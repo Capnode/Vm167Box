@@ -92,7 +92,7 @@ public class Vm167 : IVm167
         throw new NotImplementedException();
     }
 
-    public Task<int> VersionDLL()
+    public int VersionDLL()
     {
         throw new NotImplementedException();
     }

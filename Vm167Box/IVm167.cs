@@ -137,7 +137,7 @@
         /// Check dll version
         /// </summary>
         /// <returns>is 4 byte sized fields each representing one digit of the dll version</returns>
-        Task<int> VersionDLL();
+        int VersionDLL();
 
         /// <summary>
         /// Read the values of the PWM outputs

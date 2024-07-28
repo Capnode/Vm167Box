@@ -249,4 +249,70 @@ public class VM167Tests
         }
     }
 
+    [TestMethod]
+    public async Task ResetCounter()
+    {
+        // Arrange
+        // Act & Assert
+        for (int device = 0; device < Vm167.NumDevices; device++)
+        {
+            if ((_active & (1 << device)) == 0) continue;
+            await _vm167.ResetCounter(device);
+        }
+    }
+
+    [TestMethod]
+    public async Task Connected()
+    {
+        // Arrange
+        // Act
+        var connected = await _vm167.Connected();
+        Logger.LogMessage($"Connected: {connected}");
+
+        // Assert
+        Assert.IsTrue(connected > 0);
+    }
+
+    [TestMethod]
+    public async Task VersionFirmware()
+    {
+        // Arrange
+        // Act & Assert
+        for (int device = 0; device < Vm167.NumDevices; device++)
+        {
+            if ((_active & (1 << device)) == 0) continue;
+            var version = await _vm167.VersionFirmware(device);
+            Logger.LogMessage($"VersionFirmware [{device}]: {version:X}");
+            Assert.IsTrue(version > 0);
+        }
+    }
+
+    [TestMethod]
+    public async Task ReadBackPWMOut()
+    {
+        // Arrange
+        int[] buffer = new int[2];
+
+        // Act & Assert
+        for (int device = 0; device < Vm167.NumDevices; device++)
+        {
+            if ((_active & (1 << device)) == 0) continue;
+            await _vm167.ReadBackPWMOut(device, buffer);
+            Logger.LogMessage($"ReadBackPWMOut [{device}]: {string.Join(", ", buffer)}");
+        }
+    }
+
+    [TestMethod]
+    public async Task ReadBackInOutMode()
+    {
+        // Arrange
+
+        // Act & Assert
+        for (int device = 0; device < Vm167.NumDevices; device++)
+        {
+            if ((_active & (1 << device)) == 0) continue;
+            var mode = await _vm167.ReadBackInOutMode(device);
+            Logger.LogMessage($"ReadBackInOutMode [{device}]: {mode}");
+        }
+    }
 }

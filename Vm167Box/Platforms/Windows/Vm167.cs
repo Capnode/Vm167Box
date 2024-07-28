@@ -213,34 +213,68 @@ public class Vm167(ILogger<Vm167> logger) : IVm167
         return (uint)(buffer[1] + (buffer[2] << 8) + (buffer[3] << 16) + (buffer[4] << 24));
     }
 
-    public Task ResetCounter(int CardAddress)
+    public async Task ResetCounter(int CardAddress)
     {
-        throw new NotImplementedException();
+        var buffer = _deviceBuffer[CardAddress];
+
+        buffer[0] = 10; // Reset Counter
+        buffer[1] = 0;  // reset counter #0
+        await Write(CardAddress, 2);
     }
 
-    public Task<int> Connected()
+    public async Task<int> Connected()
     {
-        throw new NotImplementedException();
+        var buffer = _deviceBuffer[Device0];
+        buffer[0] = 14; // Unknown function
+        buffer[1] = Device0;
+        await Write(Device0, 2);
+        await Read(Device0);
+        int cards = buffer[1];
+
+        buffer = _deviceBuffer[Device1];
+        buffer[0] = 14; // Unknown function
+        buffer[1] = Device1;
+        await Write(Device1, 2);
+        await Read(Device1);
+        cards += buffer[1];
+
+        return cards;
     }
 
-    public Task<int> VersionFirmware(int CardAddress)
+    public async Task<int> VersionFirmware(int CardAddress)
     {
-        throw new NotImplementedException();
+        var buffer = _deviceBuffer[CardAddress];
+
+        buffer[0] = 11; // Read version info from card
+        await Write(CardAddress, 1);
+        await Read(CardAddress);
+        return 256 * 256 * 256 * buffer[1] + 256 * 256 * buffer[2] + 256 * buffer[3] + buffer[4];
     }
 
-    public Task<int> VersionDLL()
+    public int VersionDLL()
     {
-        throw new NotImplementedException();
+        return 0x0010013;
     }
 
-    public Task ReadBackPWMOut(int CardAddress, int[] Buffer)
+    public async Task ReadBackPWMOut(int CardAddress, int[] Buffer)
     {
-        throw new NotImplementedException();
+        var buffer = _deviceBuffer[CardAddress];
+
+        buffer[0] = 12; // Read PWM
+        await Write(CardAddress, 1);
+        await Read(CardAddress);
+        Buffer[0] = buffer[1];
+        Buffer[1] = buffer[2];
     }
 
-    public Task<int> ReadBackInOutMode(int CardAddress)
+    public async Task<int> ReadBackInOutMode(int CardAddress)
     {
-        throw new NotImplementedException();
+        var buffer = _deviceBuffer[CardAddress];
+
+        buffer[0] = 13; // Read In/Out Mode
+        await Write(CardAddress, 1);
+        await Read(CardAddress);
+        return buffer[1];
     }
 
     private static async Task<UsbDevice?> ScanPort(uint pid)
@@ -265,18 +299,19 @@ public class Vm167(ILogger<Vm167> logger) : IVm167
         return device;
     }
 
-    private async Task Write(int cardAddress, int bytes)
+    private async Task<int> Write(int cardAddress, int bytes)
     {
-        var device = _devices[cardAddress] ?? throw new NoNullAllowedException();
+        var device = _devices[cardAddress];
+        if (device == null) return 0;
         var buffer = _deviceBuffer[cardAddress];
-        UInt32 bytesWritten = 0;
-
         UsbBulkOutPipe writePipe = device.DefaultInterface.BulkOutPipes[0];
         writePipe.WriteOptions |= UsbWriteOptions.ShortPacketTerminate;
+
         var stream = writePipe.OutputStream;
         DataWriter writer = new(stream);
         writer.WriteBytes(buffer.AsSpan(0, bytes).ToArray());
 
+        uint bytesWritten = 0;
         try
         {
             bytesWritten = await writer.StoreAsync();
@@ -289,20 +324,22 @@ public class Vm167(ILogger<Vm167> logger) : IVm167
         {
             _logger.LogTrace("Data written: {} bytes.", bytesWritten);
         }
+
+        return (int)bytesWritten;
     }
 
     private async Task<int> Read(int cardAddress)
     {
-        var device = _devices[cardAddress] ?? throw new NoNullAllowedException();
-        UInt32 bytesRead;
+        var device = _devices[cardAddress];
+        if (device == null) return 0;
         var buffer = _deviceBuffer[cardAddress];
-
         UsbBulkInPipe readPipe = device.DefaultInterface.BulkInPipes[0];
         readPipe.ReadOptions |= UsbReadOptions.AutoClearStall;
 
         // Read data from the input pipe and store it in the buffer
         var stream = readPipe.InputStream;
 
+        uint bytesRead;
         DataReader reader = new(stream);
         while (true)
         {
