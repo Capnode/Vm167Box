@@ -9,5 +9,11 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         viewModel.Title = "Main Page";
+        Unloaded += (object? sender, EventArgs e) =>
+        {
+            var page = sender as ContentPage;
+            var vm = page?.BindingContext as IDisposable;
+            vm?.Dispose();
+        };
     }
 }

@@ -5,7 +5,7 @@ using Vm167Box;
 
 namespace Vm167Demo.ViewModels;
 
-public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) : BaseViewModel
+public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) : BaseViewModel, IDisposable
 {
     private readonly ILogger<MainViewModel> _logger = logger;
     private readonly IVm167 _vm167 = vm167;
@@ -95,6 +95,14 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
     [ObservableProperty]
     private int _pwmOut2;
 
+    public async void Dispose()
+    {
+        await _vm167.CloseDevices();
+
+        _timer?.Dispose();
+        _timer = null;
+    }
+
     [RelayCommand]
     public async Task Open()
     {
@@ -113,12 +121,9 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
             Card1 = Card1Exist && !Card0Exist;
             if (_timer != null) return;
 
-            _timer = new(obj =>
+            _timer = new(async(obj) =>
             {
-                MainThread.InvokeOnMainThreadAsync(async () =>
-                {
-                    await ReadDevice();
-                });
+                await ReadDevice();
             }, null, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100));
         }
         catch (Exception)
