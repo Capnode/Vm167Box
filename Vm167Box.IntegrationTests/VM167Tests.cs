@@ -291,7 +291,7 @@ public class VM167Tests
     public async Task ReadBackPWMOut()
     {
         // Arrange
-        int[] buffer = new int[2];
+        int[] buffer = new int[Vm167.NumPwmOut];
 
         // Act & Assert
         for (int device = 0; device < Vm167.NumDevices; device++)
