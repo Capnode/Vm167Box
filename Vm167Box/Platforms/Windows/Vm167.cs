@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Data;
-using System.Diagnostics;
 using Windows.Devices.Usb;
 using Windows.Storage.Streams;
 
@@ -10,7 +9,7 @@ partial class Vm167
 {
     private readonly UsbDevice?[] _devices = new UsbDevice[NumDevices];
 
-    public partial async Task<int> OpenDevices()
+    private async Task<int> Open()
     {
         _devices[Device0] = await ScanPort(Pid0);
         _devices[Device1] = await ScanPort(Pid1);
@@ -27,7 +26,7 @@ partial class Vm167
         return found == 0 ? -1 : found;
     }
 
-    public partial Task CloseDevices()
+    private Task Close()
     {
         if (_devices == null) throw new NoNullAllowedException(nameof(_devices));
 
@@ -40,7 +39,7 @@ partial class Vm167
         return Task.CompletedTask;
     }
 
-    private static async Task<UsbDevice?> ScanPort(uint pid)
+    private async Task<UsbDevice?> ScanPort(uint pid)
     {
         var aqs = UsbDevice.GetDeviceSelector(Vid, pid);
         var devices = await Windows.Devices.Enumeration.DeviceInformation.FindAllAsync(aqs);
@@ -50,12 +49,12 @@ partial class Vm167
             try
             {
                 device = await UsbDevice.FromIdAsync(devices[i].Id);
-                Debug.WriteLine($"open device: 0x{pid:x}:{i}");
+                _logger.LogInformation($"open device: 0x{pid:x}:{i}");
                 return device;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"open device: 0x{pid:x}:{i} failed: {ex.Message}");
+                _logger.LogInformation($"open device: 0x{pid:x}:{i} failed: {ex.Message}");
             }
         }
 

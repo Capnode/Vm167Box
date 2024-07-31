@@ -2,12 +2,12 @@
 
 partial class Vm167
 {
-    public partial Task<int> OpenDevices()
+    public Task<int> Open()
     {
         throw new NotImplementedException();
     }
 
-    public partial Task CloseDevices()
+    public Task Close()
     {
         throw new NotImplementedException();
     }
