@@ -72,19 +72,19 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
     private bool _digital8;
 
     [ObservableProperty]
-    private int _analogIn1;
+    private double _analogIn1;
 
     [ObservableProperty]
-    private int _analogIn2;
+    private double _analogIn2;
 
     [ObservableProperty]
-    private int _analogIn3;
+    private double _analogIn3;
 
     [ObservableProperty]
-    private int _analogIn4;
+    private double _analogIn4;
 
     [ObservableProperty]
-    private int _analogIn5;
+    private double _analogIn5;
 
     [ObservableProperty]
     private uint _counter;
@@ -95,10 +95,9 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
     [ObservableProperty]
     private int _pwmOut2;
 
-    public async void Dispose()
+    public void Dispose()
     {
-        await _vm167.CloseDevices();
-
+        _vm167.Dispose();
         _timer?.Dispose();
         _timer = null;
     }

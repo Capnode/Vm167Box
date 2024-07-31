@@ -1,6 +1,6 @@
 ﻿namespace Vm167Box
 {
-    public interface IVm167
+    public interface IVm167 : IDisposable
     {
         /// <summary>
         /// Open devices found on system

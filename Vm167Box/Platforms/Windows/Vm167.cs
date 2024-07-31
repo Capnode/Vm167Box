@@ -26,7 +26,7 @@ partial class Vm167
         return found == 0 ? -1 : found;
     }
 
-    private Task Close()
+    private void Close()
     {
         if (_devices == null) throw new NoNullAllowedException(nameof(_devices));
 
@@ -35,8 +35,6 @@ partial class Vm167
             _devices[i]?.Dispose();
             _devices[i] = null;
         }
-
-        return Task.CompletedTask;
     }
 
     private async Task<UsbDevice?> ScanPort(uint pid)

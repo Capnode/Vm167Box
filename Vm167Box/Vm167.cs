@@ -2,7 +2,7 @@
 
 namespace Vm167Box;
 
-public partial class Vm167(ILogger<Vm167> logger) : IVm167
+public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 {
     public const int NumDevices = 2;
     public const int Device0 = 0;
@@ -19,6 +19,12 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167
     protected readonly ILogger<Vm167> _logger = logger;
     private readonly SemaphoreSlim _lock = new(1, 1);
     private readonly byte[][] _deviceBuffer = [new byte[64], new byte[64]];
+
+
+    public void Dispose()
+    {
+        Close();
+    }
 
     public async Task<int> OpenDevices()
     {
@@ -42,7 +48,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167
         {
             await _lock.WaitAsync();
             _logger.LogTrace(">CloseDevices()");
-            await Close();
+            Close();
         }
         finally
         {

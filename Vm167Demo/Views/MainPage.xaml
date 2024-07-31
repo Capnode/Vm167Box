@@ -7,6 +7,12 @@
     xmlns:vm="clr-namespace:Vm167Demo.ViewModels"
     x:DataType="vm:MainViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -230,8 +236,8 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn1}"
-                            ProgressColor="Aqua"
+                            Progress="{Binding AnalogIn1, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
+                            ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn1}" />
                     </HorizontalStackLayout>
@@ -240,8 +246,8 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn2}"
-                            ProgressColor="Aqua"
+                            Progress="{Binding AnalogIn2, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
+                            ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn2}" />
                     </HorizontalStackLayout>
@@ -250,8 +256,8 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn3}"
-                            ProgressColor="Aqua"
+                            Progress="{Binding AnalogIn3, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
+                            ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn3}" />
                     </HorizontalStackLayout>
@@ -260,8 +266,8 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn4}"
-                            ProgressColor="Aqua"
+                            Progress="{Binding AnalogIn4, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
+                            ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn4}" />
                     </HorizontalStackLayout>
@@ -270,8 +276,8 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn5}"
-                            ProgressColor="Aqua"
+                            Progress="{Binding AnalogIn5, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
+                            ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn5}" />
                     </HorizontalStackLayout>
@@ -299,9 +305,9 @@
                                 Value="{Binding PwmOut1}">
                                 <Slider.Behaviors>
                                     <toolkit:EventToCommandBehavior
-                                            Command="{Binding PwmOutCommand}"
-                                            CommandParameter="1"
-                                            EventName="ValueChanged" />
+                                        Command="{Binding PwmOutCommand}"
+                                        CommandParameter="1"
+                                        EventName="ValueChanged" />
                                 </Slider.Behaviors>
                             </Slider>
                             <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut1}" />
@@ -320,9 +326,9 @@
                                 Value="{Binding PwmOut2}">
                                 <Slider.Behaviors>
                                     <toolkit:EventToCommandBehavior
-                                            Command="{Binding PwmOutCommand}"
-                                            CommandParameter="2"
-                                            EventName="ValueChanged" />
+                                        Command="{Binding PwmOutCommand}"
+                                        CommandParameter="2"
+                                        EventName="ValueChanged" />
                                 </Slider.Behaviors>
                             </Slider>
                             <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut2}" />

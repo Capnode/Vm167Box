@@ -7,7 +7,7 @@ partial class Vm167
         throw new NotImplementedException();
     }
 
-    public Task Close()
+    public void Close()
     {
         throw new NotImplementedException();
     }
