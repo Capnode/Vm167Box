@@ -51,7 +51,38 @@ public partial class App : Application
         Window window = base.CreateWindow(activationState);
         window.Created += OnCreated;
         window.Destroying += OnDestroying;
+        window.SizeChanged += SizeChanged;
+
+        if (Preferences.ContainsKey("WindowX"))
+        {
+            window.X = Preferences.Get("WindowX", 0d);
+        }
+
+        if (Preferences.ContainsKey("WindowY"))
+        {
+            window.Y = Preferences.Get("WindowY", 0d);
+        }
+
+        if (Preferences.ContainsKey("WindowWidth"))
+        {
+            window.Width = Preferences.Get("WindowWidth", 0d);
+        }
+
+        if (Preferences.ContainsKey("WindowHeight"))
+        {
+            window.Height = Preferences.Get("WindowHeight", 0d);
+        }
+
         return window;
+    }
+
+    private void SizeChanged(object? sender, EventArgs e)
+    {
+        if (sender is not Window window) return;
+        Preferences.Set("WindowX", window.X);
+        Preferences.Set("WindowY", window.Y);
+        Preferences.Set("WindowWidth", window.Width);
+        Preferences.Set("WindowHeight", window.Height);
     }
 
     private void OnCreated(object? sender, EventArgs e)
