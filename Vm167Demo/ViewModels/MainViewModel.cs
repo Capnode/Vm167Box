@@ -100,8 +100,13 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
     public void Dispose()
     {
-        _vm167.Dispose();
         _timer?.Dispose();
+        while (_pending)
+        {
+            Thread.Sleep(100);
+        }
+
+        _vm167.Dispose();
         _timer = null;
     }
 
