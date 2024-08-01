@@ -95,6 +95,9 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
     [ObservableProperty]
     private int _pwmOut2;
 
+    [ObservableProperty]
+    private int _pwmFreq;
+
     public void Dispose()
     {
         _vm167.Dispose();
@@ -120,10 +123,11 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
             Card1 = Card1Exist && !Card0Exist;
             if (_timer != null) return;
 
-            _timer = new(async(obj) =>
-            {
-                await ReadDevice();
-            }, null, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100));
+            _timer = new(
+                async(obj) => await ReadDevice(),
+                null,
+                TimeSpan.FromMilliseconds(100),
+                TimeSpan.FromMilliseconds(100));
         }
         catch (Exception)
         {
@@ -146,7 +150,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
         if (_pending) return;
 
         _logger.LogTrace(">SetCard()");
-        await ReadDevice();
         _logger.LogTrace("<SetCard()");
     }
 
@@ -157,7 +160,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
         _logger.LogTrace(">SetAllDigital()");
         await _vm167.SetAllDigital(Device);
-        await ReadDevice();
         _logger.LogTrace("<SetAllDigital()");
     }
 
@@ -168,7 +170,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
         _logger.LogTrace(">ClearAllDigital()");
         await _vm167.ClearAllDigital(Device);
-        await ReadDevice();
         _logger.LogTrace("<ClearAllDigital()");
     }
 
@@ -195,7 +196,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
         _logger.LogTrace(">DigitalInOutMode()");
         await _vm167.InOutMode(Device, DigitalHighIn ? 1 : 0, DigitalLowIn ? 1 : 0);
-        await ReadDevice();
         _logger.LogTrace("<DigitalInOutMode()");
     }
 
@@ -227,7 +227,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
             await _vm167.ClearDigitalChannel(Device, int.Parse(channel));
         }
 
-        await ReadDevice();
         _logger.LogTrace("<DigitalOut({channel})", channel);
     }
 
@@ -238,7 +237,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
         _logger.LogTrace(">ResetCounter()");
         await _vm167.ResetCounter(Device);
-        await ReadDevice();
         _logger.LogTrace("<ResetCounter()");
     }
 
@@ -255,8 +253,7 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
             _ => 0
         };
 
-        await _vm167.SetPWM(Device, int.Parse(channel), value, 2);
-        await ReadDevice();
+        await _vm167.SetPWM(Device, int.Parse(channel), value, Math.Min(PwmFreq + 1, 3));
         _logger.LogTrace("<PwmOut({channel})", channel);
     }
 
