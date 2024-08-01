@@ -37,19 +37,11 @@
                 <RadioButton
                     Content="0"
                     IsChecked="{Binding Card0}"
-                    IsEnabled="{Binding Card0Exist}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding SetCardCommand}" EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
+                    IsEnabled="{Binding Card0Exist}"/>
                 <RadioButton
                     Content="1"
                     IsChecked="{Binding Card1}"
-                    IsEnabled="{Binding Card1Exist}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding SetCardCommand}" EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
+                    IsEnabled="{Binding Card1Exist}"/>
             </HorizontalStackLayout>
             <Button
                 Command="{Binding SetAllDigitalCommand}"

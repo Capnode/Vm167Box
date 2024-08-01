@@ -150,15 +150,6 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
     }
 
     [RelayCommand]
-    public async Task SetCard()
-    {
-        if (_pending) return;
-
-        _logger.LogTrace(">SetCard()");
-        _logger.LogTrace("<SetCard()");
-    }
-
-    [RelayCommand]
     public async Task SetAllDigital()
     {
         if (_pending) return;
