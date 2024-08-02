@@ -6,7 +6,6 @@ namespace Vm167Box;
 
 partial class Vm167
 {
-    private IntPtr _deviceHandle;
     private readonly IntPtr[] _devices = new IntPtr[NumDevices];
 
     [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
@@ -22,10 +21,19 @@ partial class Vm167
     private static extern int IOConnectCallMethod(IntPtr connect, uint selector, ulong[] input, uint inputCnt, IntPtr inputStruct, uint inputStructCnt, out ulong output, out uint outputCnt, IntPtr outputStruct, ref uint outputStructCnt);
 
     [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
-    private static extern IntPtr IOServiceAddMatchingValue(IntPtr matchingDictionary, string key, IntPtr value);
-
-    [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
     private static extern int IOServiceClose(IntPtr connect);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern IntPtr CFNumberCreate(IntPtr allocator, int theType, ref uint value);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern void CFRelease(IntPtr cf);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern void CFDictionarySetValue(IntPtr theDict, IntPtr key, IntPtr value);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern IntPtr CFStringCreateWithCString(IntPtr alloc, string cStr, uint encoding);
 
     private async Task<int> Open()
     {
@@ -64,8 +72,19 @@ partial class Vm167
         IntPtr matchingDict = IOServiceMatching("IOUSBDevice");
 
         // Add vendorId and productId to the matching dictionary
-        IOServiceAddMatchingValue(matchingDict, "idVendor", (IntPtr)vendorId);
-        IOServiceAddMatchingValue(matchingDict, "idProduct", (IntPtr)productId);
+        IntPtr vendorIdKey = CFStringCreateWithCString(IntPtr.Zero, "idVendor", 0);
+        IntPtr productIdKey = CFStringCreateWithCString(IntPtr.Zero, "idProduct", 0);
+
+        IntPtr vendorIdValue = CFNumberCreate(IntPtr.Zero, 9, ref vendorId); // kCFNumberSInt32Type = 9
+        IntPtr productIdValue = CFNumberCreate(IntPtr.Zero, 9, ref productId); // kCFNumberSInt32Type = 9
+
+        CFDictionarySetValue(matchingDict, vendorIdKey, vendorIdValue);
+        CFDictionarySetValue(matchingDict, productIdKey, productIdValue);
+
+        CFRelease(vendorIdKey);
+        CFRelease(productIdKey);
+        CFRelease(vendorIdValue);
+        CFRelease(productIdValue);
 
         IntPtr service = IOServiceGetMatchingService(IntPtr.Zero, matchingDict);
         if (service == IntPtr.Zero)
@@ -102,7 +121,7 @@ partial class Vm167
         IntPtr outputStruct = IntPtr.Zero;
         uint outputStructCnt = 0;
 
-        int result = IOConnectCallMethod(_deviceHandle, 1, input, inputCnt, inputStruct, inputStructCnt, out output, out outputCnt, outputStruct, ref outputStructCnt);
+        int result = IOConnectCallMethod(device, 1, input, inputCnt, inputStruct, inputStructCnt, out output, out outputCnt, outputStruct, ref outputStructCnt);
 
         Marshal.FreeHGlobal(inputStruct);
         var size = result == 0 ? (int)output : -1;
@@ -124,7 +143,7 @@ partial class Vm167
         IntPtr outputStruct = Marshal.AllocHGlobal(buffer.Length);
         uint outputStructCnt = (uint)buffer.Length;
 
-        int result = IOConnectCallMethod(_deviceHandle, 0, input, inputCnt, inputStruct, inputStructCnt, out output, out outputCnt, outputStruct, ref outputStructCnt);
+        int result = IOConnectCallMethod(device, 0, input, inputCnt, inputStruct, inputStructCnt, out output, out outputCnt, outputStruct, ref outputStructCnt);
         if (result == 0)
         {
             Marshal.Copy(outputStruct, buffer, 0, buffer.Length);
