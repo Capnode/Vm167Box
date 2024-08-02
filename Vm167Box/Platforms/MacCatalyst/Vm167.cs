@@ -96,9 +96,10 @@ partial class Vm167
         IntPtr connect = IntPtr.Zero;
         uint owningTask = 0; // Use appropriate task
         uint type = 0; // Use appropriate type
-        if (IOServiceOpen(service, owningTask, type, ref connect) != 0)
+        var result = IOServiceOpen(service, owningTask, type, ref connect);
+        if (result != 0)
         {
-            _logger.LogInformation($"Failed to open device: 0x{productId:x}");
+            _logger.LogInformation($"Failed to open device: 0x{productId:x}, Error: 0x{result:x}");
             return IntPtr.Zero;
         }
 
