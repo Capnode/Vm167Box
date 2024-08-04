@@ -35,6 +35,20 @@ partial class Vm167
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
     private static extern IntPtr CFStringCreateWithCString(IntPtr alloc, string cStr, uint encoding);
 
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern int CFStringGetLength(IntPtr theString);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern int CFStringGetMaximumSizeForEncoding(int length, uint encoding);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern bool CFStringGetCString(IntPtr theString, IntPtr buffer, int bufferSize, uint encoding);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    private static extern void CFDictionaryApplyFunction(IntPtr theDict, CFDictionaryApplierFunction applier, IntPtr context);
+
+    private delegate void CFDictionaryApplierFunction(IntPtr key, IntPtr value, IntPtr context);
+
     private async Task<int> Open()
     {
         _devices[Device0] = OpenDevice(Vid, Pid0);
@@ -86,6 +100,11 @@ partial class Vm167
         CFRelease(vendorIdValue);
         CFRelease(productIdValue);
 
+        // Log the contents of the matching dictionary
+        var gch = GCHandle.Alloc(_logger);
+        CFDictionaryApplyFunction(matchingDict, LogDictionaryEntry, GCHandle.ToIntPtr(gch));
+        gch.Free();
+        
         IntPtr service = IOServiceGetMatchingService(IntPtr.Zero, matchingDict);
         if (service == IntPtr.Zero)
         {
@@ -153,5 +172,35 @@ partial class Vm167
         Marshal.FreeHGlobal(outputStruct);
         var size = result == 0 ? (int)outputStructCnt : -1;
         return await Task.FromResult(size);
+    }
+
+    private static void LogDictionaryEntry(IntPtr key, IntPtr value, IntPtr context)
+    {
+        // Convert the key and value to strings
+        string keyString = CFStringToString(key);
+        string valueString = CFStringToString(value);
+
+        // Log the key-value pair
+        var logger = (ILogger)GCHandle.FromIntPtr(context).Target;
+        logger.LogInformation($"Key: {keyString}, Value: {valueString}");
+    }
+
+    private static string CFStringToString(IntPtr cfString)
+    {
+        if (cfString == IntPtr.Zero) return null;
+
+        int length = CFStringGetLength(cfString);
+        int maxSize = CFStringGetMaximumSizeForEncoding(length, 0x08000100); // kCFStringEncodingUTF8
+        IntPtr buffer = Marshal.AllocHGlobal(maxSize);
+
+        if (CFStringGetCString(cfString, buffer, maxSize, 0x08000100))
+        {
+            string result = Marshal.PtrToStringUTF8(buffer);
+            Marshal.FreeHGlobal(buffer);
+            return result;
+        }
+
+        Marshal.FreeHGlobal(buffer);
+        return null;
     }
 }
