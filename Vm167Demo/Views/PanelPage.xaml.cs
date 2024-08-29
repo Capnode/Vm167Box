@@ -2,13 +2,13 @@
 
 namespace Vm167Demo.Views;
 
-public partial class MainPage : ContentPage
+public partial class PanelPage : ContentPage
 {
-    public MainPage(MainViewModel viewModel)
+    public PanelPage(MainViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        viewModel.Title = "Main Page";
+
         Unloaded += (object? sender, EventArgs e) =>
         {
             var page = sender as ContentPage;

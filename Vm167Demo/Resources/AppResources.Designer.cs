@@ -61,6 +61,33 @@ namespace Vm167Demo.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM167 panel.
+        /// </summary>
+        internal static string AboutMessage {
+            get {
+                return ResourceManager.GetString("AboutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM167 Demo.
+        /// </summary>
+        internal static string AppTitle {
+            get {
+                return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not open the driver, try again.
         /// </summary>
         internal static string DriverProblem {
@@ -75,6 +102,24 @@ namespace Vm167Demo.Resources {
         internal static string NoCardFound {
             get {
                 return ResourceManager.GetString("NoCardFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panel.
+        /// </summary>
+        internal static string PanelTitle {
+            get {
+                return ResourceManager.GetString("PanelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scope.
+        /// </summary>
+        internal static string ScopeTitle {
+            get {
+                return ResourceManager.GetString("ScopeTitle", resourceCulture);
             }
         }
         

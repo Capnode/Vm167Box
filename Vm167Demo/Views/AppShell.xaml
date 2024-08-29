@@ -3,11 +3,57 @@
     x:Class="Vm167Demo.Views.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:Vm167Demo.Resources"
+    xmlns:styles="clr-namespace:Vm167Demo.Resources.Styles"
     xmlns:views="clr-namespace:Vm167Demo.Views"
-    Title="Vm167 Demo">
+    x:Name="shellMain"
+    Title="{x:Static strings:AppResources.AppTitle}"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.ForegroundColor="Black">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout x:DataType="Shell" BindingContext="{x:Reference shellMain}">
+            <Image
+                Margin="10"
+                HeightRequest="24"
+                Source="{Binding CurrentItem.Icon}"
+                VerticalOptions="Start" />
+            <Label Text="{Binding CurrentItem.Title}" VerticalTextAlignment="Center">
+                <Label.FontSize>
+                    <OnIdiom x:TypeArguments="x:Double">
+                        <OnIdiom.Phone>16</OnIdiom.Phone>
+                        <OnIdiom.Tablet>24</OnIdiom.Tablet>
+                        <OnIdiom.Desktop>24</OnIdiom.Desktop>
+                    </OnIdiom>
+                </Label.FontSize>
+            </Label>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
 
     <ShellContent
-        Title="VM167 Demo"
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
+        Title="{x:Static strings:AppResources.PanelTitle}"
+        ContentTemplate="{DataTemplate views:PanelPage}"
+        Icon="{FontImage FontFamily=FontAwesomeSolid,
+                         Color=Black,
+                         Glyph={x:Static styles:FontAwesomeSolid.Plug}}"
+        Route="PanelPage"
+        Shell.NavBarIsVisible="true" />
+
+    <ShellContent
+        Title="{x:Static strings:AppResources.ScopeTitle}"
+        ContentTemplate="{DataTemplate views:ScopePage}"
+        Icon="{FontImage FontFamily=FontAwesomeSolid,
+                         Color=Black,
+                         Glyph={x:Static styles:FontAwesomeSolid.ChartArea}}"
+        Route="ScopePage"
+        Shell.NavBarIsVisible="true" />
+
+    <ShellContent
+        Title="{x:Static strings:AppResources.About}"
+        ContentTemplate="{DataTemplate views:AboutPage}"
+        Icon="{FontImage FontFamily=FontAwesomeSolid,
+                         Color=Black,
+                         Glyph={x:Static styles:FontAwesomeSolid.Info}}"
+        Route="AboutPage"
+        Shell.NavBarIsVisible="true" />
 </Shell>

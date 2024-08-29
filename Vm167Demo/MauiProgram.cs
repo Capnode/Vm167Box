@@ -16,6 +16,9 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
+                fonts.AddFont("fa-regular-400.ttf", "FontAwesomeRegular");
+                fonts.AddFont("fa-solid-900.ttf", "FontAwesomeSolid");
+                fonts.AddFont("fa-brands-400.ttf", "FontAwesomeBrands");
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
@@ -24,7 +27,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IVm167, Vm167>();
 
         // Pages
-        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<PanelPage>();
+        builder.Services.AddSingleton<ScopePage>();
 
         // ViewModels
         builder.Services.AddSingleton<MainViewModel>();
