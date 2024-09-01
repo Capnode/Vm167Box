@@ -3,8 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using OxyPlot;
 using OxyPlot.Axes;
+using OxyPlot.Legends;
 using OxyPlot.Series;
-using System.Threading.Channels;
 using Vm167Box;
 
 namespace Vm167Demo.ViewModels;
@@ -24,10 +24,11 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         _vm167 = vm167;
 
         ScopeModel = new PlotModel();
+        ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
         ScopeModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 1023 });
-        foreach (var s in Enumerable.Range(0, Vm167.NumAnalogIn))
+        foreach (var i in Enumerable.Range(0, Vm167.NumAnalogIn))
         {
-            ScopeModel.Series.Add(new LineSeries { LineStyle = LineStyle.Solid });
+            ScopeModel.Series.Add(new LineSeries { Title=$"AnalogIn{i + 1}", LineStyle = LineStyle.Solid });
         }
     }
 

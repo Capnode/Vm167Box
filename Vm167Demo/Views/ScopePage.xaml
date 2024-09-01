@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Vm167Demo.ViewModels"
     xmlns:oxy="clr-namespace:OxyPlot.Maui.Skia;assembly=OxyPlot.Maui.Skia"
-    x:DataType="vm:MainViewModel">
+    x:DataType="vm:MainViewModel"
+    Shell.NavBarIsVisible="False">
 
     <Grid>
         <oxy:PlotView Model="{Binding ScopeModel}" />
