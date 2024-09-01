@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Globalization;
 using Vm167Demo.Resources;
+using Vm167Demo.ViewModels;
 using Vm167Demo.Views;
 
 namespace Vm167Demo;
@@ -8,10 +9,13 @@ namespace Vm167Demo;
 public partial class App : Application
 {
     private readonly ILogger<App> _logger;
+    private readonly MainViewModel _vm;
 
-    public App(ILogger<App> logger)
+    public App(ILogger<App> logger, MainViewModel viewModel)
     {
         _logger = logger;
+        _vm = viewModel;
+
         InitializeComponent();
 
         MauiExceptions.UnhandledException += async (sender, args) =>
@@ -91,5 +95,6 @@ public partial class App : Application
 
     private void OnDestroying(object? sender, EventArgs e)
     {
+        _vm.Dispose();
     }
 }

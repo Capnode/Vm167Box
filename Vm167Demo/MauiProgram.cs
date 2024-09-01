@@ -3,6 +3,8 @@ using CommunityToolkit.Maui;
 using Vm167Box;
 using Vm167Demo.ViewModels;
 using Vm167Demo.Views;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using OxyPlot.Maui.Skia;
 
 namespace Vm167Demo;
 
@@ -14,6 +16,8 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseSkiaSharp()
+            .UseOxyPlotSkia()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("fa-regular-400.ttf", "FontAwesomeRegular");

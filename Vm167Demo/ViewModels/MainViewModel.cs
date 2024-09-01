@@ -1,18 +1,35 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using System.Threading.Channels;
 using Vm167Box;
 
 namespace Vm167Demo.ViewModels;
 
-public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) : BaseViewModel, IDisposable
+public partial class MainViewModel : BaseViewModel, IDisposable
 {
-    private readonly ILogger<MainViewModel> _logger = logger;
-    private readonly IVm167 _vm167 = vm167;
+    private readonly ILogger<MainViewModel> _logger;
+    private readonly IVm167 _vm167;
     private Timer? _timer;
     private bool _pending;
 
     private int Device => Card0 ? Vm167.Device0 : Card1 ? Vm167.Device1 : -1;
+
+    public MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167)
+    {
+        _logger = logger;
+        _vm167 = vm167;
+
+        ScopeModel = new PlotModel();
+        ScopeModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 1023 });
+        foreach (var s in Enumerable.Range(0, Vm167.NumAnalogIn))
+        {
+            ScopeModel.Series.Add(new LineSeries { LineStyle = LineStyle.Solid });
+        }
+    }
 
     [ObservableProperty]
     private bool _isOpen;
@@ -97,6 +114,9 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
 
     [ObservableProperty]
     private int _pwmFreq;
+
+    [ObservableProperty]
+    private PlotModel _scopeModel;
 
     public void Dispose()
     {
@@ -290,6 +310,16 @@ public partial class MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167) 
         PwmOut1 = pwm[0];
         PwmOut2 = pwm[1];
 
+        for (int i = 0; i < ScopeModel.Series.Count; i++)
+        {
+            var serie = (LineSeries)ScopeModel.Series[i];
+            var points = serie.Points;
+            var count = points.Count;
+            points.Add(new DataPoint(count + 1, analog[i]));
+        }
+
+        ScopeModel.InvalidatePlot(true);
+        
         _pending = false;
     }
 }

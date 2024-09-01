@@ -8,12 +8,5 @@ public partial class PanelPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
-
-        Unloaded += (object? sender, EventArgs e) =>
-        {
-            var page = sender as ContentPage;
-            var vm = page?.BindingContext as IDisposable;
-            vm?.Dispose();
-        };
     }
 }
