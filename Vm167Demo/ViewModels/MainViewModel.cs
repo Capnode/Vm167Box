@@ -23,12 +23,20 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         _logger = logger;
         _vm167 = vm167;
 
-        ScopeModel = new PlotModel();
-        ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
-        ScopeModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 1023 });
+        AnalogInModel = new PlotModel();
+        AnalogInModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
+        AnalogInModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 1023 });
         foreach (var i in Enumerable.Range(0, Vm167.NumAnalogIn))
         {
-            ScopeModel.Series.Add(new LineSeries { Title=$"AnalogIn{i + 1}", LineStyle = LineStyle.Solid });
+            AnalogInModel.Series.Add(new LineSeries { Title=$"AnalogIn{i + 1}", LineStyle = LineStyle.Solid });
+        }
+
+        PwmOutModel = new PlotModel();
+        PwmOutModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
+        PwmOutModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 255 });
+        foreach (var i in Enumerable.Range(0, Vm167.NumPwmOut))
+        {
+            PwmOutModel.Series.Add(new LineSeries { Title = $"PwmOut{i + 1}", LineStyle = LineStyle.Solid });
         }
     }
 
@@ -117,7 +125,10 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     private int _pwmFreq;
 
     [ObservableProperty]
-    private PlotModel _scopeModel;
+    private PlotModel _analogInModel;
+
+    [ObservableProperty]
+    private PlotModel _pwmOutModel;
 
     public void Dispose()
     {
@@ -305,22 +316,28 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         AnalogIn3 = analog[2];
         AnalogIn4 = analog[3];
         AnalogIn5 = analog[4];
-
-        int[] pwm = new int[Vm167.NumPwmOut];
-        await _vm167.ReadBackPWMOut(Device, pwm);
-        PwmOut1 = pwm[0];
-        PwmOut2 = pwm[1];
-
-        for (int i = 0; i < ScopeModel.Series.Count; i++)
+        for (int i = 0; i < AnalogInModel.Series.Count; i++)
         {
-            var serie = (LineSeries)ScopeModel.Series[i];
+            var serie = (LineSeries)AnalogInModel.Series[i];
             var points = serie.Points;
             var count = points.Count;
             points.Add(new DataPoint(count + 1, analog[i]));
         }
 
-        ScopeModel.InvalidatePlot(true);
-        
+        int[] pwm = new int[Vm167.NumPwmOut];
+        await _vm167.ReadBackPWMOut(Device, pwm);
+        PwmOut1 = pwm[0];
+        PwmOut2 = pwm[1];
+        for (int i = 0; i < PwmOutModel.Series.Count; i++)
+        {
+            var serie = (LineSeries)PwmOutModel.Series[i];
+            var points = serie.Points;
+            var count = points.Count;
+            points.Add(new DataPoint(count + 1, pwm[i]));
+        }
+
+        AnalogInModel.InvalidatePlot(true);
+        PwmOutModel.InvalidatePlot(true);
         _pending = false;
     }
 }

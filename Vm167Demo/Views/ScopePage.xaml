@@ -9,6 +9,12 @@
     Shell.NavBarIsVisible="False">
 
     <Grid>
-        <oxy:PlotView Model="{Binding ScopeModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <oxy:PlotView Grid.Row="0" Model="{Binding AnalogInModel}" />
+        <oxy:PlotView Grid.Row="1" Model="{Binding PwmOutModel}" />
     </Grid>
 </ContentPage>
