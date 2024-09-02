@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Vm167Box.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Vm167Box.ViewModels"
+    x:DataType="vm:AboutViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Margin="10" Spacing="10">
+        <HorizontalStackLayout Spacing="10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="22"
+                Text="{Binding Title}"
+                VerticalOptions="End" />
+            <Label
+                FontSize="22"
+                Text="{Binding Version}"
+                VerticalOptions="End" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="10">
+            <Label
+                FontSize="22"
+                Text="{Binding Author}"
+                VerticalOptions="End" />
+            <Label
+                FontSize="22"
+                Text="{Binding Copyright}"
+                VerticalOptions="End" />
+        </HorizontalStackLayout>
+
+        <Label Text="{Binding Message}" />
+    </VerticalStackLayout>
+</ContentPage>
