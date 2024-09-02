@@ -127,16 +127,13 @@
     <value>Ett fel har inträffat</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>VM167 Demo</value>
+    <value>VM167 Box</value>
   </data>
   <data name="PanelTitle" xml:space="preserve">
     <value>Panel</value>
   </data>
   <data name="ScopeTitle" xml:space="preserve">
     <value>Scope</value>
-  </data>
-  <data name="AboutMessage" xml:space="preserve">
-    <value>VM167 panel</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Om</value>
@@ -146,5 +143,11 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Återställ</value>
+  </data>
+  <data name="ThemeToggle" xml:space="preserve">
+    <value>Växla mörkt/ljust tema</value>
+  </data>
+  <data name="AboutMessage" xml:space="preserve">
+    <value>Kontrollpanel för Velleman VM167 USB GPIO kort.</value>
   </data>
 </root>

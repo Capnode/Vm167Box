@@ -42,6 +42,8 @@
 		<Company>Capnode AB</Company>
 		<Copyright>© 2024</Copyright>
 		<NeutralLanguage>en</NeutralLanguage>
+		<Description>Control panel for the Velleman VM167 USB GPIO interface card.</Description>
+		<PackageProjectUrl>https://github.com/Capnode/Vm167Box</PackageProjectUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">

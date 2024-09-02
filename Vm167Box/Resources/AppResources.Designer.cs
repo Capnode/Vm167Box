@@ -70,7 +70,7 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM167 panel.
+        ///   Looks up a localized string similar to Control panel for the Velleman VM167 USB GPIO interface card..
         /// </summary>
         internal static string AboutMessage {
             get {
@@ -79,7 +79,7 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM167 Demo.
+        ///   Looks up a localized string similar to VM167 Box.
         /// </summary>
         internal static string AppTitle {
             get {
@@ -138,6 +138,15 @@ namespace Vm167Box.Resources {
         internal static string ScopeTitle {
             get {
                 return ResourceManager.GetString("ScopeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle dark/light theme.
+        /// </summary>
+        internal static string ThemeToggle {
+            get {
+                return ResourceManager.GetString("ThemeToggle", resourceCulture);
             }
         }
         

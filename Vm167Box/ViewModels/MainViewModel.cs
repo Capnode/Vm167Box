@@ -9,7 +9,7 @@ using Libvm167;
 
 namespace Vm167Box.ViewModels;
 
-public partial class MainViewModel : BaseViewModel, IDisposable
+public partial class MainViewModel : ObservableObject, IDisposable
 {
     private readonly ILogger<MainViewModel> _logger;
     private readonly IVm167 _vm167;
@@ -63,7 +63,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             {
                 YAxisKey = "AnalogIn",
                 Title = $"AnalogIn{i + 1}",
-                LineStyle = LineStyle.Solid
+                LineStyle = LineStyle.Solid,
+                TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
             });
         }
 
@@ -73,7 +74,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             {
                 YAxisKey = "PwmOut",
                 Title = $"PwmOut{i + 1}",
-                LineStyle = LineStyle.Solid
+                LineStyle = LineStyle.Solid,
+                TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
             });
         }
 

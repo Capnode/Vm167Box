@@ -2,6 +2,7 @@
 <ContentPage
     x:Class="Vm167Box.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:AboutViewModel">
@@ -23,17 +24,16 @@
                 VerticalOptions="End" />
         </HorizontalStackLayout>
 
+        <Label Text="{Binding Message}" />
+
         <HorizontalStackLayout Spacing="10">
-            <Label
-                FontSize="22"
-                Text="{Binding Author}"
-                VerticalOptions="End" />
-            <Label
-                FontSize="22"
-                Text="{Binding Copyright}"
-                VerticalOptions="End" />
+            <Label Text="{Binding Author}" VerticalOptions="End" />
+            <Label Text="{Binding Copyright}" VerticalOptions="End" />
         </HorizontalStackLayout>
 
-        <Label Text="{Binding Message}" />
+        <HorizontalStackLayout Spacing="10">
+            <Label Text="{x:Static strings:AppResources.ThemeToggle}" VerticalOptions="Center" />
+            <Switch IsToggled="{Binding IsLightTheme}" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
