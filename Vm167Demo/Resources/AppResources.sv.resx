@@ -141,4 +141,10 @@
   <data name="About" xml:space="preserve">
     <value>Om</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Starta om</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Återställ</value>
+  </data>
 </root>

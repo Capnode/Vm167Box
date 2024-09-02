@@ -8,6 +8,8 @@ namespace Vm167Demo;
 
 public partial class App : Application
 {
+    private const double MinPageWidth = 400;
+
     private readonly ILogger<App> _logger;
     private readonly MainViewModel _vm;
 
@@ -77,6 +79,7 @@ public partial class App : Application
             window.Height = Preferences.Get("WindowHeight", 0d);
         }
 
+        SetShellFlyout(window.Width);
         return window;
     }
 
@@ -87,6 +90,24 @@ public partial class App : Application
         Preferences.Set("WindowY", window.Y);
         Preferences.Set("WindowWidth", window.Width);
         Preferences.Set("WindowHeight", window.Height);
+
+        // Make sure the flyout is visible when the window is resized
+        double currentWidth = ((Window)sender).Width;
+        SetShellFlyout(currentWidth);
+    }
+
+    private static void SetShellFlyout(double currentWidth)
+    {
+        if (currentWidth > MinPageWidth + Shell.Current.FlyoutWidth)
+        {
+            Shell.Current.FlyoutBehavior = FlyoutBehavior.Locked;
+            Shell.Current.FlyoutIsPresented = true;
+        }
+        else
+        {
+            Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
+            Shell.Current.FlyoutIsPresented = false;
+        }
     }
 
     private void OnCreated(object? sender, EventArgs e)

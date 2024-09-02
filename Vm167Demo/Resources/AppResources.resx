@@ -141,4 +141,10 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>

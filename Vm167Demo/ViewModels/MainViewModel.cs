@@ -15,6 +15,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     private readonly IVm167 _vm167;
     private Timer? _timer;
     private bool _pending;
+    private DateTime _startTime;
+    private bool _resetScope;
+    private bool _restartScope = true;
 
     private int Device => Card0 ? Vm167.Device0 : Card1 ? Vm167.Device1 : -1;
 
@@ -23,20 +26,55 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         _logger = logger;
         _vm167 = vm167;
 
-        AnalogInModel = new PlotModel();
-        AnalogInModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
-        AnalogInModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 1023 });
+        ScopeModel = new PlotModel();
+        ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
+        ScopeModel.Axes.Add(new LinearAxis
+        {
+            Title = "Time (s)",
+            Position = AxisPosition.Bottom,
+            IntervalLength = 60,
+            IsPanEnabled = true,
+            IsZoomEnabled = true,
+            MajorGridlineStyle = LineStyle.Solid,
+            MinorGridlineStyle = LineStyle.Solid,
+        });
+        ScopeModel.Axes.Add(new LinearAxis
+        {
+            Title = "AnalogIn",
+            Key = "AnalogIn",
+            Position = AxisPosition.Left,
+            PositionTier = 1,
+            Minimum = 0,
+            Maximum = 1023
+        });
+        ScopeModel.Axes.Add(new LinearAxis
+        {
+            Title = "PwmOut",
+            Key = "PwmOut",
+            Position = AxisPosition.Left,
+            PositionTier = 2,
+            Minimum = 0,
+            Maximum = 255
+        });
+
         foreach (var i in Enumerable.Range(0, Vm167.NumAnalogIn))
         {
-            AnalogInModel.Series.Add(new LineSeries { Title=$"AnalogIn{i + 1}", LineStyle = LineStyle.Solid });
+            ScopeModel.Series.Add(new LineSeries
+            {
+                YAxisKey = "AnalogIn",
+                Title = $"AnalogIn{i + 1}",
+                LineStyle = LineStyle.Solid
+            });
         }
 
-        PwmOutModel = new PlotModel();
-        PwmOutModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
-        PwmOutModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 255 });
         foreach (var i in Enumerable.Range(0, Vm167.NumPwmOut))
         {
-            PwmOutModel.Series.Add(new LineSeries { Title = $"PwmOut{i + 1}", LineStyle = LineStyle.Solid });
+            ScopeModel.Series.Add(new LineSeries
+            {
+                YAxisKey = "PwmOut",
+                Title = $"PwmOut{i + 1}",
+                LineStyle = LineStyle.Solid
+            });
         }
     }
 
@@ -125,10 +163,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     private int _pwmFreq;
 
     [ObservableProperty]
-    private PlotModel _analogInModel;
-
-    [ObservableProperty]
-    private PlotModel _pwmOutModel;
+    private PlotModel _scopeModel;
 
     public void Dispose()
     {
@@ -285,6 +320,18 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         _logger.LogTrace("<PwmOut({channel})", channel);
     }
 
+    [RelayCommand]
+    public void ResetScope()
+    {
+        _resetScope = true;
+    }
+
+    [RelayCommand]
+    public void RestartScope()
+    {
+        _restartScope = true;
+    }
+
     private async Task ReadDevice()
     {
         if (_pending || Device < 0) return;
@@ -316,28 +363,48 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         AnalogIn3 = analog[2];
         AnalogIn4 = analog[3];
         AnalogIn5 = analog[4];
-        for (int i = 0; i < AnalogInModel.Series.Count; i++)
-        {
-            var serie = (LineSeries)AnalogInModel.Series[i];
-            var points = serie.Points;
-            var count = points.Count;
-            points.Add(new DataPoint(count + 1, analog[i]));
-        }
 
         int[] pwm = new int[Vm167.NumPwmOut];
         await _vm167.ReadBackPWMOut(Device, pwm);
         PwmOut1 = pwm[0];
         PwmOut2 = pwm[1];
-        for (int i = 0; i < PwmOutModel.Series.Count; i++)
+
+        var timestamp = DateTime.Now - _startTime;
+        if (_restartScope)
         {
-            var serie = (LineSeries)PwmOutModel.Series[i];
-            var points = serie.Points;
-            var count = points.Count;
-            points.Add(new DataPoint(count + 1, pwm[i]));
+            _startTime = DateTime.Now;
+            timestamp = TimeSpan.Zero;
+            ScopeModel.ResetAllAxes();
+        }
+        else if (_resetScope)
+        {
+            ScopeModel.ResetAllAxes();
         }
 
-        AnalogInModel.InvalidatePlot(true);
-        PwmOutModel.InvalidatePlot(true);
+        // Update ScopeModel
+        for (int i = 0; i < ScopeModel.Series.Count; i++)
+        {
+            var serie = (LineSeries)ScopeModel.Series[i];
+            var points = serie.Points;
+            if (_restartScope)
+            {
+                points.Clear();
+            }
+
+            var value = GetType().GetProperty(serie.Title)?.GetValue(this);
+            if (value == null)
+            {
+                throw new ApplicationException($"Property {serie.Title} not found");
+            }
+            else
+            {
+                points.Add(new DataPoint(TimeSpanAxis.ToDouble(timestamp), Convert.ToInt32(value)));
+            }
+        }
+
+        ScopeModel.InvalidatePlot(true);
+        _restartScope = false;
+        _resetScope = false;
         _pending = false;
     }
 }

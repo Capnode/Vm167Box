@@ -3,18 +3,24 @@
     x:Class="Vm167Demo.Views.ScopePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:Vm167Demo.ViewModels"
     xmlns:oxy="clr-namespace:OxyPlot.Maui.Skia;assembly=OxyPlot.Maui.Skia"
-    x:DataType="vm:MainViewModel"
-    Shell.NavBarIsVisible="False">
+    xmlns:strings="clr-namespace:Vm167Demo.Resources"
+    xmlns:styles="clr-namespace:Vm167Demo.Resources.Styles"
+    xmlns:vm="clr-namespace:Vm167Demo.ViewModels"
+    x:DataType="vm:MainViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding RestartScopeCommand}"
+            IconImageSource="replay.png"
+            Text="{x:Static strings:AppResources.Restart}" />
+        <ToolbarItem
+            Command="{Binding ResetScopeCommand}"
+            IconImageSource="align_right.png"
+            Text="{x:Static strings:AppResources.Reset}" />
+    </ContentPage.ToolbarItems>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*" />
-            <RowDefinition Height="2*" />
-        </Grid.RowDefinitions>
-
-        <oxy:PlotView Grid.Row="0" Model="{Binding AnalogInModel}" />
-        <oxy:PlotView Grid.Row="1" Model="{Binding PwmOutModel}" />
+        <oxy:PlotView Model="{Binding ScopeModel}" />
     </Grid>
 </ContentPage>

@@ -1,7 +1,7 @@
 ﻿namespace Vm167Demo.Views;
 
 /// <summary>
-/// Note: For icons see: https://fontawesome.com/
+/// Note: For icons see: https://fontawesome.com/, https://www.svgrepo.com/collections/chart/
 /// </summary>
 
 public partial class AppShell : Shell
