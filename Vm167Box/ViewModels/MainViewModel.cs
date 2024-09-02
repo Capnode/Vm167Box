@@ -76,6 +76,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
                 LineStyle = LineStyle.Solid
             });
         }
+
+        ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
     }
 
     [ObservableProperty]
