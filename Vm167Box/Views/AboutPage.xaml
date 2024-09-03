@@ -2,8 +2,8 @@
 <ContentPage
     x:Class="Vm167Box.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:AboutViewModel">
 
