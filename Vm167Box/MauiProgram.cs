@@ -4,7 +4,7 @@ using Vm167Box.ViewModels;
 using Vm167Box.Views;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using OxyPlot.Maui.Skia;
-using Libvm167;
+using Vm167Lib;
 
 namespace Vm167Box;
 
@@ -40,7 +40,8 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
         builder.Logging.SetMinimumLevel(LogLevel.Trace);
-        builder.Logging.AddFilter("Vm167Box", LogLevel.Debug);
+        builder.Logging.AddFilter(nameof(Vm167Box), LogLevel.Debug);
+        builder.Logging.AddFilter(nameof(Vm167Lib), LogLevel.Debug);
 #endif
 
         return builder.Build();

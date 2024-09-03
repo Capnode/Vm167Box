@@ -2,7 +2,7 @@ using Vm167Box.ViewModels;
 using Moq;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
-using Libvm167;
+using Vm167Lib;
 
 namespace Vm167Box.Tests
 {

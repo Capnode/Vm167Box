@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Libvm167;
+namespace Vm167Lib;
 
 public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 {

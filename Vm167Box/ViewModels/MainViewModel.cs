@@ -5,7 +5,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Legends;
 using OxyPlot.Series;
-using Libvm167;
+using Vm167Lib;
 
 namespace Vm167Box.ViewModels;
 
@@ -19,7 +19,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
     private bool _resetScope;
     private bool _restartScope = true;
 
-    private int Device => Card0 ? Libvm167.Vm167.Device0 : Card1 ? Libvm167.Vm167.Device1 : -1;
+    private int Device => Card0 ? Vm167Lib.Vm167.Device0 : Card1 ? Vm167Lib.Vm167.Device1 : -1;
 
     public MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167)
     {

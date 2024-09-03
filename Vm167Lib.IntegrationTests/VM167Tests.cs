@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using Moq;
 using System.Data;
 
-namespace Libvm167.IntegrationTests;
+namespace Vm167Lib.IntegrationTests;
 
 [TestClass]
 public class VM167Tests

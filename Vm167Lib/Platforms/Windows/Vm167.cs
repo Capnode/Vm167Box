@@ -3,7 +3,7 @@ using System.Data;
 using Windows.Devices.Usb;
 using Windows.Storage.Streams;
 
-namespace Libvm167;
+namespace Vm167Lib;
 
 partial class Vm167
 {

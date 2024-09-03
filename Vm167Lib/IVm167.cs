@@ -1,4 +1,4 @@
-﻿namespace Libvm167
+﻿namespace Vm167Lib
 {
     public interface IVm167 : IDisposable
     {

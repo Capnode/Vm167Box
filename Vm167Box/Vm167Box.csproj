@@ -86,7 +86,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Libvm167\Libvm167.csproj" />
+	  <ProjectReference Include="..\Vm167Lib\Vm167Lib.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

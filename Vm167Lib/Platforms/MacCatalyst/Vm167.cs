@@ -2,7 +2,7 @@
 using System.Data;
 using System.Runtime.InteropServices;
 
-namespace Libvm167;
+namespace Vm167Lib;
 
 partial class Vm167
 {
