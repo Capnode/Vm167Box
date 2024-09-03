@@ -19,7 +19,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
     private bool _resetScope;
     private bool _restartScope = true;
 
-    private int Device => Card0 ? Vm167Lib.Vm167.Device0 : Card1 ? Vm167Lib.Vm167.Device1 : -1;
+    private int Device => Card0 ? Vm167.Device0 : Card1 ? Vm167.Device1 : -1;
 
     public MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167)
     {

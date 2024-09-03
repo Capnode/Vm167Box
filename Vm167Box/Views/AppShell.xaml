@@ -8,8 +8,9 @@
     xmlns:views="clr-namespace:Vm167Box.Views"
     x:Name="shellMain"
     Title="{x:Static strings:AppResources.AppTitle}"
-    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={StaticResource Primary}}"
-    Shell.FlyoutWidth="130">
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark},
+                                                  Dark={StaticResource Primary}}"
+    Shell.FlyoutWidth="150">
 
     <Shell.TitleView>
         <HorizontalStackLayout x:DataType="Shell" BindingContext="{x:Reference shellMain}">
@@ -42,6 +43,13 @@
         ContentTemplate="{DataTemplate views:ScopePage}"
         Icon="chart.png"
         Route="ScopePage"
+        Shell.NavBarIsVisible="true" />
+
+    <ShellContent
+        Title="{x:Static strings:AppResources.GeneratorTitle}"
+        ContentTemplate="{DataTemplate views:GeneratorPage}"
+        Icon="sine.png"
+        Route="GeneratorPage"
         Shell.NavBarIsVisible="true" />
 
     <ShellContent

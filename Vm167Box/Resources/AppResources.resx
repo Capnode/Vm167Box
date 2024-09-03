@@ -150,4 +150,7 @@
   <data name="AboutMessage" xml:space="preserve">
     <value>Control panel for the Velleman VM167 USB GPIO interface card.</value>
   </data>
+  <data name="GeneratorTitle" xml:space="preserve">
+    <value>Generator</value>
+  </data>
 </root>

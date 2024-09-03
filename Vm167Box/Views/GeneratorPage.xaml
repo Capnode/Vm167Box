@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Vm167Box.Views.GeneratorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:Vm167Box.ViewModels"
+    x:DataType="vm:GeneratorViewModel">
+
+    <VerticalStackLayout>
+        <Frame
+            Grid.Row="1"
+            Margin="10,10,0,0"
+            BorderColor="Black">
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="PWM Out 1" />
+                    <RadioButton Content="Off" />
+                    <RadioButton Content="Sine" />
+                    <RadioButton Content="Triangle" />
+                    <RadioButton Content="Ramp" />
+                    <RadioButton Content="Square" IsChecked="true" />
+                    <Picker
+                        Margin="10,-10,0,0"
+                        SelectedIndex="{Binding PwmFreq}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>2930 Hz</x:String>
+                                <x:String>11719 Hz</x:String>
+                                <x:String>46875 Hz</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                        <Picker.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                Command="{Binding PwmOutCommand}"
+                                CommandParameter="1"
+                                EventName="SelectedIndexChanged" />
+                        </Picker.Behaviors>
+                    </Picker>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <VerticalStackLayout>
+                        <Label HorizontalTextAlignment="Center" Text="1" />
+                        <Slider
+                            Margin="-30,40,0,30"
+                            HeightRequest="40"
+                            Maximum="255"
+                            Minimum="0"
+                            Rotation="-90"
+                            TranslationX="20"
+                            WidthRequest="100"
+                            Value="{Binding PwmOut1}">
+                            <Slider.Behaviors>
+                                <toolkit:EventToCommandBehavior
+                                        Command="{Binding PwmOutCommand}"
+                                        CommandParameter="1"
+                                        EventName="ValueChanged" />
+                            </Slider.Behaviors>
+                        </Slider>
+                        <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut1}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

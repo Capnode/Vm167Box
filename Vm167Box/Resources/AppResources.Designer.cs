@@ -97,6 +97,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generator.
+        /// </summary>
+        internal static string GeneratorTitle {
+            get {
+                return ResourceManager.GetString("GeneratorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No VM167 card found.
         /// </summary>
         internal static string NoCardFound {

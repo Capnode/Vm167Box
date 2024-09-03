@@ -33,9 +33,11 @@ public static class MauiProgram
         // Pages
         builder.Services.AddSingleton<PanelPage>();
         builder.Services.AddSingleton<ScopePage>();
+        builder.Services.AddSingleton<GeneratorPage>();
 
         // ViewModels
         builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<GeneratorViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();
