@@ -8,8 +8,7 @@
     xmlns:views="clr-namespace:Vm167Box.Views"
     x:Name="shellMain"
     Title="{x:Static strings:AppResources.AppTitle}"
-    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark},
-                                                  Dark={StaticResource Primary}}"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={StaticResource Primary}}"
     Shell.FlyoutWidth="130">
 
     <Shell.TitleView>

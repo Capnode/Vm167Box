@@ -21,6 +21,6 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <oxy:PlotView Model="{Binding ScopeModel}" />
+        <oxy:PlotView x:Name="_scopeView" Model="{Binding ScopeModel}" />
     </Grid>
 </ContentPage>
