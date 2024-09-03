@@ -43,13 +43,8 @@ public partial class App : Application
         _logger.LogDebug("CurrentCulture: {}", CultureInfo.CurrentCulture);
         _logger.LogDebug("CurrentUICulture: {}", CultureInfo.CurrentUICulture);
 
-        if (Current != null)
-        {
-            Current.UserAppTheme = Current.RequestedTheme;
-        }
-
-        MainPage = new AppShell();
         UserAppTheme = PlatformAppTheme;
+        MainPage = new AppShell();
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
@@ -92,7 +87,7 @@ public partial class App : Application
         Preferences.Set("WindowHeight", window.Height);
 
         // Make sure the flyout is visible when the window is resized
-        double currentWidth = ((Window)sender).Width;
+        var currentWidth = ((Window)sender).Width;
         SetShellFlyout(currentWidth);
     }
 

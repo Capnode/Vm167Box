@@ -17,6 +17,11 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<Company>Capnode AB</Company>
+		<Copyright>© 2024</Copyright>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Description>Control panel for the Velleman VM167 USB GPIO interface card.</Description>
+		<PackageProjectUrl>https://github.com/Capnode/Vm167Box</PackageProjectUrl>
 
 		<!-- Display name -->
 		<ApplicationTitle>Vm167Box</ApplicationTitle>
@@ -39,11 +44,6 @@
 		<DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION</DefineConstants>
 		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
-		<Company>Capnode AB</Company>
-		<Copyright>© 2024</Copyright>
-		<NeutralLanguage>en</NeutralLanguage>
-		<Description>Control panel for the Velleman VM167 USB GPIO interface card.</Description>
-		<PackageProjectUrl>https://github.com/Capnode/Vm167Box</PackageProjectUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
