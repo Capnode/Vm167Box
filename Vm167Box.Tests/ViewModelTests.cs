@@ -9,7 +9,7 @@ namespace Vm167Box.Tests
     [TestClass]
     public class ViewModelTests
     {
-        private readonly Mock<ILogger<MainViewModel>> _logger = new();
+        private readonly Mock<ILogger<PanelViewModel>> _logger = new();
 
         [TestMethod]
         public async Task Open_TwoDevices_Success()
@@ -18,7 +18,7 @@ namespace Vm167Box.Tests
             // Arrange
             var vm167Mock = new Mock<IVm167>();
             vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(3);
-            var vm = new MainViewModel(_logger.Object, vm167Mock.Object);
+            var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act
             await vm.Open();
@@ -36,7 +36,7 @@ namespace Vm167Box.Tests
             // Arrange
             var vm167Mock = new Mock<IVm167>();
             vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(-1);
-            var vm = new MainViewModel(_logger.Object, vm167Mock.Object);
+            var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act
             await vm.Open();

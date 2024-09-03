@@ -9,9 +9,9 @@ using Vm167Lib;
 
 namespace Vm167Box.ViewModels;
 
-public partial class MainViewModel : ObservableObject, IDisposable
+public partial class PanelViewModel : ObservableObject, IDisposable
 {
-    private readonly ILogger<MainViewModel> _logger;
+    private readonly ILogger<PanelViewModel> _logger;
     private readonly IVm167 _vm167;
     private Timer? _timer;
     private bool _pending;
@@ -21,7 +21,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
 
     private int Device => Card0 ? Vm167.Device0 : Card1 ? Vm167.Device1 : -1;
 
-    public MainViewModel(ILogger<MainViewModel> logger, IVm167 vm167)
+    public PanelViewModel(ILogger<PanelViewModel> logger, IVm167 vm167)
     {
         _logger = logger;
         _vm167 = vm167;

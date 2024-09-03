@@ -5,7 +5,7 @@ namespace Vm167Box.Views;
 
 public partial class ScopePage : ContentPage
 {
-    public ScopePage(MainViewModel viewModel)
+    public ScopePage(PanelViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

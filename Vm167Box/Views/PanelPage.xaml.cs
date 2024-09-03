@@ -4,7 +4,7 @@ namespace Vm167Box.Views;
 
 public partial class PanelPage : ContentPage
 {
-    public PanelPage(MainViewModel viewModel)
+    public PanelPage(PanelViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

@@ -11,9 +11,9 @@ public partial class App : Application
     private const double MinPageWidth = 400;
 
     private readonly ILogger<App> _logger;
-    private readonly MainViewModel _vm;
+    private readonly PanelViewModel _vm;
 
-    public App(ILogger<App> logger, MainViewModel viewModel)
+    public App(ILogger<App> logger, PanelViewModel viewModel)
     {
         _logger = logger;
         _vm = viewModel;

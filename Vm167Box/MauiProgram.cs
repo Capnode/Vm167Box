@@ -36,7 +36,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<GeneratorPage>();
 
         // ViewModels
-        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<PanelViewModel>();
         builder.Services.AddSingleton<GeneratorViewModel>();
 
 #if DEBUG
