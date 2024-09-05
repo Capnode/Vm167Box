@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using Vm167Box.Services;
-using Vm167Lib;
 
 namespace Vm167Box.ViewModels
 {
@@ -19,25 +18,33 @@ namespace Vm167Box.ViewModels
         }
 
         [ObservableProperty]
-        private int _pwmOut1;
+        private Function _function1 = Function.Off;
 
         [ObservableProperty]
-        private int _pwmOut2;
+        private Function _function2 = Function.Off;
+
+        [ObservableProperty]
+        private double _frequency1 = 10;
+
+        [ObservableProperty]
+        private double _frequency2 = 10;
 
         [RelayCommand]
-        public async Task PwmOut(string channel)
+        public async Task Generator1(EventArgs args)
         {
-            _logger.LogTrace(">PwmOut({channel})", channel);
-            var value = channel switch
-            {
-                "1" => PwmOut1,
-                "2" => PwmOut2,
-                _ => 0
-            };
+            if (args is CheckedChangedEventArgs selected && !selected.Value) return;
+            _logger.LogTrace(">Generator1({Function}, {Frequency})",Function1, Frequency1);
+             await _vm167Service.Generator(1, Function1, Frequency1);
+            _logger.LogTrace("<Generator1()");
+        }
 
-            var pwmFrequency = _vm167Service.PWMFrequency;
-            await _vm167Service.SetPWM(int.Parse(channel), value, pwmFrequency);
-            _logger.LogTrace("<PwmOut({channel})", channel);
+        [RelayCommand]
+        public async Task Generator2(EventArgs args)
+        {
+            if (args is CheckedChangedEventArgs selected && !selected.Value) return;
+            _logger.LogTrace(">Generator2({Function}, {Frequency})", Function2, Frequency2);
+            await _vm167Service.Generator(2, Function2, Frequency2);
+            _logger.LogTrace("<Generator2()");
         }
     }
 }

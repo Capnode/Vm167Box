@@ -19,7 +19,7 @@ internal class Vm167Service : IVm167Service, IDisposable
     }
 
     public int Device { get; set; }
-    public int PWMFrequency { get; set; } = 1;
+    public int PwmFrequency { get; set; } = 1;
 
     public async Task<int> OpenDevices()
     {
@@ -92,13 +92,13 @@ internal class Vm167Service : IVm167Service, IDisposable
         await _vm167.SetDigitalChannel(Device, channel);
     }
 
-    public async Task SetPWM(int channel, int data, int freq)
+    public async Task SetPwm(int channel, int data, int frequency)
     {
-        PWMFrequency = freq;
-        await _vm167.SetPWM(Device, channel, data, freq);
+        PwmFrequency = frequency;
+        await _vm167.SetPWM(Device, channel, data, frequency);
     }
 
-    public async Task OutputAllPWM(int data1, int data2)
+    public async Task OutputAllPwm(int data1, int data2)
     {
         await _vm167.OutputAllPWM(Device, data1, data2);
     }
@@ -116,5 +116,11 @@ internal class Vm167Service : IVm167Service, IDisposable
     public async Task<int> VersionFirmware()
     {
         return await _vm167.VersionFirmware(Device);
+    }
+
+    public async Task Generator(int channel, Function function, double frequency)
+    {
+        _logger.LogInformation("Generator({Channel}, {Function}, {Frequency})", channel, function, frequency);
+         await Task.CompletedTask;
     }
 }

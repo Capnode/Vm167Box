@@ -119,10 +119,10 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
     public int PWMFrequency
     {
-        get => _vm167Service.PWMFrequency;
+        get => _vm167Service.PwmFrequency;
         set
         {
-            _vm167Service.PWMFrequency = value;
+            _vm167Service.PwmFrequency = value;
             OnPropertyChanged();
         }
     }
@@ -340,7 +340,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
             _ => 0
         };
 
-        await _vm167Service.SetPWM(int.Parse(channel), value, Math.Min(PWMFrequency + 1, 3));
+        await _vm167Service.SetPwm(int.Parse(channel), value, Math.Min(PWMFrequency + 1, 3));
         _logger.LogTrace("<PwmOut({channel})", channel);
     }
 

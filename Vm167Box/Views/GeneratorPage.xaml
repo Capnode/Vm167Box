@@ -3,47 +3,155 @@
     x:Class="Vm167Box.Views.GeneratorPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:services="clr-namespace:Vm167Box.Services"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:GeneratorViewModel">
 
-    <VerticalStackLayout>
+    <FlexLayout Direction="Row" Wrap="Wrap">
         <Frame
             Grid.Row="1"
-            Margin="10,10,0,0"
+            Margin="10"
             BorderColor="Black">
-            <VerticalStackLayout>
-                <HorizontalStackLayout>
-                    <Label Text="PWM Out 1" />
-                    <RadioButton Content="Off" IsChecked="true" />
-                    <RadioButton Content="Sine" />
-                    <RadioButton Content="Triangle" />
-                    <RadioButton Content="Ramp" />
-                    <RadioButton Content="Square" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <VerticalStackLayout>
-                        <Label HorizontalTextAlignment="Center" Text="1" />
-                        <Slider
-                            Margin="-30,40,0,30"
-                            HeightRequest="40"
-                            Maximum="255"
-                            Minimum="0"
-                            Rotation="-90"
-                            TranslationX="20"
-                            WidthRequest="100"
-                            Value="{Binding PwmOut1}">
-                            <Slider.Behaviors>
-                                <toolkit:EventToCommandBehavior
-                                    Command="{Binding PwmOutCommand}"
-                                    CommandParameter="1"
-                                    EventName="ValueChanged" />
-                            </Slider.Behaviors>
-                        </Slider>
-                        <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut1}" />
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
+            <VerticalStackLayout
+                Margin="20,20,0,0"
+                RadioButtonGroup.GroupName="Function1"
+                RadioButtonGroup.SelectedValue="{Binding Function1}"
+                Spacing="10">
+                <Label Text="Generator PWM1" />
+                <RadioButton
+                    Content="Off"
+                    IsChecked="true"
+                    Value="{x:Static services:Function.Off}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Sine" Value="{x:Static services:Function.SineWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Triangle" Value="{x:Static services:Function.TriangleWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Sawtooth" Value="{x:Static services:Function.SawtoothWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Square" Value="{x:Static services:Function.SquareWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <Label Text="Frequency (Hz)" />
+                <Picker SelectedItem="{Binding Frequency1}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:Double}">
+                            <x:Double>10</x:Double>
+                            <x:Double>5</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>1</x:Double>
+                            <x:Double>0.5</x:Double>
+                            <x:Double>0.2</x:Double>
+                            <x:Double>0.1</x:Double>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
+                    </Picker.Behaviors>
+                </Picker>
             </VerticalStackLayout>
         </Frame>
-    </VerticalStackLayout>
+        <Frame
+            Grid.Row="1"
+            Margin="10"
+            BorderColor="Black">
+            <VerticalStackLayout
+                Margin="20,20,0,0"
+                RadioButtonGroup.GroupName="Function2"
+                RadioButtonGroup.SelectedValue="{Binding Function2}"
+                Spacing="10">
+                <Label Text="Generator PWM2" />
+                <RadioButton
+                    Content="Off"
+                    IsChecked="true"
+                    Value="{x:Static services:Function.Off}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator2Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Sine" Value="{x:Static services:Function.SineWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator2Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Triangle" Value="{x:Static services:Function.TriangleWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator2Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Sawtooth" Value="{x:Static services:Function.SawtoothWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator2Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Square" Value="{x:Static services:Function.SquareWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding Generator2Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <Label Text="Frequency (Hz)" />
+                <Picker SelectedItem="{Binding Frequency2}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:Double}">
+                            <x:Double>10</x:Double>
+                            <x:Double>5</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>1</x:Double>
+                            <x:Double>0.5</x:Double>
+                            <x:Double>0.2</x:Double>
+                            <x:Double>0.1</x:Double>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
+                    </Picker.Behaviors>
+                </Picker>
+            </VerticalStackLayout>
+        </Frame>
+    </FlexLayout>
 </ContentPage>
