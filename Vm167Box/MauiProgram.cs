@@ -5,6 +5,8 @@ using Vm167Box.Views;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using OxyPlot.Maui.Skia;
 using Vm167Lib;
+using Vm167Box.Services;
+using Vm167Box.Services.Internal;
 
 namespace Vm167Box;
 
@@ -29,6 +31,7 @@ public static class MauiProgram
 
         // Services
         builder.Services.AddSingleton<IVm167, Vm167>();
+        builder.Services.AddSingleton<IVm167Service, Vm167Service>();
 
         // Pages
         builder.Services.AddSingleton<PanelPage>();

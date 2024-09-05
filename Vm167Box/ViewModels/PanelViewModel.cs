@@ -5,6 +5,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Legends;
 using OxyPlot.Series;
+using Vm167Box.Services;
 using Vm167Lib;
 
 namespace Vm167Box.ViewModels;
@@ -12,19 +13,17 @@ namespace Vm167Box.ViewModels;
 public partial class PanelViewModel : ObservableObject, IDisposable
 {
     private readonly ILogger<PanelViewModel> _logger;
-    private readonly IVm167 _vm167;
+    private readonly IVm167Service _vm167Service;
     private Timer? _timer;
     private bool _pending;
     private DateTime _startTime;
     private bool _resetScope;
     private bool _restartScope = true;
 
-    private int Device => Card0 ? Vm167.Device0 : Card1 ? Vm167.Device1 : -1;
-
-    public PanelViewModel(ILogger<PanelViewModel> logger, IVm167 vm167)
+    public PanelViewModel(ILogger<PanelViewModel> logger, IVm167Service vm167service)
     {
         _logger = logger;
-        _vm167 = vm167;
+        _vm167Service = vm167service;
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
@@ -82,6 +81,52 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
     }
 
+    public void Dispose()
+    {
+        _timer?.Dispose();
+        while (_pending)
+        {
+            Thread.Sleep(100);
+        }
+        _timer = null;
+    }
+
+    public bool Card0
+    {
+        get => _vm167Service.Device == Vm167.Device0;
+        set
+        {
+            if (value)
+            {
+                _vm167Service.Device = Vm167.Device0;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool Card1
+    {
+        get => _vm167Service.Device == Vm167.Device1;
+        set
+        {
+            if (value)
+            {
+                _vm167Service.Device = Vm167.Device1;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int PWMFrequency
+    {
+        get => _vm167Service.PWMFrequency;
+        set
+        {
+            _vm167Service.PWMFrequency = value;
+            OnPropertyChanged();
+        }
+    }
+
     [ObservableProperty]
     private bool _isOpen;
 
@@ -90,12 +135,6 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
     [ObservableProperty]
     private bool _card1Exist;
-
-    [ObservableProperty]
-    private bool _card0;
-
-    [ObservableProperty]
-    private bool _card1;
 
     [ObservableProperty]
     private string _firmwareVersion = string.Empty;
@@ -164,22 +203,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
     private int _pwmOut2;
 
     [ObservableProperty]
-    private int _pwmFreq;
-
-    [ObservableProperty]
     private PlotModel _scopeModel;
-
-    public void Dispose()
-    {
-        _timer?.Dispose();
-        while (_pending)
-        {
-            Thread.Sleep(100);
-        }
-
-        _vm167.Dispose();
-        _timer = null;
-    }
 
     [RelayCommand]
     public async Task Open()
@@ -187,11 +211,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         _logger.LogTrace(">Open()");
         try
         {
-            await _vm167.CloseDevices();
-            var mask = await _vm167.OpenDevices();
-            _logger.LogInformation("Open card mask {Mask}", mask);
-            if (mask < 0) throw new ApplicationException(Resources.AppResources.NoCardFound);
-            if (mask == 0) throw new ApplicationException(Resources.AppResources.DriverProblem);
+            var mask = await _vm167Service.OpenDevices();
             IsOpen = true;
             Card0Exist = (mask & 1) > 0;
             Card1Exist = (mask & 2) > 0;
@@ -226,7 +246,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         if (_pending) return;
 
         _logger.LogTrace(">SetAllDigital()");
-        await _vm167.SetAllDigital(Device);
+        await _vm167Service.SetAllDigital();
         _logger.LogTrace("<SetAllDigital()");
     }
 
@@ -236,7 +256,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         if (_pending) return;
 
         _logger.LogTrace(">ClearAllDigital()");
-        await _vm167.ClearAllDigital(Device);
+        await _vm167Service.ClearAllDigital();
         _logger.LogTrace("<ClearAllDigital()");
     }
 
@@ -246,11 +266,11 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         if (_pending) return;
 
         _logger.LogTrace(">Version()");
-        var value = await _vm167.VersionFirmware(Device);
+        var value = await _vm167Service.VersionFirmware();
         var firmware = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
         FirmwareVersion = $"Firmware: v{firmware}";
 
-        value = _vm167.VersionDLL();
+        value = _vm167Service.VersionDLL();
         var dll = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
         DllVersion = $"DLL: v{dll}";
         _logger.LogTrace("<Version()");
@@ -262,7 +282,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         if (_pending) return;
 
         _logger.LogTrace(">DigitalInOutMode()");
-        await _vm167.InOutMode(Device, DigitalHighIn ? 1 : 0, DigitalLowIn ? 1 : 0);
+        await _vm167Service.InOutMode(DigitalHighIn ? 1 : 0, DigitalLowIn ? 1 : 0);
         _logger.LogTrace("<DigitalInOutMode()");
     }
 
@@ -287,11 +307,11 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
         if (state)
         {
-            await _vm167.SetDigitalChannel(Device, int.Parse(channel));
+            await _vm167Service.SetDigitalChannel(int.Parse(channel));
         }
         else
         {
-            await _vm167.ClearDigitalChannel(Device, int.Parse(channel));
+            await _vm167Service.ClearDigitalChannel(int.Parse(channel));
         }
 
         _logger.LogTrace("<DigitalOut({channel})", channel);
@@ -303,7 +323,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         if (_pending) return;
 
         _logger.LogTrace(">ResetCounter()");
-        await _vm167.ResetCounter(Device);
+        await _vm167Service.ResetCounter();
         _logger.LogTrace("<ResetCounter()");
     }
 
@@ -320,7 +340,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
             _ => 0
         };
 
-        await _vm167.SetPWM(Device, int.Parse(channel), value, Math.Min(PwmFreq + 1, 3));
+        await _vm167Service.SetPWM(int.Parse(channel), value, Math.Min(PWMFrequency + 1, 3));
         _logger.LogTrace("<PwmOut({channel})", channel);
     }
 
@@ -338,16 +358,16 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
     private async Task ReadDevice()
     {
-        if (_pending || Device < 0) return;
+        if (_pending) return;
         _pending = true;
 
-        var ioMode = await _vm167.ReadBackInOutMode(Device);
+        var ioMode = await _vm167Service.ReadBackInOutMode();
         DigitalLowOut = (ioMode & 1) == 0;
         DigitalLowIn = (ioMode & 1) > 0;
         DigitalHighOut = (ioMode & 2) == 0;
         DigitalHighIn = (ioMode & 2) > 0;
 
-        var digital = await _vm167.ReadAllDigital(Device);
+        var digital = await _vm167Service.ReadAllDigital();
         Digital1 = (digital & 1) > 0;
         Digital2 = (digital & 2) > 0;
         Digital3 = (digital & 4) > 0;
@@ -357,11 +377,11 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         Digital7 = (digital & 64) > 0;
         Digital8 = (digital & 128) > 0;
 
-        var counter = await _vm167.ReadCounter(Device);
+        var counter = await _vm167Service.ReadCounter();
         Counter = counter;
 
         int[] analog = new int[Vm167.NumAnalogIn];
-        await _vm167.ReadAllAnalog(Device, analog);
+        await _vm167Service.ReadAllAnalog(analog);
         AnalogIn1 = analog[0];
         AnalogIn2 = analog[1];
         AnalogIn3 = analog[2];
@@ -369,7 +389,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         AnalogIn5 = analog[4];
 
         int[] pwm = new int[Vm167.NumPwmOut];
-        await _vm167.ReadBackPWMOut(Device, pwm);
+        await _vm167Service.ReadBackPWMOut(pwm);
         PwmOut1 = pwm[0];
         PwmOut2 = pwm[1];
 

@@ -15,28 +15,11 @@
             <VerticalStackLayout>
                 <HorizontalStackLayout>
                     <Label Text="PWM Out 1" />
-                    <RadioButton Content="Off" />
+                    <RadioButton Content="Off" IsChecked="true" />
                     <RadioButton Content="Sine" />
                     <RadioButton Content="Triangle" />
                     <RadioButton Content="Ramp" />
-                    <RadioButton Content="Square" IsChecked="true" />
-                    <Picker
-                        Margin="10,-10,0,0"
-                        SelectedIndex="{Binding PwmFreq}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>2930 Hz</x:String>
-                                <x:String>11719 Hz</x:String>
-                                <x:String>46875 Hz</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                        <Picker.Behaviors>
-                            <toolkit:EventToCommandBehavior
-                                Command="{Binding PwmOutCommand}"
-                                CommandParameter="1"
-                                EventName="SelectedIndexChanged" />
-                        </Picker.Behaviors>
-                    </Picker>
+                    <RadioButton Content="Square" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <VerticalStackLayout>
@@ -52,9 +35,9 @@
                             Value="{Binding PwmOut1}">
                             <Slider.Behaviors>
                                 <toolkit:EventToCommandBehavior
-                                        Command="{Binding PwmOutCommand}"
-                                        CommandParameter="1"
-                                        EventName="ValueChanged" />
+                                    Command="{Binding PwmOutCommand}"
+                                    CommandParameter="1"
+                                    EventName="ValueChanged" />
                             </Slider.Behaviors>
                         </Slider>
                         <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut1}" />

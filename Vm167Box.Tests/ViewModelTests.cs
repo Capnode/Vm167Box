@@ -2,7 +2,7 @@ using Vm167Box.ViewModels;
 using Moq;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
-using Vm167Lib;
+using Vm167Box.Services;
 
 namespace Vm167Box.Tests
 {
@@ -16,7 +16,7 @@ namespace Vm167Box.Tests
         {
 
             // Arrange
-            var vm167Mock = new Mock<IVm167>();
+            var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(3);
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
@@ -34,7 +34,7 @@ namespace Vm167Box.Tests
         {
 
             // Arrange
-            var vm167Mock = new Mock<IVm167>();
+            var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(-1);
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 

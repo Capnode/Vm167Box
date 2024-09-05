@@ -286,7 +286,7 @@
                         <Picker
                             Margin="10,-10,0,0"
                             IsEnabled="{Binding IsOpen}"
-                            SelectedIndex="{Binding PwmFreq}">
+                            SelectedIndex="{Binding PWMFrequency}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>2930 Hz</x:String>
