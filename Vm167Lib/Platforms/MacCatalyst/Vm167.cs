@@ -35,10 +35,22 @@ partial class Vm167
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
     private static extern IntPtr CFStringCreateWithCString(IntPtr alloc, string cStr, uint encoding);
 
-    private async Task<int> Open()
+    private Task<int> Scan()
     {
-        _devices[Device0] = OpenDevice(Vid, Pid0);
-        _devices[Device1] = OpenDevice(Vid, Pid1);
+        throw new NotImplementedException();
+    }
+
+    private async Task<int> Open(int mask)
+    {
+        if ((mask & 1) > 0)
+        {
+            _devices[Device0] = OpenDevice(Vid, Pid0);
+        }
+
+        if ((mask & 2) > 0)
+        {
+            _devices[Device1] = OpenDevice(Vid, Pid1);
+        }
 
         int found = 0;
         for (var i = 0; i < NumDevices; i++)
@@ -49,8 +61,8 @@ partial class Vm167
             }
         }
 
-        var mask = found == 0 ? -1 : found;
-        return await Task.FromResult(mask);
+        var result = found == 0 ? -1 : found;
+        return await Task.FromResult(result);
     }
 
     private void Close()

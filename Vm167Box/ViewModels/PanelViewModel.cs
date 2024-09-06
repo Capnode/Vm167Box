@@ -91,42 +91,6 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         _timer = null;
     }
 
-    public bool Card0
-    {
-        get => _vm167Service.Device == Vm167.Device0;
-        set
-        {
-            if (value)
-            {
-                _vm167Service.Device = Vm167.Device0;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public bool Card1
-    {
-        get => _vm167Service.Device == Vm167.Device1;
-        set
-        {
-            if (value)
-            {
-                _vm167Service.Device = Vm167.Device1;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public int PWMFrequency
-    {
-        get => _vm167Service.PwmFrequency;
-        set
-        {
-            _vm167Service.PwmFrequency = value;
-            OnPropertyChanged();
-        }
-    }
-
     [ObservableProperty]
     private bool _isOpen;
 
@@ -197,6 +161,9 @@ public partial class PanelViewModel : ObservableObject, IDisposable
     private uint _counter;
 
     [ObservableProperty]
+    private int _pwmFrequency;
+
+    [ObservableProperty]
     private int _pwmOut1;
 
     [ObservableProperty]
@@ -211,14 +178,9 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         _logger.LogTrace(">Open()");
         try
         {
-            var mask = await _vm167Service.OpenDevices();
-            IsOpen = true;
+            var mask = await _vm167Service.ListDevices();
             Card0Exist = (mask & 1) > 0;
             Card1Exist = (mask & 2) > 0;
-            Card0 = Card0Exist;
-            Card1 = Card1Exist && !Card0Exist;
-            if (_timer != null) return;
-
             _timer = new(
                 async(obj) => await ReadDevice(),
                 null,
@@ -227,17 +189,52 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         }
         catch (Exception)
         {
-            IsOpen = false;
             Card0Exist = false;
             Card1Exist = false;
-            Card0 = false;
-            Card1 = false;
             throw;
         }
         finally
         {
             _logger.LogTrace("<Open()");
         }
+    }
+
+    [RelayCommand]
+    public async Task SelectCard0(CheckedChangedEventArgs args)
+    {
+        if (args.Value)
+        {
+            _logger.LogTrace(">SelectCard0() On");
+            await _vm167Service.OpenDevice(0);
+            IsOpen = true;
+        }
+        else
+        {
+            _logger.LogTrace(">SelectCard0() Off");
+            await _vm167Service.CloseDevice();
+            IsOpen = false;
+        }
+
+        _logger.LogTrace("<SelectCard0()");
+    }
+
+    [RelayCommand]
+    public async Task SelectCard1(CheckedChangedEventArgs args)
+    {
+        if (args.Value)
+        {
+            _logger.LogTrace(">SelectCard1() On");
+            await _vm167Service.OpenDevice(1);
+            IsOpen = true;
+        }
+        else
+        {
+            _logger.LogTrace(">SelectCard1() Off");
+            await _vm167Service.CloseDevice();
+            IsOpen = false;
+        }
+
+        _logger.LogTrace("<SelectCard1()");
     }
 
     [RelayCommand]
@@ -340,7 +337,8 @@ public partial class PanelViewModel : ObservableObject, IDisposable
             _ => 0
         };
 
-        await _vm167Service.SetPwm(int.Parse(channel), value, Math.Min(PWMFrequency + 1, 3));
+        _vm167Service.PwmFrequency = Math.Min(PwmFrequency + 1, 3);
+        await _vm167Service.SetPwm(int.Parse(channel), value);
         _logger.LogTrace("<PwmOut({channel})", channel);
     }
 
@@ -358,7 +356,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
     private async Task ReadDevice()
     {
-        if (_pending) return;
+        if (_pending || !IsOpen) return;
         _pending = true;
 
         var ioMode = await _vm167Service.ReadBackInOutMode();

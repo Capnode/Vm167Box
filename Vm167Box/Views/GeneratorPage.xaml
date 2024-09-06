@@ -3,7 +3,7 @@
     x:Class="Vm167Box.Views.GeneratorPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:services="clr-namespace:Vm167Box.Services"
+    xmlns:oxy="clr-namespace:OxyPlot.Maui.Skia;assembly=OxyPlot.Maui.Skia"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:GeneratorViewModel">
@@ -22,7 +22,7 @@
                 <RadioButton
                     Content="Off"
                     IsChecked="true"
-                    Value="{x:Static services:Function.Off}">
+                    Value="{x:Static vm:GeneratorFunction.Off}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -30,7 +30,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sine" Value="{x:Static services:Function.SineWave}">
+                <RadioButton Content="Sine" Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -38,7 +38,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Triangle" Value="{x:Static services:Function.TriangleWave}">
+                <RadioButton Content="Triangle" Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -46,7 +46,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sawtooth" Value="{x:Static services:Function.SawtoothWave}">
+                <RadioButton Content="Sawtooth" Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -54,7 +54,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Square" Value="{x:Static services:Function.SquareWave}">
+                <RadioButton Content="Square" Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -66,19 +66,20 @@
                 <Picker SelectedItem="{Binding Frequency1}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:Double}">
-                            <x:Double>10</x:Double>
-                            <x:Double>5</x:Double>
-                            <x:Double>2</x:Double>
-                            <x:Double>1</x:Double>
-                            <x:Double>0.5</x:Double>
-                            <x:Double>0.2</x:Double>
                             <x:Double>0.1</x:Double>
+                            <x:Double>0.2</x:Double>
+                            <x:Double>0.5</x:Double>
+                            <x:Double>1</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>5</x:Double>
+                            <x:Double>10</x:Double>
                         </x:Array>
                     </Picker.ItemsSource>
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
+                <oxy:PlotView x:Name="_generator1Plot" Model="{Binding Generator1Model}" HeightRequest="200" WidthRequest="200" />
             </VerticalStackLayout>
         </Frame>
         <Frame
@@ -94,7 +95,7 @@
                 <RadioButton
                     Content="Off"
                     IsChecked="true"
-                    Value="{x:Static services:Function.Off}">
+                    Value="{x:Static vm:GeneratorFunction.Off}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -102,7 +103,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sine" Value="{x:Static services:Function.SineWave}">
+                <RadioButton Content="Sine" Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -110,7 +111,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Triangle" Value="{x:Static services:Function.TriangleWave}">
+                <RadioButton Content="Triangle" Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -118,7 +119,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sawtooth" Value="{x:Static services:Function.SawtoothWave}">
+                <RadioButton Content="Sawtooth" Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -126,7 +127,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Square" Value="{x:Static services:Function.SquareWave}">
+                <RadioButton Content="Square" Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -138,19 +139,22 @@
                 <Picker SelectedItem="{Binding Frequency2}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:Double}">
-                            <x:Double>10</x:Double>
-                            <x:Double>5</x:Double>
-                            <x:Double>2</x:Double>
-                            <x:Double>1</x:Double>
-                            <x:Double>0.5</x:Double>
-                            <x:Double>0.2</x:Double>
                             <x:Double>0.1</x:Double>
+                            <x:Double>0.2</x:Double>
+                            <x:Double>0.5</x:Double>
+                            <x:Double>1</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>5</x:Double>
+                            <x:Double>10</x:Double>
                         </x:Array>
                     </Picker.ItemsSource>
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
+                <Grid>
+                    <oxy:PlotView x:Name="_generator2Plot" Model="{Binding Generator2Model}" HeightRequest="200" WidthRequest="200" />
+                </Grid>
             </VerticalStackLayout>
         </Frame>
     </FlexLayout>

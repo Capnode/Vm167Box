@@ -33,14 +33,22 @@
             <Label IsVisible="{Binding Card1Exist}" Text="Card 1 connected" />
             <Label Text="Select card:" />
             <HorizontalStackLayout>
-                <RadioButton
-                    Content="0"
-                    IsChecked="{Binding Card0}"
-                    IsEnabled="{Binding Card0Exist}" />
-                <RadioButton
-                    Content="1"
-                    IsChecked="{Binding Card1}"
-                    IsEnabled="{Binding Card1Exist}" />
+                <RadioButton Content="0" IsEnabled="{Binding Card0Exist}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding SelectCard0Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="1" IsEnabled="{Binding Card1Exist}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding SelectCard1Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
             </HorizontalStackLayout>
             <Button
                 Command="{Binding SetAllDigitalCommand}"
@@ -50,7 +58,10 @@
                 Command="{Binding ClearAllDigitalCommand}"
                 IsEnabled="{Binding IsOpen}"
                 Text="Clear All Digital" />
-            <Button Command="{Binding VersionCommand}" Text="Version" />
+            <Button
+                Command="{Binding VersionCommand}"
+                IsEnabled="{Binding IsOpen}"
+                Text="Version" />
             <Label Text="{Binding FirmwareVersion}" />
             <Label Text="{Binding DllVersion}" />
         </VerticalStackLayout>
@@ -286,7 +297,7 @@
                         <Picker
                             Margin="10,-10,0,0"
                             IsEnabled="{Binding IsOpen}"
-                            SelectedIndex="{Binding PWMFrequency}">
+                            SelectedIndex="{Binding PwmFrequency}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>2930 Hz</x:String>

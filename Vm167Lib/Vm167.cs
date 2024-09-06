@@ -26,13 +26,30 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         Close();
     }
 
-    public async Task<int> OpenDevices()
+
+    public async Task<int> ListDevices()
     {
         try
         {
             await _lock.WaitAsync();
-            _logger.LogTrace(">OpenDevices()");
-            var result = await Open();
+            _logger.LogTrace(">ListDevices()");
+            var mask = await Scan();
+            return mask;
+        }
+        finally
+        {
+            _logger.LogTrace("<ListDevices()");
+            _lock.Release();
+        }
+    }
+
+    public async Task<int> OpenDevices(int mask)
+    {
+        try
+        {
+            await _lock.WaitAsync();
+            _logger.LogTrace(">OpenDevices({})", mask);
+            var result = await Open(mask);
             return result;
         }
         finally

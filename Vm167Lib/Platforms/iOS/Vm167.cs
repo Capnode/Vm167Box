@@ -2,7 +2,12 @@
 
 partial class Vm167
 {
-    public Task<int> Open()
+    public Task<int> Scan()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> Open(int mask)
     {
         throw new NotImplementedException();
     }

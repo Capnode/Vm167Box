@@ -17,7 +17,8 @@ namespace Vm167Box.Tests
 
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
-            vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(3);
+            vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(3);
+            vm167Mock.Setup(service => service.OpenDevice(It.IsAny<int>())).ReturnsAsync(true);
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act
@@ -25,7 +26,7 @@ namespace Vm167Box.Tests
             Logger.LogMessage($"Open device");
 
             // Assert
-            vm167Mock.Verify(service => service.OpenDevices(), Times.Once);
+            vm167Mock.Verify(service => service.OpenDevice(It.IsAny<int>()), Times.Once);
         }
 
         [TestMethod]
@@ -35,14 +36,15 @@ namespace Vm167Box.Tests
 
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
-            vm167Mock.Setup(service => service.OpenDevices()).ReturnsAsync(-1);
+            vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(-1);
+            vm167Mock.Setup(service => service.OpenDevice(It.IsAny<int>())).ReturnsAsync(false);
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act
             await vm.Open();
 
             // Assert
-            vm167Mock.Verify(service => service.OpenDevices(), Times.Once);
+            vm167Mock.Verify(service => service.OpenDevice(It.IsAny<int>()), Times.Never);
         }
     }
 }

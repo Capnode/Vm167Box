@@ -3,7 +3,7 @@
     public interface IVm167 : IDisposable
     {
         /// <summary>
-        /// Open devices found on system
+        /// List devices found on system
         /// </summary>
         /// <returns>
         ///   -1 no devices found,
@@ -12,7 +12,20 @@
         ///    2 device address 1 found,
         ///    3 device address 0 and 1 found
         /// </returns>
-        Task<int> OpenDevices();
+        Task<int> ListDevices();
+
+        /// <summary>
+        /// Open devices found on system
+        /// </summary>
+        /// <param name="mask">bitmask of devices to open</param>
+        /// <returns>
+        ///   -1 no devices found,
+        ///    0 driver problem, try reconnecting,
+        ///    1 device address 0 opened,
+        ///    2 device address 1 opened,
+        ///    3 device address 0 and 1 opened
+        /// </returns>
+        Task<int> OpenDevices(int mask);
 
         /// <summary>
         /// Close devices

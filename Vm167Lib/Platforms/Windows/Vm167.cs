@@ -9,10 +9,29 @@ partial class Vm167
 {
     private readonly UsbDevice?[] _devices = new UsbDevice[NumDevices];
 
-    private async Task<int> Open()
+    private async Task<int> Scan()
     {
-        _devices[Device0] = await ScanPort(Pid0);
-        _devices[Device1] = await ScanPort(Pid1);
+        var aqs = UsbDevice.GetDeviceSelector(Vid, Pid0);
+        var devices = await Windows.Devices.Enumeration.DeviceInformation.FindAllAsync(aqs);
+        var mask = devices.Count != 0 ? 1 : 0;
+
+        aqs = UsbDevice.GetDeviceSelector(Vid, Pid1);
+        devices = await Windows.Devices.Enumeration.DeviceInformation.FindAllAsync(aqs);
+        mask |= devices.Count != 0 ? 2 : 0;
+        return mask;
+    }
+
+    private async Task<int> Open(int mask)
+    {
+        if ((mask & 1) > 0)
+        {
+            _devices[Device0] = await ScanPort(Pid0);
+        }
+
+        if ((mask & 2) > 0)
+        {
+            _devices[Device1] = await ScanPort(Pid1);
+        }
 
         int found = 0;
         for (var i = 0; i < NumDevices; i++)

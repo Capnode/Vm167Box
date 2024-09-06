@@ -20,7 +20,9 @@ public class VM167Tests
     [TestInitialize]
     public async Task TestInitialize()
     {
-        _active = await _vm167.OpenDevices();
+        var mask = await _vm167.ListDevices();
+        _active = await _vm167.OpenDevices(mask);
+        Assert.AreEqual(mask, _active);
         Assert.IsFalse(_active == -1, "No VM167 cards found");
         Assert.IsFalse(_active == 0, "Connect problem, disconnect and reconnect USB cable");
     }
