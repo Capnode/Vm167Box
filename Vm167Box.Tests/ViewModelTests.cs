@@ -18,7 +18,6 @@ namespace Vm167Box.Tests
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(3);
-            vm167Mock.Setup(service => service.OpenDevice(It.IsAny<int>())).ReturnsAsync(true);
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act
@@ -26,18 +25,17 @@ namespace Vm167Box.Tests
             Logger.LogMessage($"Open device");
 
             // Assert
-            vm167Mock.Verify(service => service.OpenDevice(It.IsAny<int>()), Times.Once);
+            vm167Mock.Verify(service => service.ListDevices(), Times.Once);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ApplicationException), "No VM167 card found")]
+        [ExpectedException(typeof(ApplicationException))]
         public async Task Open_NoDevices_ThrowException()
         {
 
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
-            vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(-1);
-            vm167Mock.Setup(service => service.OpenDevice(It.IsAny<int>())).ReturnsAsync(false);
+            vm167Mock.Setup(service => service.ListDevices()).Throws(new ApplicationException());
             var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
 
             // Act

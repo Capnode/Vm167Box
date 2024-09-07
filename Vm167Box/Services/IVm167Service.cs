@@ -2,11 +2,13 @@
 
 public interface IVm167Service
 {
-    const int Interval = 100;
+    const int Period = 100;
     int PwmFrequency { get; set; }
 
+    public event Func<Task> Tick;
+    
     Task<int> ListDevices();
-    Task<bool> OpenDevice(int device);
+    Task OpenDevice(int device);
     Task CloseDevice();
     Task ClearAllDigital();
     Task ClearDigitalChannel(int channel);

@@ -10,11 +10,10 @@ using Vm167Lib;
 
 namespace Vm167Box.ViewModels;
 
-public partial class PanelViewModel : ObservableObject, IDisposable
+public partial class PanelViewModel : ObservableObject
 {
     private readonly ILogger<PanelViewModel> _logger;
     private readonly IVm167Service _vm167Service;
-    private Timer? _timer;
     private bool _pending;
     private DateTime _startTime;
     private bool _resetScope;
@@ -24,6 +23,7 @@ public partial class PanelViewModel : ObservableObject, IDisposable
     {
         _logger = logger;
         _vm167Service = vm167service;
+        _vm167Service.Tick += ReadDevice;
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
@@ -81,16 +81,6 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
     }
 
-    public void Dispose()
-    {
-        _timer?.Dispose();
-        while (_pending)
-        {
-            Thread.Sleep(100);
-        }
-        _timer = null;
-    }
-
     [ObservableProperty]
     private bool _isOpen;
 
@@ -99,6 +89,12 @@ public partial class PanelViewModel : ObservableObject, IDisposable
 
     [ObservableProperty]
     private bool _card1Exist;
+
+    [ObservableProperty]
+    private bool _card0;
+
+    [ObservableProperty]
+    private bool _card1;
 
     [ObservableProperty]
     private string _firmwareVersion = string.Empty;
@@ -181,11 +177,6 @@ public partial class PanelViewModel : ObservableObject, IDisposable
             var mask = await _vm167Service.ListDevices();
             Card0Exist = (mask & 1) > 0;
             Card1Exist = (mask & 2) > 0;
-            _timer = new(
-                async(obj) => await ReadDevice(),
-                null,
-                TimeSpan.FromMilliseconds(100),
-                TimeSpan.FromMilliseconds(100));
         }
         catch (Exception)
         {
@@ -202,38 +193,16 @@ public partial class PanelViewModel : ObservableObject, IDisposable
     [RelayCommand]
     public async Task SelectCard0(CheckedChangedEventArgs args)
     {
-        if (args.Value)
-        {
-            _logger.LogTrace(">SelectCard0() On");
-            await _vm167Service.OpenDevice(0);
-            IsOpen = true;
-        }
-        else
-        {
-            _logger.LogTrace(">SelectCard0() Off");
-            await _vm167Service.CloseDevice();
-            IsOpen = false;
-        }
-
+        _logger.LogTrace(">SelectCard0({})", args.Value);
+        await SelectCard(args.Value, Vm167.Device0);
         _logger.LogTrace("<SelectCard0()");
     }
 
     [RelayCommand]
     public async Task SelectCard1(CheckedChangedEventArgs args)
     {
-        if (args.Value)
-        {
-            _logger.LogTrace(">SelectCard1() On");
-            await _vm167Service.OpenDevice(1);
-            IsOpen = true;
-        }
-        else
-        {
-            _logger.LogTrace(">SelectCard1() Off");
-            await _vm167Service.CloseDevice();
-            IsOpen = false;
-        }
-
+        _logger.LogTrace(">SelectCard1({})", args.Value);
+        await SelectCard(args.Value, Vm167.Device1);
         _logger.LogTrace("<SelectCard1()");
     }
 
@@ -354,9 +323,36 @@ public partial class PanelViewModel : ObservableObject, IDisposable
         _restartScope = true;
     }
 
+    private async Task SelectCard(bool selected, int card)
+    {
+        if (selected)
+        {
+            try
+            {
+                await _vm167Service.OpenDevice(card);
+                _restartScope = true;
+                IsOpen = true;
+            }
+            catch (Exception)
+            {
+                IsOpen = false;
+                Card0 = false;
+                Card1 = false;
+                throw;
+            }
+        }
+        else
+        {
+            await _vm167Service.CloseDevice();
+            FirmwareVersion = string.Empty;
+            DllVersion = string.Empty;
+            IsOpen = false;
+        }
+    }
+
     private async Task ReadDevice()
     {
-        if (_pending || !IsOpen) return;
+        if (_pending) return;
         _pending = true;
 
         var ioMode = await _vm167Service.ReadBackInOutMode();

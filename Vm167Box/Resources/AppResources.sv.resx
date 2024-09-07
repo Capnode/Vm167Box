@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DriverProblem" xml:space="preserve">
-    <value>Can inte öppna driver, försök igen</value>
+    <value>Kan inte öppna driver, kontrollera anslutning och försök igen</value>
   </data>
   <data name="NoCardFound" xml:space="preserve">
     <value>Hittar inget VM167 kort</value>
@@ -152,5 +152,8 @@
   </data>
   <data name="GeneratorTitle" xml:space="preserve">
     <value>Generator</value>
+  </data>
+  <data name="CardInUse" xml:space="preserve">
+    <value>Kortet används redan</value>
   </data>
 </root>

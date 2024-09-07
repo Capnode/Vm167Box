@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Globalization;
 using Vm167Box.Resources;
-using Vm167Box.ViewModels;
+using Vm167Box.Services;
 using Vm167Box.Views;
 
 namespace Vm167Box;
@@ -11,12 +11,12 @@ public partial class App : Application
     private const double MinPageWidth = 400;
 
     private readonly ILogger<App> _logger;
-    private readonly PanelViewModel _vm;
+    private readonly IVm167Service _vm167Service;
 
-    public App(ILogger<App> logger, PanelViewModel viewModel)
+    public App(ILogger<App> logger, IVm167Service vm167Service)
     {
         _logger = logger;
-        _vm = viewModel;
+        _vm167Service = vm167Service;
 
         InitializeComponent();
 
@@ -111,6 +111,6 @@ public partial class App : Application
 
     private void OnDestroying(object? sender, EventArgs e)
     {
-        _vm.Dispose();
+        _vm167Service.CloseDevice();
     }
 }

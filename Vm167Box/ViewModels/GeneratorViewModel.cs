@@ -123,7 +123,7 @@ namespace Vm167Box.ViewModels
             {
                 case GeneratorFunction.SineWave:
                     var range = 2 * Math.PI;
-                    var step = range * frequency * IVm167Service.Interval / 1000;
+                    var step = range * frequency * IVm167Service.Period / 1000;
                     for (double i = 0; i < range; i += step)
                     {
                         var y = 255 * (1 + Math.Sin(i)) / 2;

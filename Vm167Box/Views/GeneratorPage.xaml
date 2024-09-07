@@ -79,7 +79,11 @@
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
-                <oxy:PlotView x:Name="_generator1Plot" Model="{Binding Generator1Model}" HeightRequest="200" WidthRequest="200" />
+                <oxy:PlotView
+                    x:Name="_generator1Plot"
+                    HeightRequest="200"
+                    Model="{Binding Generator1Model}"
+                    WidthRequest="200" />
             </VerticalStackLayout>
         </Frame>
         <Frame
@@ -153,7 +157,11 @@
                     </Picker.Behaviors>
                 </Picker>
                 <Grid>
-                    <oxy:PlotView x:Name="_generator2Plot" Model="{Binding Generator2Model}" HeightRequest="200" WidthRequest="200" />
+                    <oxy:PlotView
+                        x:Name="_generator2Plot"
+                        HeightRequest="200"
+                        Model="{Binding Generator2Model}"
+                        WidthRequest="200" />
                 </Grid>
             </VerticalStackLayout>
         </Frame>

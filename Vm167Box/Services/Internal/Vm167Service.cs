@@ -1,12 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Vm167Lib;
+
 namespace Vm167Box.Services.Internal;
 
 internal sealed class Vm167Service : IVm167Service, IDisposable
 {
+    public event Func<Task>? Tick;
+
     private readonly ILogger<Vm167Service> _logger;
     private readonly IVm167 _vm167;
     private readonly Timer _timer;
+    private readonly SemaphoreSlim _lock = new(1, 1);
     private int _device = -1;
 
     public Vm167Service(ILogger<Vm167Service> logger, IVm167 vm167)
@@ -31,24 +35,31 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         return mask;
     }
 
-    public async Task<bool> OpenDevice(int device)
+    public async Task OpenDevice(int device)
     {
         _logger.LogInformation("Open({})", device);
         int mask = 1 << device;
-        int opened = await _vm167.OpenDevices(mask);
-        _logger.LogInformation("Open card mask {Mask}", mask);
-        if (mask != opened) return false;
+        int opened;
+        using (await _lock.UseWaitAsync())
+        {
+            opened = await _vm167.OpenDevices(mask);
+        }
 
-        _timer.Change(IVm167Service.Interval, IVm167Service.Interval);
+        _logger.LogInformation("Open card mask {Mask}", mask);
+        if (mask != opened) throw new ApplicationException(Resources.AppResources.CardInUse);
+
+        _timer.Change(IVm167Service.Period, IVm167Service.Period);
         _device = device;
-        return true;
     }
 
     public async Task CloseDevice()
     {
         _logger.LogInformation("Close");
-        await _vm167.CloseDevices();
         _timer.Change(Timeout.Infinite, Timeout.Infinite);
+        using (await _lock.UseWaitAsync())
+        {
+            await _vm167.CloseDevices();
+        }
     }
 
     public async Task ClearAllDigital()
@@ -136,8 +147,13 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         return await _vm167.VersionFirmware(_device);
     }
 
-    private Task Update()
+    private async Task Update()
     {
-        return Task.CompletedTask;
+        if (Tick == null) return;
+
+        using (await _lock.UseWaitAsync())
+        {
+            await Tick.Invoke();
+        }
     }
 }

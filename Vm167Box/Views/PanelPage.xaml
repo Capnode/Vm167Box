@@ -3,6 +3,7 @@
     x:Class="Vm167Box.Views.PanelPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:PanelViewModel">
@@ -33,17 +34,23 @@
             <Label IsVisible="{Binding Card1Exist}" Text="Card 1 connected" />
             <Label Text="Select card:" />
             <HorizontalStackLayout>
-                <RadioButton Content="0" IsEnabled="{Binding Card0Exist}">
+                <RadioButton
+                    Content="{x:Static lib:Vm167.Device0}"
+                    IsChecked="{Binding Card0}"
+                    IsEnabled="{Binding Card0Exist}">
                     <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
+                    <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
                             Command="{Binding SelectCard0Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="1" IsEnabled="{Binding Card1Exist}">
+                <RadioButton
+                    Content="{x:Static lib:Vm167.Device1}"
+                    IsChecked="{Binding Card1}"
+                    IsEnabled="{Binding Card1Exist}">
                     <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
+                    <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
                             Command="{Binding SelectCard1Command}"
                             EventName="CheckedChanged" />

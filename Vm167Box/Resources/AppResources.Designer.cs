@@ -88,7 +88,16 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not open the driver, try again.
+        ///   Looks up a localized string similar to Card in use.
+        /// </summary>
+        internal static string CardInUse {
+            get {
+                return ResourceManager.GetString("CardInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not open the driver, check connections and try again.
         /// </summary>
         internal static string DriverProblem {
             get {
