@@ -19,6 +19,7 @@ namespace Vm167Box.ViewModels
 
     public partial class GeneratorViewModel : ObservableObject
     {
+        private const double epsilon = 1e-6;
         private static List<double> _periods = new () { 60, 30, 10, 5, 2, 1, 0.5, 0.2, 0.1 };
 
         private readonly ILogger<GeneratorViewModel> _logger;
@@ -33,6 +34,9 @@ namespace Vm167Box.ViewModels
             _vm167Service = vm167Service;
             _vm167Service.Tick += UpdateGenerator;
         }
+
+        [ObservableProperty]
+        private bool _isOpen;
 
         [ObservableProperty]
         private GeneratorFunction _function1 = GeneratorFunction.Off;
@@ -126,20 +130,42 @@ namespace Vm167Box.ViewModels
 
         private static FunctionSeries CreateSeries(GeneratorFunction function, double period)
         {
-            FunctionSeries series = new();
             switch (function)
             {
                 case GeneratorFunction.SineWave:
-                    var range = 2 * Math.PI;
-                    var step = range * IVm167Service.Period / (1000 * period);
-                    for (double i = 0; i < range; i += step)
-                    {
-                        var y = 255 * (1 + Math.Sin(i)) / 2;
-                        series.Points.Add(new DataPoint(i * period / range, y));
-                    }
+                    return SineSeries(period);
+                case GeneratorFunction.SquareWave:
+                    return SquareSeries(period, 0.5);
+                default:
+                    return new FunctionSeries();
+            }
+        }
 
-                    series.Points.RemoveAt(series.Points.Count - 1);
-                    break;
+        private static FunctionSeries SineSeries(double period)
+        {
+            FunctionSeries series = new();
+            var range = 2 * Math.PI;
+            var step = range * IVm167Service.Period / (1000 * period);
+            for (double i = 0; i <= range + epsilon; i += step)
+            {
+                var x = Math.Round(i * period / range, 7);
+                var y = 255 * (1 + Math.Sin(i)) / 2;
+                series.Points.Add(new DataPoint(x, y));
+            }
+
+            return series;
+        }
+
+        private static FunctionSeries SquareSeries(double period, double dutyCycle)
+        {
+            FunctionSeries series = new();
+            var step = IVm167Service.Period / 1000d;
+            var duty = dutyCycle * period;
+            for (double i = 0; i <= period + epsilon; i += step)
+            {
+                var x = Math.Round(i, 7);
+                var y = x < duty ? 255 : 0;
+                series.Points.Add(new DataPoint(x, y));
             }
 
             return series;
@@ -147,6 +173,7 @@ namespace Vm167Box.ViewModels
 
         private async Task UpdateGenerator()
         {
+            IsOpen = true;
             using (await _lock.UseWaitAsync())
             {
                 await UpdateGenerator1();
@@ -167,7 +194,7 @@ namespace Vm167Box.ViewModels
                 {
                     _index1 = -1;
                 }
-                else if (_update1 || _index1 >= count)
+                else if (_update1 || _index1 >= count - 1)
                 {
                     _index1 = 0;
                 }
@@ -200,7 +227,7 @@ namespace Vm167Box.ViewModels
                 {
                     _index2 = -1;
                 }
-                else if (_update2 || _index2 >= count)
+                else if (_update2 || _index2 >= count - 1)
                 {
                     _index2 = 0;
                 }

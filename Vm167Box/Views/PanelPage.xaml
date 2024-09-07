@@ -39,7 +39,7 @@
                     IsChecked="{Binding Card0}"
                     IsEnabled="{Binding Card0Exist}">
                     <RadioButton.Behaviors>
-                    <toolkit:EventToCommandBehavior
+                        <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
                             Command="{Binding SelectCard0Command}"
                             EventName="CheckedChanged" />
@@ -50,7 +50,7 @@
                     IsChecked="{Binding Card1}"
                     IsEnabled="{Binding Card1Exist}">
                     <RadioButton.Behaviors>
-                    <toolkit:EventToCommandBehavior
+                        <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
                             Command="{Binding SelectCard1Command}"
                             EventName="CheckedChanged" />

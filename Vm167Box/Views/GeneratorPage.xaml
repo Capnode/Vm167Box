@@ -22,6 +22,7 @@
                 <RadioButton
                     Content="Off"
                     IsChecked="true"
+                    IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.Off}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
@@ -30,7 +31,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sine" Value="{x:Static vm:GeneratorFunction.SineWave}">
+                <RadioButton
+                    Content="Sine"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -38,7 +42,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Triangle" Value="{x:Static vm:GeneratorFunction.TriangleWave}">
+                <RadioButton
+                    Content="Triangle"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -46,7 +53,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sawtooth" Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
+                <RadioButton
+                    Content="Sawtooth"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -54,7 +64,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Square" Value="{x:Static vm:GeneratorFunction.SquareWave}">
+                <RadioButton
+                    Content="Square"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -63,7 +76,10 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <Label Text="Period (s)" />
-                <Picker ItemsSource="{Binding Periods}" SelectedItem="{Binding Period1, Mode=TwoWay}">
+                <Picker
+                    IsEnabled="{Binding IsOpen}"
+                    ItemsSource="{Binding Periods}"
+                    SelectedItem="{Binding Period1, Mode=TwoWay}">
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
@@ -88,6 +104,7 @@
                 <RadioButton
                     Content="Off"
                     IsChecked="true"
+                    IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.Off}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
@@ -96,7 +113,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sine" Value="{x:Static vm:GeneratorFunction.SineWave}">
+                <RadioButton
+                    Content="Sine"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -104,7 +124,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Triangle" Value="{x:Static vm:GeneratorFunction.TriangleWave}">
+                <RadioButton
+                    Content="Triangle"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -112,7 +135,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Sawtooth" Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
+                <RadioButton
+                    Content="Sawtooth"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -120,7 +146,10 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <RadioButton Content="Square" Value="{x:Static vm:GeneratorFunction.SquareWave}">
+                <RadioButton
+                    Content="Square"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
@@ -129,7 +158,10 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <Label Text="Period (s)" />
-                <Picker ItemsSource="{Binding Periods}" SelectedItem="{Binding Period2, Mode=TwoWay}">
+                <Picker
+                    IsEnabled="{Binding IsOpen}"
+                    ItemsSource="{Binding Periods}"
+                    SelectedItem="{Binding Period2, Mode=TwoWay}">
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
