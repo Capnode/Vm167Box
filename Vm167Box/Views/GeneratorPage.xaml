@@ -62,19 +62,8 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <Label Text="Frequency (Hz)" />
-                <Picker SelectedItem="{Binding Frequency1}">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:Double}">
-                            <x:Double>0.1</x:Double>
-                            <x:Double>0.2</x:Double>
-                            <x:Double>0.5</x:Double>
-                            <x:Double>1</x:Double>
-                            <x:Double>2</x:Double>
-                            <x:Double>5</x:Double>
-                            <x:Double>10</x:Double>
-                        </x:Array>
-                    </Picker.ItemsSource>
+                <Label Text="Period (s)" />
+                <Picker ItemsSource="{Binding Periods}" SelectedItem="{Binding Period1, Mode=TwoWay}">
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
@@ -139,19 +128,8 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <Label Text="Frequency (Hz)" />
-                <Picker SelectedItem="{Binding Frequency2}">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:Double}">
-                            <x:Double>0.1</x:Double>
-                            <x:Double>0.2</x:Double>
-                            <x:Double>0.5</x:Double>
-                            <x:Double>1</x:Double>
-                            <x:Double>2</x:Double>
-                            <x:Double>5</x:Double>
-                            <x:Double>10</x:Double>
-                        </x:Array>
-                    </Picker.ItemsSource>
+                <Label Text="Period (s)" />
+                <Picker ItemsSource="{Binding Periods}" SelectedItem="{Binding Period2, Mode=TwoWay}">
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>

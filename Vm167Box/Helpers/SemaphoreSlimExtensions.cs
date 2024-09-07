@@ -1,6 +1,6 @@
-﻿namespace Vm167Box.Services.Internal; 
+﻿namespace Vm167Box.Helpers; 
 
-internal static class SemaphoreSlimExtensions
+public static class SemaphoreSlimExtensions
 {
     public static async Task<IDisposable> UseWaitAsync(
         this SemaphoreSlim semaphore,

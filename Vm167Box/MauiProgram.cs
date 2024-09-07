@@ -45,7 +45,7 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
         builder.Logging.SetMinimumLevel(LogLevel.Trace);
-        //builder.Logging.AddFilter(nameof(Vm167Box), LogLevel.Debug);
+        builder.Logging.AddFilter(nameof(Vm167Box), LogLevel.Debug);
         builder.Logging.AddFilter(nameof(Vm167Lib), LogLevel.Debug);
 #endif
 
