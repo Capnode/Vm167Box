@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Vm167Box.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
+    xmlns:vm="clr-namespace:Vm167Box.ViewModels"
+    x:DataType="vm:SettingsViewModel">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout Spacing="10">
+            <Label Text="{x:Static strings:AppResources.ThemeToggle}" VerticalOptions="Center" />
+            <Switch IsToggled="{Binding IsLightTheme}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

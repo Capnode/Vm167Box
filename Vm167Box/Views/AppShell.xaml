@@ -53,6 +53,15 @@
         Shell.NavBarIsVisible="true" />
 
     <ShellContent
+        Title="{x:Static strings:AppResources.Settings}"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Icon="{FontImage FontFamily=FontAwesomeSolid,
+                         Color=Black,
+                         Glyph={x:Static styles:FontAwesomeSolid.Cogs}}"
+        Route="SettingsPage"
+        Shell.NavBarIsVisible="true" />
+
+    <ShellContent
         Title="{x:Static strings:AppResources.About}"
         ContentTemplate="{DataTemplate views:AboutPage}"
         Icon="{FontImage FontFamily=FontAwesomeSolid,

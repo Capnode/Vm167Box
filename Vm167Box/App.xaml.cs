@@ -12,11 +12,13 @@ public partial class App : Application
 
     private readonly ILogger<App> _logger;
     private readonly IVm167Service _vm167Service;
+    private readonly ISettingsService _settingsService;
 
-    public App(ILogger<App> logger, IVm167Service vm167Service)
+    public App(ILogger<App> logger, IVm167Service vm167Service, ISettingsService settingsService)
     {
         _logger = logger;
         _vm167Service = vm167Service;
+        _settingsService = settingsService;
 
         InitializeComponent();
 
@@ -43,7 +45,7 @@ public partial class App : Application
         _logger.LogDebug("CurrentCulture: {}", CultureInfo.CurrentCulture);
         _logger.LogDebug("CurrentUICulture: {}", CultureInfo.CurrentUICulture);
 
-        UserAppTheme = PlatformAppTheme;
+        UserAppTheme = _settingsService.AppTheme;
         MainPage = new AppShell();
     }
 

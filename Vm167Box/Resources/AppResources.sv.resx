@@ -156,4 +156,7 @@
   <data name="CardInUse" xml:space="preserve">
     <value>Kortet används redan</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Inställningar</value>
+  </data>
 </root>

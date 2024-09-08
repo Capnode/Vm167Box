@@ -32,15 +32,20 @@ public static class MauiProgram
         // Services
         builder.Services.AddSingleton<IVm167, Vm167>();
         builder.Services.AddSingleton<IVm167Service, Vm167Service>();
+        builder.Services.AddSingleton<ISettingsService, SettingsService>();
 
         // Pages
         builder.Services.AddSingleton<PanelPage>();
         builder.Services.AddSingleton<ScopePage>();
         builder.Services.AddSingleton<GeneratorPage>();
+        builder.Services.AddSingleton<SettingsPage>();
+        builder.Services.AddSingleton<AboutPage>();
 
         // ViewModels
         builder.Services.AddSingleton<PanelViewModel>();
         builder.Services.AddSingleton<GeneratorViewModel>();
+        builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddSingleton<AboutViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();
