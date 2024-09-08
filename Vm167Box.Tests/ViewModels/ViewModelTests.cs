@@ -1,10 +1,10 @@
-using Vm167Box.ViewModels;
+﻿using Vm167Box.ViewModels;
 using Moq;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using Vm167Box.Services;
 
-namespace Vm167Box.Tests
+namespace Vm167Box.Tests.ViewModels
 {
     [TestClass]
     public class ViewModelTests
@@ -14,7 +14,6 @@ namespace Vm167Box.Tests
         [TestMethod]
         public async Task Open_TwoDevices_Success()
         {
-
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(3);
@@ -32,7 +31,6 @@ namespace Vm167Box.Tests
         [ExpectedException(typeof(ApplicationException))]
         public async Task Open_NoDevices_ThrowException()
         {
-
             // Arrange
             var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.ListDevices()).Throws(new ApplicationException());

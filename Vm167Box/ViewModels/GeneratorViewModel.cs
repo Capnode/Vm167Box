@@ -8,14 +8,7 @@ using Vm167Box.Services;
 
 namespace Vm167Box.ViewModels
 {
-    public enum GeneratorFunction
-    {
-        Off = 0,
-        SquareWave = 1,
-        TriangleWave = 2,
-        SawtoothWave = 3,
-        SineWave = 4,
-    }
+    public enum GeneratorFunction {Off, SquareWave, TriangleWave, SineWave };
 
     public partial class GeneratorViewModel : ObservableObject
     {
@@ -33,6 +26,8 @@ namespace Vm167Box.ViewModels
             _logger = logger;
             _vm167Service = vm167Service;
             _vm167Service.Tick += UpdateGenerator;
+            Generator1Model.Series.Add(new FunctionSeries());
+            Generator2Model.Series.Add(new FunctionSeries());
         }
 
         [ObservableProperty]
@@ -51,6 +46,12 @@ namespace Vm167Box.ViewModels
         private double _period2 = 10;
 
         [ObservableProperty]
+        private int _dutyCycle1 = 50;
+
+        [ObservableProperty]
+        private int _dutyCycle2 = 50;
+
+        [ObservableProperty]
         private PlotModel _generator1Model = new();
 
         [ObservableProperty]
@@ -67,10 +68,10 @@ namespace Vm167Box.ViewModels
             {
                 if (args is CheckedChangedEventArgs selected)
                 {
-                    _logger.LogTrace(">Generator1({}, {}, {})", selected.Value, Function1, Period1);
+                    _logger.LogTrace(">Generator1({}, {}, {}, {})", selected.Value, Function1, Period1, DutyCycle1);
                     if (selected.Value)
                     {
-                        var series = CreateSeries(Function1, Period1);
+                        var series = CreateSeries(Function1, Period1, DutyCycle1);
                         Generator1Model.Series.Add(series);
                         _update1 = true;
                     }
@@ -82,9 +83,9 @@ namespace Vm167Box.ViewModels
                 }
                 else
                 {
-                    _logger.LogTrace(">Generator1({}, {})", Function1, Period1);
+                    _logger.LogTrace(">Generator1({}, {}, {})", Function1, Period1, DutyCycle1);
                     Generator1Model.Series.Clear();
-                    var series = CreateSeries(Function1, Period1);
+                    var series = CreateSeries(Function1, Period1, DutyCycle1);
                     Generator1Model.Series.Add(series);
                     _update1 = true;
                 }
@@ -101,10 +102,10 @@ namespace Vm167Box.ViewModels
             {
                 if (args is CheckedChangedEventArgs selected)
                 {
-                    _logger.LogTrace(">Generator2({}, {}, {})", selected.Value, Function2, Period2);
+                    _logger.LogTrace(">Generator2({}, {}, {}, {})", selected.Value, Function2, Period2, DutyCycle2);
                     if (selected.Value)
                     {
-                        var series = CreateSeries(Function2, Period2);
+                        var series = CreateSeries(Function2, Period2, DutyCycle2);
                         Generator2Model.Series.Add(series);
                         _update2 = true;
                     }
@@ -116,9 +117,9 @@ namespace Vm167Box.ViewModels
                 }
                 else
                 {
-                    _logger.LogTrace(">Generator2({}, {})", Function2, Period2);
+                    _logger.LogTrace(">Generator2({}, {}, {})", Function2, Period2, DutyCycle2);
                     Generator2Model.Series.Clear();
-                    var series = CreateSeries(Function2, Period2);
+                    var series = CreateSeries(Function2, Period2, DutyCycle2);
                     Generator2Model.Series.Add(series);
                     _update2 = true;
                 }
@@ -128,43 +129,62 @@ namespace Vm167Box.ViewModels
             _logger.LogTrace("<Generator2()");
         }
 
-        private static FunctionSeries CreateSeries(GeneratorFunction function, double period)
+        private static FunctionSeries CreateSeries(GeneratorFunction function, double period, int dutyCycle)
         {
             switch (function)
             {
-                case GeneratorFunction.SineWave:
-                    return SineSeries(period);
                 case GeneratorFunction.SquareWave:
-                    return SquareSeries(period, 0.5);
+                    return SquareSeries(period, dutyCycle);
+                case GeneratorFunction.TriangleWave:
+                    return TriangleSeries(period, dutyCycle);
+                case GeneratorFunction.SineWave:
+                    return SineSeries(period, dutyCycle);
                 default:
                     return new FunctionSeries();
             }
         }
 
-        private static FunctionSeries SineSeries(double period)
+        private static FunctionSeries SquareSeries(double period, int dutyCycle)
         {
             FunctionSeries series = new();
-            var range = 2 * Math.PI;
-            var step = range * IVm167Service.Period / (1000 * period);
-            for (double i = 0; i <= range + epsilon; i += step)
+            var step = IVm167Service.Period / 1000d;
+            for (var i = 0d; i <= period + epsilon; i += step)
             {
-                var x = Math.Round(i * period / range, 7);
-                var y = 255 * (1 + Math.Sin(i)) / 2;
+                var x = Math.Round(i, 7);
+                var t = Signal.Duty(x, period, dutyCycle);
+                var y = t < period / 2 ? 255 : 0;
                 series.Points.Add(new DataPoint(x, y));
             }
 
             return series;
         }
 
-        private static FunctionSeries SquareSeries(double period, double dutyCycle)
+        private static FunctionSeries TriangleSeries(double period, int dutyCycle)
         {
             FunctionSeries series = new();
             var step = IVm167Service.Period / 1000d;
-            var duty = dutyCycle * period;
-            for (double i = 0; i <= period + epsilon; i += step)
+            var half = period / 2;
+            for (var i = 0d; i <= period + epsilon; i += step)
             {
                 var x = Math.Round(i, 7);
-                var y = x < duty ? 255 : 0;
+                var t = Signal.Duty(x, period, dutyCycle);
+                var y = t < half ? 255 * t / half : 255 * (1 - (t - half) / half);
+                series.Points.Add(new DataPoint(x, y));
+            }
+
+            return series;
+        }
+
+        private static FunctionSeries SineSeries(double period, int dutyCycle)
+        {
+            FunctionSeries series = new();
+            var range = 2 * Math.PI;
+            var step = range * IVm167Service.Period / (1000 * period);
+            for (var i = 0d; i <= range + epsilon; i += step)
+            {
+                var x = Math.Round(i * period / range, 7);
+                var t = Signal.Duty(i, range, dutyCycle);
+                var y = 255 * (1 + Math.Sin(t)) / 2;
                 series.Points.Add(new DataPoint(x, y));
             }
 

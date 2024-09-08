@@ -54,17 +54,6 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Sawtooth"
-                    IsEnabled="{Binding IsOpen}"
-                    Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator1Command}"
-                            EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
-                <RadioButton
                     Content="Square"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SquareWave}">
@@ -84,9 +73,24 @@
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
+                <Label Text="Duty cycle (%)" />
+                <HorizontalStackLayout Spacing="5">
+                    <Slider
+                        IsEnabled="{Binding IsOpen}"
+                        Maximum="100"
+                        Minimum="0"
+                        MinimumWidthRequest="150"
+                        Value="{Binding DutyCycle1}">
+                        <Slider.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="ValueChanged" />
+                        </Slider.Behaviors>
+                    </Slider>
+                    <Label Text="{Binding DutyCycle1}" />
+                </HorizontalStackLayout>
                 <oxy:PlotView
                     x:Name="_generator1Plot"
                     HeightRequest="200"
+                    IsEnabled="{Binding IsOpen}"
                     Model="{Binding Generator1Model}"
                     WidthRequest="200" />
             </VerticalStackLayout>
@@ -136,17 +140,6 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Sawtooth"
-                    IsEnabled="{Binding IsOpen}"
-                    Value="{x:Static vm:GeneratorFunction.SawtoothWave}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator2Command}"
-                            EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
-                <RadioButton
                     Content="Square"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SquareWave}">
@@ -166,10 +159,25 @@
                         <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
+                <Label Text="Duty cycle (%)" />
+                <HorizontalStackLayout Spacing="5">
+                    <Slider
+                        IsEnabled="{Binding IsOpen}"
+                        Maximum="100"
+                        Minimum="0"
+                        MinimumWidthRequest="150"
+                        Value="{Binding DutyCycle2}">
+                        <Slider.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="ValueChanged" />
+                        </Slider.Behaviors>
+                    </Slider>
+                    <Label Text="{Binding DutyCycle2}" />
+                </HorizontalStackLayout>
                 <Grid>
                     <oxy:PlotView
                         x:Name="_generator2Plot"
                         HeightRequest="200"
+                        IsEnabled="{Binding IsOpen}"
                         Model="{Binding Generator2Model}"
                         WidthRequest="200" />
                 </Grid>
