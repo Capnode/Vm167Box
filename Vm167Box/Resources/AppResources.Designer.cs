@@ -79,6 +79,60 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analog1.
+        /// </summary>
+        internal static string Analog1 {
+            get {
+                return ResourceManager.GetString("Analog1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analog2.
+        /// </summary>
+        internal static string Analog2 {
+            get {
+                return ResourceManager.GetString("Analog2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analog3.
+        /// </summary>
+        internal static string Analog3 {
+            get {
+                return ResourceManager.GetString("Analog3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analog4.
+        /// </summary>
+        internal static string Analog4 {
+            get {
+                return ResourceManager.GetString("Analog4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analog5.
+        /// </summary>
+        internal static string Analog5 {
+            get {
+                return ResourceManager.GetString("Analog5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analog in calibration.
+        /// </summary>
+        internal static string AnalogInCalibration {
+            get {
+                return ResourceManager.GetString("AnalogInCalibration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM167 Box.
         /// </summary>
         internal static string AppTitle {
@@ -115,6 +169,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No VM167 card found.
         /// </summary>
         internal static string NoCardFound {
@@ -129,6 +192,51 @@ namespace Vm167Box.Resources {
         internal static string PanelTitle {
             get {
                 return ResourceManager.GetString("PanelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point1.
+        /// </summary>
+        internal static string Point1 {
+            get {
+                return ResourceManager.GetString("Point1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point2.
+        /// </summary>
+        internal static string Point2 {
+            get {
+                return ResourceManager.GetString("Point2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pwm1.
+        /// </summary>
+        internal static string Pwm1 {
+            get {
+                return ResourceManager.GetString("Pwm1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pwm2.
+        /// </summary>
+        internal static string Pwm2 {
+            get {
+                return ResourceManager.GetString("Pwm2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PWM out calibration.
+        /// </summary>
+        internal static string PwmOutCalibration {
+            get {
+                return ResourceManager.GetString("PwmOutCalibration", resourceCulture);
             }
         }
         
@@ -183,6 +291,33 @@ namespace Vm167Box.Resources {
         internal static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit.
+        /// </summary>
+        internal static string Unit {
+            get {
+                return ResourceManager.GetString("Unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value1.
+        /// </summary>
+        internal static string Value1 {
+            get {
+                return ResourceManager.GetString("Value1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value2.
+        /// </summary>
+        internal static string Value2 {
+            get {
+                return ResourceManager.GetString("Value2", resourceCulture);
             }
         }
     }

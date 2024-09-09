@@ -10,7 +10,7 @@
     Title="{x:Static strings:AppResources.AppTitle}"
     Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark},
                                                   Dark={StaticResource Primary}}"
-    Shell.FlyoutWidth="150">
+    Shell.FlyoutWidth="170">
 
     <Shell.TitleView>
         <HorizontalStackLayout x:DataType="Shell" BindingContext="{x:Reference shellMain}">
@@ -57,7 +57,7 @@
         ContentTemplate="{DataTemplate views:SettingsPage}"
         Icon="{FontImage FontFamily=FontAwesomeSolid,
                          Color=Black,
-                         Glyph={x:Static styles:FontAwesomeSolid.Cogs}}"
+                         Glyph={x:Static styles:FontAwesomeSolid.Cog}}"
         Route="SettingsPage"
         Shell.NavBarIsVisible="true" />
 
