@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 using System.Globalization;
 using Vm167Box.Resources;
 using Vm167Box.Services;
@@ -54,7 +55,7 @@ public partial class App : Application
         Window window = base.CreateWindow(activationState);
         window.Created += OnCreated;
         window.Destroying += OnDestroying;
-        window.SizeChanged += SizeChanged;
+        window.PropertyChanged += WindowChanged;
 
         if (Preferences.ContainsKey("WindowX"))
         {
@@ -80,17 +81,33 @@ public partial class App : Application
         return window;
     }
 
-    private void SizeChanged(object? sender, EventArgs e)
+    private void WindowChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (sender is not Window window) return;
-        Preferences.Set("WindowX", window.X);
-        Preferences.Set("WindowY", window.Y);
-        Preferences.Set("WindowWidth", window.Width);
-        Preferences.Set("WindowHeight", window.Height);
 
-        // Make sure the flyout is visible when the window is resized
-        var currentWidth = ((Window)sender).Width;
-        SetShellFlyout(currentWidth);
+        if (e.PropertyName == nameof(Window.X))
+        {
+            Preferences.Set("WindowX", window.X);
+        }
+
+        if (e.PropertyName == nameof(Window.Y))
+        {
+            Preferences.Set("WindowY", window.Y);
+        }
+
+        if (e.PropertyName == nameof(Window.Width))
+        {
+            Preferences.Set("WindowWidth", window.Width);
+
+            // Make sure the flyout is visible when the window is resized
+            var currentWidth = ((Window)sender).Width;
+            SetShellFlyout(currentWidth);
+        }
+
+        if (e.PropertyName == nameof(Window.Height))
+        {
+            Preferences.Set("WindowHeight", window.Height);
+        }
     }
 
     private static void SetShellFlyout(double currentWidth)
