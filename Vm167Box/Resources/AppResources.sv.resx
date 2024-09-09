@@ -204,4 +204,67 @@
   <data name="PwmOutCalibration" xml:space="preserve">
     <value>PWM ut kalibrering</value>
   </data>
+  <data name="Card0Connected" xml:space="preserve">
+    <value>Kort 0 anslutet</value>
+  </data>
+  <data name="Card1Connected" xml:space="preserve">
+    <value>Kort 1 anslutet</value>
+  </data>
+  <data name="SetAllDigital" xml:space="preserve">
+    <value>Ettställ Alla Digitalt</value>
+  </data>
+  <data name="ClearAllDigital" xml:space="preserve">
+    <value>Nollställ Alla Digitalt</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="DigitalInOut" xml:space="preserve">
+    <value>Digital In/Ut</value>
+  </data>
+  <data name="DigitalIn" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="DigitalOut" xml:space="preserve">
+    <value>Ut</value>
+  </data>
+  <data name="AnalogIn" xml:space="preserve">
+    <value>Analog In</value>
+  </data>
+  <data name="PwmOut" xml:space="preserve">
+    <value>Pwm Ut</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Öppna</value>
+  </data>
+  <data name="SelectCard" xml:space="preserve">
+    <value>Välj Kort:</value>
+  </data>
+  <data name="GeneratorPwm1" xml:space="preserve">
+    <value>Generator PWM1</value>
+  </data>
+  <data name="GeneratorPwm2" xml:space="preserve">
+    <value>Generator PWM2</value>
+  </data>
+  <data name="OffWave" xml:space="preserve">
+    <value>Avstängd</value>
+  </data>
+  <data name="SineWave" xml:space="preserve">
+    <value>Sinus</value>
+  </data>
+  <data name="TriangleWave" xml:space="preserve">
+    <value>Triangel</value>
+  </data>
+  <data name="SquareWave" xml:space="preserve">
+    <value>Fyrkant</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period (s)</value>
+  </data>
+  <data name="DutyCycle" xml:space="preserve">
+    <value>Pulskvot (%)</value>
+  </data>
+  <data name="Counter" xml:space="preserve">
+    <value>Räknare</value>
+  </data>
 </root>

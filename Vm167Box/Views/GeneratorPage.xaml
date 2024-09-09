@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:oxy="clr-namespace:OxyPlot.Maui.Skia;assembly=OxyPlot.Maui.Skia"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:GeneratorViewModel">
@@ -18,9 +19,9 @@
                 RadioButtonGroup.GroupName="Function1"
                 RadioButtonGroup.SelectedValue="{Binding Function1}"
                 Spacing="10">
-                <Label Text="Generator PWM1" />
+                <Label Text="{x:Static strings:AppResources.GeneratorPwm1}" />
                 <RadioButton
-                    Content="Off"
+                    Content="{x:Static strings:AppResources.OffWave}"
                     IsChecked="true"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.Off}">
@@ -32,7 +33,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Sine"
+                    Content="{x:Static strings:AppResources.SineWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
@@ -43,7 +44,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Triangle"
+                    Content="{x:Static strings:AppResources.TriangleWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
@@ -54,7 +55,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Square"
+                    Content="{x:Static strings:AppResources.SquareWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
@@ -64,7 +65,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <Label Text="Period (s)" />
+                <Label Text="{x:Static strings:AppResources.Period}" />
                 <Picker
                     IsEnabled="{Binding IsOpen}"
                     ItemsSource="{Binding Periods}"
@@ -73,7 +74,7 @@
                         <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
-                <Label Text="Duty cycle (%)" />
+                <Label Text="{x:Static strings:AppResources.DutyCycle}" />
                 <HorizontalStackLayout Spacing="5">
                     <Slider
                         IsEnabled="{Binding IsOpen}"
@@ -104,9 +105,9 @@
                 RadioButtonGroup.GroupName="Function2"
                 RadioButtonGroup.SelectedValue="{Binding Function2}"
                 Spacing="10">
-                <Label Text="Generator PWM2" />
+                <Label Text="{x:Static strings:AppResources.GeneratorPwm2}" />
                 <RadioButton
-                    Content="Off"
+                    Content="{x:Static strings:AppResources.OffWave}"
                     IsChecked="true"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.Off}">
@@ -118,7 +119,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Sine"
+                    Content="{x:Static strings:AppResources.SineWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SineWave}">
                     <RadioButton.Behaviors>
@@ -129,7 +130,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Triangle"
+                    Content="{x:Static strings:AppResources.TriangleWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.TriangleWave}">
                     <RadioButton.Behaviors>
@@ -140,7 +141,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton
-                    Content="Square"
+                    Content="{x:Static strings:AppResources.SquareWave}"
                     IsEnabled="{Binding IsOpen}"
                     Value="{x:Static vm:GeneratorFunction.SquareWave}">
                     <RadioButton.Behaviors>
@@ -150,7 +151,7 @@
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
-                <Label Text="Period (s)" />
+                <Label Text="{x:Static strings:AppResources.Period}" />
                 <Picker
                     IsEnabled="{Binding IsOpen}"
                     ItemsSource="{Binding Periods}"
@@ -159,7 +160,7 @@
                         <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
-                <Label Text="Duty cycle (%)" />
+                <Label Text="{x:Static strings:AppResources.DutyCycle}" />
                 <HorizontalStackLayout Spacing="5">
                     <Slider
                         IsEnabled="{Binding IsOpen}"

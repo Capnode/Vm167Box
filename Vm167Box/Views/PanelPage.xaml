@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:PanelViewModel">
@@ -28,11 +29,11 @@
             <Button
                 Command="{Binding OpenCommand}"
                 HorizontalOptions="Fill"
-                Text="Open" />
+                Text="{x:Static strings:AppResources.Open}" />
 
-            <Label IsVisible="{Binding Card0Exist}" Text="Card 0 connected" />
-            <Label IsVisible="{Binding Card1Exist}" Text="Card 1 connected" />
-            <Label Text="Select card:" />
+            <Label IsVisible="{Binding Card0Exist}" Text="{x:Static strings:AppResources.Card0Connected}" />
+            <Label IsVisible="{Binding Card1Exist}" Text="{x:Static strings:AppResources.Card1Connected}" />
+            <Label Text="{x:Static strings:AppResources.SelectCard}" />
             <HorizontalStackLayout>
                 <RadioButton
                     Content="{x:Static lib:Vm167.Device0}"
@@ -60,15 +61,15 @@
             <Button
                 Command="{Binding SetAllDigitalCommand}"
                 IsEnabled="{Binding IsOpen}"
-                Text="Set All Digital" />
+                Text="{x:Static strings:AppResources.SetAllDigital}" />
             <Button
                 Command="{Binding ClearAllDigitalCommand}"
                 IsEnabled="{Binding IsOpen}"
-                Text="Clear All Digital" />
+                Text="{x:Static strings:AppResources.ClearAllDigital}" />
             <Button
                 Command="{Binding VersionCommand}"
                 IsEnabled="{Binding IsOpen}"
-                Text="Version" />
+                Text="{x:Static strings:AppResources.Version}" />
             <Label Text="{Binding FirmwareVersion}" />
             <Label Text="{Binding DllVersion}" />
         </VerticalStackLayout>
@@ -79,11 +80,11 @@
             Wrap="Wrap">
             <Frame Margin="10,10,0,0" BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="Digital In/Out" />
+                    <Label Text="{x:Static strings:AppResources.DigitalInOut}" />
                     <HorizontalStackLayout Spacing="20">
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
-                                Content="In"
+                                Content="{x:Static strings:AppResources.DigitalIn}"
                                 IsChecked="{Binding DigitalLowIn}"
                                 IsEnabled="{Binding IsOpen}">
                                 <RadioButton.Behaviors>
@@ -91,7 +92,7 @@
                                 </RadioButton.Behaviors>
                             </RadioButton>
                             <RadioButton
-                                Content="Out"
+                                Content="{x:Static strings:AppResources.DigitalOut}"
                                 IsChecked="{Binding DigitalLowOut}"
                                 IsEnabled="{Binding IsOpen}">
                                 <RadioButton.Behaviors>
@@ -151,11 +152,11 @@
 
             <Frame Margin="10,10,0,0" BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="Digital In/Out" />
+                    <Label Text="{x:Static strings:AppResources.DigitalInOut}" />
                     <HorizontalStackLayout Spacing="20">
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
-                                Content="In"
+                                Content="{x:Static strings:AppResources.DigitalIn}"
                                 IsChecked="{Binding DigitalHighIn}"
                                 IsEnabled="{Binding IsOpen}">
                                 <RadioButton.Behaviors>
@@ -163,7 +164,7 @@
                                 </RadioButton.Behaviors>
                             </RadioButton>
                             <RadioButton
-                                Content="Out"
+                                Content="{x:Static strings:AppResources.DigitalOut}"
                                 IsChecked="{Binding DigitalHighOut}"
                                 IsEnabled="{Binding IsOpen}">
                                 <RadioButton.Behaviors>
@@ -226,12 +227,12 @@
                 Margin="10,10,0,0"
                 BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="Counter" />
+                    <Label Text="{x:Static strings:AppResources.Counter}" />
                     <Entry IsEnabled="{Binding IsOpen}" Text="{Binding Counter}" />
                     <Button
                         Command="{Binding ResetCounterCommand}"
                         IsEnabled="{Binding IsOpen}"
-                        Text="Reset" />
+                        Text="{x:Static strings:AppResources.Reset}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame
@@ -240,7 +241,7 @@
                 Margin="10,10,0,0"
                 BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="Analog In" />
+                    <Label Text="{x:Static strings:AppResources.AnalogIn}" />
                     <HorizontalStackLayout Spacing="5">
                         <Label Text="1" />
                         <ProgressBar
@@ -300,7 +301,7 @@
                 BorderColor="Black">
                 <VerticalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="PWM Out" />
+                        <Label Text="{x:Static strings:AppResources.PwmOut}" />
                         <Picker
                             Margin="10,-10,0,0"
                             IsEnabled="{Binding IsOpen}"

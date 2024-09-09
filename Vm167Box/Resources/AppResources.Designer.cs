@@ -124,6 +124,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analog In.
+        /// </summary>
+        internal static string AnalogIn {
+            get {
+                return ResourceManager.GetString("AnalogIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analog in calibration.
         /// </summary>
         internal static string AnalogInCalibration {
@@ -142,6 +151,24 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Card 0 connected.
+        /// </summary>
+        internal static string Card0Connected {
+            get {
+                return ResourceManager.GetString("Card0Connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Card 1 connected.
+        /// </summary>
+        internal static string Card1Connected {
+            get {
+                return ResourceManager.GetString("Card1Connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card in use.
         /// </summary>
         internal static string CardInUse {
@@ -151,11 +178,83 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear All Digital.
+        /// </summary>
+        internal static string ClearAllDigital {
+            get {
+                return ResourceManager.GetString("ClearAllDigital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counter.
+        /// </summary>
+        internal static string Counter {
+            get {
+                return ResourceManager.GetString("Counter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In.
+        /// </summary>
+        internal static string DigitalIn {
+            get {
+                return ResourceManager.GetString("DigitalIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digital In/Out.
+        /// </summary>
+        internal static string DigitalInOut {
+            get {
+                return ResourceManager.GetString("DigitalInOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out.
+        /// </summary>
+        internal static string DigitalOut {
+            get {
+                return ResourceManager.GetString("DigitalOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not open the driver, check connections and try again.
         /// </summary>
         internal static string DriverProblem {
             get {
                 return ResourceManager.GetString("DriverProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duty Cycle (%).
+        /// </summary>
+        internal static string DutyCycle {
+            get {
+                return ResourceManager.GetString("DutyCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generator PWM1.
+        /// </summary>
+        internal static string GeneratorPwm1 {
+            get {
+                return ResourceManager.GetString("GeneratorPwm1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generator PWM2.
+        /// </summary>
+        internal static string GeneratorPwm2 {
+            get {
+                return ResourceManager.GetString("GeneratorPwm2", resourceCulture);
             }
         }
         
@@ -187,11 +286,38 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string OffWave {
+            get {
+                return ResourceManager.GetString("OffWave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Panel.
         /// </summary>
         internal static string PanelTitle {
             get {
                 return ResourceManager.GetString("PanelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Period (s).
+        /// </summary>
+        internal static string Period {
+            get {
+                return ResourceManager.GetString("Period", resourceCulture);
             }
         }
         
@@ -232,6 +358,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pwm Out.
+        /// </summary>
+        internal static string PwmOut {
+            get {
+                return ResourceManager.GetString("PwmOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PWM out calibration.
         /// </summary>
         internal static string PwmOutCalibration {
@@ -268,6 +403,24 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Card:.
+        /// </summary>
+        internal static string SelectCard {
+            get {
+                return ResourceManager.GetString("SelectCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set All Digital.
+        /// </summary>
+        internal static string SetAllDigital {
+            get {
+                return ResourceManager.GetString("SetAllDigital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string Settings {
@@ -277,11 +430,38 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sine.
+        /// </summary>
+        internal static string SineWave {
+            get {
+                return ResourceManager.GetString("SineWave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square.
+        /// </summary>
+        internal static string SquareWave {
+            get {
+                return ResourceManager.GetString("SquareWave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle dark/light theme.
         /// </summary>
         internal static string ThemeToggle {
             get {
                 return ResourceManager.GetString("ThemeToggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Triangle.
+        /// </summary>
+        internal static string TriangleWave {
+            get {
+                return ResourceManager.GetString("TriangleWave", resourceCulture);
             }
         }
         
@@ -318,6 +498,15 @@ namespace Vm167Box.Resources {
         internal static string Value2 {
             get {
                 return ResourceManager.GetString("Value2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }

@@ -204,4 +204,67 @@
   <data name="PwmOutCalibration" xml:space="preserve">
     <value>PWM out calibration</value>
   </data>
+  <data name="Card0Connected" xml:space="preserve">
+    <value>Card 0 connected</value>
+  </data>
+  <data name="Card1Connected" xml:space="preserve">
+    <value>Card 1 connected</value>
+  </data>
+  <data name="SetAllDigital" xml:space="preserve">
+    <value>Set All Digital</value>
+  </data>
+  <data name="ClearAllDigital" xml:space="preserve">
+    <value>Clear All Digital</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="DigitalInOut" xml:space="preserve">
+    <value>Digital In/Out</value>
+  </data>
+  <data name="DigitalIn" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="DigitalOut" xml:space="preserve">
+    <value>Out</value>
+  </data>
+  <data name="AnalogIn" xml:space="preserve">
+    <value>Analog In</value>
+  </data>
+  <data name="PwmOut" xml:space="preserve">
+    <value>Pwm Out</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="SelectCard" xml:space="preserve">
+    <value>Select Card:</value>
+  </data>
+  <data name="GeneratorPwm1" xml:space="preserve">
+    <value>Generator PWM1</value>
+  </data>
+  <data name="GeneratorPwm2" xml:space="preserve">
+    <value>Generator PWM2</value>
+  </data>
+  <data name="OffWave" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SineWave" xml:space="preserve">
+    <value>Sine</value>
+  </data>
+  <data name="TriangleWave" xml:space="preserve">
+    <value>Triangle</value>
+  </data>
+  <data name="SquareWave" xml:space="preserve">
+    <value>Square</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period (s)</value>
+  </data>
+  <data name="DutyCycle" xml:space="preserve">
+    <value>Duty Cycle (%)</value>
+  </data>
+  <data name="Counter" xml:space="preserve">
+    <value>Counter</value>
+  </data>
 </root>
