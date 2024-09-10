@@ -80,7 +80,7 @@
             Wrap="Wrap">
             <Frame Margin="10,10,0,0" BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.DigitalInOut}" />
+                    <Label Text="{x:Static strings:AppResources.DigitalInOut}"  FontSize="Subtitle"/>
                     <HorizontalStackLayout Spacing="20">
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
@@ -152,7 +152,7 @@
 
             <Frame Margin="10,10,0,0" BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.DigitalInOut}" />
+                    <Label Text="{x:Static strings:AppResources.DigitalInOut}" FontSize="Subtitle"/>
                     <HorizontalStackLayout Spacing="20">
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
@@ -223,11 +223,10 @@
             </Frame>
 
             <Frame
-                Grid.Row="0"
                 Margin="10,10,0,0"
                 BorderColor="Black">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.Counter}" />
+                    <Label Text="{x:Static strings:AppResources.Counter}"  FontSize="Subtitle" />
                     <Entry IsEnabled="{Binding IsOpen}" Text="{Binding Counter}" />
                     <Button
                         Command="{Binding ResetCounterCommand}"
@@ -236,14 +235,12 @@
                 </VerticalStackLayout>
             </Frame>
             <Frame
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
                 Margin="10,10,0,0"
                 BorderColor="Black">
-                <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.AnalogIn}" />
+                <VerticalStackLayout Spacing="10" >
+                    <Label Text="{x:Static strings:AppResources.AnalogIn}" FontSize="Subtitle"/>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog1Name}" />
+                        <Label Text="{Binding Analog1Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
@@ -251,9 +248,10 @@
                             ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn1}" />
+                        <Label Text="{Binding Analog1Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog2Name}" />
+                        <Label Text="{Binding Analog2Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
@@ -261,9 +259,10 @@
                             ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn2}" />
+                        <Label Text="{Binding Analog2Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog3Name}" />
+                        <Label Text="{Binding Analog3Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
@@ -271,9 +270,10 @@
                             ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn3}" />
+                        <Label Text="{Binding Analog3Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog4Name}" />
+                        <Label Text="{Binding Analog4Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
@@ -281,9 +281,10 @@
                             ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn4}" />
+                        <Label Text="{Binding Analog4Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog5Name}" />
+                        <Label Text="{Binding Analog5Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
@@ -291,17 +292,17 @@
                             ScaleY="3"
                             WidthRequest="150" />
                         <Label Text="{Binding AnalogIn5}" />
+                        <Label Text="{Binding Analog5Unit}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
             <Frame
-                Grid.Row="1"
                 Margin="10,10,0,0"
                 BorderColor="Black">
                 <VerticalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="{x:Static strings:AppResources.PwmOut}" />
+                        <Label Text="{x:Static strings:AppResources.PwmOut}"  FontSize="Subtitle"/>
                         <Picker
                             Margin="10,-10,0,0"
                             IsEnabled="{Binding IsOpen}"
@@ -322,7 +323,7 @@
                         </Picker>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Spacing="10">
                             <Label HorizontalTextAlignment="Center" Text="{Binding Pwm1Name}" />
                             <Slider
                                 Margin="-30,40,0,30"
@@ -341,9 +342,12 @@
                                         EventName="ValueChanged" />
                                 </Slider.Behaviors>
                             </Slider>
-                            <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut1}" />
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                <Label Text="{Binding PwmOut1}" />
+                                <Label Text="{Binding Pwm1Unit}" />
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Spacing="10">
                             <Label HorizontalTextAlignment="Center" Text="{Binding Pwm2Name}" />
                             <Slider
                                 Margin="-30,40,0,30"
@@ -362,7 +366,10 @@
                                         EventName="ValueChanged" />
                                 </Slider.Behaviors>
                             </Slider>
-                            <Label HorizontalTextAlignment="Center" Text="{Binding PwmOut2}" />
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                <Label Text="{Binding PwmOut2}" />
+                                <Label Text="{Binding Pwm2Unit}" />
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>

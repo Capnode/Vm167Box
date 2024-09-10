@@ -58,30 +58,6 @@ public partial class PanelViewModel : ObservableObject
             Minimum = 0,
             Maximum = 255
         });
-
-        foreach (var i in Enumerable.Range(0, IVm167.NumAnalogIn))
-        {
-            ScopeModel.Series.Add(new LineSeries
-            {
-                YAxisKey = "AnalogIn",
-                Title = $"AnalogIn{i + 1}",
-                LineStyle = LineStyle.Solid,
-                TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
-            });
-        }
-
-        foreach (var i in Enumerable.Range(0, IVm167.NumPwmOut))
-        {
-            ScopeModel.Series.Add(new LineSeries
-            {
-                YAxisKey = "PwmOut",
-                Title = $"PwmOut{i + 1}",
-                LineStyle = LineStyle.Solid,
-                TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
-            });
-        }
-
-        ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
     }
 
     public string Analog1Name => _settingsService.Analog1Name;
@@ -97,6 +73,20 @@ public partial class PanelViewModel : ObservableObject
     public string Pwm1Name => _settingsService.Pwm1Name;
 
     public string Pwm2Name => _settingsService.Pwm2Name;
+
+    public string Analog1Unit => _settingsService.Analog1Unit;
+
+    public string Analog2Unit => _settingsService.Analog2Unit;
+
+    public string Analog3Unit => _settingsService.Analog3Unit;
+
+    public string Analog4Unit => _settingsService.Analog4Unit;
+
+    public string Analog5Unit => _settingsService.Analog5Unit;
+
+    public string Pwm1Unit => _settingsService.Pwm1Unit;
+
+    public string Pwm2Unit => _settingsService.Pwm2Unit;
 
     [ObservableProperty]
     private bool _isOpen;
@@ -410,34 +400,24 @@ public partial class PanelViewModel : ObservableObject
             _startTime = DateTime.Now;
             timestamp = TimeSpan.Zero;
             ScopeModel.ResetAllAxes();
+            AddSeries();
         }
         else if (_resetScope)
         {
             ScopeModel.ResetAllAxes();
         }
 
-        // Update ScopeModel
-        for (int i = 0; i < ScopeModel.Series.Count; i++)
-        {
-            var serie = (LineSeries)ScopeModel.Series[i];
-            var points = serie.Points;
-            if (_restartScope)
-            {
-                points.Clear();
-            }
-
-            var value = GetType().GetProperty(serie.Title)?.GetValue(this);
-            if (value == null)
-            {
-                throw new ApplicationException($"Property {serie.Title} not found");
-            }
-            else
-            {
-                points.Add(new DataPoint(TimeSpanAxis.ToDouble(timestamp), Convert.ToInt32(value)));
-            }
-        }
-
+        // Update points
+        var i = 0;
+        AddPoint(i++, timestamp, AnalogIn1);
+        AddPoint(i++, timestamp, AnalogIn2);
+        AddPoint(i++, timestamp, AnalogIn3);
+        AddPoint(i++, timestamp, AnalogIn4);
+        AddPoint(i++, timestamp, AnalogIn5);
+        AddPoint(i++, timestamp, PwmOut1);
+        AddPoint(i++, timestamp, PwmOut2);
         ScopeModel.InvalidatePlot(true);
+
         _restartScope = false;
         _resetScope = false;
         _pending = false;
@@ -453,6 +433,52 @@ public partial class PanelViewModel : ObservableObject
         OnPropertyChanged(nameof(Pwm1Name));
         OnPropertyChanged(nameof(Pwm2Name));
 
+        OnPropertyChanged(nameof(Analog1Unit));
+        OnPropertyChanged(nameof(Analog2Unit));
+        OnPropertyChanged(nameof(Analog3Unit));
+        OnPropertyChanged(nameof(Analog4Unit));
+        OnPropertyChanged(nameof(Analog5Unit));
+        OnPropertyChanged(nameof(Pwm1Unit));
+        OnPropertyChanged(nameof(Pwm2Unit));
+
+        _restartScope = true;
         return Task.CompletedTask;
+    }
+
+    private void AddSeries()
+    {
+        ScopeModel.Series.Clear();
+        AddSerie(Analog1Name, "AnalogIn");
+        AddSerie(Analog2Name, "AnalogIn");
+        AddSerie(Analog3Name, "AnalogIn");
+        AddSerie(Analog4Name, "AnalogIn");
+        AddSerie(Analog5Name, "AnalogIn");
+        AddSerie(Pwm1Name, "PwmOut");
+        AddSerie(Pwm2Name, "PwmOut");
+
+        ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
+    }
+
+    private void AddSerie(string title, string yAxisKey)
+    {
+        ScopeModel.Series.Add(new LineSeries
+        {
+            YAxisKey = yAxisKey,
+            Title = title,
+            LineStyle = LineStyle.Solid,
+            TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
+        });
+    }
+
+    private void AddPoint(int i, TimeSpan timestamp, double value)
+    {
+        var serie = (LineSeries)ScopeModel.Series[i];
+        var points = serie.Points;
+        if (_restartScope)
+        {
+            points.Clear();
+        }
+
+        points.Add(new DataPoint(TimeSpanAxis.ToDouble(timestamp), value));
     }
 }
