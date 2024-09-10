@@ -3,19 +3,10 @@
     x:Class="Vm167Box.Views.SettingsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Vm167Box.Behaviors"
     xmlns:strings="clr-namespace:Vm167Box.Resources"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:SettingsViewModel">
-
-    <ContentPage.Resources>
-        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Red" />
-        </Style>
-        <Style x:Key="ValidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Green" />
-        </Style>
-    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -37,187 +28,106 @@
                         <Label Text="{x:Static strings:AppResources.Analog1}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog1Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Analog1Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Analog1Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Analog1Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Analog1Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Analog1Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Analog1Point1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Analog1Value1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Analog1Point2}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Analog1Value2}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Analog2}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog2Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Analog2Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Analog2Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Analog2Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Analog2Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Analog2Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Analog2Point1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Analog2Value1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Analog2Point2}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Analog2Value2}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Analog3}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog3Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Analog3Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Analog3Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Analog3Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Analog3Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Analog3Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Analog3Point1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Analog3Value1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Analog3Point2}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Analog3Value2}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Analog4}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog4Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Analog4Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Analog4Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Analog4Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Analog4Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Analog4Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Analog4Point1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Analog4Value1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Analog4Point2}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Analog4Value2}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Analog5}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog5Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Analog5Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Analog5Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Analog5Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Analog5Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Analog5Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Analog5Point1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Analog5Value1}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Analog5Point2}" />
+                        <Entry
+                            behaviors:AnalogBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Analog5Value2}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -228,75 +138,43 @@
                         <Label Text="{x:Static strings:AppResources.Pwm1}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Pwm1Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Pwm1Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Pwm1Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Pwm1Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Pwm1Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Pwm1Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Pwm1Point1}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Pwm1Value1}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Pwm1Point2}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Pwm1Value2}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Pwm2}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Pwm2Name}" />
                         <Entry Placeholder="{x:Static strings:AppResources.Unit}" Text="{Binding Pwm2Unit}" />
-                        <Entry Placeholder="{x:Static strings:AppResources.Point1}" Text="{Binding Pwm2Point1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value1}" Text="{Binding Pwm2Value1}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Point2}" Text="{Binding Pwm2Point2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Placeholder="{x:Static strings:AppResources.Value2}" Text="{Binding Pwm2Value2}">
-                            <Entry.Behaviors>
-                                <toolkit:NumericValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point1}"
+                            Text="{Binding Pwm2Point1}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value1}"
+                            Text="{Binding Pwm2Value1}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Point2}"
+                            Text="{Binding Pwm2Point2}" />
+                        <Entry
+                            behaviors:PwmBehavior.NumericValidationBehavior="True"
+                            Placeholder="{x:Static strings:AppResources.Value2}"
+                            Text="{Binding Pwm2Value2}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
