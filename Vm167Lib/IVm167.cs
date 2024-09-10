@@ -2,6 +2,20 @@
 {
     public interface IVm167 : IDisposable
     {
+        public const int NumDevices = 2;
+        public const int Device0 = 0;
+        public const int Device1 = 1;
+        public const int NumAnalogIn = 5;
+        public const int NumPwmOut = 2;
+        public const int NumDigitalIn = 8;
+        public const int NumDigitalOut = 8;
+        public const int AnalogMin = 0;
+        public const int AnalogMax = 1023;
+        public const int PwmMin = 0;
+        public const int PwmMax = 255;
+        public const int DigitalMin = 0;
+        public const int DigitalMax = 1;
+
         /// <summary>
         /// List devices found on system
         /// </summary>

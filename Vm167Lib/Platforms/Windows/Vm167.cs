@@ -7,7 +7,7 @@ namespace Vm167Lib;
 
 partial class Vm167
 {
-    private readonly UsbDevice?[] _devices = new UsbDevice[NumDevices];
+    private readonly UsbDevice?[] _devices = new UsbDevice[IVm167.NumDevices];
 
     private async Task<int> Scan()
     {
@@ -25,16 +25,16 @@ partial class Vm167
     {
         if ((mask & 1) > 0)
         {
-            _devices[Device0] = await ScanPort(Pid0);
+            _devices[IVm167.Device0] = await ScanPort(Pid0);
         }
 
         if ((mask & 2) > 0)
         {
-            _devices[Device1] = await ScanPort(Pid1);
+            _devices[IVm167.Device1] = await ScanPort(Pid1);
         }
 
         int found = 0;
-        for (var i = 0; i < NumDevices; i++)
+        for (var i = 0; i < IVm167.NumDevices; i++)
         {
             if (_devices[i] != null)
             {
@@ -49,7 +49,7 @@ partial class Vm167
     {
         if (_devices == null) throw new NoNullAllowedException(nameof(_devices));
 
-        for (var i = 0; i < NumDevices; i++)
+        for (var i = 0; i < IVm167.NumDevices; i++)
         {
             _devices[i]?.Dispose();
             _devices[i] = null;

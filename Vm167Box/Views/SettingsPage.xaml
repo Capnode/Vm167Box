@@ -17,6 +17,13 @@
         </Style>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding ResetCommand}"
+            IconImageSource="replay.png"
+            Text="{x:Static strings:AppResources.Reset}" />
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <VerticalStackLayout Margin="10" Spacing="10">
             <HorizontalStackLayout Spacing="10">
@@ -25,7 +32,7 @@
             </HorizontalStackLayout>
             <Frame Padding="10,2,10,2">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.AnalogInCalibration}" VerticalOptions="StartAndExpand" />
+                    <Label Text="{x:Static strings:AppResources.AnalogIn}" VerticalOptions="StartAndExpand" />
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Analog1}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Analog1Name}" />
@@ -216,7 +223,7 @@
             </Frame>
             <Frame Padding="10,2,10,2">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.PwmOutCalibration}" VerticalOptions="StartAndExpand" />
+                    <Label Text="{x:Static strings:AppResources.PwmOut}" VerticalOptions="StartAndExpand" />
                     <HorizontalStackLayout Spacing="10">
                         <Label Text="{x:Static strings:AppResources.Pwm1}" VerticalOptions="Center" />
                         <Entry Placeholder="{x:Static strings:AppResources.Name}" Text="{Binding Pwm1Name}" />

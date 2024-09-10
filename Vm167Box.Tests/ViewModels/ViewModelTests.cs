@@ -15,9 +15,10 @@ namespace Vm167Box.Tests.ViewModels
         public async Task Open_TwoDevices_Success()
         {
             // Arrange
+            var settingsMock = new Mock<ISettingsService>();
             var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.ListDevices()).ReturnsAsync(3);
-            var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
+            var vm = new PanelViewModel(_logger.Object, settingsMock.Object, vm167Mock.Object);
 
             // Act
             await vm.Open();
@@ -32,9 +33,10 @@ namespace Vm167Box.Tests.ViewModels
         public async Task Open_NoDevices_ThrowException()
         {
             // Arrange
+            var settingsMock = new Mock<ISettingsService>();
             var vm167Mock = new Mock<IVm167Service>();
             vm167Mock.Setup(service => service.ListDevices()).Throws(new ApplicationException());
-            var vm = new PanelViewModel(_logger.Object, vm167Mock.Object);
+            var vm = new PanelViewModel(_logger.Object, settingsMock.Object, vm167Mock.Object);
 
             // Act
             await vm.Open();

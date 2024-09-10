@@ -6,7 +6,7 @@ namespace Vm167Lib;
 
 partial class Vm167
 {
-    private readonly IntPtr[] _devices = new IntPtr[NumDevices];
+    private readonly IntPtr[] _devices = new IntPtr[IVm167.NumDevices];
 
     [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
     private static extern IntPtr IOServiceGetMatchingService(IntPtr masterPort, IntPtr matchingDictionary);
@@ -44,16 +44,16 @@ partial class Vm167
     {
         if ((mask & 1) > 0)
         {
-            _devices[Device0] = OpenDevice(Vid, Pid0);
+            _devices[IVm167.Device0] = OpenDevice(Vid, Pid0);
         }
 
         if ((mask & 2) > 0)
         {
-            _devices[Device1] = OpenDevice(Vid, Pid1);
+            _devices[IVm167.Device1] = OpenDevice(Vid, Pid1);
         }
 
         int found = 0;
-        for (var i = 0; i < NumDevices; i++)
+        for (var i = 0; i < IVm167.NumDevices; i++)
         {
             if (_devices[i] != IntPtr.Zero)
             {
@@ -69,7 +69,7 @@ partial class Vm167
     {
         if (_devices == null) throw new NoNullAllowedException(nameof(_devices));
 
-        for (var i = 0; i < NumDevices; i++)
+        for (var i = 0; i < IVm167.NumDevices; i++)
         {
             if (_devices[i] != IntPtr.Zero)
             {

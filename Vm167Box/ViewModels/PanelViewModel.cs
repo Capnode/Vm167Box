@@ -13,15 +13,18 @@ namespace Vm167Box.ViewModels;
 public partial class PanelViewModel : ObservableObject
 {
     private readonly ILogger<PanelViewModel> _logger;
+    private readonly ISettingsService _settingsService;
     private readonly IVm167Service _vm167Service;
     private bool _pending;
     private DateTime _startTime;
     private bool _resetScope;
     private bool _restartScope = true;
 
-    public PanelViewModel(ILogger<PanelViewModel> logger, IVm167Service vm167service)
+    public PanelViewModel(ILogger<PanelViewModel> logger, ISettingsService settingsService, IVm167Service vm167service)
     {
         _logger = logger;
+        _settingsService = settingsService;
+        _settingsService.Update += UpdateSettings;
         _vm167Service = vm167service;
         _vm167Service.Tick += ReadDevice;
 
@@ -56,7 +59,7 @@ public partial class PanelViewModel : ObservableObject
             Maximum = 255
         });
 
-        foreach (var i in Enumerable.Range(0, Vm167.NumAnalogIn))
+        foreach (var i in Enumerable.Range(0, IVm167.NumAnalogIn))
         {
             ScopeModel.Series.Add(new LineSeries
             {
@@ -67,7 +70,7 @@ public partial class PanelViewModel : ObservableObject
             });
         }
 
-        foreach (var i in Enumerable.Range(0, Vm167.NumPwmOut))
+        foreach (var i in Enumerable.Range(0, IVm167.NumPwmOut))
         {
             ScopeModel.Series.Add(new LineSeries
             {
@@ -80,6 +83,20 @@ public partial class PanelViewModel : ObservableObject
 
         ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
     }
+
+    public string Analog1Name => _settingsService.Analog1Name;
+
+    public string Analog2Name => _settingsService.Analog2Name;
+
+    public string Analog3Name => _settingsService.Analog3Name;
+
+    public string Analog4Name => _settingsService.Analog4Name;
+
+    public string Analog5Name => _settingsService.Analog5Name;
+
+    public string Pwm1Name => _settingsService.Pwm1Name;
+
+    public string Pwm2Name => _settingsService.Pwm2Name;
 
     [ObservableProperty]
     private bool _isOpen;
@@ -194,7 +211,7 @@ public partial class PanelViewModel : ObservableObject
     public async Task SelectCard0(CheckedChangedEventArgs args)
     {
         _logger.LogTrace(">SelectCard0({})", args.Value);
-        await SelectCard(args.Value, Vm167.Device0);
+        await SelectCard(args.Value, IVm167.Device0);
         _logger.LogTrace("<SelectCard0()");
     }
 
@@ -202,7 +219,7 @@ public partial class PanelViewModel : ObservableObject
     public async Task SelectCard1(CheckedChangedEventArgs args)
     {
         _logger.LogTrace(">SelectCard1({})", args.Value);
-        await SelectCard(args.Value, Vm167.Device1);
+        await SelectCard(args.Value, IVm167.Device1);
         _logger.LogTrace("<SelectCard1()");
     }
 
@@ -374,7 +391,7 @@ public partial class PanelViewModel : ObservableObject
         var counter = await _vm167Service.ReadCounter();
         Counter = counter;
 
-        int[] analog = new int[Vm167.NumAnalogIn];
+        int[] analog = new int[IVm167.NumAnalogIn];
         await _vm167Service.ReadAllAnalog(analog);
         AnalogIn1 = analog[0];
         AnalogIn2 = analog[1];
@@ -382,7 +399,7 @@ public partial class PanelViewModel : ObservableObject
         AnalogIn4 = analog[3];
         AnalogIn5 = analog[4];
 
-        int[] pwm = new int[Vm167.NumPwmOut];
+        int[] pwm = new int[IVm167.NumPwmOut];
         await _vm167Service.ReadBackPWMOut(pwm);
         PwmOut1 = pwm[0];
         PwmOut2 = pwm[1];
@@ -424,5 +441,18 @@ public partial class PanelViewModel : ObservableObject
         _restartScope = false;
         _resetScope = false;
         _pending = false;
+    }
+
+    private Task UpdateSettings()
+    {
+        OnPropertyChanged(nameof(Analog1Name));
+        OnPropertyChanged(nameof(Analog2Name));
+        OnPropertyChanged(nameof(Analog3Name));
+        OnPropertyChanged(nameof(Analog4Name));
+        OnPropertyChanged(nameof(Analog5Name));
+        OnPropertyChanged(nameof(Pwm1Name));
+        OnPropertyChanged(nameof(Pwm2Name));
+
+        return Task.CompletedTask;
     }
 }

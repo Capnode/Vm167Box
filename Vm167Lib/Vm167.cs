@@ -4,14 +4,6 @@ namespace Vm167Lib;
 
 public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 {
-    public const int NumDevices = 2;
-    public const int Device0 = 0;
-    public const int Device1 = 1;
-    public const int NumAnalogIn = 5;
-    public const int NumPwmOut = 2;
-    public const int NumDigitalIn = 8;
-    public const int NumDigitalOut = 8;
-
     protected const uint Vid = 0x10cf;
     protected const uint Pid0 = 0x1670;
     protected const uint Pid1 = 0x1671;
@@ -20,12 +12,10 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
     private readonly SemaphoreSlim _lock = new(1, 1);
     private readonly byte[][] _deviceBuffer = [new byte[64], new byte[64]];
 
-
     public void Dispose()
     {
         Close();
     }
-
 
     public async Task<int> ListDevices()
     {
@@ -81,8 +71,8 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             await _lock.WaitAsync();
             _logger.LogTrace(">ReadAnalogChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
-            buffer[Device0] = 0; // Read Analog Channel
-            buffer[Device1] = (byte)(Channel - 1);
+            buffer[IVm167.Device0] = 0; // Read Analog Channel
+            buffer[IVm167.Device1] = (byte)(Channel - 1);
 
             await Write(CardAddress, 2);
             var transf = await Read(CardAddress);
@@ -378,18 +368,18 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             await _lock.WaitAsync();
             _logger.LogTrace(">Connected()");
-            var buffer = _deviceBuffer[Device0];
+            var buffer = _deviceBuffer[IVm167.Device0];
             buffer[0] = 14; // Unknown function
-            buffer[1] = Device0;
-            await Write(Device0, 2);
-            await Read(Device0);
+            buffer[1] = IVm167.Device0;
+            await Write(IVm167.Device0, 2);
+            await Read(IVm167.Device0);
             int cards = buffer[1];
 
-            buffer = _deviceBuffer[Device1];
+            buffer = _deviceBuffer[IVm167.Device1];
             buffer[0] = 14; // Unknown function
-            buffer[1] = Device1;
-            await Write(Device1, 2);
-            await Read(Device1);
+            buffer[1] = IVm167.Device1;
+            await Write(IVm167.Device1, 2);
+            await Read(IVm167.Device1);
             cards += buffer[1];
 
             return cards;

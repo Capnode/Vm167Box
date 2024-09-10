@@ -133,15 +133,6 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analog in calibration.
-        /// </summary>
-        internal static string AnalogInCalibration {
-            get {
-                return ResourceManager.GetString("AnalogInCalibration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to VM167 Box.
         /// </summary>
         internal static string AppTitle {
@@ -363,15 +354,6 @@ namespace Vm167Box.Resources {
         internal static string PwmOut {
             get {
                 return ResourceManager.GetString("PwmOut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PWM out calibration.
-        /// </summary>
-        internal static string PwmOutCalibration {
-            get {
-                return ResourceManager.GetString("PwmOutCalibration", resourceCulture);
             }
         }
         

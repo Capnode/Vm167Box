@@ -1,5 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Globalization;
+using CommunityToolkit.Mvvm.Input;
 using Vm167Box.Services;
 
 namespace Vm167Box.ViewModels
@@ -11,11 +11,12 @@ namespace Vm167Box.ViewModels
         public SettingsViewModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
+            _settingsService.Update += UpdateSettings;
         }
 
         public bool IsLightTheme
         {
-            get => Application.Current?.RequestedTheme is AppTheme.Light;
+            get => _settingsService.AppTheme is AppTheme.Light;
             set
             {
                 var appTheme = value ? AppTheme.Light : AppTheme.Dark;
@@ -26,270 +27,311 @@ namespace Vm167Box.ViewModels
             }
         }
 
-        public string? Analog1Name
+        public string Analog1Name
         {
             get => _settingsService.Analog1Name;
             set => _settingsService.Analog1Name = value;
         }
 
-        public string? Analog1Unit
+        public string Analog1Unit
         {
             get => _settingsService.Analog1Unit;
             set => _settingsService.Analog1Unit = value;
         }
 
-        public string? Analog1Point1
+        public double Analog1Point1
         {
-            get => ToString(_settingsService.Analog1Point1);
-            set => _settingsService.Analog1Point1 = ToDouble(value);
+            get => _settingsService.Analog1Point1;
+            set => _settingsService.Analog1Point1 = value;
         }
 
-        public string? Analog1Value1
+        public double Analog1Value1
         {
-            get => ToString(_settingsService.Analog1Value1);
-            set => _settingsService.Analog1Value1 = ToDouble(value);
+            get => _settingsService.Analog1Value1;
+            set => _settingsService.Analog1Value1 = value;
         }
 
-        public string? Analog1Point2
+        public double Analog1Point2
         {
-            get => ToString(_settingsService.Analog1Point2);
-            set => _settingsService.Analog1Point2 = ToDouble(value);
+            get => _settingsService.Analog1Point2;
+            set => _settingsService.Analog1Point2 = value;
         }
 
-        public string? Analog1Value2
+        public double Analog1Value2
         {
-            get => ToString(_settingsService.Analog1Value2);
-            set => _settingsService.Analog1Value2 = ToDouble(value);
+            get => _settingsService.Analog1Value2;
+            set => _settingsService.Analog1Value2 = value;
         }
 
-        public string? Analog2Name
+        public string Analog2Name
         {
             get => _settingsService.Analog2Name;
             set => _settingsService.Analog2Name = value;
         }
 
-        public string? Analog2Unit
+        public string Analog2Unit
         {
             get => _settingsService.Analog2Unit;
             set => _settingsService.Analog2Unit = value;
         }
 
-        public string? Analog2Point1
+        public double Analog2Point1
         {
-            get => ToString(_settingsService.Analog2Point1);
-            set => _settingsService.Analog2Point1 = ToDouble(value);
+            get => _settingsService.Analog2Point1;
+            set => _settingsService.Analog2Point1 = value;
         }
 
-        public string? Analog2Value1
+        public double Analog2Value1
         {
-            get => ToString(_settingsService.Analog2Value1);
-            set => _settingsService.Analog2Value1 = ToDouble(value);
+            get => _settingsService.Analog2Value1;
+            set => _settingsService.Analog2Value1 = value;
         }
 
-        public string? Analog2Point2
+        public double Analog2Point2
         {
-            get => ToString(_settingsService.Analog2Point2);
-            set => _settingsService.Analog2Point2 = ToDouble(value);
+            get => _settingsService.Analog2Point2;
+            set => _settingsService.Analog2Point2 = value;
         }
 
-        public string? Analog2Value2
+        public double Analog2Value2
         {
-            get => ToString(_settingsService.Analog2Value2);
-            set => _settingsService.Analog2Value2 = ToDouble(value);
+            get => _settingsService.Analog2Value2;
+            set => _settingsService.Analog2Value2 = value;
         }
 
-        public string? Analog3Name
+        public string Analog3Name
         {
             get => _settingsService.Analog3Name;
             set => _settingsService.Analog3Name = value;
         }
 
-        public string? Analog3Unit
+        public string Analog3Unit
         {
             get => _settingsService.Analog3Unit;
             set => _settingsService.Analog3Unit = value;
         }
 
-        public string? Analog3Point1
+        public double Analog3Point1
         {
-            get => ToString(_settingsService.Analog3Point1);
-            set => _settingsService.Analog3Point1 = ToDouble(value);
+            get => _settingsService.Analog3Point1;
+            set => _settingsService.Analog3Point1 = value;
         }
 
-        public string? Analog3Value1
+        public double Analog3Value1
         {
-            get => ToString(_settingsService.Analog3Value1);
-            set => _settingsService.Analog3Value1 = ToDouble(value);
+            get => _settingsService.Analog3Value1;
+            set => _settingsService.Analog3Value1 = value;
         }
 
-        public string? Analog3Point2
+        public double Analog3Point2
         {
-            get => ToString(_settingsService.Analog3Point2);
-            set => _settingsService.Analog3Point2 = ToDouble(value);
+            get => _settingsService.Analog3Point2;
+            set => _settingsService.Analog3Point2 = value;
         }
 
-        public string? Analog3Value2
+        public double Analog3Value2
         {
-            get => ToString(_settingsService.Analog3Value2);
-            set => _settingsService.Analog3Value2 = ToDouble(value);
+            get => _settingsService.Analog3Value2;
+            set => _settingsService.Analog3Value2 = value;
         }
 
-        public string? Analog4Name
+        public string Analog4Name
         {
             get => _settingsService.Analog4Name;
             set =>_settingsService.Analog4Name = value;
         }
 
-        public string? Analog4Unit
+        public string Analog4Unit
         {
             get => _settingsService.Analog4Unit;
             set => _settingsService.Analog4Unit = value;
         }
 
-        public string? Analog4Point1
+        public double Analog4Point1
         {
-            get => ToString(_settingsService.Analog4Point1);
-            set => _settingsService.Analog4Point1 = ToDouble(value);
+            get => _settingsService.Analog4Point1;
+            set => _settingsService.Analog4Point1 = value;
         }
 
-        public string? Analog4Value1
+        public double Analog4Value1
         {
-            get => ToString(_settingsService.Analog4Value1);
-            set => _settingsService.Analog4Value1 = ToDouble(value);
+            get => _settingsService.Analog4Value1;
+            set => _settingsService.Analog4Value1 = value;
         }
 
-        public string? Analog4Point2
+        public double Analog4Point2
         {
-            get => ToString(_settingsService.Analog4Point2);
-            set => _settingsService.Analog4Point2 = ToDouble(value);
+            get => _settingsService.Analog4Point2;
+            set => _settingsService.Analog4Point2 = value;
         }
 
-        public string? Analog4Value2
+        public double Analog4Value2
         {
-            get => ToString(_settingsService.Analog4Value2);
-            set => _settingsService.Analog4Value2 = ToDouble(value);
+            get => _settingsService.Analog4Value2;
+            set => _settingsService.Analog4Value2 = value;
         }
 
-        public string? Analog5Name
+        public string Analog5Name
         {
             get => _settingsService.Analog5Name;
             set => _settingsService.Analog5Name = value;
         }
 
-        public string? Analog5Unit
+        public string Analog5Unit
         {
             get => _settingsService.Analog5Unit;
             set => _settingsService.Analog5Unit = value;
         }
 
-        public string? Analog5Point1
+        public double Analog5Point1
         {
-            get => ToString(_settingsService.Analog5Point1);
-            set => _settingsService.Analog5Point1 = ToDouble(value);
+            get => _settingsService.Analog5Point1;
+            set => _settingsService.Analog5Point1 = value;
         }
 
-        public string? Analog5Value1
+        public double Analog5Value1
         {
-            get => ToString(_settingsService.Analog5Value1);
-            set => _settingsService.Analog5Value1 = ToDouble(value);
+            get => _settingsService.Analog5Value1;
+            set => _settingsService.Analog5Value1 = value;
         }
 
-        public string? Analog5Point2
+        public double Analog5Point2
         {
-            get => ToString(_settingsService.Analog5Point2);
-            set => _settingsService.Analog5Point2 = ToDouble(value);
+            get => _settingsService.Analog5Point2;
+            set => _settingsService.Analog5Point2 = value;
         }
 
-        public string? Analog5Value2
+        public double Analog5Value2
         {
-            get => ToString(_settingsService.Analog5Value2);
-            set => _settingsService.Analog5Value2 = ToDouble(value);
+            get => _settingsService.Analog5Value2;
+            set => _settingsService.Analog5Value2 = value;
         }
 
-        public string? Pwm1Name
+        public string Pwm1Name
         {
             get => _settingsService.Pwm1Name;
             set => _settingsService.Pwm1Name = value;
         }
 
-        public string? Pwm1Unit
+        public string Pwm1Unit
         {
             get => _settingsService.Pwm1Unit;
             set => _settingsService.Pwm1Unit = value;
         }
 
-        public string? Pwm1Point1
+        public double Pwm1Point1
         {
-            get => ToString(_settingsService.Pwm1Point1);
-            set => _settingsService.Pwm1Point1 = ToDouble(value);
+            get => _settingsService.Pwm1Point1;
+            set => _settingsService.Pwm1Point1 = value;
         }
 
-        public string? Pwm1Value1
+        public double Pwm1Value1
         {
-            get => ToString(_settingsService.Pwm1Value1);
-            set => _settingsService.Pwm1Value1 = ToDouble(value);
+            get => _settingsService.Pwm1Value1;
+            set => _settingsService.Pwm1Value1 = value;
         }
 
-        public string? Pwm1Point2
+        public double Pwm1Point2
         {
-            get => ToString(_settingsService.Pwm1Point2);
-            set => _settingsService.Pwm1Point2 = ToDouble(value);
+            get => _settingsService.Pwm1Point2;
+            set => _settingsService.Pwm1Point2 = value;
         }
 
-        public string? Pwm1Value2
+        public double Pwm1Value2
         {
-            get => ToString(_settingsService.Pwm1Value2);
-            set => _settingsService.Pwm1Value2 = ToDouble(value);
+            get => _settingsService.Pwm1Value2;
+            set => _settingsService.Pwm1Value2 = value;
         }
 
 
-        public string? Pwm2Name
+        public string Pwm2Name
         {
             get => _settingsService.Pwm2Name;
             set => _settingsService.Pwm2Name = value;
         }
 
-        public string? Pwm2Unit
+        public string Pwm2Unit
         {
             get => _settingsService.Pwm2Unit;
             set => _settingsService.Pwm2Unit = value;
         }
 
-        public string? Pwm2Point1
+        public double Pwm2Point1
         {
-            get => ToString(_settingsService.Pwm2Point1);
-            set => _settingsService.Pwm2Point1 = ToDouble(value);
+            get => _settingsService.Pwm2Point1;
+            set => _settingsService.Pwm2Point1 = value;
         }
 
-        public string? Pwm2Value1
+        public double Pwm2Value1
         {
-            get => ToString(_settingsService.Pwm2Value1);
-            set => _settingsService.Pwm2Value1 = ToDouble(value);
+            get => _settingsService.Pwm2Value1;
+            set => _settingsService.Pwm2Value1 = value;
         }
 
-        public string? Pwm2Point2
+        public double Pwm2Point2
         {
-            get => ToString(_settingsService.Pwm2Point2);
-            set => _settingsService.Pwm2Point2 = ToDouble(value);
+            get => _settingsService.Pwm2Point2;
+            set => _settingsService.Pwm2Point2 = value;
         }
 
-        public string? Pwm2Value2
+        public double Pwm2Value2
         {
-            get => ToString(_settingsService.Pwm2Value2);
-            set => _settingsService.Pwm2Value2 = ToDouble(value);
+            get => _settingsService.Pwm2Value2;
+            set => _settingsService.Pwm2Value2 = value;
         }
 
-        private string? ToString(double value)
+        [RelayCommand]
+        public void Reset()
         {
-            if (Double.IsNaN(value)) return null;
-            return value.ToString();
+            _settingsService.Reset();
         }
 
-        private double ToDouble(string? value)
+        private Task UpdateSettings()
         {
-            if (string.IsNullOrWhiteSpace(value)) return double.NaN;
-            if (double.TryParse(value, CultureInfo.CurrentCulture.NumberFormat, out double result)) return result;
-            return double.NaN;
+            OnPropertyChanged(nameof(IsLightTheme));
+            OnPropertyChanged(nameof(Analog1Name));
+            OnPropertyChanged(nameof(Analog1Unit));
+            OnPropertyChanged(nameof(Analog1Point1));
+            OnPropertyChanged(nameof(Analog1Value1));
+            OnPropertyChanged(nameof(Analog1Point2));
+            OnPropertyChanged(nameof(Analog1Value2));
+            OnPropertyChanged(nameof(Analog2Name));
+            OnPropertyChanged(nameof(Analog2Unit));
+            OnPropertyChanged(nameof(Analog2Point1));
+            OnPropertyChanged(nameof(Analog2Value1));
+            OnPropertyChanged(nameof(Analog2Point2));
+            OnPropertyChanged(nameof(Analog2Value2));
+            OnPropertyChanged(nameof(Analog3Name));
+            OnPropertyChanged(nameof(Analog3Unit));
+            OnPropertyChanged(nameof(Analog3Point1));
+            OnPropertyChanged(nameof(Analog3Value1));
+            OnPropertyChanged(nameof(Analog3Point2));
+            OnPropertyChanged(nameof(Analog3Value2));
+            OnPropertyChanged(nameof(Analog4Name));
+            OnPropertyChanged(nameof(Analog4Unit));
+            OnPropertyChanged(nameof(Analog4Point1));
+            OnPropertyChanged(nameof(Analog4Value1));
+            OnPropertyChanged(nameof(Analog4Point2));
+            OnPropertyChanged(nameof(Analog4Value2));
+            OnPropertyChanged(nameof(Analog5Name));
+            OnPropertyChanged(nameof(Analog5Unit));
+            OnPropertyChanged(nameof(Analog5Point1));
+            OnPropertyChanged(nameof(Analog5Value1));
+            OnPropertyChanged(nameof(Analog5Point2));
+            OnPropertyChanged(nameof(Analog5Value2));
+            OnPropertyChanged(nameof(Pwm1Name));
+            OnPropertyChanged(nameof(Pwm1Unit));
+            OnPropertyChanged(nameof(Pwm1Point1));
+            OnPropertyChanged(nameof(Pwm1Value1));
+            OnPropertyChanged(nameof(Pwm1Point2));
+            OnPropertyChanged(nameof(Pwm1Value2));
+            OnPropertyChanged(nameof(Pwm2Name));
+            OnPropertyChanged(nameof(Pwm2Unit));
+            OnPropertyChanged(nameof(Pwm2Point1));
+            OnPropertyChanged(nameof(Pwm2Value1));
+            OnPropertyChanged(nameof(Pwm2Point2));
+            OnPropertyChanged(nameof(Pwm2Value2));
+            return Task.CompletedTask;
         }
     }
 }

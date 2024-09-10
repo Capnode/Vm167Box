@@ -43,7 +43,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var value = await _vm167.ReadAnalogChannel(device, channel);
@@ -58,10 +58,10 @@ public class VM167Tests
     public async Task ReadAllAnalog_Success()
     {
         // Arrange
-        int[] values = new int[Vm167.NumAnalogIn];
+        int[] values = new int[IVm167.NumAnalogIn];
 
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.ReadAllAnalog(device, values);
@@ -81,7 +81,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.SetPWM(device, channel, data, freq);
@@ -98,7 +98,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.OutputAllPWM(device, data1, data2);
@@ -122,7 +122,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.InOutMode(device, 0, 0);
@@ -144,7 +144,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.InOutMode(device, 0, 0);
@@ -158,7 +158,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.InOutMode(device, 0, 0);
@@ -180,7 +180,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.InOutMode(device, 0, 0);
@@ -194,7 +194,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.InOutMode(device, 0, 0);
@@ -216,7 +216,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var value = await _vm167.ReadDigitalChannel(device, channel);
@@ -229,7 +229,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var value = await _vm167.ReadAllDigital(device);
@@ -242,7 +242,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var value = await _vm167.ReadCounter(device);
@@ -255,7 +255,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.ResetCounter(device);
@@ -279,7 +279,7 @@ public class VM167Tests
     {
         // Arrange
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var version = await _vm167.VersionFirmware(device);
@@ -292,10 +292,10 @@ public class VM167Tests
     public async Task ReadBackPWMOut()
     {
         // Arrange
-        int[] buffer = new int[Vm167.NumPwmOut];
+        int[] buffer = new int[IVm167.NumPwmOut];
 
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             await _vm167.ReadBackPWMOut(device, buffer);
@@ -309,7 +309,7 @@ public class VM167Tests
         // Arrange
 
         // Act & Assert
-        for (int device = 0; device < Vm167.NumDevices; device++)
+        for (int device = 0; device < IVm167.NumDevices; device++)
         {
             if ((_active & (1 << device)) == 0) continue;
             var mode = await _vm167.ReadBackInOutMode(device);

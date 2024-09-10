@@ -174,9 +174,6 @@
   <data name="Analog5" xml:space="preserve">
     <value>Analog5</value>
   </data>
-  <data name="AnalogInCalibration" xml:space="preserve">
-    <value>Analog in kalibrering</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Namn</value>
   </data>
@@ -200,9 +197,6 @@
   </data>
   <data name="Pwm2" xml:space="preserve">
     <value>Pwm2</value>
-  </data>
-  <data name="PwmOutCalibration" xml:space="preserve">
-    <value>PWM ut kalibrering</value>
   </data>
   <data name="Card0Connected" xml:space="preserve">
     <value>Kort 0 anslutet</value>
