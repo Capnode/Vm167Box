@@ -22,279 +22,337 @@
                 <Label Text="{x:Static strings:AppResources.ThemeToggle}" VerticalOptions="Center" />
                 <Switch IsToggled="{Binding IsLightTheme}" />
             </HorizontalStackLayout>
-            <Frame Padding="10,2,10,2">
+            <Frame Padding="10">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.AnalogIn}" VerticalOptions="StartAndExpand" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.AnalogIn}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="100" Text="{x:Static strings:AppResources.Name}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.Unit}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinPoint}" FontAttributes="Bold"  />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinValue}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxPoint}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxValue}" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Analog1}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Analog1Name}" />
+                            Text="{Binding Analog1Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Analog1Unit}" />
+                            Text="{Binding Analog1Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Analog1Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Analog1MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Analog1Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Analog1MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Analog1Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Analog1MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Analog1Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Analog1MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Analog2}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Analog2Name}" />
+                            Text="{Binding Analog2Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Analog2Unit}" />
+                            Text="{Binding Analog2Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Analog2Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Analog2MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Analog2Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Analog2MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Analog2Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Analog2MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Analog2Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Analog2MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Analog3}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Analog3Name}" />
+                            Text="{Binding Analog3Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Analog3Unit}" />
+                            Text="{Binding Analog3Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Analog3Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Analog3MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Analog3Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Analog3MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Analog3Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Analog3MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Analog3Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Analog3MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Analog4}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Analog4Name}" />
+                            Text="{Binding Analog4Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Analog4Unit}" />
+                            Text="{Binding Analog4Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Analog4Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Analog4MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Analog4Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Analog4MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Analog4Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Analog4MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Analog4Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Analog4MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Analog5}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Analog5Name}" />
+                            Text="{Binding Analog5Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Analog5Unit}" />
+                            Text="{Binding Analog5Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Analog5Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Analog5MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Analog5Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Analog5MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Analog5Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Analog5MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Analog5Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Analog5MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
-            <Frame Padding="10,2,10,2">
+            <Frame Padding="10">
                 <VerticalStackLayout>
-                    <Label Text="{x:Static strings:AppResources.PwmOut}" VerticalOptions="StartAndExpand" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.PwmOut}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="100" Text="{x:Static strings:AppResources.Name}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.Unit}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinPoint}" FontAttributes="Bold"  />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinValue}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxPoint}" FontAttributes="Bold" />
+                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxValue}" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Pwm1}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Pwm1Name}" />
+                            Text="{Binding Pwm1Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Pwm1Unit}" />
+                            Text="{Binding Pwm1Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Pwm1Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Pwm1MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Pwm1Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Pwm1MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Pwm1Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Pwm1MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Pwm1Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Pwm1MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Text="{x:Static strings:AppResources.Pwm2}"
                             VerticalOptions="Center" />
                         <Entry
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.Name}"
-                            Text="{Binding Pwm2Name}" />
+                            Text="{Binding Pwm2Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            MinimumWidthRequest="60"
+                            MinimumWidthRequest="80"
                             Placeholder="{x:Static strings:AppResources.Unit}"
-                            Text="{Binding Pwm2Unit}" />
+                            Text="{Binding Pwm2Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point1}"
-                            Text="{Binding Pwm2Point1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinPoint}"
+                            Text="{Binding Pwm2MinPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value1}"
-                            Text="{Binding Pwm2Value1}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            Text="{Binding Pwm2MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Point2}"
-                            Text="{Binding Pwm2Point2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
+                            Text="{Binding Pwm2MaxPoint}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
-                            behaviors:NumericValidation.Activate="True"
-                            MinimumWidthRequest="60"
-                            Placeholder="{x:Static strings:AppResources.Value2}"
-                            Text="{Binding Pwm2Value2}" />
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            Text="{Binding Pwm2MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>

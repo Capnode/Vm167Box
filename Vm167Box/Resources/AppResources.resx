@@ -180,17 +180,17 @@
   <data name="Unit" xml:space="preserve">
     <value>Unit</value>
   </data>
-  <data name="Point1" xml:space="preserve">
-    <value>Point1</value>
+  <data name="MinPoint" xml:space="preserve">
+    <value>MinPoint</value>
   </data>
-  <data name="Value1" xml:space="preserve">
-    <value>Value1</value>
+  <data name="MinValue" xml:space="preserve">
+    <value>MinValue</value>
   </data>
-  <data name="Point2" xml:space="preserve">
-    <value>Point2</value>
+  <data name="MaxPoint" xml:space="preserve">
+    <value>MaxPoint</value>
   </data>
-  <data name="Value2" xml:space="preserve">
-    <value>Value2</value>
+  <data name="MaxValue" xml:space="preserve">
+    <value>MaxValue</value>
   </data>
   <data name="Pwm1" xml:space="preserve">
     <value>Pwm1</value>

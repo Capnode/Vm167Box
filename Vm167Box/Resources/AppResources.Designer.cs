@@ -259,6 +259,42 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MaxPoint.
+        /// </summary>
+        internal static string MaxPoint {
+            get {
+                return ResourceManager.GetString("MaxPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MaxValue.
+        /// </summary>
+        internal static string MaxValue {
+            get {
+                return ResourceManager.GetString("MaxValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MinPoint.
+        /// </summary>
+        internal static string MinPoint {
+            get {
+                return ResourceManager.GetString("MinPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MinValue.
+        /// </summary>
+        internal static string MinValue {
+            get {
+                return ResourceManager.GetString("MinValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name {
@@ -309,24 +345,6 @@ namespace Vm167Box.Resources {
         internal static string Period {
             get {
                 return ResourceManager.GetString("Period", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Point1.
-        /// </summary>
-        internal static string Point1 {
-            get {
-                return ResourceManager.GetString("Point1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Point2.
-        /// </summary>
-        internal static string Point2 {
-            get {
-                return ResourceManager.GetString("Point2", resourceCulture);
             }
         }
         
@@ -462,24 +480,6 @@ namespace Vm167Box.Resources {
         internal static string Unit {
             get {
                 return ResourceManager.GetString("Unit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value1.
-        /// </summary>
-        internal static string Value1 {
-            get {
-                return ResourceManager.GetString("Value1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value2.
-        /// </summary>
-        internal static string Value2 {
-            get {
-                return ResourceManager.GetString("Value2", resourceCulture);
             }
         }
         

@@ -4,13 +4,13 @@ namespace Vm167Box.Behaviors
 {
     public static class NumericValidation
     {
-        public static readonly BindableProperty ActivateProperty =
+        public static readonly BindableProperty ZZZActivateProperty =
             BindableProperty.CreateAttached(
-                "Activate",
+                "ZZZActivate",
                 typeof(bool),
                 typeof(NumericValidation),
                 false,
-                propertyChanged: OnActivateChanged);
+                propertyChanged: OnZZZActivateChanged);
 
         public static readonly BindableProperty MinimumValueProperty =
             BindableProperty.CreateAttached(
@@ -26,14 +26,14 @@ namespace Vm167Box.Behaviors
                 typeof(NumericValidation),
                 double.MaxValue);
 
-        public static bool GetActivate(BindableObject view)
+        public static bool GetZZZActivate(BindableObject view)
         {
-            return (bool)view.GetValue(ActivateProperty);
+            return (bool)view.GetValue(ZZZActivateProperty);
         }
 
-        public static void SetActivate(BindableObject view, bool value)
+        public static void SetZZZActivate(BindableObject view, bool value)
         {
-            view.SetValue(ActivateProperty, value);
+            view.SetValue(ZZZActivateProperty, value);
         }
 
         public static double GetMinimumValue(BindableObject view)
@@ -56,7 +56,7 @@ namespace Vm167Box.Behaviors
             view.SetValue(MaximumValueProperty, value);
         }
 
-        private static void OnActivateChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnZZZActivateChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable is Entry entry && newValue is bool isEnabled && isEnabled)
             {
