@@ -25,13 +25,34 @@
             <Frame Padding="10">
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="10">
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.AnalogIn}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="100" Text="{x:Static strings:AppResources.Name}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.Unit}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinPoint}" FontAttributes="Bold"  />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinValue}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxPoint}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxValue}" FontAttributes="Bold" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.AnalogIn}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="100"
+                            Text="{x:Static strings:AppResources.Name}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.Unit}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MinPoint}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MinValue}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MaxPoint}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MaxValue}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
@@ -258,13 +279,34 @@
             <Frame Padding="10">
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="10">
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.PwmOut}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="100" Text="{x:Static strings:AppResources.Name}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.Unit}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinPoint}" FontAttributes="Bold"  />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MinValue}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxPoint}" FontAttributes="Bold" />
-                        <Label MinimumWidthRequest="80" Text="{x:Static strings:AppResources.MaxValue}" FontAttributes="Bold" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.PwmOut}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="100"
+                            Text="{x:Static strings:AppResources.Name}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.Unit}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MinPoint}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MinValue}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MaxPoint}" />
+                        <Label
+                            FontAttributes="Bold"
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.MaxValue}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
