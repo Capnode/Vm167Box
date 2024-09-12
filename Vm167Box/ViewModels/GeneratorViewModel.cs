@@ -25,7 +25,7 @@ namespace Vm167Box.ViewModels
         {
             _logger = logger;
             _vm167Service = vm167Service;
-            _vm167Service.Tick += UpdateGenerator;
+            _vm167Service.Tick += Loop;
             Generator1Model.Series.Add(new FunctionSeries());
             Generator2Model.Series.Add(new FunctionSeries());
         }
@@ -191,17 +191,17 @@ namespace Vm167Box.ViewModels
             return series;
         }
 
-        private async Task UpdateGenerator()
+        private async Task Loop()
         {
             IsOpen = true;
             using (await _lock.UseWaitAsync())
             {
-                await UpdateGenerator1();
-                await UpdateGenerator2();
+                UpdateGenerator1();
+                UpdateGenerator2();
             }
         }
 
-        private async Task UpdateGenerator1()
+        private void UpdateGenerator1()
         {
             if (!_update1 && _index1 < 0) return;
 
@@ -230,11 +230,11 @@ namespace Vm167Box.ViewModels
                 _index1 = -1;
             }
 
-            await _vm167Service.SetPwm(1, pwm);
+            _vm167Service.PwmOut1 =  pwm;
             _update1 = false;
         }
 
-        private async Task UpdateGenerator2()
+        private void UpdateGenerator2()
         {
             if (!_update2 && _index2 < 0) return;
 
@@ -263,7 +263,7 @@ namespace Vm167Box.ViewModels
                 _index2 = -1;
             }
 
-            await _vm167Service.SetPwm(2, pwm);
+            _vm167Service.PwmOut2 = pwm;
             _update2 = false;
         }
     }

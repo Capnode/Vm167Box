@@ -3,28 +3,32 @@
 public interface IVm167Service
 {
     const int Period = 100;
+
+    event Func<Task> Tick;
+
+    bool IsDigitalLowIn { get; set; }
+    bool IsDigitalHighIn { get; set; }
+    bool Digital1 { get; set; }
+    bool Digital2 { get; set; }
+    bool Digital3 { get; set; }
+    bool Digital4 { get; set; }
+    bool Digital5 { get; set; }
+    bool Digital6 { get; set; }
+    bool Digital7 { get; set; }
+    bool Digital8 { get; set; }
+    uint Counter { get; set; }
+    double AnalogIn1 { get; }
+    double AnalogIn2 { get; }
+    double AnalogIn3 { get; }
+    double AnalogIn4 { get; }
+    double AnalogIn5 { get; }
+    double PwmOut1 { get; set; }
+    double PwmOut2 { get; set; }
     int PwmFrequency { get; set; }
 
-    public event Func<Task> Tick;
-    
     Task<int> ListDevices();
     Task OpenDevice(int device);
     Task CloseDevice();
-    Task ClearAllDigital();
-    Task ClearDigitalChannel(int channel);
-    Task InOutMode(int high, int low);
-    Task ReadAllAnalog(int[] analog);
-    Task<bool> ReadDigitalChannel(int channel);
-    Task<int> ReadAllDigital();
-    Task<int> ReadBackInOutMode();
-    Task ReadBackPWMOut(int[] pwm);
-    Task<uint> ReadCounter();
-    Task ResetCounter();
-    Task SetAllDigital();
-    Task SetDigitalChannel(int channel);
-    Task SetPwm(int channel, int data);
-    Task OutputAllPwm(int data1, int data2);
-    Task OutputAllDigital(int data);
     int VersionDLL();
     Task<int> VersionFirmware();
 }

@@ -71,7 +71,7 @@ partial class Vm167
             }
             catch (Exception ex)
             {
-                _logger.LogInformation($"open device: 0x{pid:x}:{i} failed: {ex.Message}");
+                _logger.LogError($"open device: 0x{pid:x}:{i} failed: {ex.Message}");
             }
         }
 

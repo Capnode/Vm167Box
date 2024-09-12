@@ -15,6 +15,9 @@
         public const int PwmMax = 255;
         public const int DigitalMin = 0;
         public const int DigitalMax = 1;
+        public const int Freq2930 = 1;
+        public const int Freq11719 = 2;
+        public const int Freq46875 = 3;
 
         /// <summary>
         /// List devices found on system

@@ -86,63 +86,27 @@
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalIn}"
                                 IsChecked="{Binding DigitalLowIn}"
-                                IsEnabled="{Binding IsOpen}">
-                                <RadioButton.Behaviors>
-                                    <toolkit:EventToCommandBehavior Command="{Binding DigitalInOutModeCommand}" EventName="CheckedChanged" />
-                                </RadioButton.Behaviors>
-                            </RadioButton>
+                                IsEnabled="{Binding IsOpen}" />
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalOut}"
                                 IsChecked="{Binding DigitalLowOut}"
-                                IsEnabled="{Binding IsOpen}">
-                                <RadioButton.Behaviors>
-                                    <toolkit:EventToCommandBehavior Command="{Binding DigitalInOutModeCommand}" EventName="CheckedChanged" />
-                                </RadioButton.Behaviors>
-                            </RadioButton>
+                                IsEnabled="{Binding IsOpen}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="0">
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital1}" IsEnabled="{Binding DigitalLowOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="1"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital1}" IsEnabled="{Binding DigitalLowOut}" />
                                 <Label Padding="0,10,0,0" Text="1" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital2}" IsEnabled="{Binding DigitalLowOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="2"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital2}" IsEnabled="{Binding DigitalLowOut}" />
                                 <Label Padding="0,10,0,0" Text="2" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital3}" IsEnabled="{Binding DigitalLowOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="3"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital3}" IsEnabled="{Binding DigitalLowOut}" />
                                 <Label Padding="0,10,0,0" Text="3" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital4}" IsEnabled="{Binding DigitalLowOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="4"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital4}" IsEnabled="{Binding DigitalLowOut}" />
                                 <Label Padding="0,10,0,0" Text="4" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -158,63 +122,27 @@
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalIn}"
                                 IsChecked="{Binding DigitalHighIn}"
-                                IsEnabled="{Binding IsOpen}">
-                                <RadioButton.Behaviors>
-                                    <toolkit:EventToCommandBehavior Command="{Binding DigitalInOutModeCommand}" EventName="CheckedChanged" />
-                                </RadioButton.Behaviors>
-                            </RadioButton>
+                                IsEnabled="{Binding IsOpen}" />
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalOut}"
                                 IsChecked="{Binding DigitalHighOut}"
-                                IsEnabled="{Binding IsOpen}">
-                                <RadioButton.Behaviors>
-                                    <toolkit:EventToCommandBehavior Command="{Binding DigitalInOutModeCommand}" EventName="CheckedChanged" />
-                                </RadioButton.Behaviors>
-                            </RadioButton>
+                                IsEnabled="{Binding IsOpen}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="0">
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital5}" IsEnabled="{Binding DigitalHighOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="5"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital5}" IsEnabled="{Binding DigitalHighOut}" />
                                 <Label Padding="0,10,0,0" Text="5" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital6}" IsEnabled="{Binding DigitalHighOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="6"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital6}" IsEnabled="{Binding DigitalHighOut}" />
                                 <Label Padding="0,10,0,0" Text="6" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital7}" IsEnabled="{Binding DigitalHighOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="7"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital7}" IsEnabled="{Binding DigitalHighOut}" />
                                 <Label Padding="0,10,0,0" Text="7" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital8}" IsEnabled="{Binding DigitalHighOut}">
-                                    <CheckBox.Behaviors>
-                                        <toolkit:EventToCommandBehavior
-                                            Command="{Binding DigitalOutCommand}"
-                                            CommandParameter="8"
-                                            EventName="CheckedChanged" />
-                                    </CheckBox.Behaviors>
-                                </CheckBox>
+                                <CheckBox IsChecked="{Binding Digital8}" IsEnabled="{Binding DigitalHighOut}" />
                                 <Label Padding="0,10,0,0" Text="8" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -300,21 +228,9 @@
                         <Picker
                             Margin="10,-10,0,0"
                             IsEnabled="{Binding IsOpen}"
-                            SelectedIndex="{Binding PwmFrequency}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>2930 Hz</x:String>
-                                    <x:String>11719 Hz</x:String>
-                                    <x:String>46875 Hz</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                            <Picker.Behaviors>
-                                <toolkit:EventToCommandBehavior
-                                    Command="{Binding PwmOutCommand}"
-                                    CommandParameter="1"
-                                    EventName="SelectedIndexChanged" />
-                            </Picker.Behaviors>
-                        </Picker>
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding PwmFrequencies}"
+                            SelectedItem="{Binding PwmFrequency}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
                         <VerticalStackLayout Spacing="10">
@@ -328,14 +244,7 @@
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding PwmOut1}">
-                                <Slider.Behaviors>
-                                    <toolkit:EventToCommandBehavior
-                                        Command="{Binding PwmOutCommand}"
-                                        CommandParameter="1"
-                                        EventName="ValueChanged" />
-                                </Slider.Behaviors>
-                            </Slider>
+                                Value="{Binding PwmOut1}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                                 <Label Text="{Binding PwmOut1}" />
                                 <Label Text="{Binding Pwm1Unit}" />
@@ -352,14 +261,7 @@
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding PwmOut2}">
-                                <Slider.Behaviors>
-                                    <toolkit:EventToCommandBehavior
-                                        Command="{Binding PwmOutCommand}"
-                                        CommandParameter="2"
-                                        EventName="ValueChanged" />
-                                </Slider.Behaviors>
-                            </Slider>
+                                Value="{Binding PwmOut2}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                                 <Label Text="{Binding PwmOut2}" />
                                 <Label Text="{Binding Pwm2Unit}" />

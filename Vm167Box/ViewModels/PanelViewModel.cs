@@ -10,12 +10,24 @@ using Vm167Lib;
 
 namespace Vm167Box.ViewModels;
 
+public class Frequency
+{
+    public required string Name { get; set; }
+    public int Value { get; set; }
+}
+
 public partial class PanelViewModel : ObservableObject
 {
+    private static readonly Frequency[] _frequencies =
+    {
+        new Frequency { Name = "2930 Hz", Value = IVm167.Freq2930 },
+        new Frequency { Name = "11719 Hz", Value = IVm167.Freq11719 },
+        new Frequency { Name = "46875 Hz", Value = IVm167.Freq46875 }
+    };
+
     private readonly ILogger<PanelViewModel> _logger;
     private readonly ISettingsService _settingsService;
     private readonly IVm167Service _vm167Service;
-    private bool _pending;
     private DateTime _startTime;
     private bool _resetScope;
     private bool _restartScope = true;
@@ -26,7 +38,7 @@ public partial class PanelViewModel : ObservableObject
         _settingsService = settingsService;
         _settingsService.Update += UpdateSettings;
         _vm167Service = vm167service;
-        _vm167Service.Tick += ReadDevice;
+        _vm167Service.Tick += Loop;
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
@@ -59,6 +71,8 @@ public partial class PanelViewModel : ObservableObject
             Maximum = 255
         });
     }
+
+    public IEnumerable<Frequency> PwmFrequencies => _frequencies;
 
     public string Analog1Name => _settingsService.Analog1Name;
 
@@ -109,41 +123,165 @@ public partial class PanelViewModel : ObservableObject
     [ObservableProperty]
     private string _dllVersion = string.Empty;
 
-    [ObservableProperty]
     private bool _digitalLowIn;
+    public bool DigitalLowIn
+    {
+        get => _digitalLowIn;
+        set
+        {
+            if (SetProperty(ref _digitalLowIn, value))
+            {
+                _logger.LogTrace("DigitalLowIn = {}", value);
+                _vm167Service.IsDigitalLowIn = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
-    private bool _digitalLowOut;
-
-    [ObservableProperty]
     private bool _digitalHighIn;
+    public bool DigitalHighIn
+    {
+        get => _digitalHighIn;
+        set
+        {
+            if (SetProperty(ref _digitalHighIn, value))
+            {
+                _logger.LogTrace("DigitalHighIn = {}", value);
+                _vm167Service.IsDigitalHighIn = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
+    private bool _digitalLowOut;
+    public bool DigitalLowOut
+    {
+        get => _digitalLowOut;
+        set
+        {
+            if (SetProperty(ref _digitalLowOut, value))
+            {
+                _logger.LogTrace("DigitalLowOut = {}", value);
+                _vm167Service.IsDigitalLowIn = !value;
+            }
+        }
+    }
+
     private bool _digitalHighOut;
+    public bool DigitalHighOut
+    {
+        get => _digitalHighOut;
+        set
+        {
+            if (SetProperty(ref _digitalHighOut, value))
+            {
+                _logger.LogTrace("DigitalHighOut = {}", value);
+                _vm167Service.IsDigitalHighIn = !value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital1;
+    public bool Digital1
+    {
+        get => _digital1;
+        set
+        {
+            if (SetProperty(ref _digital1, value))
+            {
+                _vm167Service.Digital1 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital2;
+    public bool Digital2
+    {
+        get => _digital2;
+        set
+        {
+            if (SetProperty(ref _digital2, value))
+            {
+                _vm167Service.Digital2 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital3;
+    public bool Digital3
+    {
+        get => _digital3;
+        set
+        {
+            if (SetProperty(ref _digital3, value))
+            {
+                _vm167Service.Digital3 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital4;
+    public bool Digital4
+    {
+        get => _digital4;
+        set
+        {
+            if (SetProperty(ref _digital4, value))
+            {
+                _vm167Service.Digital4 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital5;
+    public bool Digital5
+    {
+        get => _digital5;
+        set
+        {
+            if (SetProperty(ref _digital5, value))
+            {
+                _vm167Service.Digital5 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital6;
+    public bool Digital6
+    {
+        get => _digital6;
+        set
+        {
+            if (SetProperty(ref _digital6, value))
+            {
+                _vm167Service.Digital6 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital7;
+    public bool Digital7
+    {
+        get => _digital7;
+        set
+        {
+            if (SetProperty(ref _digital7, value))
+            {
+                _vm167Service.Digital7 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
     private bool _digital8;
+    public bool Digital8
+    {
+        get => _digital8;
+        set
+        {
+            if (SetProperty(ref _digital8, value))
+            {
+                _vm167Service.Digital8 = value;
+            }
+        }
+    }
 
     [ObservableProperty]
     private double _analogIn1;
@@ -163,14 +301,42 @@ public partial class PanelViewModel : ObservableObject
     [ObservableProperty]
     private uint _counter;
 
-    [ObservableProperty]
-    private int _pwmFrequency;
+    private Frequency _pwmFrequency = _frequencies[0];
+    public Frequency PwmFrequency
+    {
+        get => _pwmFrequency;
+        set
+        {
+            SetProperty(ref _pwmFrequency, value);
+            _vm167Service.PwmFrequency = value.Value;
+        }
+    }
 
-    [ObservableProperty]
-    private int _pwmOut1;
+    private double _pwmOut1;
+    public double PwmOut1
+    {
+        get => _pwmOut1;
+        set
+        {
+            if (SetProperty(ref _pwmOut1, value))
+            { 
+                _vm167Service.PwmOut1 = value;
+            }
+        }
+    }
 
-    [ObservableProperty]
-    private int _pwmOut2;
+    private double _pwmOut2;
+    public double PwmOut2
+    {
+        get => _pwmOut2;
+        set
+        {
+            if (SetProperty(ref _pwmOut2, value))
+            {
+                _vm167Service.PwmOut2 = value;
+            }
+        }
+    }
 
     [ObservableProperty]
     private PlotModel _scopeModel;
@@ -214,30 +380,38 @@ public partial class PanelViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task SetAllDigital()
+    public void SetAllDigital()
     {
-        if (_pending) return;
-
         _logger.LogTrace(">SetAllDigital()");
-        await _vm167Service.SetAllDigital();
+        _vm167Service.Digital1 = true;
+        _vm167Service.Digital2 = true;
+        _vm167Service.Digital3 = true;
+        _vm167Service.Digital4 = true;
+        _vm167Service.Digital5 = true;
+        _vm167Service.Digital6 = true;
+        _vm167Service.Digital7 = true;
+        _vm167Service.Digital8 = true;
         _logger.LogTrace("<SetAllDigital()");
     }
 
     [RelayCommand]
-    public async Task ClearAllDigital()
+    public void ClearAllDigital()
     {
-        if (_pending) return;
-
         _logger.LogTrace(">ClearAllDigital()");
-        await _vm167Service.ClearAllDigital();
+        _vm167Service.Digital1 = false;
+        _vm167Service.Digital2 = false;
+        _vm167Service.Digital3 = false;
+        _vm167Service.Digital4 = false;
+        _vm167Service.Digital5 = false;
+        _vm167Service.Digital6 = false;
+        _vm167Service.Digital7 = false;
+        _vm167Service.Digital8 = false;
         _logger.LogTrace("<ClearAllDigital()");
     }
 
     [RelayCommand]
     public async Task Version()
     {
-        if (_pending) return;
-
         _logger.LogTrace(">Version()");
         var value = await _vm167Service.VersionFirmware();
         var firmware = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
@@ -250,72 +424,11 @@ public partial class PanelViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task DigitalInOutMode()
+    public void ResetCounter()
     {
-        if (_pending) return;
-
-        _logger.LogTrace(">DigitalInOutMode()");
-        await _vm167Service.InOutMode(DigitalHighIn ? 1 : 0, DigitalLowIn ? 1 : 0);
-        _logger.LogTrace("<DigitalInOutMode()");
-    }
-
-    [RelayCommand]
-    public async Task DigitalOut(string channel)
-    {
-        if (_pending) return;
-
-        _logger.LogTrace(">DigitalOut({channel})", channel);
-        var state = channel switch
-        {
-            "1" => Digital1,
-            "2" => Digital2,
-            "3" => Digital3,
-            "4" => Digital4,
-            "5" => Digital5,
-            "6" => Digital6,
-            "7" => Digital7,
-            "8" => Digital8,
-            _ => false
-        };
-
-        if (state)
-        {
-            await _vm167Service.SetDigitalChannel(int.Parse(channel));
-        }
-        else
-        {
-            await _vm167Service.ClearDigitalChannel(int.Parse(channel));
-        }
-
-        _logger.LogTrace("<DigitalOut({channel})", channel);
-    }
-
-    [RelayCommand]
-    public async Task ResetCounter()
-    {
-        if (_pending) return;
-
         _logger.LogTrace(">ResetCounter()");
-        await _vm167Service.ResetCounter();
+        _vm167Service.Counter = 0;
         _logger.LogTrace("<ResetCounter()");
-    }
-
-    [RelayCommand]
-    public async Task PwmOut(string channel)
-    {
-        if (_pending) return;
-
-        _logger.LogTrace(">PwmOut({channel})", channel);
-        var value = channel switch
-        {
-            "1" => PwmOut1,
-            "2" => PwmOut2,
-            _ => 0
-        };
-
-        _vm167Service.PwmFrequency = Math.Min(PwmFrequency + 1, 3);
-        await _vm167Service.SetPwm(int.Parse(channel), value);
-        _logger.LogTrace("<PwmOut({channel})", channel);
     }
 
     [RelayCommand]
@@ -357,42 +470,33 @@ public partial class PanelViewModel : ObservableObject
         }
     }
 
-    private async Task ReadDevice()
+    private Task Loop()
     {
-        if (_pending) return;
-        _pending = true;
+        _logger.LogTrace(">Loop()");
+        DigitalLowOut = !_vm167Service.IsDigitalLowIn;
+        DigitalLowIn = _vm167Service.IsDigitalLowIn;
+        DigitalHighOut = !_vm167Service.IsDigitalHighIn;
+        DigitalHighIn = _vm167Service.IsDigitalHighIn;
 
-        var ioMode = await _vm167Service.ReadBackInOutMode();
-        DigitalLowOut = (ioMode & 1) == 0;
-        DigitalLowIn = (ioMode & 1) > 0;
-        DigitalHighOut = (ioMode & 2) == 0;
-        DigitalHighIn = (ioMode & 2) > 0;
+        Digital1 = _vm167Service.Digital1;
+        Digital2 = _vm167Service.Digital2;
+        Digital3 = _vm167Service.Digital3;
+        Digital4 = _vm167Service.Digital4;
+        Digital5 = _vm167Service.Digital5;
+        Digital6 = _vm167Service.Digital6;
+        Digital7 = _vm167Service.Digital7;
+        Digital8 = _vm167Service.Digital8;
 
-        var digital = await _vm167Service.ReadAllDigital();
-        Digital1 = (digital & 1) > 0;
-        Digital2 = (digital & 2) > 0;
-        Digital3 = (digital & 4) > 0;
-        Digital4 = (digital & 8) > 0;
-        Digital5 = (digital & 16) > 0;
-        Digital6 = (digital & 32) > 0;
-        Digital7 = (digital & 64) > 0;
-        Digital8 = (digital & 128) > 0;
+        Counter = _vm167Service.Counter;
 
-        var counter = await _vm167Service.ReadCounter();
-        Counter = counter;
+        AnalogIn1 = _vm167Service.AnalogIn1;
+        AnalogIn2 = _vm167Service.AnalogIn2;
+        AnalogIn3 = _vm167Service.AnalogIn3;
+        AnalogIn4 = _vm167Service.AnalogIn4;
+        AnalogIn5 = _vm167Service.AnalogIn5;
 
-        int[] analog = new int[IVm167.NumAnalogIn];
-        await _vm167Service.ReadAllAnalog(analog);
-        AnalogIn1 = analog[0];
-        AnalogIn2 = analog[1];
-        AnalogIn3 = analog[2];
-        AnalogIn4 = analog[3];
-        AnalogIn5 = analog[4];
-
-        int[] pwm = new int[IVm167.NumPwmOut];
-        await _vm167Service.ReadBackPWMOut(pwm);
-        PwmOut1 = pwm[0];
-        PwmOut2 = pwm[1];
+        PwmOut1 = _vm167Service.PwmOut1;
+        PwmOut2 = _vm167Service.PwmOut2;
 
         var timestamp = DateTime.Now - _startTime;
         if (_restartScope)
@@ -420,7 +524,9 @@ public partial class PanelViewModel : ObservableObject
 
         _restartScope = false;
         _resetScope = false;
-        _pending = false;
+
+        _logger.LogTrace("<Loop()");
+        return Task.CompletedTask;
     }
 
     private Task UpdateSettings()

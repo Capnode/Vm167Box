@@ -282,7 +282,6 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             _logger.LogTrace("<ReadDigitalChannel()");
         }
-
     }
 
     public async Task<int> ReadAllDigital(int CardAddress)
