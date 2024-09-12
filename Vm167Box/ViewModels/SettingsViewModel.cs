@@ -39,7 +39,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog1Unit = value;
         }
 
-        public double Analog1MinPoint
+        public int Analog1MinPoint
         {
             get => _settingsService.Analog1MinPoint;
             set => _settingsService.Analog1MinPoint = value;
@@ -51,7 +51,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog1MinValue = value;
         }
 
-        public double Analog1MaxPoint
+        public int Analog1MaxPoint
         {
             get => _settingsService.Analog1MaxPoint;
             set => _settingsService.Analog1MaxPoint = value;
@@ -75,7 +75,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog2Unit = value;
         }
 
-        public double Analog2MinPoint
+        public int Analog2MinPoint
         {
             get => _settingsService.Analog2MinPoint;
             set => _settingsService.Analog2MinPoint = value;
@@ -87,7 +87,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog2MinValue = value;
         }
 
-        public double Analog2MaxPoint
+        public int Analog2MaxPoint
         {
             get => _settingsService.Analog2MaxPoint;
             set => _settingsService.Analog2MaxPoint = value;
@@ -111,7 +111,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog3Unit = value;
         }
 
-        public double Analog3MinPoint
+        public int Analog3MinPoint
         {
             get => _settingsService.Analog3MinPoint;
             set => _settingsService.Analog3MinPoint = value;
@@ -123,7 +123,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog3MinValue = value;
         }
 
-        public double Analog3MaxPoint
+        public int Analog3MaxPoint
         {
             get => _settingsService.Analog3MaxPoint;
             set => _settingsService.Analog3MaxPoint = value;
@@ -147,7 +147,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog4Unit = value;
         }
 
-        public double Analog4MinPoint
+        public int Analog4MinPoint
         {
             get => _settingsService.Analog4MinPoint;
             set => _settingsService.Analog4MinPoint = value;
@@ -159,7 +159,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog4MinValue = value;
         }
 
-        public double Analog4MaxPoint
+        public int Analog4MaxPoint
         {
             get => _settingsService.Analog4MaxPoint;
             set => _settingsService.Analog4MaxPoint = value;
@@ -183,7 +183,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog5Unit = value;
         }
 
-        public double Analog5MinPoint
+        public int Analog5MinPoint
         {
             get => _settingsService.Analog5MinPoint;
             set => _settingsService.Analog5MinPoint = value;
@@ -195,7 +195,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog5MinValue = value;
         }
 
-        public double Analog5MaxPoint
+        public int Analog5MaxPoint
         {
             get => _settingsService.Analog5MaxPoint;
             set => _settingsService.Analog5MaxPoint = value;
@@ -219,7 +219,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm1Unit = value;
         }
 
-        public double Pwm1MinPoint
+        public int Pwm1MinPoint
         {
             get => _settingsService.Pwm1MinPoint;
             set => _settingsService.Pwm1MinPoint = value;
@@ -231,7 +231,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm1MinValue = value;
         }
 
-        public double Pwm1MaxPoint
+        public int Pwm1MaxPoint
         {
             get => _settingsService.Pwm1MaxPoint;
             set => _settingsService.Pwm1MaxPoint = value;
@@ -256,7 +256,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm2Unit = value;
         }
 
-        public double Pwm2MinPoint
+        public int Pwm2MinPoint
         {
             get => _settingsService.Pwm2MinPoint;
             set => _settingsService.Pwm2MinPoint = value;
@@ -268,7 +268,7 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm2MinValue = value;
         }
 
-        public double Pwm2MaxPoint
+        public int Pwm2MaxPoint
         {
             get => _settingsService.Pwm2MaxPoint;
             set => _settingsService.Pwm2MaxPoint = value;

@@ -70,6 +70,7 @@
                             Text="{Binding Analog1Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -84,6 +85,7 @@
                             Text="{Binding Analog1MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -114,6 +116,7 @@
                             Text="{Binding Analog2Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -128,6 +131,7 @@
                             Text="{Binding Analog2MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -158,6 +162,7 @@
                             Text="{Binding Analog3Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -172,6 +177,7 @@
                             Text="{Binding Analog3MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -202,6 +208,7 @@
                             Text="{Binding Analog4Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -216,6 +223,7 @@
                             Text="{Binding Analog4MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -246,6 +254,7 @@
                             Text="{Binding Analog5Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -260,6 +269,7 @@
                             Text="{Binding Analog5MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -324,6 +334,7 @@
                             Text="{Binding Pwm1Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -338,6 +349,7 @@
                             Text="{Binding Pwm1MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -368,6 +380,7 @@
                             Text="{Binding Pwm2Unit}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -382,6 +395,7 @@
                             Text="{Binding Pwm2MinValue}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
+                            behaviors:NumericValidation.DecimalPlaces="0"
                             behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.PwmMax}}"
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"

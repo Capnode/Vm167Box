@@ -46,9 +46,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog1MinPoint
+    public int Analog1MinPoint
     {
-        get => _settings.Get(nameof(Analog1MinPoint), (double)IVm167.AnalogMin);
+        get => _settings.Get(nameof(Analog1MinPoint), IVm167.AnalogMin);
         set
         {
             _settings.Set(nameof(Analog1MinPoint), value);
@@ -66,9 +66,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog1MaxPoint
+    public int Analog1MaxPoint
     {
-        get => _settings.Get(nameof(Analog1MaxPoint), (double)IVm167.AnalogMax);
+        get => _settings.Get(nameof(Analog1MaxPoint), IVm167.AnalogMax);
         set
         {
             _settings.Set(nameof(Analog1MaxPoint), value);
@@ -106,9 +106,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog2MinPoint
+    public int Analog2MinPoint
     {
-        get => _settings.Get(nameof(Analog2MinPoint), (double)IVm167.AnalogMin);
+        get => _settings.Get(nameof(Analog2MinPoint), IVm167.AnalogMin);
         set
         {
             _settings.Set(nameof(Analog2MinPoint), value);
@@ -126,9 +126,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog2MaxPoint
+    public int Analog2MaxPoint
     {
-        get => _settings.Get(nameof(Analog2MaxPoint), (double)IVm167.AnalogMax);
+        get => _settings.Get(nameof(Analog2MaxPoint), IVm167.AnalogMax);
         set
         {
             _settings.Set(nameof(Analog2MaxPoint), value);
@@ -166,9 +166,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog3MinPoint
+    public int Analog3MinPoint
     {
-        get => _settings.Get(nameof(Analog3MinPoint), (double)IVm167.AnalogMin);
+        get => _settings.Get(nameof(Analog3MinPoint), IVm167.AnalogMin);
         set
         {
             _settings.Set(nameof(Analog3MinPoint), value);
@@ -186,9 +186,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog3MaxPoint
+    public int Analog3MaxPoint
     {
-        get => _settings.Get(nameof(Analog3MaxPoint), (double)IVm167.AnalogMax);
+        get => _settings.Get(nameof(Analog3MaxPoint), IVm167.AnalogMax);
         set
         {
             _settings.Set(nameof(Analog3MaxPoint), value);
@@ -226,9 +226,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog4MinPoint
+    public int Analog4MinPoint
     {
-        get => _settings.Get(nameof(Analog4MinPoint), (double)IVm167.AnalogMin);
+        get => _settings.Get(nameof(Analog4MinPoint), IVm167.AnalogMin);
         set
         {
             _settings.Set(nameof(Analog4MinPoint), value);
@@ -246,9 +246,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog4MaxPoint
+    public int Analog4MaxPoint
     {
-        get => _settings.Get(nameof(Analog4MaxPoint), (double)IVm167.AnalogMax);
+        get => _settings.Get(nameof(Analog4MaxPoint), IVm167.AnalogMax);
         set
         {
             _settings.Set(nameof(Analog4MaxPoint), value);
@@ -286,9 +286,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog5MinPoint
+    public int Analog5MinPoint
     {
-        get => _settings.Get(nameof(Analog5MinPoint), (double)IVm167.AnalogMin);
+        get => _settings.Get(nameof(Analog5MinPoint), IVm167.AnalogMin);
         set
         {
             _settings.Set(nameof(Analog5MinPoint), value);
@@ -306,9 +306,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Analog5MaxPoint
+    public int Analog5MaxPoint
     {
-        get => _settings.Get(nameof(Analog5MaxPoint), (double)IVm167.AnalogMax);
+        get => _settings.Get(nameof(Analog5MaxPoint), IVm167.AnalogMax);
         set
         {
             _settings.Set(nameof(Analog5MaxPoint), value);
@@ -346,9 +346,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Pwm1MinPoint
+    public int Pwm1MinPoint
     {
-        get => _settings.Get(nameof(Pwm1MinPoint), (double)IVm167.PwmMin);
+        get => _settings.Get(nameof(Pwm1MinPoint), IVm167.PwmMin);
         set
         {
             _settings.Set(nameof(Pwm1MinPoint), value);
@@ -366,9 +366,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Pwm1MaxPoint
+    public int Pwm1MaxPoint
     {
-        get => _settings.Get(nameof(Pwm1MaxPoint), (double)IVm167.PwmMax);
+        get => _settings.Get(nameof(Pwm1MaxPoint), IVm167.PwmMax);
         set
         {
             _settings.Set(nameof(Pwm1MaxPoint), value);
@@ -406,9 +406,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Pwm2MinPoint
+    public int Pwm2MinPoint
     {
-        get => _settings.Get(nameof(Pwm2MinPoint), (double)IVm167.PwmMin);
+        get => _settings.Get(nameof(Pwm2MinPoint), IVm167.PwmMin);
         set
         {
             _settings.Set(nameof(Pwm2MinPoint), value);
@@ -426,9 +426,9 @@ internal class SettingsService : ISettingsService
         }
     }
 
-    public double Pwm2MaxPoint
+    public int Pwm2MaxPoint
     {
-        get => _settings.Get(nameof(Pwm2MaxPoint), (double)IVm167.PwmMax);
+        get => _settings.Get(nameof(Pwm2MaxPoint), IVm167.PwmMax);
         set
         {
             _settings.Set(nameof(Pwm2MaxPoint), value);

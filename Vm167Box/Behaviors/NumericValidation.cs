@@ -26,6 +26,13 @@ namespace Vm167Box.Behaviors
                 typeof(NumericValidation),
                 double.MaxValue);
 
+        public static readonly BindableProperty DecimalPlacesProperty =
+            BindableProperty.CreateAttached(
+                "DecimalPlaces",
+                typeof(int),
+                typeof(NumericValidation),
+                int.MaxValue);
+
         public static bool GetZZZActivate(BindableObject view)
         {
             return (bool)view.GetValue(ZZZActivateProperty);
@@ -51,9 +58,19 @@ namespace Vm167Box.Behaviors
             return (double)view.GetValue(MaximumValueProperty);
         }
 
-        public static void SetMaximumValue(BindableObject view, double value)
+        public static void SetMaximumValue(BindableObject view, int value)
         {
             view.SetValue(MaximumValueProperty, value);
+        }
+
+        public static int GetDecimalPlaces(BindableObject view)
+        {
+            return (int)view.GetValue(DecimalPlacesProperty);
+        }
+
+        public static void SetDecimalPlaces(BindableObject view, int value)
+        {
+            view.SetValue(DecimalPlacesProperty, value);
         }
 
         private static void OnZZZActivateChanged(BindableObject bindable, object oldValue, object newValue)
@@ -64,6 +81,7 @@ namespace Vm167Box.Behaviors
                 var validStyle = new Style(typeof(Entry)) { Setters = { new Setter { Property = Entry.TextColorProperty, Value = Colors.Green } } };
                 var minimumValue = GetMinimumValue(entry);
                 var maximumValue = GetMaximumValue(entry);
+                var decimalPlaces = GetDecimalPlaces(entry);
 
                 entry.Behaviors.Add(new NumericValidationBehavior
                 {
@@ -71,6 +89,7 @@ namespace Vm167Box.Behaviors
                     InvalidStyle = invalidStyle,
                     MinimumValue = minimumValue,
                     MaximumValue = maximumValue,
+                    MaximumDecimalPlaces = decimalPlaces,
                     ValidStyle = validStyle
                 });
             }
