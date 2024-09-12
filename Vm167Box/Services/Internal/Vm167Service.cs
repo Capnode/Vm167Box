@@ -359,19 +359,19 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     {
         int[] pwm = new int[IVm167.NumPwmOut];
         await _vm167.ReadBackPWMOut(_device, pwm);
-        _pwmOut1 = pwm[0];
-        _pwmOut2 = pwm[1];
+        _pwmOut1 = Convert.ToDouble(pwm[0]);
+        _pwmOut2 = Convert.ToDouble(pwm[1]);
     }
 
     private async Task ReadAnalog()
     {
         int[] analog = new int[IVm167.NumAnalogIn];
         await _vm167.ReadAllAnalog(_device, analog);
-        AnalogIn1 = analog[0];
-        AnalogIn2 = analog[1];
-        AnalogIn3 = analog[2];
-        AnalogIn4 = analog[3];
-        AnalogIn5 = analog[4];
+        AnalogIn1 = Convert.ToDouble(analog[0]);
+        AnalogIn2 = Convert.ToDouble(analog[1]);
+        AnalogIn3 = Convert.ToDouble(analog[2]);
+        AnalogIn4 = Convert.ToDouble(analog[3]);
+        AnalogIn5 = Convert.ToDouble(analog[4]);
     }
 
     private async Task ReadCounter()

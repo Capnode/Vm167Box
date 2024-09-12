@@ -171,7 +171,7 @@
                             Progress="{Binding AnalogIn1, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn1}" />
+                        <Label Text="{Binding AnalogIn1, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog1Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -182,7 +182,7 @@
                             Progress="{Binding AnalogIn2, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn2}" />
+                        <Label Text="{Binding AnalogIn2, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog2Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -193,7 +193,7 @@
                             Progress="{Binding AnalogIn3, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn3}" />
+                        <Label Text="{Binding AnalogIn3, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog3Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -204,7 +204,7 @@
                             Progress="{Binding AnalogIn4, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn4}" />
+                        <Label Text="{Binding AnalogIn4, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog4Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -215,7 +215,7 @@
                             Progress="{Binding AnalogIn5, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn5}" />
+                        <Label Text="{Binding AnalogIn5, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog5Unit}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
@@ -246,7 +246,7 @@
                                 WidthRequest="100"
                                 Value="{Binding PwmOut1}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding PwmOut1}" />
+                                <Label Text="{Binding PwmOut1, StringFormat='{0:G4}'}" />
                                 <Label Text="{Binding Pwm1Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -263,7 +263,7 @@
                                 WidthRequest="100"
                                 Value="{Binding PwmOut2}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding PwmOut2}" />
+                                <Label Text="{Binding PwmOut2, StringFormat='{0:G4}'}" />
                                 <Label Text="{Binding Pwm2Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
