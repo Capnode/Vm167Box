@@ -178,19 +178,19 @@
     <value>Namn</value>
   </data>
   <data name="Unit" xml:space="preserve">
-    <value>Enhet</value>
+    <value>Enhet Värde</value>
   </data>
-  <data name="MinPoint" xml:space="preserve">
-    <value>MinPunkt</value>
+  <data name="MinSignal" xml:space="preserve">
+    <value>Min Signal</value>
   </data>
   <data name="MinValue" xml:space="preserve">
-    <value>MinVärde</value>
+    <value>Min Värde</value>
   </data>
-  <data name="MaxPoint" xml:space="preserve">
-    <value>MaxPunkt</value>
+  <data name="MaxSignal" xml:space="preserve">
+    <value>Max Signal</value>
   </data>
   <data name="MaxValue" xml:space="preserve">
-    <value>MaxVärde</value>
+    <value>Max Värde</value>
   </data>
   <data name="Pwm1" xml:space="preserve">
     <value>Pwm1</value>

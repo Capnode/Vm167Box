@@ -40,7 +40,7 @@
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
-                            Text="{x:Static strings:AppResources.MinPoint}" />
+                            Text="{x:Static strings:AppResources.MinSignal}" />
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
@@ -48,7 +48,7 @@
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
-                            Text="{x:Static strings:AppResources.MaxPoint}" />
+                            Text="{x:Static strings:AppResources.MaxSignal}" />
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
@@ -75,8 +75,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Analog1MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Analog1MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -90,8 +90,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Analog1MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Analog1MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -121,8 +121,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Analog2MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Analog2MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -136,8 +136,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Analog2MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Analog2MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -167,8 +167,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Analog3MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Analog3MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -182,8 +182,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Analog3MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Analog3MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -213,8 +213,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Analog4MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Analog4MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -228,8 +228,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Analog4MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Analog4MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -259,8 +259,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Analog5MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Analog5MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -274,8 +274,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Analog5MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Analog5MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -304,7 +304,7 @@
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
-                            Text="{x:Static strings:AppResources.MinPoint}" />
+                            Text="{x:Static strings:AppResources.MinSignal}" />
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
@@ -312,7 +312,7 @@
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
-                            Text="{x:Static strings:AppResources.MaxPoint}" />
+                            Text="{x:Static strings:AppResources.MaxSignal}" />
                         <Label
                             FontAttributes="Bold"
                             MinimumWidthRequest="80"
@@ -339,8 +339,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Pwm1MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Pwm1MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -354,8 +354,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Pwm1MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Pwm1MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -385,8 +385,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MinPoint}"
-                            Text="{Binding Pwm2MinPoint}"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            Text="{Binding Pwm2MinSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"
@@ -400,8 +400,8 @@
                             behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.PwmMin}}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="80"
-                            Placeholder="{x:Static strings:AppResources.MaxPoint}"
-                            Text="{Binding Pwm2MaxPoint}"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            Text="{Binding Pwm2MaxSignal}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                         <Entry
                             behaviors:NumericValidation.ZZZActivate="True"

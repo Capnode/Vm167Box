@@ -259,16 +259,16 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MaxPoint.
+        ///   Looks up a localized string similar to Max Signal.
         /// </summary>
-        internal static string MaxPoint {
+        internal static string MaxSignal {
             get {
-                return ResourceManager.GetString("MaxPoint", resourceCulture);
+                return ResourceManager.GetString("MaxSignal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MaxValue.
+        ///   Looks up a localized string similar to Max Value.
         /// </summary>
         internal static string MaxValue {
             get {
@@ -277,16 +277,16 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MinPoint.
+        ///   Looks up a localized string similar to Min Signal.
         /// </summary>
-        internal static string MinPoint {
+        internal static string MinSignal {
             get {
-                return ResourceManager.GetString("MinPoint", resourceCulture);
+                return ResourceManager.GetString("MinSignal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MinValue.
+        ///   Looks up a localized string similar to Min Value.
         /// </summary>
         internal static string MinValue {
             get {
@@ -475,7 +475,7 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unit.
+        ///   Looks up a localized string similar to Unit Value.
         /// </summary>
         internal static string Unit {
             get {

@@ -39,10 +39,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog1Unit = value;
         }
 
-        public int Analog1MinPoint
+        public int Analog1MinSignal
         {
-            get => _settingsService.Analog1MinPoint;
-            set => _settingsService.Analog1MinPoint = value;
+            get => _settingsService.Analog1MinSignal;
+            set => _settingsService.Analog1MinSignal = value;
         }
 
         public double Analog1MinValue
@@ -51,10 +51,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog1MinValue = value;
         }
 
-        public int Analog1MaxPoint
+        public int Analog1MaxSignal
         {
-            get => _settingsService.Analog1MaxPoint;
-            set => _settingsService.Analog1MaxPoint = value;
+            get => _settingsService.Analog1MaxSignal;
+            set => _settingsService.Analog1MaxSignal = value;
         }
 
         public double Analog1MaxValue
@@ -75,10 +75,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog2Unit = value;
         }
 
-        public int Analog2MinPoint
+        public int Analog2MinSignal
         {
-            get => _settingsService.Analog2MinPoint;
-            set => _settingsService.Analog2MinPoint = value;
+            get => _settingsService.Analog2MinSignal;
+            set => _settingsService.Analog2MinSignal = value;
         }
 
         public double Analog2MinValue
@@ -87,10 +87,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog2MinValue = value;
         }
 
-        public int Analog2MaxPoint
+        public int Analog2MaxSignal
         {
-            get => _settingsService.Analog2MaxPoint;
-            set => _settingsService.Analog2MaxPoint = value;
+            get => _settingsService.Analog2MaxSignal;
+            set => _settingsService.Analog2MaxSignal = value;
         }
 
         public double Analog2MaxValue
@@ -111,10 +111,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog3Unit = value;
         }
 
-        public int Analog3MinPoint
+        public int Analog3MinSignal
         {
-            get => _settingsService.Analog3MinPoint;
-            set => _settingsService.Analog3MinPoint = value;
+            get => _settingsService.Analog3MinSignal;
+            set => _settingsService.Analog3MinSignal = value;
         }
 
         public double Analog3MinValue
@@ -123,10 +123,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog3MinValue = value;
         }
 
-        public int Analog3MaxPoint
+        public int Analog3MaxSignal
         {
-            get => _settingsService.Analog3MaxPoint;
-            set => _settingsService.Analog3MaxPoint = value;
+            get => _settingsService.Analog3MaxSignal;
+            set => _settingsService.Analog3MaxSignal = value;
         }
 
         public double Analog3MaxValue
@@ -147,10 +147,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog4Unit = value;
         }
 
-        public int Analog4MinPoint
+        public int Analog4MinSignal
         {
-            get => _settingsService.Analog4MinPoint;
-            set => _settingsService.Analog4MinPoint = value;
+            get => _settingsService.Analog4MinSignal;
+            set => _settingsService.Analog4MinSignal = value;
         }
 
         public double Analog4MinValue
@@ -159,10 +159,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog4MinValue = value;
         }
 
-        public int Analog4MaxPoint
+        public int Analog4MaxSignal
         {
-            get => _settingsService.Analog4MaxPoint;
-            set => _settingsService.Analog4MaxPoint = value;
+            get => _settingsService.Analog4MaxSignal;
+            set => _settingsService.Analog4MaxSignal = value;
         }
 
         public double Analog4MaxValue
@@ -183,10 +183,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog5Unit = value;
         }
 
-        public int Analog5MinPoint
+        public int Analog5MinSignal
         {
-            get => _settingsService.Analog5MinPoint;
-            set => _settingsService.Analog5MinPoint = value;
+            get => _settingsService.Analog5MinSignal;
+            set => _settingsService.Analog5MinSignal = value;
         }
 
         public double Analog5MinValue
@@ -195,10 +195,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog5MinValue = value;
         }
 
-        public int Analog5MaxPoint
+        public int Analog5MaxSignal
         {
-            get => _settingsService.Analog5MaxPoint;
-            set => _settingsService.Analog5MaxPoint = value;
+            get => _settingsService.Analog5MaxSignal;
+            set => _settingsService.Analog5MaxSignal = value;
         }
 
         public double Analog5MaxValue
@@ -219,10 +219,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm1Unit = value;
         }
 
-        public int Pwm1MinPoint
+        public int Pwm1MinSignal
         {
-            get => _settingsService.Pwm1MinPoint;
-            set => _settingsService.Pwm1MinPoint = value;
+            get => _settingsService.Pwm1MinSignal;
+            set => _settingsService.Pwm1MinSignal = value;
         }
 
         public double Pwm1MinValue
@@ -231,10 +231,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm1MinValue = value;
         }
 
-        public int Pwm1MaxPoint
+        public int Pwm1MaxSignal
         {
-            get => _settingsService.Pwm1MaxPoint;
-            set => _settingsService.Pwm1MaxPoint = value;
+            get => _settingsService.Pwm1MaxSignal;
+            set => _settingsService.Pwm1MaxSignal = value;
         }
 
         public double Pwm1MaxValue
@@ -256,10 +256,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm2Unit = value;
         }
 
-        public int Pwm2MinPoint
+        public int Pwm2MinSignal
         {
-            get => _settingsService.Pwm2MinPoint;
-            set => _settingsService.Pwm2MinPoint = value;
+            get => _settingsService.Pwm2MinSignal;
+            set => _settingsService.Pwm2MinSignal = value;
         }
 
         public double Pwm2MinValue
@@ -268,10 +268,10 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Pwm2MinValue = value;
         }
 
-        public int Pwm2MaxPoint
+        public int Pwm2MaxSignal
         {
-            get => _settingsService.Pwm2MaxPoint;
-            set => _settingsService.Pwm2MaxPoint = value;
+            get => _settingsService.Pwm2MaxSignal;
+            set => _settingsService.Pwm2MaxSignal = value;
         }
 
         public double Pwm2MaxValue
@@ -291,45 +291,45 @@ namespace Vm167Box.ViewModels
             OnPropertyChanged(nameof(IsLightTheme));
             OnPropertyChanged(nameof(Analog1Name));
             OnPropertyChanged(nameof(Analog1Unit));
-            OnPropertyChanged(nameof(Analog1MinPoint));
+            OnPropertyChanged(nameof(Analog1MinSignal));
             OnPropertyChanged(nameof(Analog1MinValue));
-            OnPropertyChanged(nameof(Analog1MaxPoint));
+            OnPropertyChanged(nameof(Analog1MaxSignal));
             OnPropertyChanged(nameof(Analog1MaxValue));
             OnPropertyChanged(nameof(Analog2Name));
             OnPropertyChanged(nameof(Analog2Unit));
-            OnPropertyChanged(nameof(Analog2MinPoint));
+            OnPropertyChanged(nameof(Analog2MinSignal));
             OnPropertyChanged(nameof(Analog2MinValue));
-            OnPropertyChanged(nameof(Analog2MaxPoint));
+            OnPropertyChanged(nameof(Analog2MaxSignal));
             OnPropertyChanged(nameof(Analog2MaxValue));
             OnPropertyChanged(nameof(Analog3Name));
             OnPropertyChanged(nameof(Analog3Unit));
-            OnPropertyChanged(nameof(Analog3MinPoint));
+            OnPropertyChanged(nameof(Analog3MinSignal));
             OnPropertyChanged(nameof(Analog3MinValue));
-            OnPropertyChanged(nameof(Analog3MaxPoint));
+            OnPropertyChanged(nameof(Analog3MaxSignal));
             OnPropertyChanged(nameof(Analog3MaxValue));
             OnPropertyChanged(nameof(Analog4Name));
             OnPropertyChanged(nameof(Analog4Unit));
-            OnPropertyChanged(nameof(Analog4MinPoint));
+            OnPropertyChanged(nameof(Analog4MinSignal));
             OnPropertyChanged(nameof(Analog4MinValue));
-            OnPropertyChanged(nameof(Analog4MaxPoint));
+            OnPropertyChanged(nameof(Analog4MaxSignal));
             OnPropertyChanged(nameof(Analog4MaxValue));
             OnPropertyChanged(nameof(Analog5Name));
             OnPropertyChanged(nameof(Analog5Unit));
-            OnPropertyChanged(nameof(Analog5MinPoint));
+            OnPropertyChanged(nameof(Analog5MinSignal));
             OnPropertyChanged(nameof(Analog5MinValue));
-            OnPropertyChanged(nameof(Analog5MaxPoint));
+            OnPropertyChanged(nameof(Analog5MaxSignal));
             OnPropertyChanged(nameof(Analog5MaxValue));
             OnPropertyChanged(nameof(Pwm1Name));
             OnPropertyChanged(nameof(Pwm1Unit));
-            OnPropertyChanged(nameof(Pwm1MinPoint));
+            OnPropertyChanged(nameof(Pwm1MinSignal));
             OnPropertyChanged(nameof(Pwm1MinValue));
-            OnPropertyChanged(nameof(Pwm1MaxPoint));
+            OnPropertyChanged(nameof(Pwm1MaxSignal));
             OnPropertyChanged(nameof(Pwm1MaxValue));
             OnPropertyChanged(nameof(Pwm2Name));
             OnPropertyChanged(nameof(Pwm2Unit));
-            OnPropertyChanged(nameof(Pwm2MinPoint));
+            OnPropertyChanged(nameof(Pwm2MinSignal));
             OnPropertyChanged(nameof(Pwm2MinValue));
-            OnPropertyChanged(nameof(Pwm2MaxPoint));
+            OnPropertyChanged(nameof(Pwm2MaxSignal));
             OnPropertyChanged(nameof(Pwm2MaxValue));
             return Task.CompletedTask;
         }
