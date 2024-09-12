@@ -42,34 +42,6 @@ public partial class PanelViewModel : ObservableObject
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
-        ScopeModel.Axes.Add(new LinearAxis
-        {
-            Title = "Time (s)",
-            Position = AxisPosition.Bottom,
-            IntervalLength = 60,
-            IsPanEnabled = true,
-            IsZoomEnabled = true,
-            MajorGridlineStyle = LineStyle.Solid,
-            MinorGridlineStyle = LineStyle.Solid,
-        });
-        ScopeModel.Axes.Add(new LinearAxis
-        {
-            Title = "AnalogIn",
-            Key = "AnalogIn",
-            Position = AxisPosition.Left,
-            PositionTier = 1,
-            Minimum = 0,
-            Maximum = 1023
-        });
-        ScopeModel.Axes.Add(new LinearAxis
-        {
-            Title = "PwmOut",
-            Key = "PwmOut",
-            Position = AxisPosition.Left,
-            PositionTier = 2,
-            Minimum = 0,
-            Maximum = 255
-        });
     }
 
     public IEnumerable<Frequency> PwmFrequencies => _frequencies;
@@ -553,23 +525,68 @@ public partial class PanelViewModel : ObservableObject
 
     private void AddSeries()
     {
+        ScopeModel.Axes.Clear();
         ScopeModel.Series.Clear();
-        AddSerie(Analog1Name, "AnalogIn");
-        AddSerie(Analog2Name, "AnalogIn");
-        AddSerie(Analog3Name, "AnalogIn");
-        AddSerie(Analog4Name, "AnalogIn");
-        AddSerie(Analog5Name, "AnalogIn");
-        AddSerie(Pwm1Name, "PwmOut");
-        AddSerie(Pwm2Name, "PwmOut");
 
-        ScopeModel.DefaultColors = OxyPalettes.Hue(ScopeModel.Series.Count).Colors;
+        ScopeModel.Axes.Add(new LinearAxis
+        {
+            Title = "Time (s)",
+            Position = AxisPosition.Bottom,
+            IntervalLength = 60,
+            IsPanEnabled = true,
+            IsZoomEnabled = true,
+            MajorGridlineStyle = LineStyle.Solid,
+            MinorGridlineStyle = LineStyle.Solid,
+        });
+
+        AddSerie(Analog1Name, Analog1Unit, Resources.AppResources.AnalogIn, _settingsService.Analog1MinValue, _settingsService.Analog1MaxValue);
+        AddSerie(Analog2Name, Analog2Unit, Resources.AppResources.AnalogIn, _settingsService.Analog2MinValue, _settingsService.Analog2MaxValue);
+        AddSerie(Analog3Name, Analog3Unit, Resources.AppResources.AnalogIn, _settingsService.Analog3MinValue, _settingsService.Analog3MaxValue);
+        AddSerie(Analog4Name, Analog4Unit, Resources.AppResources.AnalogIn, _settingsService.Analog4MinValue, _settingsService.Analog4MaxValue);
+        AddSerie(Analog5Name, Analog5Unit, Resources.AppResources.AnalogIn, _settingsService.Analog5MinValue, _settingsService.Analog5MaxValue);
+        AddSerie(Pwm1Name, Pwm1Unit, Resources.AppResources.PwmOut, _settingsService.Pwm1MinValue, _settingsService.Pwm1MaxValue);
+        AddSerie(Pwm2Name, Pwm2Unit, Resources.AppResources.PwmOut, _settingsService.Pwm2MinValue, _settingsService.Pwm2MaxValue);
+
+        ScopeModel.DefaultColors =  OxyPalette.Interpolate(
+            ScopeModel.Series.Count,
+            OxyColors.DarkBlue,
+            OxyColors.DarkRed,
+            OxyColors.Violet,
+            OxyColors.Indigo,
+            OxyColors.Blue,
+            OxyColors.Green,
+            OxyColors.Orange,
+            OxyColors.Cyan,
+            OxyColors.Magenta,
+            OxyColors.Red).Colors;
     }
 
-    private void AddSerie(string title, string yAxisKey)
+    private void AddSerie(string title, string unit, string fallback, double minValue, double maxValue)
     {
+        if (string.IsNullOrWhiteSpace(unit))
+        {
+            unit = fallback;
+        }
+
+        var key = $"{unit}_{minValue}_{maxValue}";
+        var count = ScopeModel.Axes.Count;
+        var axes = ScopeModel.Axes.FirstOrDefault(a => a.Key == key);
+        if (axes == default)
+        {
+            ScopeModel.Axes.Add(new LinearAxis
+            {
+                Title = unit,
+                Key = key,
+                Position = AxisPosition.Left,
+                PositionTier = count + 1,
+                Minimum = minValue,
+                Maximum = maxValue
+            });
+        }
+
         ScopeModel.Series.Add(new LineSeries
         {
-            YAxisKey = yAxisKey,
+            YAxisKey = key,
             Title = title,
             LineStyle = LineStyle.Solid,
             TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}"
