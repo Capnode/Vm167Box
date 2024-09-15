@@ -9,17 +9,30 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     public event Func<Task>? Tick;
 
     private readonly ILogger<Vm167Service> _logger;
+    private readonly ISettingsService _settingsService;
     private readonly IVm167 _vm167;
     private readonly Timer _timer;
+    private readonly Channel _analog1Channel = new();
+    private readonly Channel _analog2Channel = new();
+    private readonly Channel _analog3Channel = new();
+    private readonly Channel _analog4Channel = new();
+    private readonly Channel _analog5Channel = new();
+    private readonly Channel _pwm1Channel = new();
+    private readonly Channel _pwm2Channel = new();
     private readonly SemaphoreSlim _lock = new(1, 1);
+
     private int _device = -1;
     private bool _pending;
 
-    public Vm167Service(ILogger<Vm167Service> logger, IVm167 vm167)
+    public Vm167Service(ILogger<Vm167Service> logger, ISettingsService settingsService, IVm167 vm167)
     {
         _logger = logger;
+        _settingsService = settingsService;
         _vm167 = vm167;
+
+        _settingsService.Update += UpdateSettings;
         _timer = new(async (obj) => await Loop(), null, Timeout.Infinite, Timeout.Infinite);
+        UpdateSettings().Wait();
     }
 
     public void Dispose()
@@ -328,20 +341,20 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     {
         if (_pwmFrequencyRequest)
         {
-            await _vm167.SetPWM(_device, 1, Convert.ToInt32(_pwmOut1), PwmFrequency);
-            await _vm167.SetPWM(_device, 2, Convert.ToInt32(_pwmOut2), PwmFrequency);
+            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwmOut1), PwmFrequency);
+            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwmOut2), PwmFrequency);
         }
         else if (_pwmOut1Request && _pwmOut2Request)
         {
-            await _vm167.OutputAllPWM(_device, Convert.ToInt32(_pwmOut1), Convert.ToInt32(_pwmOut2));
+            await _vm167.OutputAllPWM(_device, _pwm1Channel.ToSignal(_pwmOut1), _pwm2Channel.ToSignal(_pwmOut2));
         }
         else if (_pwmOut1Request)
         {
-            await _vm167.SetPWM(_device, 1, Convert.ToInt32(_pwmOut1), PwmFrequency);
+            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwmOut1), PwmFrequency);
         }
         else if (_pwmOut2Request)
         {
-            await _vm167.SetPWM(_device, 2, Convert.ToInt32(_pwmOut2), PwmFrequency);
+            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwmOut2), PwmFrequency);
         }
 
         _pwmFrequencyRequest = false;
@@ -359,19 +372,19 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     {
         int[] pwm = new int[IVm167.NumPwmOut];
         await _vm167.ReadBackPWMOut(_device, pwm);
-        _pwmOut1 = Convert.ToDouble(pwm[0]);
-        _pwmOut2 = Convert.ToDouble(pwm[1]);
+        _pwmOut1 = _pwm1Channel.ToValue(pwm[0]);
+        _pwmOut2 = _pwm2Channel.ToValue(pwm[1]);
     }
 
     private async Task ReadAnalog()
     {
         int[] analog = new int[IVm167.NumAnalogIn];
         await _vm167.ReadAllAnalog(_device, analog);
-        AnalogIn1 = Convert.ToDouble(analog[0]);
-        AnalogIn2 = Convert.ToDouble(analog[1]);
-        AnalogIn3 = Convert.ToDouble(analog[2]);
-        AnalogIn4 = Convert.ToDouble(analog[3]);
-        AnalogIn5 = Convert.ToDouble(analog[4]);
+        AnalogIn1 = _analog1Channel.ToValue(analog[0]);
+        AnalogIn2 = _analog2Channel.ToValue(analog[1]);
+        AnalogIn3 = _analog3Channel.ToValue(analog[2]);
+        AnalogIn4 = _analog4Channel.ToValue(analog[3]);
+        AnalogIn5 = _analog5Channel.ToValue(analog[4]);
     }
 
     private async Task ReadCounter()
@@ -528,5 +541,59 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         {
             await _vm167.ClearDigitalChannel(_device, channel);
         }
+    }
+
+    private Task UpdateSettings()
+    {
+        _analog1Channel.Name = _settingsService.Analog1Name;
+        _analog1Channel.Unit = _settingsService.Analog1Unit;
+        _analog1Channel.MinSignal = _settingsService.Analog1MinSignal;
+        _analog1Channel.MaxSignal = _settingsService.Analog1MaxSignal;
+        _analog1Channel.MinValue = _settingsService.Analog1MinValue;
+        _analog1Channel.MaxValue = _settingsService.Analog1MaxValue;
+
+        _analog2Channel.Name = _settingsService.Analog2Name;
+        _analog2Channel.Unit = _settingsService.Analog2Unit;
+        _analog2Channel.MinSignal = _settingsService.Analog2MinSignal;
+        _analog2Channel.MaxSignal = _settingsService.Analog2MaxSignal;
+        _analog2Channel.MinValue = _settingsService.Analog2MinValue;
+        _analog2Channel.MaxValue = _settingsService.Analog2MaxValue;
+
+        _analog3Channel.Name = _settingsService.Analog3Name;
+        _analog3Channel.Unit = _settingsService.Analog3Unit;
+        _analog3Channel.MinSignal = _settingsService.Analog3MinSignal;
+        _analog3Channel.MaxSignal = _settingsService.Analog3MaxSignal;
+        _analog3Channel.MinValue = _settingsService.Analog3MinValue;
+        _analog3Channel.MaxValue = _settingsService.Analog3MaxValue;
+
+        _analog4Channel.Name = _settingsService.Analog4Name;
+        _analog4Channel.Unit = _settingsService.Analog4Unit;
+        _analog4Channel.MinSignal = _settingsService.Analog4MinSignal;
+        _analog4Channel.MaxSignal = _settingsService.Analog4MaxSignal;
+        _analog4Channel.MinValue = _settingsService.Analog4MinValue;
+        _analog4Channel.MaxValue = _settingsService.Analog4MaxValue;
+
+        _analog5Channel.Name = _settingsService.Analog5Name;
+        _analog5Channel.Unit = _settingsService.Analog5Unit;
+        _analog5Channel.MinSignal = _settingsService.Analog5MinSignal;
+        _analog5Channel.MaxSignal = _settingsService.Analog5MaxSignal;
+        _analog5Channel.MinValue = _settingsService.Analog5MinValue;
+        _analog5Channel.MaxValue = _settingsService.Analog5MaxValue;
+
+        _pwm1Channel.Name = _settingsService.Pwm1Name;
+        _pwm1Channel.Unit = _settingsService.Pwm1Unit;
+        _pwm1Channel.MinSignal = _settingsService.Pwm1MinSignal;
+        _pwm1Channel.MaxSignal = _settingsService.Pwm1MaxSignal;
+        _pwm1Channel.MinValue = _settingsService.Pwm1MinValue;
+        _pwm1Channel.MaxValue = _settingsService.Pwm1MaxValue;
+
+        _pwm2Channel.Name = _settingsService.Pwm2Name;
+        _pwm2Channel.Unit = _settingsService.Pwm2Unit;
+        _pwm2Channel.MinSignal = _settingsService.Pwm2MinSignal;
+        _pwm2Channel.MaxSignal = _settingsService.Pwm2MaxSignal;
+        _pwm2Channel.MinValue = _settingsService.Pwm2MinValue;
+        _pwm2Channel.MaxValue = _settingsService.Pwm2MaxValue;
+
+        return Task.CompletedTask;
     }
 }

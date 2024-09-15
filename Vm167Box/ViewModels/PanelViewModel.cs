@@ -47,32 +47,39 @@ public partial class PanelViewModel : ObservableObject
     public IEnumerable<Frequency> PwmFrequencies => _frequencies;
 
     public string Analog1Name => _settingsService.Analog1Name;
+    public string Analog1Unit => _settingsService.Analog1Unit;
+    public double Analog1MinValue => _settingsService.Analog1MinValue;
+    public double Analog1MaxValue => _settingsService.Analog1MaxValue;
 
     public string Analog2Name => _settingsService.Analog2Name;
+    public string Analog2Unit => _settingsService.Analog2Unit;
+    public double Analog2MinValue => _settingsService.Analog2MinValue;
+    public double Analog2MaxValue => _settingsService.Analog2MaxValue;
 
     public string Analog3Name => _settingsService.Analog3Name;
+    public string Analog3Unit => _settingsService.Analog3Unit;
+    public double Analog3MinValue => _settingsService.Analog3MinValue;
+    public double Analog3MaxValue => _settingsService.Analog3MaxValue;
 
     public string Analog4Name => _settingsService.Analog4Name;
+    public string Analog4Unit => _settingsService.Analog4Unit;
+    public double Analog4MinValue => _settingsService.Analog4MinValue;
+    public double Analog4MaxValue => _settingsService.Analog4MaxValue;
 
     public string Analog5Name => _settingsService.Analog5Name;
+    public string Analog5Unit => _settingsService.Analog5Unit;
+    public double Analog5MinValue => _settingsService.Analog5MinValue;
+    public double Analog5MaxValue => _settingsService.Analog5MaxValue;
 
     public string Pwm1Name => _settingsService.Pwm1Name;
+    public string Pwm1Unit => _settingsService.Pwm1Unit;
+    public double Pwm1MinValue => _settingsService.Pwm1MinValue;
+    public double Pwm1MaxValue => _settingsService.Pwm1MaxValue;
 
     public string Pwm2Name => _settingsService.Pwm2Name;
-
-    public string Analog1Unit => _settingsService.Analog1Unit;
-
-    public string Analog2Unit => _settingsService.Analog2Unit;
-
-    public string Analog3Unit => _settingsService.Analog3Unit;
-
-    public string Analog4Unit => _settingsService.Analog4Unit;
-
-    public string Analog5Unit => _settingsService.Analog5Unit;
-
-    public string Pwm1Unit => _settingsService.Pwm1Unit;
-
     public string Pwm2Unit => _settingsService.Pwm2Unit;
+    public double Pwm2MinValue => _settingsService.Pwm2MinValue;
+    public double Pwm2MaxValue => _settingsService.Pwm2MaxValue;
 
     [ObservableProperty]
     private bool _isOpen;
@@ -504,20 +511,39 @@ public partial class PanelViewModel : ObservableObject
     private Task UpdateSettings()
     {
         OnPropertyChanged(nameof(Analog1Name));
-        OnPropertyChanged(nameof(Analog2Name));
-        OnPropertyChanged(nameof(Analog3Name));
-        OnPropertyChanged(nameof(Analog4Name));
-        OnPropertyChanged(nameof(Analog5Name));
-        OnPropertyChanged(nameof(Pwm1Name));
-        OnPropertyChanged(nameof(Pwm2Name));
-
         OnPropertyChanged(nameof(Analog1Unit));
+        OnPropertyChanged(nameof(Analog1MinValue));
+        OnPropertyChanged(nameof(Analog1MaxValue));
+
+        OnPropertyChanged(nameof(Analog2Name));
         OnPropertyChanged(nameof(Analog2Unit));
+        OnPropertyChanged(nameof(Analog2MinValue));
+        OnPropertyChanged(nameof(Analog2MaxValue));
+
+        OnPropertyChanged(nameof(Analog3Name));
         OnPropertyChanged(nameof(Analog3Unit));
+        OnPropertyChanged(nameof(Analog3MinValue));
+        OnPropertyChanged(nameof(Analog3MaxValue));
+
+        OnPropertyChanged(nameof(Analog4Name));
         OnPropertyChanged(nameof(Analog4Unit));
+        OnPropertyChanged(nameof(Analog4MinValue));
+        OnPropertyChanged(nameof(Analog4MaxValue));
+
+        OnPropertyChanged(nameof(Analog5Name));
         OnPropertyChanged(nameof(Analog5Unit));
+        OnPropertyChanged(nameof(Analog5MinValue));
+        OnPropertyChanged(nameof(Analog5MaxValue));
+
+        OnPropertyChanged(nameof(Pwm1Name));
         OnPropertyChanged(nameof(Pwm1Unit));
+        OnPropertyChanged(nameof(Pwm1MinValue));
+        OnPropertyChanged(nameof(Pwm1MaxValue));
+
+        OnPropertyChanged(nameof(Pwm2Name));
         OnPropertyChanged(nameof(Pwm2Unit));
+        OnPropertyChanged(nameof(Pwm2MinValue));
+        OnPropertyChanged(nameof(Pwm2MaxValue));
 
         _restartScope = true;
         return Task.CompletedTask;
