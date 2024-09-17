@@ -3,6 +3,7 @@
     x:Class="Vm167Box.Views.PanelPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Vm167Box.Converters"
     xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
     xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -12,6 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
+            <converters:DoubleToIntConverter x:Key="DoubleToIntConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -168,10 +170,17 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn1, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
-                            WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn1, StringFormat='{0:G4}'}" />
+                            WidthRequest="150">
+                            <ProgressBar.Progress>
+                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
+                                    <Binding Path="Analog1In" />
+                                    <Binding Path="Analog1MinValue" />
+                                    <Binding Path="Analog1MaxValue" />
+                                </MultiBinding>
+                            </ProgressBar.Progress>
+                        </ProgressBar>
+                        <Label Text="{Binding Analog1In, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog1Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -179,10 +188,17 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn2, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
-                            WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn2, StringFormat='{0:G4}'}" />
+                            WidthRequest="150">
+                            <ProgressBar.Progress>
+                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
+                                    <Binding Path="Analog2In" />
+                                    <Binding Path="Analog2MinValue" />
+                                    <Binding Path="Analog2MaxValue" />
+                                </MultiBinding>
+                            </ProgressBar.Progress>
+                        </ProgressBar>
+                        <Label Text="{Binding Analog2In, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog2Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -190,10 +206,17 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn3, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
-                            WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn3, StringFormat='{0:G4}'}" />
+                            WidthRequest="150">
+                            <ProgressBar.Progress>
+                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
+                                    <Binding Path="Analog3In" />
+                                    <Binding Path="Analog3MinValue" />
+                                    <Binding Path="Analog3MaxValue" />
+                                </MultiBinding>
+                            </ProgressBar.Progress>
+                        </ProgressBar>
+                        <Label Text="{Binding Analog3In, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog3Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -201,10 +224,17 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn4, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
-                            WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn4, StringFormat='{0:G4}'}" />
+                            WidthRequest="150">
+                            <ProgressBar.Progress>
+                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
+                                    <Binding Path="Analog4In" />
+                                    <Binding Path="Analog4MinValue" />
+                                    <Binding Path="Analog4MaxValue" />
+                                </MultiBinding>
+                            </ProgressBar.Progress>
+                        </ProgressBar>
+                        <Label Text="{Binding Analog4In, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog4Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -212,10 +242,17 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding AnalogIn5, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/1023'}"
                             ScaleY="3"
-                            WidthRequest="150" />
-                        <Label Text="{Binding AnalogIn5, StringFormat='{0:G4}'}" />
+                            WidthRequest="150">
+                            <ProgressBar.Progress>
+                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
+                                    <Binding Path="Analog5In" />
+                                    <Binding Path="Analog5MinValue" />
+                                    <Binding Path="Analog5MaxValue" />
+                                </MultiBinding>
+                            </ProgressBar.Progress>
+                        </ProgressBar>
+                        <Label Text="{Binding Analog5In, StringFormat='{0:G4}'}" />
                         <Label Text="{Binding Analog5Unit}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
@@ -244,9 +281,9 @@
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding PwmOut1}" />
+                                Value="{Binding Pwm1Out}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding PwmOut1, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm1Out, StringFormat='{0:G4}'}" />
                                 <Label Text="{Binding Pwm1Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -261,9 +298,9 @@
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding PwmOut2}" />
+                                Value="{Binding Pwm2Out}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding PwmOut2, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm2Out, StringFormat='{0:G4}'}" />
                                 <Label Text="{Binding Pwm2Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>

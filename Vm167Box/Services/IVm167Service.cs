@@ -17,13 +17,13 @@ public interface IVm167Service
     bool Digital7 { get; set; }
     bool Digital8 { get; set; }
     uint Counter { get; set; }
-    double AnalogIn1 { get; }
-    double AnalogIn2 { get; }
-    double AnalogIn3 { get; }
-    double AnalogIn4 { get; }
-    double AnalogIn5 { get; }
-    double PwmOut1 { get; set; }
-    double PwmOut2 { get; set; }
+    double Analog1In { get; }
+    double Analog2In { get; }
+    double Analog3In { get; }
+    double Analog4In { get; }
+    double Analog5In { get; }
+    double Pwm1Out { get; set; }
+    double Pwm2Out { get; set; }
     int PwmFrequency { get; set; }
 
     Task<int> ListDevices();

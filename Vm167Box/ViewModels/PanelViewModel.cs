@@ -36,50 +36,22 @@ public partial class PanelViewModel : ObservableObject
     {
         _logger = logger;
         _settingsService = settingsService;
-        _settingsService.Update += UpdateSettings;
         _vm167Service = vm167service;
         _vm167Service.Tick += Loop;
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
+        UpdateSettings();
+
+        _settingsService.Update += () =>
+        {
+            UpdateSettings();
+            return Task.CompletedTask;
+        };
     }
 
+
     public IEnumerable<Frequency> PwmFrequencies => _frequencies;
-
-    public string Analog1Name => _settingsService.Analog1Name;
-    public string Analog1Unit => _settingsService.Analog1Unit;
-    public double Analog1MinValue => _settingsService.Analog1MinValue;
-    public double Analog1MaxValue => _settingsService.Analog1MaxValue;
-
-    public string Analog2Name => _settingsService.Analog2Name;
-    public string Analog2Unit => _settingsService.Analog2Unit;
-    public double Analog2MinValue => _settingsService.Analog2MinValue;
-    public double Analog2MaxValue => _settingsService.Analog2MaxValue;
-
-    public string Analog3Name => _settingsService.Analog3Name;
-    public string Analog3Unit => _settingsService.Analog3Unit;
-    public double Analog3MinValue => _settingsService.Analog3MinValue;
-    public double Analog3MaxValue => _settingsService.Analog3MaxValue;
-
-    public string Analog4Name => _settingsService.Analog4Name;
-    public string Analog4Unit => _settingsService.Analog4Unit;
-    public double Analog4MinValue => _settingsService.Analog4MinValue;
-    public double Analog4MaxValue => _settingsService.Analog4MaxValue;
-
-    public string Analog5Name => _settingsService.Analog5Name;
-    public string Analog5Unit => _settingsService.Analog5Unit;
-    public double Analog5MinValue => _settingsService.Analog5MinValue;
-    public double Analog5MaxValue => _settingsService.Analog5MaxValue;
-
-    public string Pwm1Name => _settingsService.Pwm1Name;
-    public string Pwm1Unit => _settingsService.Pwm1Unit;
-    public double Pwm1MinValue => _settingsService.Pwm1MinValue;
-    public double Pwm1MaxValue => _settingsService.Pwm1MaxValue;
-
-    public string Pwm2Name => _settingsService.Pwm2Name;
-    public string Pwm2Unit => _settingsService.Pwm2Unit;
-    public double Pwm2MinValue => _settingsService.Pwm2MinValue;
-    public double Pwm2MaxValue => _settingsService.Pwm2MaxValue;
 
     [ObservableProperty]
     private bool _isOpen;
@@ -263,19 +235,79 @@ public partial class PanelViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private double _analogIn1;
+    private double _analog1In;
 
     [ObservableProperty]
-    private double _analogIn2;
+    private string _analog1Name = string.Empty;
 
     [ObservableProperty]
-    private double _analogIn3;
+    private string _analog1Unit = string.Empty;
 
     [ObservableProperty]
-    private double _analogIn4;
+    private double _analog1MinValue;
 
     [ObservableProperty]
-    private double _analogIn5;
+    private double _analog1MaxValue;
+
+    [ObservableProperty]
+    private double _analog2In;
+
+    [ObservableProperty]
+    private string _analog2Name = string.Empty;
+
+    [ObservableProperty]
+    private string _analog2Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _analog2MinValue;
+
+    [ObservableProperty]
+    private double _analog2MaxValue;
+
+    [ObservableProperty]
+    private double _analog3In;
+
+    [ObservableProperty]
+    private string _analog3Name = string.Empty;
+
+    [ObservableProperty]
+    private string _analog3Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _analog3MinValue;
+
+    [ObservableProperty]
+    private double _analog3MaxValue;
+
+    [ObservableProperty]
+    private double _analog4In;
+
+    [ObservableProperty]
+    private string _analog4Name = string.Empty;
+
+    [ObservableProperty]
+    private string _analog4Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _analog4MinValue;
+
+    [ObservableProperty]
+    private double _analog4MaxValue;
+
+    [ObservableProperty]
+    private double _analog5In;
+
+    [ObservableProperty]
+    private string _analog5Name = string.Empty;
+
+    [ObservableProperty]
+    private string _analog5Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _analog5MinValue;
+
+    [ObservableProperty]
+    private double _analog5MaxValue;
 
     [ObservableProperty]
     private uint _counter;
@@ -291,31 +323,55 @@ public partial class PanelViewModel : ObservableObject
         }
     }
 
-    private double _pwmOut1;
-    public double PwmOut1
+    private double _pwm1Out;
+    public double Pwm1Out
     {
-        get => _pwmOut1;
+        get => _pwm1Out;
         set
         {
-            if (SetProperty(ref _pwmOut1, value))
+            if (SetProperty(ref _pwm1Out, value))
             { 
-                _vm167Service.PwmOut1 = value;
+                _vm167Service.Pwm1Out = value;
             }
         }
     }
 
-    private double _pwmOut2;
-    public double PwmOut2
+    [ObservableProperty]
+    private string _pwm1Name = string.Empty;
+
+    [ObservableProperty]
+    private string _pwm1Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _pwm1MinValue;
+
+    [ObservableProperty]
+    private double _pwm1MaxValue;
+
+    private double _pwm2Out;
+    public double Pwm2Out
     {
-        get => _pwmOut2;
+        get => _pwm2Out;
         set
         {
-            if (SetProperty(ref _pwmOut2, value))
+            if (SetProperty(ref _pwm2Out, value))
             {
-                _vm167Service.PwmOut2 = value;
+                _vm167Service.Pwm2Out = value;
             }
         }
     }
+
+    [ObservableProperty]
+    private string _pwm2Name = string.Empty;
+
+    [ObservableProperty]
+    private string _pwm2Unit = string.Empty;
+
+    [ObservableProperty]
+    private double _pwm2MinValue;
+
+    [ObservableProperty]
+    private double _pwm2MaxValue;
 
     [ObservableProperty]
     private PlotModel _scopeModel;
@@ -468,14 +524,14 @@ public partial class PanelViewModel : ObservableObject
 
         Counter = _vm167Service.Counter;
 
-        AnalogIn1 = _vm167Service.AnalogIn1;
-        AnalogIn2 = _vm167Service.AnalogIn2;
-        AnalogIn3 = _vm167Service.AnalogIn3;
-        AnalogIn4 = _vm167Service.AnalogIn4;
-        AnalogIn5 = _vm167Service.AnalogIn5;
+        Analog1In = _vm167Service.Analog1In;
+        Analog2In = _vm167Service.Analog2In;
+        Analog3In = _vm167Service.Analog3In;
+        Analog4In = _vm167Service.Analog4In;
+        Analog5In = _vm167Service.Analog5In;
 
-        PwmOut1 = _vm167Service.PwmOut1;
-        PwmOut2 = _vm167Service.PwmOut2;
+        Pwm1Out = _vm167Service.Pwm1Out;
+        Pwm2Out = _vm167Service.Pwm2Out;
 
         var timestamp = DateTime.Now - _startTime;
         if (_restartScope)
@@ -492,13 +548,13 @@ public partial class PanelViewModel : ObservableObject
 
         // Update points
         var i = 0;
-        AddPoint(i++, timestamp, AnalogIn1);
-        AddPoint(i++, timestamp, AnalogIn2);
-        AddPoint(i++, timestamp, AnalogIn3);
-        AddPoint(i++, timestamp, AnalogIn4);
-        AddPoint(i++, timestamp, AnalogIn5);
-        AddPoint(i++, timestamp, PwmOut1);
-        AddPoint(i++, timestamp, PwmOut2);
+        AddPoint(i++, timestamp, Analog1In);
+        AddPoint(i++, timestamp, Analog2In);
+        AddPoint(i++, timestamp, Analog3In);
+        AddPoint(i++, timestamp, Analog4In);
+        AddPoint(i++, timestamp, Analog5In);
+        AddPoint(i++, timestamp, Pwm1Out);
+        AddPoint(i++, timestamp, Pwm2Out);
         ScopeModel.InvalidatePlot(true);
 
         _restartScope = false;
@@ -508,45 +564,44 @@ public partial class PanelViewModel : ObservableObject
         return Task.CompletedTask;
     }
 
-    private Task UpdateSettings()
+    private void UpdateSettings()
     {
-        OnPropertyChanged(nameof(Analog1Name));
-        OnPropertyChanged(nameof(Analog1Unit));
-        OnPropertyChanged(nameof(Analog1MinValue));
-        OnPropertyChanged(nameof(Analog1MaxValue));
+        Analog1Name = _settingsService.Analog1Name;
+        Analog1Unit = _settingsService.Analog1Unit;
+        Analog1MinValue = _settingsService.Analog1MinValue;
+        Analog1MaxValue = _settingsService.Analog1MaxValue;
 
-        OnPropertyChanged(nameof(Analog2Name));
-        OnPropertyChanged(nameof(Analog2Unit));
-        OnPropertyChanged(nameof(Analog2MinValue));
-        OnPropertyChanged(nameof(Analog2MaxValue));
+        Analog2Name = _settingsService.Analog2Name;
+        Analog2Unit = _settingsService.Analog2Unit;
+        Analog2MinValue = _settingsService.Analog2MinValue;
+        Analog2MaxValue = _settingsService.Analog2MaxValue;
 
-        OnPropertyChanged(nameof(Analog3Name));
-        OnPropertyChanged(nameof(Analog3Unit));
-        OnPropertyChanged(nameof(Analog3MinValue));
-        OnPropertyChanged(nameof(Analog3MaxValue));
+        Analog3Name = _settingsService.Analog3Name;
+        Analog3Unit = _settingsService.Analog3Unit;
+        Analog3MinValue = _settingsService.Analog3MinValue;
+        Analog3MaxValue = _settingsService.Analog3MaxValue;
 
-        OnPropertyChanged(nameof(Analog4Name));
-        OnPropertyChanged(nameof(Analog4Unit));
-        OnPropertyChanged(nameof(Analog4MinValue));
-        OnPropertyChanged(nameof(Analog4MaxValue));
+        Analog4Name = _settingsService.Analog4Name;
+        Analog4Unit = _settingsService.Analog4Unit;
+        Analog4MinValue = _settingsService.Analog4MinValue;
+        Analog4MaxValue = _settingsService.Analog4MaxValue;
 
-        OnPropertyChanged(nameof(Analog5Name));
-        OnPropertyChanged(nameof(Analog5Unit));
-        OnPropertyChanged(nameof(Analog5MinValue));
-        OnPropertyChanged(nameof(Analog5MaxValue));
+        Analog5Name = _settingsService.Analog5Name;
+        Analog5Unit = _settingsService.Analog5Unit;
+        Analog5MinValue = _settingsService.Analog5MinValue;
+        Analog5MaxValue = _settingsService.Analog5MaxValue;
 
-        OnPropertyChanged(nameof(Pwm1Name));
-        OnPropertyChanged(nameof(Pwm1Unit));
-        OnPropertyChanged(nameof(Pwm1MinValue));
-        OnPropertyChanged(nameof(Pwm1MaxValue));
+        Pwm1Name = _settingsService.Pwm1Name;
+        Pwm1Unit = _settingsService.Pwm1Unit;
+        Pwm1MinValue = _settingsService.Pwm1MinValue;
+        Pwm1MaxValue = _settingsService.Pwm1MaxValue;
 
-        OnPropertyChanged(nameof(Pwm2Name));
-        OnPropertyChanged(nameof(Pwm2Unit));
-        OnPropertyChanged(nameof(Pwm2MinValue));
-        OnPropertyChanged(nameof(Pwm2MaxValue));
+        Pwm2Name = _settingsService.Pwm2Name;
+        Pwm2Unit = _settingsService.Pwm2Unit;
+        Pwm2MinValue = _settingsService.Pwm2MinValue;
+        Pwm2MaxValue = _settingsService.Pwm2MaxValue;
 
         _restartScope = true;
-        return Task.CompletedTask;
     }
 
     private void AddSeries()

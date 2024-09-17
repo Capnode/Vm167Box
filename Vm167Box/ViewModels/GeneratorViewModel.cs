@@ -230,7 +230,7 @@ namespace Vm167Box.ViewModels
                 _index1 = -1;
             }
 
-            _vm167Service.PwmOut1 =  pwm;
+            _vm167Service.Pwm1Out =  pwm;
             _update1 = false;
         }
 
@@ -263,7 +263,7 @@ namespace Vm167Box.ViewModels
                 _index2 = -1;
             }
 
-            _vm167Service.PwmOut2 = pwm;
+            _vm167Service.Pwm2Out = pwm;
             _update2 = false;
         }
     }

@@ -198,39 +198,39 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         }
     }
 
-    public double AnalogIn1 { get; private set; }
+    public double Analog1In { get; private set; }
 
-    public double AnalogIn2 { get; private set; }
+    public double Analog2In { get; private set; }
 
-    public double AnalogIn3 { get; private set; }
+    public double Analog3In { get; private set; }
 
-    public double AnalogIn4 { get; private set; }
+    public double Analog4In { get; private set; }
 
-    public double AnalogIn5 { get; private set; }
+    public double Analog5In { get; private set; }
 
-    private double _pwmOut1;
-    private bool _pwmOut1Request;
-    public double PwmOut1
+    private double _pwm1Out;
+    private bool _pwm1Request;
+    public double Pwm1Out
     {
-        get => _pwmOut1;
+        get => _pwm1Out;
         set
         {
-            if (_pwmOut1 == value) return;
-            _pwmOut1 = value;
-            _pwmOut1Request = true;
+            if (_pwm1Out == value) return;
+            _pwm1Out = value;
+            _pwm1Request = true;
         }
     }
 
-    private double _pwmOut2;
-    private bool _pwmOut2Request;
-    public double PwmOut2
+    private double _pwm2Out;
+    private bool _pwm2Request;
+    public double Pwm2Out
     {
-        get => _pwmOut2;
+        get => _pwm2Out;
         set
         {
-            if (_pwmOut2 == value) return;
-            _pwmOut2 = value;
-            _pwmOut2Request = true;
+            if (_pwm2Out == value) return;
+            _pwm2Out = value;
+            _pwm2Request = true;
         }
     }
 
@@ -329,8 +329,8 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
             await ResetCounter();
         }
 
-        if (_pwmOut1Request ||
-            _pwmOut2Request ||
+        if (_pwm1Request ||
+            _pwm2Request ||
             _pwmFrequencyRequest)
         {
             await WritePwmOut();
@@ -341,25 +341,25 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     {
         if (_pwmFrequencyRequest)
         {
-            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwmOut1), PwmFrequency);
-            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwmOut2), PwmFrequency);
+            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwm1Out), PwmFrequency);
+            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwm2Out), PwmFrequency);
         }
-        else if (_pwmOut1Request && _pwmOut2Request)
+        else if (_pwm1Request && _pwm1Request)
         {
-            await _vm167.OutputAllPWM(_device, _pwm1Channel.ToSignal(_pwmOut1), _pwm2Channel.ToSignal(_pwmOut2));
+            await _vm167.OutputAllPWM(_device, _pwm1Channel.ToSignal(_pwm1Out), _pwm2Channel.ToSignal(_pwm2Out));
         }
-        else if (_pwmOut1Request)
+        else if (_pwm1Request)
         {
-            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwmOut1), PwmFrequency);
+            await _vm167.SetPWM(_device, 1, _pwm1Channel.ToSignal(_pwm1Out), PwmFrequency);
         }
-        else if (_pwmOut2Request)
+        else if (_pwm2Request)
         {
-            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwmOut2), PwmFrequency);
+            await _vm167.SetPWM(_device, 2, _pwm2Channel.ToSignal(_pwm2Out), PwmFrequency);
         }
 
         _pwmFrequencyRequest = false;
-        _pwmOut1Request = false;
-        _pwmOut2Request = false;
+        _pwm1Request = false;
+        _pwm1Request = false;
     }
 
     private async Task ResetCounter()
@@ -372,19 +372,19 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     {
         int[] pwm = new int[IVm167.NumPwmOut];
         await _vm167.ReadBackPWMOut(_device, pwm);
-        _pwmOut1 = _pwm1Channel.ToValue(pwm[0]);
-        _pwmOut2 = _pwm2Channel.ToValue(pwm[1]);
+        _pwm1Out = _pwm1Channel.ToValue(pwm[0]);
+        _pwm2Out = _pwm2Channel.ToValue(pwm[1]);
     }
 
     private async Task ReadAnalog()
     {
         int[] analog = new int[IVm167.NumAnalogIn];
         await _vm167.ReadAllAnalog(_device, analog);
-        AnalogIn1 = _analog1Channel.ToValue(analog[0]);
-        AnalogIn2 = _analog2Channel.ToValue(analog[1]);
-        AnalogIn3 = _analog3Channel.ToValue(analog[2]);
-        AnalogIn4 = _analog4Channel.ToValue(analog[3]);
-        AnalogIn5 = _analog5Channel.ToValue(analog[4]);
+        Analog1In = _analog1Channel.ToValue(analog[0]);
+        Analog2In = _analog2Channel.ToValue(analog[1]);
+        Analog3In = _analog3Channel.ToValue(analog[2]);
+        Analog4In = _analog4Channel.ToValue(analog[3]);
+        Analog5In = _analog5Channel.ToValue(analog[4]);
     }
 
     private async Task ReadCounter()
