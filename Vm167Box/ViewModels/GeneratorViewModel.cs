@@ -4,7 +4,9 @@ using Microsoft.Extensions.Logging;
 using OxyPlot;
 using OxyPlot.Series;
 using Vm167Box.Helpers;
+using Vm167Box.Models;
 using Vm167Box.Services;
+using Vm167Lib;
 
 namespace Vm167Box.ViewModels
 {
@@ -64,6 +66,7 @@ namespace Vm167Box.ViewModels
         [RelayCommand]
         public async Task Generator1(EventArgs args)
         {
+            var Pwm1 = _vm167Service.Pwm1;
             using (await _lock.UseWaitAsync())
             {
                 if (args is CheckedChangedEventArgs selected)
@@ -71,7 +74,7 @@ namespace Vm167Box.ViewModels
                     _logger.LogTrace(">Generator1({}, {}, {}, {})", selected.Value, Function1, Period1, DutyCycle1);
                     if (selected.Value)
                     {
-                        var series = CreateSeries(Function1, Period1, DutyCycle1);
+                        var series = CreateSeries(Pwm1, Function1, Period1, DutyCycle1);
                         Generator1Model.Series.Add(series);
                         _update1 = true;
                     }
@@ -85,7 +88,7 @@ namespace Vm167Box.ViewModels
                 {
                     _logger.LogTrace(">Generator1({}, {}, {})", Function1, Period1, DutyCycle1);
                     Generator1Model.Series.Clear();
-                    var series = CreateSeries(Function1, Period1, DutyCycle1);
+                    var series = CreateSeries(Pwm1, Function1, Period1, DutyCycle1);
                     Generator1Model.Series.Add(series);
                     _update1 = true;
                 }
@@ -98,6 +101,7 @@ namespace Vm167Box.ViewModels
         [RelayCommand]
         public async Task Generator2(EventArgs args)
         {
+            var Pwm2 = _vm167Service.Pwm2;
             using (await _lock.UseWaitAsync())
             {
                 if (args is CheckedChangedEventArgs selected)
@@ -105,7 +109,7 @@ namespace Vm167Box.ViewModels
                     _logger.LogTrace(">Generator2({}, {}, {}, {})", selected.Value, Function2, Period2, DutyCycle2);
                     if (selected.Value)
                     {
-                        var series = CreateSeries(Function2, Period2, DutyCycle2);
+                        var series = CreateSeries(Pwm2, Function2, Period2, DutyCycle2);
                         Generator2Model.Series.Add(series);
                         _update2 = true;
                     }
@@ -119,7 +123,7 @@ namespace Vm167Box.ViewModels
                 {
                     _logger.LogTrace(">Generator2({}, {}, {})", Function2, Period2, DutyCycle2);
                     Generator2Model.Series.Clear();
-                    var series = CreateSeries(Function2, Period2, DutyCycle2);
+                    var series = CreateSeries(Pwm2, Function2, Period2, DutyCycle2);
                     Generator2Model.Series.Add(series);
                     _update2 = true;
                 }
@@ -129,22 +133,22 @@ namespace Vm167Box.ViewModels
             _logger.LogTrace("<Generator2()");
         }
 
-        private static FunctionSeries CreateSeries(GeneratorFunction function, double period, int dutyCycle)
+        private static FunctionSeries CreateSeries(AnalogChannel channel, GeneratorFunction function, double period, int dutyCycle)
         {
             switch (function)
             {
                 case GeneratorFunction.SquareWave:
-                    return SquareSeries(period, dutyCycle);
+                    return SquareSeries(channel, period, dutyCycle);
                 case GeneratorFunction.TriangleWave:
-                    return TriangleSeries(period, dutyCycle);
+                    return TriangleSeries(channel, period, dutyCycle);
                 case GeneratorFunction.SineWave:
-                    return SineSeries(period, dutyCycle);
+                    return SineSeries(channel, period, dutyCycle);
                 default:
                     return new FunctionSeries();
             }
         }
 
-        private static FunctionSeries SquareSeries(double period, int dutyCycle)
+        private static FunctionSeries SquareSeries(AnalogChannel channel, double period, int dutyCycle)
         {
             FunctionSeries series = new();
             var step = IVm167Service.Period / 1000d;
@@ -152,14 +156,15 @@ namespace Vm167Box.ViewModels
             {
                 var x = Math.Round(i, 7);
                 var t = Signal.Duty(x, period, dutyCycle);
-                var y = t < period / 2 ? 255 : 0;
-                series.Points.Add(new DataPoint(x, y));
+                var y = t < period / 2 ? IVm167.PwmMax : 0;
+                channel.Signal = y;
+                series.Points.Add(new DataPoint(x, channel.Value));
             }
 
             return series;
         }
 
-        private static FunctionSeries TriangleSeries(double period, int dutyCycle)
+        private static FunctionSeries TriangleSeries(AnalogChannel channel, double period, int dutyCycle)
         {
             FunctionSeries series = new();
             var step = IVm167Service.Period / 1000d;
@@ -168,14 +173,15 @@ namespace Vm167Box.ViewModels
             {
                 var x = Math.Round(i, 7);
                 var t = Signal.Duty(x, period, dutyCycle);
-                var y = t < half ? 255 * t / half : 255 * (1 - (t - half) / half);
-                series.Points.Add(new DataPoint(x, y));
+                var y = t < half ? IVm167.PwmMax * t / half : IVm167.PwmMax * (1 - (t - half) / half);
+                channel.Signal = Convert.ToInt32(y);
+                series.Points.Add(new DataPoint(x, channel.Value));
             }
 
             return series;
         }
 
-        private static FunctionSeries SineSeries(double period, int dutyCycle)
+        private static FunctionSeries SineSeries(AnalogChannel channel, double period, int dutyCycle)
         {
             FunctionSeries series = new();
             var range = 2 * Math.PI;
@@ -184,8 +190,9 @@ namespace Vm167Box.ViewModels
             {
                 var x = Math.Round(i * period / range, 7);
                 var t = Signal.Duty(i, range, dutyCycle);
-                var y = 255 * (1 + Math.Sin(t)) / 2;
-                series.Points.Add(new DataPoint(x, y));
+                var y = IVm167.PwmMax * (1 + Math.Sin(t)) / 2;
+                channel.Signal = Convert.ToInt32(y);
+                series.Points.Add(new DataPoint(x, channel.Value));
             }
 
             return series;
@@ -205,7 +212,7 @@ namespace Vm167Box.ViewModels
         {
             if (!_update1 && _index1 < 0) return;
 
-            int pwm = 0;
+            double pwm = 0;
             if (Generator1Model.Series.FirstOrDefault() is FunctionSeries series)
             {
                 var points = series.Points;
@@ -222,7 +229,7 @@ namespace Vm167Box.ViewModels
                 if (0 <= _index1 && _index1 < count)
                 {
                     var value = points[_index1++].Y;
-                    pwm = Convert.ToInt32(value);
+                    pwm = value;
                 }
             }
             else
@@ -230,7 +237,7 @@ namespace Vm167Box.ViewModels
                 _index1 = -1;
             }
 
-            _vm167Service.Pwm1.Signal =  pwm;
+            _vm167Service.Pwm1.Value =  pwm;
             _update1 = false;
         }
 
@@ -238,7 +245,7 @@ namespace Vm167Box.ViewModels
         {
             if (!_update2 && _index2 < 0) return;
 
-            int pwm = 0;
+            double pwm = 0;
             if (Generator2Model.Series.FirstOrDefault() is FunctionSeries series)
             {
                 var points = series.Points;
@@ -255,7 +262,7 @@ namespace Vm167Box.ViewModels
                 if (0 <= _index2 && _index2 < count)
                 {
                     var value = points[_index2++].Y;
-                    pwm = Convert.ToInt32(value);
+                    pwm = value;
                 }
             }
             else
@@ -263,7 +270,7 @@ namespace Vm167Box.ViewModels
                 _index2 = -1;
             }
 
-            _vm167Service.Pwm2.Signal = pwm;
+            _vm167Service.Pwm2.Value = pwm;
             _update2 = false;
         }
     }
