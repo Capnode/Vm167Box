@@ -178,7 +178,7 @@
     <value>Namn</value>
   </data>
   <data name="Unit" xml:space="preserve">
-    <value>Enhet Värde</value>
+    <value>Enhet</value>
   </data>
   <data name="MinSignal" xml:space="preserve">
     <value>Min Signal</value>
@@ -260,5 +260,8 @@
   </data>
   <data name="Counter" xml:space="preserve">
     <value>Räknare</value>
+  </data>
+  <data name="Decimals" xml:space="preserve">
+    <value>Decimaler</value>
   </data>
 </root>

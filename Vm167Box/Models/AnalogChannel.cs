@@ -28,6 +28,18 @@
             }
         }
 
+        private int _decimals;
+        public int Decimals
+        {
+            get => _decimals;
+            set
+            {
+                if (value == _decimals) return;
+                _decimals = value;
+                Changed = true;
+            }
+        }
+
         private int _minSignal;
         public int MinSignal
         {
@@ -105,6 +117,7 @@
         {
             _name = channel.Name;
             _unit = channel.Unit;
+            _decimals = channel.Decimals;
             _minSignal = channel.MinSignal;
             _maxSignal = channel.MaxSignal;
             _minValue = channel.MinValue;

@@ -187,6 +187,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decimals.
+        /// </summary>
+        internal static string Decimals {
+            get {
+                return ResourceManager.GetString("Decimals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In.
         /// </summary>
         internal static string DigitalIn {
@@ -475,7 +484,7 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unit Value.
+        ///   Looks up a localized string similar to Unit.
         /// </summary>
         internal static string Unit {
             get {

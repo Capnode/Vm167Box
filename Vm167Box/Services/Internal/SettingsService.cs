@@ -8,8 +8,10 @@ namespace Vm167Box.Services.Internal;
 
 internal class SettingsService : ISettingsService
 {
+    public const int Decimals = 2;
+
     public event Func<Task>? Update;
-    
+
     private readonly ILogger<SettingsService> _logger;
     private readonly IPreferences _settings = Preferences.Default;
 
@@ -69,6 +71,17 @@ internal class SettingsService : ISettingsService
         {
             _settings.Set(Key(), value);
             _analog1.Unit = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog1Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog1.Decimals = value;
             Update?.Invoke();
         }
     }
@@ -139,6 +152,17 @@ internal class SettingsService : ISettingsService
         }
     }
 
+    public int Analog2Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog2.Decimals = value;
+            Update?.Invoke();
+        }
+    }
+
     public int Analog2MinSignal
     {
         get => _settings.Get(Key(), IVm167.AnalogMin);
@@ -201,6 +225,17 @@ internal class SettingsService : ISettingsService
         {
             _settings.Set(Key(), value);
             _analog3.Unit = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog3Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog3.Decimals = value;
             Update?.Invoke();
         }
     }
@@ -271,6 +306,17 @@ internal class SettingsService : ISettingsService
         }
     }
 
+    public int Analog4Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog4.Decimals = value;
+            Update?.Invoke();
+        }
+    }
+
     public int Analog4MinSignal
     {
         get => _settings.Get(Key(), IVm167.AnalogMin);
@@ -333,6 +379,17 @@ internal class SettingsService : ISettingsService
         {
             _settings.Set(Key(), value);
             _analog5.Unit = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog5Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog5.Decimals = value;
             Update?.Invoke();
         }
     }
@@ -403,6 +460,17 @@ internal class SettingsService : ISettingsService
         }
     }
 
+    public int Pwm1Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _pwm1.Decimals = value;
+            Update?.Invoke();
+        }
+    }
+
     public int Pwm1MinSignal
     {
         get => _settings.Get(Key(), IVm167.PwmMin);
@@ -465,6 +533,17 @@ internal class SettingsService : ISettingsService
         {
             _settings.Set(Key(), value);
             _pwm2.Unit = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Pwm2Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _pwm2.Decimals = value;
             Update?.Invoke();
         }
     }
@@ -536,42 +615,49 @@ internal class SettingsService : ISettingsService
     {
         _analog1.Name = Analog1Name;
         _analog1.Unit = Analog1Unit;
+        _analog1.Decimals = Analog1Decimals;
         _analog1.MinSignal = Analog1MinSignal;
         _analog1.MinValue = Analog1MinValue;
         _analog1.MaxSignal = Analog1MaxSignal;
         _analog1.MaxValue = Analog1MaxValue;
         _analog2.Name = Analog2Name;
         _analog2.Unit = Analog2Unit;
+        _analog2.Decimals = Analog2Decimals;
         _analog2.MinSignal = Analog2MinSignal;
         _analog2.MinValue = Analog2MinValue;
         _analog2.MaxSignal = Analog2MaxSignal;
         _analog2.MaxValue = Analog2MaxValue;
         _analog3.Name = Analog3Name;
         _analog3.Unit = Analog3Unit;
+        _analog3.Decimals = Analog3Decimals;
         _analog3.MinSignal = Analog3MinSignal;
         _analog3.MinValue = Analog3MinValue;
         _analog3.MaxSignal = Analog3MaxSignal;
         _analog3.MaxValue = Analog3MaxValue;
         _analog4.Name = Analog4Name;
         _analog4.Unit = Analog4Unit;
+        _analog4.Decimals = Analog4Decimals;
         _analog4.MinSignal = Analog4MinSignal;
         _analog4.MinValue = Analog4MinValue;
         _analog4.MaxSignal = Analog4MaxSignal;
         _analog4.MaxValue = Analog4MaxValue;
         _analog5.Name = Analog5Name;
         _analog5.Unit = Analog5Unit;
+        _analog5.Decimals = Analog5Decimals;
         _analog5.MinSignal = Analog5MinSignal;
         _analog5.MinValue = Analog5MinValue;
         _analog5.MaxSignal = Analog5MaxSignal;
         _analog5.MaxValue = Analog5MaxValue;
         _pwm1.Name = Pwm1Name;
         _pwm1.Unit = Pwm1Unit;
+        _pwm1.Decimals = Pwm1Decimals;
         _pwm1.MinSignal = Pwm1MinSignal;
         _pwm1.MinValue = Pwm1MinValue;
         _pwm1.MaxSignal = Pwm1MaxSignal;
         _pwm1.MaxValue = Pwm1MaxValue;
         _pwm2.Name = Pwm2Name;
         _pwm2.Unit = Pwm2Unit;
+        _pwm2.Decimals = Pwm2Decimals;
         _pwm2.MinSignal = Pwm2MinSignal;
         _pwm2.MinValue = Pwm2MinValue;
         _pwm2.MaxSignal = Pwm2MaxSignal;

@@ -12,7 +12,8 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:AnalogChannelToUnitIntervalConverter x:Key="AnalogChannelToUnitIntervalConverter" />
+            <converters:AnalogChannelToUnitIntervalConverter x:Key="AnalogToUnit" />
+            <converters:AnalogChannelToStringFormatConverter x:Key="AnalogToString" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -169,10 +170,10 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding Analog1, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
+                            Progress="{Binding Analog1, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog1.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog1, Converter={StaticResource AnalogToString}}" />
                         <Label Text="{Binding Analog1.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -180,10 +181,10 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding Analog2, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
+                            Progress="{Binding Analog2, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog2.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog2, Converter={StaticResource AnalogToString}}" />
                         <Label Text="{Binding Analog2.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -191,10 +192,10 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding Analog3, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
+                            Progress="{Binding Analog3, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog3.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog3, Converter={StaticResource AnalogToString}}" />
                         <Label Text="{Binding Analog3.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -202,10 +203,10 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding Analog4, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
+                            Progress="{Binding Analog4, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog4.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog4, Converter={StaticResource AnalogToString}}" />
                         <Label Text="{Binding Analog4.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
@@ -213,10 +214,10 @@
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Progress="{Binding Analog5, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
+                            Progress="{Binding Analog5, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog5.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog5, Converter={StaticResource AnalogToString}}"/>
                         <Label Text="{Binding Analog5.Unit}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
@@ -247,7 +248,7 @@
                                 WidthRequest="100"
                                 Value="{Binding Pwm1.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding Pwm1.Value, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm1, Converter={StaticResource AnalogToString}}" />
                                 <Label Text="{Binding Pwm1.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -264,7 +265,7 @@
                                 WidthRequest="100"
                                 Value="{Binding Pwm2.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding Pwm2.Value, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm2, Converter={StaticResource AnalogToString}}" />
                                 <Label Text="{Binding Pwm2.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
