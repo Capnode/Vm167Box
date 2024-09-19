@@ -1,98 +1,97 @@
 using CommunityToolkit.Maui.Behaviors;
 
-namespace Vm167Box.Behaviors
+namespace Vm167Box.Behaviors;
+
+public static class NumericValidation
 {
-    public static class NumericValidation
+    public static readonly BindableProperty ZZZActivateProperty =
+        BindableProperty.CreateAttached(
+            "ZZZActivate",
+            typeof(bool),
+            typeof(NumericValidation),
+            false,
+            propertyChanged: OnZZZActivateChanged);
+
+    public static readonly BindableProperty MinimumValueProperty =
+        BindableProperty.CreateAttached(
+            "MinimumValue",
+            typeof(double),
+            typeof(NumericValidation),
+            double.MinValue);
+
+    public static readonly BindableProperty MaximumValueProperty =
+        BindableProperty.CreateAttached(
+            "MaximumValue",
+            typeof(double),
+            typeof(NumericValidation),
+            double.MaxValue);
+
+    public static readonly BindableProperty DecimalPlacesProperty =
+        BindableProperty.CreateAttached(
+            "DecimalPlaces",
+            typeof(int),
+            typeof(NumericValidation),
+            int.MaxValue);
+
+    public static bool GetZZZActivate(BindableObject view)
     {
-        public static readonly BindableProperty ZZZActivateProperty =
-            BindableProperty.CreateAttached(
-                "ZZZActivate",
-                typeof(bool),
-                typeof(NumericValidation),
-                false,
-                propertyChanged: OnZZZActivateChanged);
+        return (bool)view.GetValue(ZZZActivateProperty);
+    }
 
-        public static readonly BindableProperty MinimumValueProperty =
-            BindableProperty.CreateAttached(
-                "MinimumValue",
-                typeof(double),
-                typeof(NumericValidation),
-                double.MinValue);
+    public static void SetZZZActivate(BindableObject view, bool value)
+    {
+        view.SetValue(ZZZActivateProperty, value);
+    }
 
-        public static readonly BindableProperty MaximumValueProperty =
-            BindableProperty.CreateAttached(
-                "MaximumValue",
-                typeof(double),
-                typeof(NumericValidation),
-                double.MaxValue);
+    public static double GetMinimumValue(BindableObject view)
+    {
+        return (double)view.GetValue(MinimumValueProperty);
+    }
 
-        public static readonly BindableProperty DecimalPlacesProperty =
-            BindableProperty.CreateAttached(
-                "DecimalPlaces",
-                typeof(int),
-                typeof(NumericValidation),
-                int.MaxValue);
+    public static void SetMinimumValue(BindableObject view, double value)
+    {
+        view.SetValue(MinimumValueProperty, value);
+    }
 
-        public static bool GetZZZActivate(BindableObject view)
+    public static double GetMaximumValue(BindableObject view)
+    {
+        return (double)view.GetValue(MaximumValueProperty);
+    }
+
+    public static void SetMaximumValue(BindableObject view, int value)
+    {
+        view.SetValue(MaximumValueProperty, value);
+    }
+
+    public static int GetDecimalPlaces(BindableObject view)
+    {
+        return (int)view.GetValue(DecimalPlacesProperty);
+    }
+
+    public static void SetDecimalPlaces(BindableObject view, int value)
+    {
+        view.SetValue(DecimalPlacesProperty, value);
+    }
+
+    private static void OnZZZActivateChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is Entry entry && newValue is bool isEnabled && isEnabled)
         {
-            return (bool)view.GetValue(ZZZActivateProperty);
-        }
+            var invalidStyle = new Style(typeof(Entry)) { Setters = { new Setter { Property = Entry.TextColorProperty, Value = Colors.Red } } };
+            var validStyle = new Style(typeof(Entry)) { Setters = { new Setter { Property = Entry.TextColorProperty, Value = Colors.Green } } };
+            var minimumValue = GetMinimumValue(entry);
+            var maximumValue = GetMaximumValue(entry);
+            var decimalPlaces = GetDecimalPlaces(entry);
 
-        public static void SetZZZActivate(BindableObject view, bool value)
-        {
-            view.SetValue(ZZZActivateProperty, value);
-        }
-
-        public static double GetMinimumValue(BindableObject view)
-        {
-            return (double)view.GetValue(MinimumValueProperty);
-        }
-
-        public static void SetMinimumValue(BindableObject view, double value)
-        {
-            view.SetValue(MinimumValueProperty, value);
-        }
-
-        public static double GetMaximumValue(BindableObject view)
-        {
-            return (double)view.GetValue(MaximumValueProperty);
-        }
-
-        public static void SetMaximumValue(BindableObject view, int value)
-        {
-            view.SetValue(MaximumValueProperty, value);
-        }
-
-        public static int GetDecimalPlaces(BindableObject view)
-        {
-            return (int)view.GetValue(DecimalPlacesProperty);
-        }
-
-        public static void SetDecimalPlaces(BindableObject view, int value)
-        {
-            view.SetValue(DecimalPlacesProperty, value);
-        }
-
-        private static void OnZZZActivateChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable is Entry entry && newValue is bool isEnabled && isEnabled)
+            entry.Behaviors.Add(new NumericValidationBehavior
             {
-                var invalidStyle = new Style(typeof(Entry)) { Setters = { new Setter { Property = Entry.TextColorProperty, Value = Colors.Red } } };
-                var validStyle = new Style(typeof(Entry)) { Setters = { new Setter { Property = Entry.TextColorProperty, Value = Colors.Green } } };
-                var minimumValue = GetMinimumValue(entry);
-                var maximumValue = GetMaximumValue(entry);
-                var decimalPlaces = GetDecimalPlaces(entry);
-
-                entry.Behaviors.Add(new NumericValidationBehavior
-                {
-                    Flags = ValidationFlags.ValidateOnValueChanged,
-                    InvalidStyle = invalidStyle,
-                    MinimumValue = minimumValue,
-                    MaximumValue = maximumValue,
-                    MaximumDecimalPlaces = decimalPlaces,
-                    ValidStyle = validStyle
-                });
-            }
+                Flags = ValidationFlags.ValidateOnValueChanged,
+                InvalidStyle = invalidStyle,
+                MinimumValue = minimumValue,
+                MaximumValue = maximumValue,
+                MaximumDecimalPlaces = decimalPlaces,
+                ValidStyle = validStyle
+            });
         }
     }
 }
