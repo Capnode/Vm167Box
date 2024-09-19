@@ -1,10 +1,20 @@
-﻿namespace Vm167Box.Services;
+﻿using Vm167Box.Models;
+
+namespace Vm167Box.Services;
 
 public interface ISettingsService
 {
     public event Func<Task> Update;
 
     AppTheme AppTheme { get; set; }
+
+    AnalogChannel Analog1 { get; }
+    AnalogChannel Analog2 { get; }
+    AnalogChannel Analog3 { get; }
+    AnalogChannel Analog4 { get; }
+    AnalogChannel Analog5 { get; }
+    AnalogChannel Pwm1 { get; }
+    AnalogChannel Pwm2 { get; }
 
     string Analog1Name { get; set; }
     string Analog1Unit { get; set; }

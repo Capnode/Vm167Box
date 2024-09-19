@@ -1,4 +1,6 @@
-﻿namespace Vm167Box.Services;
+﻿using Vm167Box.Models;
+
+namespace Vm167Box.Services;
 
 public interface IVm167Service
 {
@@ -6,25 +8,26 @@ public interface IVm167Service
 
     event Func<Task> Tick;
 
-    bool IsDigitalLowIn { get; set; }
-    bool IsDigitalHighIn { get; set; }
-    bool Digital1 { get; set; }
-    bool Digital2 { get; set; }
-    bool Digital3 { get; set; }
-    bool Digital4 { get; set; }
-    bool Digital5 { get; set; }
-    bool Digital6 { get; set; }
-    bool Digital7 { get; set; }
-    bool Digital8 { get; set; }
     uint Counter { get; set; }
-    double Analog1In { get; }
-    double Analog2In { get; }
-    double Analog3In { get; }
-    double Analog4In { get; }
-    double Analog5In { get; }
-    double Pwm1Out { get; set; }
-    double Pwm2Out { get; set; }
+    bool AllDigital { get; set; }
     int PwmFrequency { get; set; }
+    DigitalChannel DigitalLowIn { get; }
+    DigitalChannel DigitalHighIn { get; }
+    DigitalChannel Digital1 { get; }
+    DigitalChannel Digital2 { get; }
+    DigitalChannel Digital3 { get; }
+    DigitalChannel Digital4 { get; }
+    DigitalChannel Digital5 { get; }
+    DigitalChannel Digital6 { get; }
+    DigitalChannel Digital7 { get; }
+    DigitalChannel Digital8 { get; }
+    AnalogChannel Analog1 { get; }
+    AnalogChannel Analog2 { get; }
+    AnalogChannel Analog3 { get; }
+    AnalogChannel Analog4 { get; }
+    AnalogChannel Analog5 { get; }
+    AnalogChannel Pwm1 { get; }
+    AnalogChannel Pwm2 { get; }
 
     Task<int> ListDevices();
     Task OpenDevice(int device);

@@ -7,6 +7,7 @@ using OxyPlot.Maui.Skia;
 using Vm167Lib;
 using Vm167Box.Services;
 using Vm167Box.Services.Internal;
+using Vm167Box.Converters;
 
 namespace Vm167Box;
 
@@ -46,6 +47,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<GeneratorViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton<AboutViewModel>();
+
+        // Converters
+        builder.Services.AddSingleton<AnalogChannelToUnitIntervalConverter>();
 
 #if DEBUG
         builder.Logging.AddDebug();

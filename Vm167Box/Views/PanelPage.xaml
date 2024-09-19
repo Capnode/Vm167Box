@@ -12,8 +12,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
-            <converters:DoubleToIntConverter x:Key="DoubleToIntConverter" />
+            <converters:AnalogChannelToUnitIntervalConverter x:Key="AnalogChannelToUnitIntervalConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -87,28 +86,28 @@
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalIn}"
-                                IsChecked="{Binding DigitalLowIn}"
+                                IsChecked="{Binding DigitalLowIn.Value}"
                                 IsEnabled="{Binding IsOpen}" />
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalOut}"
-                                IsChecked="{Binding DigitalLowOut}"
+                                IsChecked="{Binding DigitalLowOut.Value}"
                                 IsEnabled="{Binding IsOpen}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="0">
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital1}" IsEnabled="{Binding DigitalLowOut}" />
+                                <CheckBox IsChecked="{Binding Digital1.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="1" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital2}" IsEnabled="{Binding DigitalLowOut}" />
+                                <CheckBox IsChecked="{Binding Digital2.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="2" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital3}" IsEnabled="{Binding DigitalLowOut}" />
+                                <CheckBox IsChecked="{Binding Digital3.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="3" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital4}" IsEnabled="{Binding DigitalLowOut}" />
+                                <CheckBox IsChecked="{Binding Digital4.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="4" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -123,28 +122,28 @@
                         <VerticalStackLayout Spacing="0">
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalIn}"
-                                IsChecked="{Binding DigitalHighIn}"
+                                IsChecked="{Binding DigitalHighIn.Value}"
                                 IsEnabled="{Binding IsOpen}" />
                             <RadioButton
                                 Content="{x:Static strings:AppResources.DigitalOut}"
-                                IsChecked="{Binding DigitalHighOut}"
+                                IsChecked="{Binding DigitalHighOut.Value}"
                                 IsEnabled="{Binding IsOpen}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="0">
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital5}" IsEnabled="{Binding DigitalHighOut}" />
+                                <CheckBox IsChecked="{Binding Digital5.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="5" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital6}" IsEnabled="{Binding DigitalHighOut}" />
+                                <CheckBox IsChecked="{Binding Digital6.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="6" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital7}" IsEnabled="{Binding DigitalHighOut}" />
+                                <CheckBox IsChecked="{Binding Digital7.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="7" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="0">
-                                <CheckBox IsChecked="{Binding Digital8}" IsEnabled="{Binding DigitalHighOut}" />
+                                <CheckBox IsChecked="{Binding Digital8.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
                                 <Label Padding="0,10,0,0" Text="8" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
@@ -166,94 +165,59 @@
                 <VerticalStackLayout Spacing="10">
                     <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.AnalogIn}" />
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog1Name}" WidthRequest="60" />
+                        <Label Text="{Binding Analog1.Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog1, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
                             ScaleY="3"
-                            WidthRequest="150">
-                            <ProgressBar.Progress>
-                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
-                                    <Binding Path="Analog1In" />
-                                    <Binding Path="Analog1MinValue" />
-                                    <Binding Path="Analog1MaxValue" />
-                                </MultiBinding>
-                            </ProgressBar.Progress>
-                        </ProgressBar>
-                        <Label Text="{Binding Analog1In, StringFormat='{0:G4}'}" />
-                        <Label Text="{Binding Analog1Unit}" />
+                            WidthRequest="150" />
+                        <Label Text="{Binding Analog1.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog1.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog2Name}" WidthRequest="60" />
+                        <Label Text="{Binding Analog2.Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog2, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
                             ScaleY="3"
-                            WidthRequest="150">
-                            <ProgressBar.Progress>
-                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
-                                    <Binding Path="Analog2In" />
-                                    <Binding Path="Analog2MinValue" />
-                                    <Binding Path="Analog2MaxValue" />
-                                </MultiBinding>
-                            </ProgressBar.Progress>
-                        </ProgressBar>
-                        <Label Text="{Binding Analog2In, StringFormat='{0:G4}'}" />
-                        <Label Text="{Binding Analog2Unit}" />
+                            WidthRequest="150" />
+                        <Label Text="{Binding Analog2.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog2.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog3Name}" WidthRequest="60" />
+                        <Label Text="{Binding Analog3.Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog3, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
                             ScaleY="3"
-                            WidthRequest="150">
-                            <ProgressBar.Progress>
-                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
-                                    <Binding Path="Analog3In" />
-                                    <Binding Path="Analog3MinValue" />
-                                    <Binding Path="Analog3MaxValue" />
-                                </MultiBinding>
-                            </ProgressBar.Progress>
-                        </ProgressBar>
-                        <Label Text="{Binding Analog3In, StringFormat='{0:G4}'}" />
-                        <Label Text="{Binding Analog3Unit}" />
+                            WidthRequest="150" />
+                        <Label Text="{Binding Analog3.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog3.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog4Name}" WidthRequest="60" />
+                        <Label Text="{Binding Analog4.Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog4, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
                             ScaleY="3"
-                            WidthRequest="150">
-                            <ProgressBar.Progress>
-                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
-                                    <Binding Path="Analog4In" />
-                                    <Binding Path="Analog4MinValue" />
-                                    <Binding Path="Analog4MaxValue" />
-                                </MultiBinding>
-                            </ProgressBar.Progress>
-                        </ProgressBar>
-                        <Label Text="{Binding Analog4In, StringFormat='{0:G4}'}" />
-                        <Label Text="{Binding Analog4Unit}" />
+                            WidthRequest="150" />
+                        <Label Text="{Binding Analog4.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog4.Unit}" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
-                        <Label Text="{Binding Analog5Name}" WidthRequest="60" />
+                        <Label Text="{Binding Analog5.Name}" WidthRequest="60" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog5, Converter={StaticResource AnalogChannelToUnitIntervalConverter}}"
                             ScaleY="3"
-                            WidthRequest="150">
-                            <ProgressBar.Progress>
-                                <MultiBinding Converter="{StaticResource DoubleToIntConverter}" Mode="TwoWay">
-                                    <Binding Path="Analog5In" />
-                                    <Binding Path="Analog5MinValue" />
-                                    <Binding Path="Analog5MaxValue" />
-                                </MultiBinding>
-                            </ProgressBar.Progress>
-                        </ProgressBar>
-                        <Label Text="{Binding Analog5In, StringFormat='{0:G4}'}" />
-                        <Label Text="{Binding Analog5Unit}" />
+                            WidthRequest="150" />
+                        <Label Text="{Binding Analog5.Value, StringFormat='{0:G4}'}" />
+                        <Label Text="{Binding Analog5.Unit}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -271,37 +235,37 @@
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
                         <VerticalStackLayout Spacing="10">
-                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm1Name}" />
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm1.Name}" />
                             <Slider
                                 Margin="-30,40,0,30"
                                 HeightRequest="40"
                                 IsEnabled="{Binding IsOpen}"
-                                Maximum="{Binding Pwm1MaxValue}"
-                                Minimum="{Binding Pwm2MinValue}"
+                                Maximum="{Binding Pwm1.MaxSignal}"
+                                Minimum="{Binding Pwm1.MinSignal}"
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding Pwm1Out}" />
+                                Value="{Binding Pwm1.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding Pwm1Out, StringFormat='{0:G4}'}" />
-                                <Label Text="{Binding Pwm1Unit}" />
+                                <Label Text="{Binding Pwm1.Value, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm1.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="10">
-                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm2Name}" />
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm2.Name}" />
                             <Slider
                                 Margin="-30,40,0,30"
                                 HeightRequest="40"
                                 IsEnabled="{Binding IsOpen}"
-                                Maximum="{Binding Pwm2MaxValue}"
-                                Minimum="{Binding Pwm2MinValue}"
+                                Maximum="{Binding Pwm2.MaxSignal}"
+                                Minimum="{Binding Pwm2.MinSignal}"
                                 Rotation="-90"
                                 TranslationX="20"
                                 WidthRequest="100"
-                                Value="{Binding Pwm2Out}" />
+                                Value="{Binding Pwm2.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                                <Label Text="{Binding Pwm2Out, StringFormat='{0:G4}'}" />
-                                <Label Text="{Binding Pwm2Unit}" />
+                                <Label Text="{Binding Pwm2.Value, StringFormat='{0:G4}'}" />
+                                <Label Text="{Binding Pwm2.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
@@ -309,5 +273,4 @@
             </Frame>
         </FlexLayout>
     </Grid>
-
 </ContentPage>

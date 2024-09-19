@@ -82,7 +82,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         }
         finally
         {
-            _logger.LogTrace("<ReadAnalogChannel()");
+            _logger.LogTrace("<ReadAnalogChannel({},{})", CardAddress, Channel);
             _lock.Release();
         }
     }
@@ -92,7 +92,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         try
         {
             await _lock.WaitAsync();
-            _logger.LogTrace(">ReadAllAnalog({},{})", CardAddress, Buffer);
+            _logger.LogTrace(">ReadAllAnalog({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 1; // Read All Analog Channels
 
@@ -107,7 +107,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         }
         finally
         {
-            _logger.LogTrace("<ReadAllAnalog()");
+            _logger.LogTrace("<ReadAllAnalog({}) => {}", CardAddress, Buffer);
             _lock.Release();
         }
     }
@@ -269,19 +269,13 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 
     public async Task<bool> ReadDigitalChannel(int CardAddress, int Channel)
     {
-        try
-        {
-            _logger.LogTrace(">ReadDigitalChannel({},{})", CardAddress, Channel);
-            var value = await ReadAllDigital(CardAddress);
-            Channel = Math.Max(Channel, 8);
-            Channel = Math.Min(Channel, 1);
-            var val = (value & (1 << (Channel - 1))) != 0;
-            return val;
-        }
-        finally
-        {
-            _logger.LogTrace("<ReadDigitalChannel()");
-        }
+        _logger.LogTrace(">ReadDigitalChannel({},{})", CardAddress, Channel);
+        var value = await ReadAllDigital(CardAddress);
+        Channel = Math.Max(Channel, 8);
+        Channel = Math.Min(Channel, 1);
+        var val = (value & (1 << (Channel - 1))) != 0;
+        _logger.LogTrace("<ReadDigitalChannel() => {}", val);
+        return val;
     }
 
     public async Task<int> ReadAllDigital(int CardAddress)
@@ -294,11 +288,12 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             buffer[0] = 4; // Read All Digital
             await Write(CardAddress, 1);
             await Read(CardAddress);
-            return buffer[1];
+            var value = buffer[1];
+            _logger.LogTrace("<ReadAllDigital() => {}", value);
+            return value;
         }
         finally
         {
-            _logger.LogTrace("<ReadAllDigital()");
             _lock.Release();
         }
     }
@@ -334,11 +329,11 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             await Write(CardAddress, 2);
             await Read(CardAddress);
             var value = (uint)(buffer[1] + (buffer[2] << 8) + (buffer[3] << 16) + (buffer[4] << 24));
+            _logger.LogTrace("<ReadCounter() => {}", value);
             return value;
         }
         finally
         {
-            _logger.LogTrace("<ReadCounter()");
             _lock.Release();
         }
     }
@@ -428,7 +423,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         try
         {
             await _lock.WaitAsync();
-            _logger.LogTrace(">ReadBackPWMOut({},{})", CardAddress, Buffer);
+            _logger.LogTrace(">ReadBackPWMOut({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 12; // Read PWM
             await Write(CardAddress, 1);
@@ -438,7 +433,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         }
         finally
         {
-            _logger.LogTrace("<ReadBackPWMOut()");
+            _logger.LogTrace("<ReadBackPWMOut({}) => {}", CardAddress, Buffer);
             _lock.Release();
         }
     }
@@ -454,11 +449,11 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             await Write(CardAddress, 1);
             await Read(CardAddress);
             var value = buffer[1];
+            _logger.LogTrace("<ReadBackInOutMode() => {}", value);
             return value;
         }
         finally
         {
-            _logger.LogTrace("<ReadBackInOutMode()");
             _lock.Release();
         }
     }
