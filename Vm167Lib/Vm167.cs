@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Vm167Lib.Helpers;
 
 namespace Vm167Lib;
 
@@ -19,56 +20,40 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 
     public async Task<int> ListDevices()
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ListDevices()");
             var mask = await Scan();
+            _logger.LogTrace("<ListDevices() => {}", mask);
             return mask;
-        }
-        finally
-        {
-            _logger.LogTrace("<ListDevices()");
-            _lock.Release();
         }
     }
 
     public async Task<int> OpenDevices(int mask)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">OpenDevices({})", mask);
             var result = await Open(mask);
+            _logger.LogTrace("<OpenDevices() => {}", result);
             return result;
-        }
-        finally
-        {
-            _logger.LogTrace("<OpenDevices()");
-            _lock.Release();
         }
     }
 
     public async Task CloseDevices()
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">CloseDevices()");
             Close();
-        }
-        finally
-        {
             _logger.LogTrace("<CloseDevices()");
-            _lock.Release();
         }
     }
 
     public async Task<int> ReadAnalogChannel(int CardAddress, int Channel)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadAnalogChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
             buffer[IVm167.Device0] = 0; // Read Analog Channel
@@ -78,20 +63,15 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             var transf = await Read(CardAddress);
             if (transf == 0) return 0;
             var value = buffer[1] + (buffer[2] << 8);
+            _logger.LogTrace("<ReadAnalogChannel({},{}) => {}", CardAddress, Channel, value);
             return value;
-        }
-        finally
-        {
-            _logger.LogTrace("<ReadAnalogChannel({},{})", CardAddress, Channel);
-            _lock.Release();
         }
     }
 
     public async Task ReadAllAnalog(int CardAddress, int[] Buffer)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadAllAnalog({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 1; // Read All Analog Channels
@@ -104,19 +84,15 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
                 var value = buffer[2 * i + 1] + (buffer[2 * i + 2] << 8);
                 Buffer[i] = value;
             }
-        }
-        finally
-        {
+
             _logger.LogTrace("<ReadAllAnalog({}) => {}", CardAddress, Buffer);
-            _lock.Release();
         }
     }
 
     public async Task SetPWM(int CardAddress, int Channel, int Data, int Freq)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">SetPWM({},{},{},{})", CardAddress, Channel, Data, Freq);
             var buffer = _deviceBuffer[CardAddress];
             if (Channel > 2) Channel = 2;
@@ -136,56 +112,41 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             buffer[2] = (byte)Data;
             buffer[3] = (byte)Freq;
             await Write(CardAddress, 4);
-        }
-        finally
-        {
             _logger.LogTrace("<SetPWM()");
-            _lock.Release();
         }
     }
 
     public async Task OutputAllPWM(int CardAddress, int Data1, int Data2)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">OutputAllPWM({},{},{})", CardAddress, Data1, Data2);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 3; // Output All PWM
             buffer[1] = (byte)Data1;
             buffer[2] = (byte)Data2;
             await Write(CardAddress, 3);
-        }
-        finally
-        {
             _logger.LogTrace("<OutputAllPWM()");
-            _lock.Release();
         }
     }
 
     public async Task OutputAllDigital(int CardAddress, int Data)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">OutputAllDigital({},{})", CardAddress, Data);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 5; // Output All Digital
             buffer[1] = (byte)Data;
             await Write(CardAddress, 2);
-        }
-        finally
-        {
             _logger.LogTrace("<OutputAllDigital()");
-            _lock.Release();
         }
     }
 
     public async Task ClearDigitalChannel(int CardAddress, int Channel)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ClearDigitalChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
             if (Channel > 8)
@@ -203,32 +164,21 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             buffer[0] = 6; // Clear Digital Channel
             buffer[1] = (byte)k;
             await Write(CardAddress, 2);
-        }
-        finally
-        {
             _logger.LogTrace("<ClearDigitalChannel()");
-            _lock.Release();
         }
     }
 
     public async Task ClearAllDigital(int CardAddress)
     {
-        try
-        {
-            _logger.LogTrace(">ClearAllDigital({})", CardAddress);
-            await OutputAllDigital(CardAddress, 0);
-        }
-        finally
-        {
-            _logger.LogTrace("<ClearAllDigital()");
-        }
+        _logger.LogTrace(">ClearAllDigital({})", CardAddress);
+        await OutputAllDigital(CardAddress, 0);
+        _logger.LogTrace("<ClearAllDigital()");
     }
 
     public async Task SetDigitalChannel(int CardAddress, int Channel)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">SetDigitalChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
             if (Channel > 8)
@@ -246,25 +196,15 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             buffer[0] = 7; // Set Digital Channel
             buffer[1] = (byte)k;
             await Write(CardAddress, 2);
-        }
-        finally
-        {
             _logger.LogTrace("<SetDigitalChannel()");
-            _lock.Release();
         }
     }
 
     public async Task SetAllDigital(int CardAddress)
     {
-        try
-        {
-            _logger.LogTrace(">SetAllDigital({})", CardAddress);
-            await OutputAllDigital(CardAddress, 255);
-        }
-        finally
-        {
-            _logger.LogTrace("<SetAllDigital()");
-        }
+        _logger.LogTrace(">SetAllDigital({})", CardAddress);
+        await OutputAllDigital(CardAddress, 255);
+        _logger.LogTrace("<SetAllDigital()");
     }
 
     public async Task<bool> ReadDigitalChannel(int CardAddress, int Channel)
@@ -280,9 +220,8 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
 
     public async Task<int> ReadAllDigital(int CardAddress)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadAllDigital({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 4; // Read All Digital
@@ -292,36 +231,26 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             _logger.LogTrace("<ReadAllDigital() => {}", value);
             return value;
         }
-        finally
-        {
-            _lock.Release();
-        }
     }
 
     public async Task InOutMode(int CardAddress, int HighNibble, int LowNibble)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">InOutMode({},{},{})", CardAddress, HighNibble, LowNibble);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 8; // InOut Mode
             buffer[1] = (byte)LowNibble;
             buffer[2] = (byte)HighNibble;
             await Write(CardAddress, 3);
-        }
-        finally
-        {
             _logger.LogTrace("<InOutMode()");
-            _lock.Release();
         }
     }
 
     public async Task<uint> ReadCounter(int CardAddress)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadCounter({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 9; // Read Counter
@@ -332,35 +261,25 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             _logger.LogTrace("<ReadCounter() => {}", value);
             return value;
         }
-        finally
-        {
-            _lock.Release();
-        }
     }
 
     public async Task ResetCounter(int CardAddress)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ResetCounter({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 10; // Reset Counter
             buffer[1] = 0;  // reset counter #0
             await Write(CardAddress, 2);
-        }
-        finally
-        {
             _logger.LogTrace("<ResetCounter()");
-            _lock.Release();
         }
     }
 
     public async Task<int> Connected()
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">Connected()");
             var buffer = _deviceBuffer[IVm167.Device0];
             buffer[0] = 14; // Unknown function
@@ -375,54 +294,38 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             await Write(IVm167.Device1, 2);
             await Read(IVm167.Device1);
             cards += buffer[1];
-
+            _logger.LogTrace("<Connected() => {}", cards);
             return cards;
-        }
-        finally
-        {
-            _logger.LogTrace("<Connected()");
-            _lock.Release();
         }
     }
 
     public async Task<int> VersionFirmware(int CardAddress)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">VersionFirmware({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 11; // Read version info from card
             await Write(CardAddress, 1);
             await Read(CardAddress);
             var value = 256 * 256 * 256 * buffer[1] + 256 * 256 * buffer[2] + 256 * buffer[3] + buffer[4];
+            _logger.LogTrace("<VersionFirmware() => {}", value);
             return value;
-        }
-        finally
-        {
-            _logger.LogTrace("<VersionFirmware()");
-            _lock.Release();
         }
     }
 
     public int VersionDLL()
     {
-        try
-        {
-            _logger.LogTrace(">VersionDLL()");
-            return 0x0010013;
-        }
-        finally
-        {
-            _logger.LogTrace("<VersionDLL()");
-        }
+        _logger.LogTrace(">VersionDLL()");
+        var value = 0x0010013;
+        _logger.LogTrace("<VersionDLL() => {}", value);
+        return value;
     }
 
     public async Task ReadBackPWMOut(int CardAddress, int[] Buffer)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadBackPWMOut({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 12; // Read PWM
@@ -430,19 +333,14 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             await Read(CardAddress);
             Buffer[0] = buffer[1];
             Buffer[1] = buffer[2];
-        }
-        finally
-        {
             _logger.LogTrace("<ReadBackPWMOut({}) => {}", CardAddress, Buffer);
-            _lock.Release();
         }
     }
 
     public async Task<int> ReadBackInOutMode(int CardAddress)
     {
-        try
+        using (await _lock.UseWaitAsync())
         {
-            await _lock.WaitAsync();
             _logger.LogTrace(">ReadBackInOutMode({})", CardAddress);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 13; // Read In/Out Mode
@@ -451,10 +349,6 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             var value = buffer[1];
             _logger.LogTrace("<ReadBackInOutMode() => {}", value);
             return value;
-        }
-        finally
-        {
-            _lock.Release();
         }
     }
 }
