@@ -66,6 +66,12 @@ public interface ISettingsService
     double Pwm2MaxValue { get; set; }
 
     /// <summary>
+    /// Initialize the settings service and load the settings for the device.
+    /// </summary>
+    /// <param name="deviceId">Selected device id</param>
+    void Initialize(int deviceId);
+
+    /// <summary>
     /// Reset all settings to their default values.
     /// </summary>
     void Reset();

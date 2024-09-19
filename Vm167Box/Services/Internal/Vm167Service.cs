@@ -147,7 +147,9 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         Analog5.Changed = true;
         Pwm1.Changed = true;
         Pwm2.Changed = true;
+
         _device = device;
+        _settingsService.Initialize(device);
         _timer.Change(IVm167Service.Period, IVm167Service.Period);
     }
 
