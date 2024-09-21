@@ -15,7 +15,7 @@ namespace Vm167Box.ViewModels
     public partial class GeneratorViewModel : ObservableObject
     {
         private const double epsilon = 1e-6;
-        private static List<double> _periods = new () { 60, 30, 10, 5, 2, 1, 0.5, 0.2, 0.1 };
+        private static List<double> _periods = new() { 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000 };
 
         private readonly ILogger<GeneratorViewModel> _logger;
         private readonly IVm167Service _vm167Service;
