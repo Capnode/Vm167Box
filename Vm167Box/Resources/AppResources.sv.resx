@@ -264,4 +264,28 @@
   <data name="Decimals" xml:space="preserve">
     <value>Decimaler</value>
   </data>
+  <data name="s10" xml:space="preserve">
+    <value>10 s</value>
+  </data>
+  <data name="s100" xml:space="preserve">
+    <value>100 s</value>
+  </data>
+  <data name="s1000" xml:space="preserve">
+    <value>1000 s</value>
+  </data>
+  <data name="s10000" xml:space="preserve">
+    <value>10000 s</value>
+  </data>
+  <data name="CalibrateLowShort" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="CalibrateHighShort" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="CalibrateHigh" xml:space="preserve">
+    <value>Kalibrera högsta värde</value>
+  </data>
+  <data name="CalibrateLow" xml:space="preserve">
+    <value>Kalibrera lägsta värde</value>
+  </data>
 </root>

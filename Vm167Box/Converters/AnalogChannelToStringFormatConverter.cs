@@ -12,9 +12,10 @@ public class AnalogChannelToStringFormatConverter : IValueConverter
             var format = parameter as string;
             if (format == null)
             {
-                format = "{0:F" + channel.Decimals + "}";
+                format = "{0:F" + channel.Decimals + "} {1}";
             }
-            return string.Format(culture, format ?? "{0}", channel.Value);
+
+            return string.Format(culture, format ?? "{0}", channel.Value, channel.Unit);
         }
 
         return null;

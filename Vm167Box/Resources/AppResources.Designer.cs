@@ -142,6 +142,42 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calibrate high value.
+        /// </summary>
+        internal static string CalibrateHigh {
+            get {
+                return ResourceManager.GetString("CalibrateHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H.
+        /// </summary>
+        internal static string CalibrateHighShort {
+            get {
+                return ResourceManager.GetString("CalibrateHighShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calibrate low value.
+        /// </summary>
+        internal static string CalibrateLow {
+            get {
+                return ResourceManager.GetString("CalibrateLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L.
+        /// </summary>
+        internal static string CalibrateLowShort {
+            get {
+                return ResourceManager.GetString("CalibrateLowShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card 0 connected.
         /// </summary>
         internal static string Card0Connected {
@@ -399,6 +435,42 @@ namespace Vm167Box.Resources {
         internal static string Restart {
             get {
                 return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 s.
+        /// </summary>
+        internal static string s10 {
+            get {
+                return ResourceManager.GetString("s10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100 s.
+        /// </summary>
+        internal static string s100 {
+            get {
+                return ResourceManager.GetString("s100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1000 s.
+        /// </summary>
+        internal static string s1000 {
+            get {
+                return ResourceManager.GetString("s1000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10000 s.
+        /// </summary>
+        internal static string s10000 {
+            get {
+                return ResourceManager.GetString("s10000", resourceCulture);
             }
         }
         

@@ -25,6 +25,7 @@ public class Range
 
 public partial class PanelViewModel : ObservableObject
 {
+    private const int MaxPoints = 1000;
     private static readonly Frequency[] _frequencies =
     {
         new Frequency { Name = "2930 Hz", Value = IVm167.Freq2930 },
@@ -37,7 +38,10 @@ public partial class PanelViewModel : ObservableObject
     private readonly IVm167Service _vm167Service;
     private DateTime _startTime;
     private bool _resetScope;
+    private TimeSpan _lastPlot;
     private bool _restartScope = true;
+    private int _maxPoints = MaxPoints;
+    private int _plotInterval = 1;
 
     public PanelViewModel(ILogger<PanelViewModel> logger, ISettingsService settingsService, IVm167Service vm167service)
     {
@@ -238,7 +242,71 @@ public partial class PanelViewModel : ObservableObject
         _restartScope = true;
     }
 
-    private async Task SelectCard(bool selected, int card)
+    [RelayCommand]
+    public void History(int time)
+    {
+        _logger.LogTrace(">History({})", time);
+        var plotIntervale = _plotInterval;
+        if (time > 100)
+        {
+            _plotInterval = 10;
+        }
+        else
+        {
+            _plotInterval = 1;
+        }
+
+        if (plotIntervale != _plotInterval)
+        {
+            _restartScope = true;
+        }
+
+        _maxPoints = time * _plotInterval * 1000 / IVm167Service.Period;
+        _logger.LogTrace("<History()");
+    }
+
+    [RelayCommand]
+    public void Calibrate(string position)
+    {
+        _logger.LogTrace(">Calibrate({})", position);
+        switch (position)
+        {
+            case "1L":
+                _settingsService.Analog1MinSignal = Analog1.Signal;
+                break;
+            case "1H":
+                _settingsService.Analog1MaxSignal = Analog1.Signal;
+                break;
+            case "2L":
+                _settingsService.Analog2MinSignal = Analog2.Signal;
+                break;
+            case "2H":
+                _settingsService.Analog2MaxSignal = Analog2.Signal;
+                break;
+            case "3L":
+                _settingsService.Analog3MinSignal = Analog3.Signal;
+                break;
+            case "3H":
+                _settingsService.Analog3MaxSignal = Analog3.Signal;
+                break;
+            case "4L":
+                _settingsService.Analog4MinSignal = Analog4.Signal;
+                break;
+            case "4H":
+                _settingsService.Analog4MaxSignal = Analog4.Signal;
+                break;
+            case "5L":
+                _settingsService.Analog5MinSignal = Analog5.Signal;
+                break;
+            case "5H":
+                _settingsService.Analog5MaxSignal = Analog5.Signal;
+                break;
+        }
+
+        _logger.LogTrace("<Calibrate()");
+    }
+
+        private async Task SelectCard(bool selected, int card)
     {
         if (selected)
         {
@@ -443,19 +511,22 @@ public partial class PanelViewModel : ObservableObject
         }
 
         // Update points
-        var i = 0;
-        AddPoint(i++, timestamp, Analog1.Value);
-        AddPoint(i++, timestamp, Analog2.Value);
-        AddPoint(i++, timestamp, Analog3.Value);
-        AddPoint(i++, timestamp, Analog4.Value);
-        AddPoint(i++, timestamp, Analog5.Value);
-        AddPoint(i++, timestamp, Pwm1.Value);
-        AddPoint(i++, timestamp, Pwm2.Value);
-        ScopeModel.InvalidatePlot(true);
+        if ((_plotInterval == 1) || (timestamp.Seconds != _lastPlot.Seconds))
+        {
+            var i = 0;
+            AddPoint(i++, timestamp, Analog1.Value);
+            AddPoint(i++, timestamp, Analog2.Value);
+            AddPoint(i++, timestamp, Analog3.Value);
+            AddPoint(i++, timestamp, Analog4.Value);
+            AddPoint(i++, timestamp, Analog5.Value);
+            AddPoint(i++, timestamp, Pwm1.Value);
+            AddPoint(i++, timestamp, Pwm2.Value);
+            ScopeModel.InvalidatePlot(true);
+            _lastPlot = timestamp;
+        }
 
         _restartScope = false;
         _resetScope = false;
-
         _logger.LogTrace("<Loop()");
         return Task.CompletedTask;
     }
@@ -542,6 +613,11 @@ public partial class PanelViewModel : ObservableObject
         if (_restartScope)
         {
             points.Clear();
+        }
+
+        while (points.Count > _maxPoints)
+        {
+            points.RemoveAt(0);
         }
 
         points.Add(new DataPoint(TimeSpanAxis.ToDouble(timestamp), value));
