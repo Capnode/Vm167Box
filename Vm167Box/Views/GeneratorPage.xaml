@@ -16,8 +16,8 @@
             BorderColor="Black">
             <VerticalStackLayout
                 Margin="20,20,0,0"
-                RadioButtonGroup.GroupName="Function1"
-                RadioButtonGroup.SelectedValue="{Binding Function1}"
+                RadioButtonGroup.GroupName="FunctionPwm1"
+                RadioButtonGroup.SelectedValue="{Binding FunctionPwm1}"
                 Spacing="10">
                 <Label Text="{x:Static strings:AppResources.GeneratorPwm1}" />
                 <RadioButton
@@ -28,7 +28,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator1Command}"
+                            Command="{Binding GeneratorPwm1Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -39,7 +39,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator1Command}"
+                            Command="{Binding GeneratorPwm1Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -50,7 +50,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator1Command}"
+                            Command="{Binding GeneratorPwm1Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -61,7 +61,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator1Command}"
+                            Command="{Binding GeneratorPwm1Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -69,9 +69,9 @@
                 <Picker
                     IsEnabled="{Binding IsOpen}"
                     ItemsSource="{Binding Periods}"
-                    SelectedItem="{Binding Period1, Mode=TwoWay}">
+                    SelectedItem="{Binding PeriodPwm1, Mode=TwoWay}">
                     <Picker.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="SelectedIndexChanged" />
+                        <toolkit:EventToCommandBehavior Command="{Binding GeneratorPwm1Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
                 <Label Text="{x:Static strings:AppResources.DutyCycle}" />
@@ -81,18 +81,17 @@
                         Maximum="100"
                         Minimum="0"
                         MinimumWidthRequest="150"
-                        Value="{Binding DutyCycle1}">
+                        Value="{Binding DutyCyclePwm1}">
                         <Slider.Behaviors>
-                            <toolkit:EventToCommandBehavior Command="{Binding Generator1Command}" EventName="ValueChanged" />
+                            <toolkit:EventToCommandBehavior Command="{Binding GeneratorPwm1Command}" EventName="ValueChanged" />
                         </Slider.Behaviors>
                     </Slider>
-                    <Label Text="{Binding DutyCycle1}" />
+                    <Label Text="{Binding DutyCyclePwm1}" />
                 </HorizontalStackLayout>
                 <oxy:PlotView
-                    x:Name="_generator1Plot"
                     HeightRequest="200"
                     IsEnabled="{Binding IsOpen}"
-                    Model="{Binding Generator1Model}"
+                    Model="{Binding ModelPwm1}"
                     WidthRequest="200" />
             </VerticalStackLayout>
         </Frame>
@@ -102,8 +101,8 @@
             BorderColor="Black">
             <VerticalStackLayout
                 Margin="20,20,0,0"
-                RadioButtonGroup.GroupName="Function2"
-                RadioButtonGroup.SelectedValue="{Binding Function2}"
+                RadioButtonGroup.GroupName="FunctionPwm2"
+                RadioButtonGroup.SelectedValue="{Binding FunctionPwm2}"
                 Spacing="10">
                 <Label Text="{x:Static strings:AppResources.GeneratorPwm2}" />
                 <RadioButton
@@ -114,7 +113,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator2Command}"
+                            Command="{Binding GeneratorPwm2Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -125,7 +124,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator2Command}"
+                            Command="{Binding GeneratorPwm2Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -136,7 +135,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator2Command}"
+                            Command="{Binding GeneratorPwm2Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -147,7 +146,7 @@
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding Generator2Command}"
+                            Command="{Binding GeneratorPwm2Command}"
                             EventName="CheckedChanged" />
                     </RadioButton.Behaviors>
                 </RadioButton>
@@ -155,9 +154,9 @@
                 <Picker
                     IsEnabled="{Binding IsOpen}"
                     ItemsSource="{Binding Periods}"
-                    SelectedItem="{Binding Period2, Mode=TwoWay}">
+                    SelectedItem="{Binding PeriodPwm2, Mode=TwoWay}">
                     <Picker.Behaviors>
-                        <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="SelectedIndexChanged" />
+                        <toolkit:EventToCommandBehavior Command="{Binding GeneratorPwm2Command}" EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
                 <Label Text="{x:Static strings:AppResources.DutyCycle}" />
@@ -167,19 +166,105 @@
                         Maximum="100"
                         Minimum="0"
                         MinimumWidthRequest="150"
-                        Value="{Binding DutyCycle2}">
+                        Value="{Binding DutyCyclePwm2}">
                         <Slider.Behaviors>
-                            <toolkit:EventToCommandBehavior Command="{Binding Generator2Command}" EventName="ValueChanged" />
+                            <toolkit:EventToCommandBehavior Command="{Binding GeneratorPwm2Command}" EventName="ValueChanged" />
                         </Slider.Behaviors>
                     </Slider>
-                    <Label Text="{Binding DutyCycle2}" />
+                    <Label Text="{Binding DutyCyclePwm2}" />
                 </HorizontalStackLayout>
                 <Grid>
                     <oxy:PlotView
-                        x:Name="_generator2Plot"
                         HeightRequest="200"
                         IsEnabled="{Binding IsOpen}"
-                        Model="{Binding Generator2Model}"
+                        Model="{Binding ModelPwm2}"
+                        WidthRequest="200" />
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+        <Frame
+            Grid.Row="1"
+            Margin="10"
+            BorderColor="Black">
+            <VerticalStackLayout
+                Margin="20,20,0,0"
+                RadioButtonGroup.GroupName="FunctionAnalog6"
+                RadioButtonGroup.SelectedValue="{Binding FunctionAnalog6}"
+                Spacing="10">
+                <Label Text="{x:Static strings:AppResources.GeneratorAnalog6}" />
+                <RadioButton
+                    Content="{x:Static strings:AppResources.OffWave}"
+                    IsChecked="true"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.Off}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding GeneratorAnalog6Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton
+                    Content="{x:Static strings:AppResources.SineWave}"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SineWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding GeneratorAnalog6Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton
+                    Content="{x:Static strings:AppResources.TriangleWave}"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.TriangleWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding GeneratorAnalog6Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton
+                    Content="{x:Static strings:AppResources.SquareWave}"
+                    IsEnabled="{Binding IsOpen}"
+                    Value="{x:Static vm:GeneratorFunction.SquareWave}">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:TypeArguments="CheckedChangedEventArgs"
+                            Command="{Binding GeneratorAnalog6Command}"
+                            EventName="CheckedChanged" />
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <Label Text="{x:Static strings:AppResources.Period}" />
+                <Picker
+                    IsEnabled="{Binding IsOpen}"
+                    ItemsSource="{Binding Periods}"
+                    SelectedItem="{Binding PeriodAnalog6, Mode=TwoWay}">
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding GeneratorAnalog6Command}" EventName="SelectedIndexChanged" />
+                    </Picker.Behaviors>
+                </Picker>
+                <Label Text="{x:Static strings:AppResources.DutyCycle}" />
+                <HorizontalStackLayout Spacing="5">
+                    <Slider
+                        IsEnabled="{Binding IsOpen}"
+                        Maximum="100"
+                        Minimum="0"
+                        MinimumWidthRequest="150"
+                        Value="{Binding DutyCycleAnalog6}">
+                        <Slider.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding GeneratorAnalog6Command}" EventName="ValueChanged" />
+                        </Slider.Behaviors>
+                    </Slider>
+                    <Label Text="{Binding DutyCycleAnalog6}" />
+                </HorizontalStackLayout>
+                <Grid>
+                    <oxy:PlotView
+                        HeightRequest="200"
+                        IsEnabled="{Binding IsOpen}"
+                        Model="{Binding ModelAnalog6}"
                         WidthRequest="200" />
                 </Grid>
             </VerticalStackLayout>

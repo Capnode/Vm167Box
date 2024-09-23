@@ -47,6 +47,9 @@ internal class SettingsService : ISettingsService
     private AnalogChannel _analog5 = new();
     public AnalogChannel Analog5 => _analog5;
 
+    private AnalogChannel _analog6 = new();
+    public AnalogChannel Analog6 => _analog6;
+
     private AnalogChannel _pwm1 = new();
     public AnalogChannel Pwm1 => _pwm1;
 
@@ -438,6 +441,83 @@ internal class SettingsService : ISettingsService
         }
     }
 
+    public string Analog6Name
+    {
+        get => _settings.Get(Key(), AppResources.Analog6);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.Name = value;
+            Update?.Invoke();
+        }
+    }
+
+    public string Analog6Unit
+    {
+        get => _settings.Get(Key(), string.Empty);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.Unit = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog6Decimals
+    {
+        get => _settings.Get(Key(), Decimals);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.Decimals = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog6MinSignal
+    {
+        get => _settings.Get(Key(), IVm167.AnalogMin);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.MinSignal = value;
+            Update?.Invoke();
+        }
+    }
+
+    public double Analog6MinValue
+    {
+        get => _settings.Get(Key(), (double)IVm167.AnalogMin);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.MinValue = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int Analog6MaxSignal
+    {
+        get => _settings.Get(Key(), IVm167.AnalogMax);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.MaxSignal = value;
+            Update?.Invoke();
+        }
+    }
+
+    public double Analog6MaxValue
+    {
+        get => _settings.Get(Key(), (double)IVm167.AnalogMax);
+        set
+        {
+            _settings.Set(Key(), value);
+            _analog6.MaxValue = value;
+            Update?.Invoke();
+        }
+    }
+
     public string Pwm1Name
     {
         get => _settings.Get(Key(), AppResources.Pwm1);
@@ -648,6 +728,13 @@ internal class SettingsService : ISettingsService
         _analog5.MinValue = Analog5MinValue;
         _analog5.MaxSignal = Analog5MaxSignal;
         _analog5.MaxValue = Analog5MaxValue;
+        _analog6.Name = Analog6Name;
+        _analog6.Unit = Analog6Unit;
+        _analog6.Decimals = Analog6Decimals;
+        _analog6.MinSignal = Analog6MinSignal;
+        _analog6.MinValue = Analog6MinValue;
+        _analog6.MaxSignal = Analog6MaxSignal;
+        _analog6.MaxValue = Analog6MaxValue;
         _pwm1.Name = Pwm1Name;
         _pwm1.Unit = Pwm1Unit;
         _pwm1.Decimals = Pwm1Decimals;

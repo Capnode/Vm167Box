@@ -131,6 +131,8 @@ public partial class PanelViewModel : ObservableObject
 
     public AnalogChannel Analog5 => _vm167Service.Analog5;
 
+    public AnalogChannel Analog6 => _settingsService.Analog6;
+
     [ObservableProperty]
     private AnalogChannel _pwm1 = new();
 
@@ -300,6 +302,12 @@ public partial class PanelViewModel : ObservableObject
                 break;
             case "5H":
                 _settingsService.Analog5MaxSignal = Analog5.Signal;
+                break;
+            case "6L":
+                _settingsService.Analog6MinSignal = Analog6.Signal;
+                break;
+            case "6H":
+                _settingsService.Analog6MaxSignal = Analog6.Signal;
                 break;
         }
 
@@ -472,6 +480,7 @@ public partial class PanelViewModel : ObservableObject
         if (Analog3.Changed) OnPropertyChanged(nameof(Analog3));
         if (Analog4.Changed) OnPropertyChanged(nameof(Analog4));
         if (Analog5.Changed) OnPropertyChanged(nameof(Analog5));
+        if (Analog6.Changed) OnPropertyChanged(nameof(Analog6));
 
         if (Pwm1.Changed)
         {
@@ -519,6 +528,7 @@ public partial class PanelViewModel : ObservableObject
             AddPoint(i++, timestamp, Analog3.Value);
             AddPoint(i++, timestamp, Analog4.Value);
             AddPoint(i++, timestamp, Analog5.Value);
+            AddPoint(i++, timestamp, Analog6.Value);
             AddPoint(i++, timestamp, Pwm1.Value);
             AddPoint(i++, timestamp, Pwm2.Value);
             ScopeModel.InvalidatePlot(true);
@@ -557,6 +567,7 @@ public partial class PanelViewModel : ObservableObject
         AddSerie(Analog3.Name, Analog3.Unit, Resources.AppResources.AnalogIn, _settingsService.Analog3MinValue, _settingsService.Analog3MaxValue);
         AddSerie(Analog4.Name, Analog4.Unit, Resources.AppResources.AnalogIn, _settingsService.Analog4MinValue, _settingsService.Analog4MaxValue);
         AddSerie(Analog5.Name, Analog5.Unit, Resources.AppResources.AnalogIn, _settingsService.Analog5MinValue, _settingsService.Analog5MaxValue);
+        AddSerie(Analog6.Name, Analog6.Unit, Resources.AppResources.AnalogIn, _settingsService.Analog6MinValue, _settingsService.Analog6MaxValue);
         AddSerie(Pwm1.Name, Pwm1.Unit, Resources.AppResources.PwmOut, _settingsService.Pwm1MinValue, _settingsService.Pwm1MaxValue);
         AddSerie(Pwm2.Name, Pwm2.Unit, Resources.AppResources.PwmOut, _settingsService.Pwm2MinValue, _settingsService.Pwm2MaxValue);
 
@@ -581,7 +592,7 @@ public partial class PanelViewModel : ObservableObject
             unit = fallback;
         }
 
-        var key = $"{unit}_{minValue}_{maxValue}";
+        var key = $"{unit}";
         var count = ScopeModel.Axes.Count;
         var axes = ScopeModel.Axes.FirstOrDefault(a => a.Key == key);
         if (axes == default)

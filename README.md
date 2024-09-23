@@ -14,3 +14,5 @@ The VM167 USB interface board has 8 digital input/output channels, five analog i
 - Velleman VM167 [SDK Rev 1.18.18](https://cdn.velleman.eu/downloads/files/downloads/vm167_sdk_rev1818.exe) software development pack with drivers,DLL,demo, diagnose and program examples.
 
 
+## PID Controller
+- [PID Controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller)

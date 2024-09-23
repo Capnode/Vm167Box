@@ -453,6 +453,85 @@
                             </Entry.Behaviors>
                         </Entry>
                     </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            MinimumWidthRequest="80"
+                            Text="{x:Static strings:AppResources.Analog6}"
+                            VerticalOptions="Center" />
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6Name}"
+                            MinimumWidthRequest="100"
+                            Placeholder="{x:Static strings:AppResources.Name}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6Unit}"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.Unit}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6Decimals}"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.Decimals}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6MinSignal}"
+                            behaviors:NumericValidation.DecimalPlaces="0"
+                            behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
+                            behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinSignal}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6MinValue}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MinValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6MaxSignal}"
+                            behaviors:NumericValidation.DecimalPlaces="0"
+                            behaviors:NumericValidation.MaximumValue="{Binding Source={x:Static lib:IVm167.AnalogMax}}"
+                            behaviors:NumericValidation.MinimumValue="{Binding Source={x:Static lib:IVm167.AnalogMin}}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxSignal}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding Analog6MaxValue}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="80"
+                            Placeholder="{x:Static strings:AppResources.MaxValue}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
             <Frame Padding="10">

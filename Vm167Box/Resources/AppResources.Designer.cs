@@ -124,6 +124,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analog6.
+        /// </summary>
+        internal static string Analog6 {
+            get {
+                return ResourceManager.GetString("Analog6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analog In.
         /// </summary>
         internal static string AnalogIn {
@@ -273,6 +282,15 @@ namespace Vm167Box.Resources {
         internal static string DutyCycle {
             get {
                 return ResourceManager.GetString("DutyCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generator Analog6.
+        /// </summary>
+        internal static string GeneratorAnalog6 {
+            get {
+                return ResourceManager.GetString("GeneratorAnalog6", resourceCulture);
             }
         }
         

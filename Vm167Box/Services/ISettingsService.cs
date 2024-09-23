@@ -13,6 +13,7 @@ public interface ISettingsService
     AnalogChannel Analog3 { get; }
     AnalogChannel Analog4 { get; }
     AnalogChannel Analog5 { get; }
+    AnalogChannel Analog6 { get; }
     AnalogChannel Pwm1 { get; }
     AnalogChannel Pwm2 { get; }
 
@@ -55,6 +56,14 @@ public interface ISettingsService
     double Analog5MinValue { get; set; }
     int Analog5MaxSignal { get; set; }
     double Analog5MaxValue { get; set; }
+
+    string Analog6Name { get; set; }
+    string Analog6Unit { get; set; }
+    int Analog6Decimals { get; set; }
+    int Analog6MinSignal { get; set; }
+    double Analog6MinValue { get; set; }
+    int Analog6MaxSignal { get; set; }
+    double Analog6MaxValue { get; set; }
 
     string Pwm1Name { get; set; }
     string Pwm1Unit { get; set; }

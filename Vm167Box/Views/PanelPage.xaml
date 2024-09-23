@@ -169,14 +169,17 @@
                         <Label
                             Text="{Binding Analog1.Name}"
                             VerticalTextAlignment="Center"
-                            WidthRequest="60" />
+                            WidthRequest="80" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
                             Progress="{Binding Analog1, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog1, Converter={StaticResource AnalogToString}}" VerticalTextAlignment="Center" WidthRequest="60"/>
+                        <Label
+                            Text="{Binding Analog1, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="1L"
@@ -192,14 +195,17 @@
                         <Label
                             Text="{Binding Analog2.Name}"
                             VerticalTextAlignment="Center"
-                            WidthRequest="60" />
+                            WidthRequest="80" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
                             Progress="{Binding Analog2, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog2, Converter={StaticResource AnalogToString}}" VerticalTextAlignment="Center" WidthRequest="60" />
+                        <Label
+                            Text="{Binding Analog2, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="2L"
@@ -215,14 +221,17 @@
                         <Label
                             Text="{Binding Analog3.Name}"
                             VerticalTextAlignment="Center"
-                            WidthRequest="60" />
+                            WidthRequest="80" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
                             Progress="{Binding Analog3, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog3, Converter={StaticResource AnalogToString}}" VerticalTextAlignment="Center" WidthRequest="60"/>
+                        <Label
+                            Text="{Binding Analog3, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="3L"
@@ -238,14 +247,17 @@
                         <Label
                             Text="{Binding Analog4.Name}"
                             VerticalTextAlignment="Center"
-                            WidthRequest="60" />
+                            WidthRequest="80" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
                             Progress="{Binding Analog4, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog4, Converter={StaticResource AnalogToString}}" VerticalTextAlignment="Center" WidthRequest="60"/>
+                        <Label
+                            Text="{Binding Analog4, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="4L"
@@ -261,14 +273,17 @@
                         <Label
                             Text="{Binding Analog5.Name}"
                             VerticalTextAlignment="Center"
-                            WidthRequest="60" />
+                            WidthRequest="80" />
                         <ProgressBar
                             HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
                             Progress="{Binding Analog5, Converter={StaticResource AnalogToUnit}}"
                             ScaleY="3"
                             WidthRequest="150" />
-                        <Label Text="{Binding Analog5, Converter={StaticResource AnalogToString}}" VerticalTextAlignment="Center" WidthRequest="60"/>
+                        <Label
+                            Text="{Binding Analog5, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="5L"
@@ -277,6 +292,32 @@
                         <Button
                             Command="{Binding CalibrateCommand}"
                             CommandParameter="5H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog6.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
+                            IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog6, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog6, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="6L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="6H"
                             Text="{x:Static strings:AppResources.CalibrateHighShort}"
                             ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
                     </HorizontalStackLayout>

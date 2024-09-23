@@ -237,6 +237,48 @@ namespace Vm167Box.ViewModels
             set => _settingsService.Analog5MaxValue = value;
         }
 
+        public string Analog6Name
+        {
+            get => _settingsService.Analog6Name;
+            set => _settingsService.Analog6Name = value;
+        }
+
+        public string Analog6Unit
+        {
+            get => _settingsService.Analog6Unit;
+            set => _settingsService.Analog6Unit = value;
+        }
+
+        public int Analog6Decimals
+        {
+            get => _settingsService.Analog6Decimals;
+            set => _settingsService.Analog6Decimals = value;
+        }
+
+        public int Analog6MinSignal
+        {
+            get => _settingsService.Analog6MinSignal;
+            set => _settingsService.Analog6MinSignal = value;
+        }
+
+        public double Analog6MinValue
+        {
+            get => _settingsService.Analog6MinValue;
+            set => _settingsService.Analog6MinValue = value;
+        }
+
+        public int Analog6MaxSignal
+        {
+            get => _settingsService.Analog6MaxSignal;
+            set => _settingsService.Analog6MaxSignal = value;
+        }
+
+        public double Analog6MaxValue
+        {
+            get => _settingsService.Analog6MaxValue;
+            set => _settingsService.Analog6MaxValue = value;
+        }
+
         public string Pwm1Name
         {
             get => _settingsService.Pwm1Name;

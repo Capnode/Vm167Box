@@ -288,4 +288,10 @@
   <data name="CalibrateLow" xml:space="preserve">
     <value>Kalibrera lägsta värde</value>
   </data>
+  <data name="Analog6" xml:space="preserve">
+    <value>Analog6</value>
+  </data>
+  <data name="GeneratorAnalog6" xml:space="preserve">
+    <value>Generator Analog6</value>
+  </data>
 </root>
