@@ -89,6 +89,7 @@
                     <Label Text="{Binding DutyCyclePwm1}" />
                 </HorizontalStackLayout>
                 <oxy:PlotView
+                    x:Name="_plotPwm1"
                     HeightRequest="200"
                     IsEnabled="{Binding IsOpen}"
                     Model="{Binding ModelPwm1}"
@@ -175,6 +176,7 @@
                 </HorizontalStackLayout>
                 <Grid>
                     <oxy:PlotView
+                        x:Name="_plotPwm2"
                         HeightRequest="200"
                         IsEnabled="{Binding IsOpen}"
                         Model="{Binding ModelPwm2}"
@@ -262,6 +264,7 @@
                 </HorizontalStackLayout>
                 <Grid>
                     <oxy:PlotView
+                        x:Name="_plotAnalog6"
                         HeightRequest="200"
                         IsEnabled="{Binding IsOpen}"
                         Model="{Binding ModelAnalog6}"

@@ -350,7 +350,6 @@
                                 Value="{Binding Pwm1.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                                 <Label Text="{Binding Pwm1, Converter={StaticResource AnalogToString}}" />
-                                <Label Text="{Binding Pwm1.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                         <VerticalStackLayout Spacing="10">
@@ -367,7 +366,6 @@
                                 Value="{Binding Pwm2.Signal}" />
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                                 <Label Text="{Binding Pwm2, Converter={StaticResource AnalogToString}}" />
-                                <Label Text="{Binding Pwm2.Unit}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
