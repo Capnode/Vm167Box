@@ -53,6 +53,13 @@
         Shell.NavBarIsVisible="true" />
 
     <ShellContent
+        Title="{x:Static strings:AppResources.RegulatorTitle}"
+        ContentTemplate="{DataTemplate views:RegulatorPage}"
+        Icon="regulator.png"
+        Route="RegulatorPage"
+        Shell.NavBarIsVisible="true" />
+
+    <ShellContent
         Title="{x:Static strings:AppResources.Settings}"
         ContentTemplate="{DataTemplate views:SettingsPage}"
         Icon="{FontImage FontFamily=FontAwesomeSolid,

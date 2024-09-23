@@ -294,4 +294,13 @@
   <data name="GeneratorAnalog6" xml:space="preserve">
     <value>Generator Analog6</value>
   </data>
+  <data name="RegulatorStop" xml:space="preserve">
+    <value>Stoppa</value>
+  </data>
+  <data name="RegulatorStart" xml:space="preserve">
+    <value>Starta</value>
+  </data>
+  <data name="RegulatorTitle" xml:space="preserve">
+    <value>Regulator</value>
+  </data>
 </root>

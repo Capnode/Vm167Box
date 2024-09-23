@@ -439,6 +439,33 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string RegulatorStart {
+            get {
+                return ResourceManager.GetString("RegulatorStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string RegulatorStop {
+            get {
+                return ResourceManager.GetString("RegulatorStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regulator.
+        /// </summary>
+        internal static string RegulatorTitle {
+            get {
+                return ResourceManager.GetString("RegulatorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
         internal static string Reset {

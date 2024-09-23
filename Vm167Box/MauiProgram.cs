@@ -39,12 +39,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<PanelPage>();
         builder.Services.AddSingleton<ScopePage>();
         builder.Services.AddSingleton<GeneratorPage>();
+        builder.Services.AddSingleton<RegulatorPage>();
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddSingleton<AboutPage>();
 
         // ViewModels
         builder.Services.AddSingleton<PanelViewModel>();
         builder.Services.AddSingleton<GeneratorViewModel>();
+        builder.Services.AddSingleton<RegulatorViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton<AboutViewModel>();
 

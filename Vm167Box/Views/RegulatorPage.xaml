@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Vm167Box.Views.RegulatorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Vm167Box.Behaviors"
+    xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
+    xmlns:strings="clr-namespace:Vm167Box.Resources"
+    xmlns:styles="clr-namespace:Vm167Box.Resources.Styles"
+    xmlns:vm="clr-namespace:Vm167Box.ViewModels"
+    x:DataType="vm:RegulatorViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding StopCommand}"
+            IconImageSource="{FontImage FontFamily=FontAwesomeSolid,
+                                        Color=Black,
+                                        Glyph={x:Static styles:FontAwesomeSolid.Stop},
+                                        Size=20}"
+            Text="{x:Static strings:AppResources.RegulatorStop}" />
+        <ToolbarItem
+            Command="{Binding StartCommand}"
+            IconImageSource="{FontImage FontFamily=FontAwesomeSolid,
+                                        Color=Black,
+                                        Glyph={x:Static styles:FontAwesomeSolid.Play},
+                                        Size=20}"
+            Text="{x:Static strings:AppResources.RegulatorStart}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Margin="10" Spacing="10">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="{x:Static strings:AppResources.ThemeToggle}" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

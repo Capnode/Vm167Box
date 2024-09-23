@@ -99,6 +99,9 @@
 	  <Compile Update="Views\PanelPage.xaml.cs">
 	    <DependentUpon>PanelPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\RegulatorPage.xaml.cs">
+	    <DependentUpon>RegulatorPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -116,6 +119,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ScopePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RegulatorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SettingsPage.xaml">
