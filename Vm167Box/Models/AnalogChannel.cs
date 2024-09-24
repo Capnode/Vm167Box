@@ -133,7 +133,8 @@
 
         private int ToSignal(double value)
         {
-            return MinSignal + (int)((value - MinValue) * (MaxSignal - MinSignal) / (MaxValue - MinValue));
+            var signal = MinSignal + (int)((value - MinValue) * (MaxSignal - MinSignal) / (MaxValue - MinValue));
+            return signal < MinSignal ? MinSignal : signal > MaxSignal ? MaxSignal : signal;
         }
     }
 }

@@ -223,6 +223,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control.
+        /// </summary>
+        internal static string ControlSignal {
+            get {
+                return ResourceManager.GetString("ControlSignal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Counter.
         /// </summary>
         internal static string Counter {
@@ -282,6 +291,24 @@ namespace Vm167Box.Resources {
         internal static string DutyCycle {
             get {
                 return ResourceManager.GetString("DutyCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback.
+        /// </summary>
+        internal static string FeedbackSignal {
+            get {
+                return ResourceManager.GetString("FeedbackSignal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gain PID.
+        /// </summary>
+        internal static string Gain {
+            get {
+                return ResourceManager.GetString("Gain", resourceCulture);
             }
         }
         
@@ -439,6 +466,42 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference.
+        /// </summary>
+        internal static string ReferenceSignal {
+            get {
+                return ResourceManager.GetString("ReferenceSignal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Derivative.
+        /// </summary>
+        internal static string RegulatorKd {
+            get {
+                return ResourceManager.GetString("RegulatorKd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integral.
+        /// </summary>
+        internal static string RegulatorKi {
+            get {
+                return ResourceManager.GetString("RegulatorKi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proportional.
+        /// </summary>
+        internal static string RegulatorKp {
+            get {
+                return ResourceManager.GetString("RegulatorKp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         internal static string RegulatorStart {
@@ -520,6 +583,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Safety.
+        /// </summary>
+        internal static string Safety {
+            get {
+                return ResourceManager.GetString("Safety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scope.
         /// </summary>
         internal static string ScopeTitle {
@@ -552,6 +624,15 @@ namespace Vm167Box.Resources {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signals.
+        /// </summary>
+        internal static string Signals {
+            get {
+                return ResourceManager.GetString("Signals", resourceCulture);
             }
         }
         

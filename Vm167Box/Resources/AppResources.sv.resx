@@ -303,4 +303,31 @@
   <data name="RegulatorTitle" xml:space="preserve">
     <value>Regulator</value>
   </data>
+  <data name="ReferenceSignal" xml:space="preserve">
+    <value>Referens</value>
+  </data>
+  <data name="FeedbackSignal" xml:space="preserve">
+    <value>Återkoppling</value>
+  </data>
+  <data name="ControlSignal" xml:space="preserve">
+    <value>Styrsignal</value>
+  </data>
+  <data name="RegulatorKp" xml:space="preserve">
+    <value>Proportionell</value>
+  </data>
+  <data name="RegulatorKi" xml:space="preserve">
+    <value>Integrerande</value>
+  </data>
+  <data name="RegulatorKd" xml:space="preserve">
+    <value>Deriverande</value>
+  </data>
+  <data name="Signals" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="Gain" xml:space="preserve">
+    <value>Förstärkning PID</value>
+  </data>
+  <data name="Safety" xml:space="preserve">
+    <value>Säkerhet</value>
+  </data>
 </root>

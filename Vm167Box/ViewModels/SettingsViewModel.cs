@@ -370,7 +370,7 @@ namespace Vm167Box.ViewModels
             _settingsService.Reset();
         }
 
-        private Task UpdateSettings()
+        private void UpdateSettings()
         {
             OnPropertyChanged(nameof(IsLightTheme));
             OnPropertyChanged(nameof(Analog1Name));
@@ -422,7 +422,6 @@ namespace Vm167Box.ViewModels
             OnPropertyChanged(nameof(Pwm2MinValue));
             OnPropertyChanged(nameof(Pwm2MaxSignal));
             OnPropertyChanged(nameof(Pwm2MaxValue));
-            return Task.CompletedTask;
         }
     }
 }

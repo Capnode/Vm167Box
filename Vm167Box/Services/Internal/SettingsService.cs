@@ -10,16 +10,17 @@ internal class SettingsService : ISettingsService
 {
     public const int Decimals = 2;
 
-    public event Func<Task>? Update;
+    public event Action? Update;
 
     private readonly ILogger<SettingsService> _logger;
     private readonly IPreferences _settings = Preferences.Default;
 
-    private int _deviceId;
+    private int _deviceId = 0;
 
     public SettingsService(ILogger<SettingsService> logger)
     {
         _logger = logger;
+        LoadChannels();
     }
 
     public AppTheme AppTheme
@@ -668,6 +669,76 @@ internal class SettingsService : ISettingsService
         {
             _settings.Set(Key(), value);
             _pwm2.MaxValue = value;
+            Update?.Invoke();
+        }
+    }
+
+    public int ReferenceIndex
+    {
+        get => _settings.Get(Key(), 0);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public int FeedbackIndex
+    {
+        get => _settings.Get(Key(), 0);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public int ControlIndex
+    {
+        get => _settings.Get(Key(), 0);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public double RegulatorKp
+    {
+        get => _settings.Get(Key(), 1d);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public double RegulatorKi
+    {
+        get => _settings.Get(Key(), 0d);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public double RegulatorKd
+    {
+        get => _settings.Get(Key(), 0d);
+        set
+        {
+            _settings.Set(Key(), value);
+            Update?.Invoke();
+        }
+    }
+
+    public string Safety
+    {
+        get => _settings.Get(Key(), string.Empty);
+        set
+        {
+            _settings.Set(Key(), value);
             Update?.Invoke();
         }
     }

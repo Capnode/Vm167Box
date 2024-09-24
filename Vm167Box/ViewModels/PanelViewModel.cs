@@ -54,11 +54,7 @@ public partial class PanelViewModel : ObservableObject
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
         UpdateSettings();
 
-        _settingsService.Update += () =>
-        {
-            UpdateSettings();
-            return Task.CompletedTask;
-        };
+        _settingsService.Update += UpdateSettings;
     }
 
 

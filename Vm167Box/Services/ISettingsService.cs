@@ -4,7 +4,7 @@ namespace Vm167Box.Services;
 
 public interface ISettingsService
 {
-    public event Func<Task> Update;
+    public event Action Update;
 
     AppTheme AppTheme { get; set; }
 
@@ -80,6 +80,16 @@ public interface ISettingsService
     double Pwm2MinValue { get; set; }
     int Pwm2MaxSignal { get; set; }
     double Pwm2MaxValue { get; set; }
+
+    int ReferenceIndex { get; set; }
+    int FeedbackIndex { get; set; }
+    int ControlIndex { get; set; }
+
+    double RegulatorKp { get; set; }
+    double RegulatorKi { get; set; }
+    double RegulatorKd { get; set; }
+
+    string Safety { get; set; }
 
     /// <summary>
     /// Initialize the settings service and load the settings for the device.

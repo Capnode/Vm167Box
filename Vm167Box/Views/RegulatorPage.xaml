@@ -7,6 +7,7 @@
     xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
     xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:styles="clr-namespace:Vm167Box.Resources.Styles"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:RegulatorViewModel">
 
@@ -27,11 +28,115 @@
             Text="{x:Static strings:AppResources.RegulatorStart}" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
-        <VerticalStackLayout Margin="10" Spacing="10">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="{x:Static strings:AppResources.ThemeToggle}" VerticalOptions="Center" />
-            </HorizontalStackLayout>
+    <Grid ColumnDefinitions="Auto, *">
+        <VerticalStackLayout
+            Grid.Row="0"
+            Margin="10"
+            Spacing="10">
+            <Frame>
+                <VerticalStackLayout Spacing="10">
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Signals}" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{x:Static strings:AppResources.ReferenceSignal}" WidthRequest="130" />
+                        <Picker
+                            Margin="10,-10,0,0"
+                            IsEnabled="{Binding IsOpen}"
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding Inputs}"
+                            SelectedItem="{Binding ReferenceSignal, Mode=TwoWay}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{x:Static strings:AppResources.FeedbackSignal}" WidthRequest="130" />
+                        <Picker
+                            Margin="10,-10,0,0"
+                            IsEnabled="{Binding IsOpen}"
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding Inputs}"
+                            SelectedItem="{Binding FeedbackSignal, Mode=TwoWay}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{x:Static strings:AppResources.ControlSignal}" WidthRequest="130" />
+                        <Picker
+                            Margin="10,-10,0,0"
+                            IsEnabled="{Binding IsOpen}"
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding Outputs}"
+                            SelectedItem="{Binding ControlSignal, Mode=TwoWay}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout>
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Gain}" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            Text="{x:Static strings:AppResources.RegulatorKp}"
+                            VerticalOptions="Center"
+                            WidthRequest="130" />
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding RegulatorKp}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            Placeholder="{x:Static strings:AppResources.RegulatorKp}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}"
+                            WidthRequest="100">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            MinimumWidthRequest="130"
+                            Text="{x:Static strings:AppResources.RegulatorKi}"
+                            VerticalOptions="Center" />
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding RegulatorKi}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            Placeholder="{x:Static strings:AppResources.RegulatorKi}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}"
+                            WidthRequest="100">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            MinimumWidthRequest="130"
+                            Text="{x:Static strings:AppResources.RegulatorKd}"
+                            VerticalOptions="Center" />
+                        <Entry
+                            behaviors:EntryLostFocus.Text="{Binding RegulatorKd}"
+                            behaviors:NumericValidation.ZZZActivate="True"
+                            MinimumWidthRequest="100"
+                            Placeholder="{x:Static strings:AppResources.RegulatorKd}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
+                            <Entry.Behaviors>
+                                <behaviors:EntryLostFocus />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame BackgroundColor="Yellow">
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Safety}" />
+                    </toolkit:Expander.Header>
+                    <ListView ItemsSource="{Binding Safety}" VerticalScrollBarVisibility="Always">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:SafetyViewModel">
+                                <ViewCell>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <CheckBox IsChecked="{Binding IsSafe}" />
+                                        <Label Text="{Binding Channel.Name}" VerticalTextAlignment="Center" />
+                                    </HorizontalStackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </toolkit:Expander>
+            </Frame>
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>
