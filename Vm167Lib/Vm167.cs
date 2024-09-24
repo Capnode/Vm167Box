@@ -8,6 +8,10 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
     protected const uint Vid = 0x10cf;
     protected const uint Pid0 = 0x1670;
     protected const uint Pid1 = 0x1671;
+    protected const int Pwm1 = 1;
+    protected const int Pwm2 = 2;
+    protected const int Channel1 = 1;
+    protected const int Channel8 = 8;
 
     protected readonly ILogger<Vm167> _logger = logger;
     private readonly SemaphoreSlim _lock = new(1, 1);
@@ -95,17 +99,9 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             _logger.LogTrace(">SetPWM({},{},{},{})", CardAddress, Channel, Data, Freq);
             var buffer = _deviceBuffer[CardAddress];
-            if (Channel > 2) Channel = 2;
-            if (Channel < 1) Channel = 1;
-            if (Freq > 3)
-            {
-                Freq = 3;
-            }
-
-            if (Freq < 1)
-            {
-                Freq = 1;
-            }
+            Channel = Validate(Channel, Pwm1, Pwm2);
+            Freq = Validate(Freq, IVm167.Freq2930, IVm167.Freq46875);
+            Data = Validate(Data, IVm167.PwmMin, IVm167.PwmMax);
 
             buffer[0] = 2; // Set PWM
             buffer[1] = (byte)(Channel - 1);
@@ -122,6 +118,9 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             _logger.LogTrace(">OutputAllPWM({},{},{})", CardAddress, Data1, Data2);
             var buffer = _deviceBuffer[CardAddress];
+            Data1 = Validate(Data1, IVm167.PwmMin, IVm167.PwmMax);
+            Data2 = Validate(Data2, IVm167.PwmMin, IVm167.PwmMax);
+
             buffer[0] = 3; // Output All PWM
             buffer[1] = (byte)Data1;
             buffer[2] = (byte)Data2;
@@ -137,7 +136,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             _logger.LogTrace(">OutputAllDigital({},{})", CardAddress, Data);
             var buffer = _deviceBuffer[CardAddress];
             buffer[0] = 5; // Output All Digital
-            buffer[1] = (byte)Data;
+            buffer[1] = (byte)Validate(Data, 0, 255);
             await Write(CardAddress, 2);
             _logger.LogTrace("<OutputAllDigital()");
         }
@@ -149,16 +148,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             _logger.LogTrace(">ClearDigitalChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
-            if (Channel > 8)
-            {
-                Channel = 8;
-            }
-
-            if (Channel < 1)
-            {
-                Channel = 1;
-            }
-
+            Channel = Validate(Channel, Channel, Channel8);
             int k = ~(1 << (Channel - 1));
 
             buffer[0] = 6; // Clear Digital Channel
@@ -181,16 +171,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
         {
             _logger.LogTrace(">SetDigitalChannel({},{})", CardAddress, Channel);
             var buffer = _deviceBuffer[CardAddress];
-            if (Channel > 8)
-            {
-                Channel = 8;
-            }
-
-            if (Channel < 1)
-            {
-                Channel = 1;
-            }
-
+            Channel = Validate(Channel, Channel1, Channel8);
             int k = 1 << (Channel - 1);
 
             buffer[0] = 7; // Set Digital Channel
@@ -211,8 +192,7 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
     {
         _logger.LogTrace(">ReadDigitalChannel({},{})", CardAddress, Channel);
         var value = await ReadAllDigital(CardAddress);
-        Channel = Math.Max(Channel, 8);
-        Channel = Math.Min(Channel, 1);
+        Channel = Validate(Channel, Channel1, Channel8);
         var val = (value & (1 << (Channel - 1))) != 0;
         _logger.LogTrace("<ReadDigitalChannel() => {}", val);
         return val;
@@ -350,5 +330,10 @@ public partial class Vm167(ILogger<Vm167> logger) : IVm167, IDisposable
             _logger.LogTrace("<ReadBackInOutMode() => {}", value);
             return value;
         }
+    }
+
+    private int Validate(int value, int low, int high)
+    {
+        return value < low ? low : value > high ? high : value;
     }
 }
