@@ -5,12 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Vm167Box.Behaviors"
     xmlns:lib="clr-namespace:Vm167Lib;assembly=Vm167Lib"
+    xmlns:oxy="clr-namespace:OxyPlot.Maui.Skia;assembly=OxyPlot.Maui.Skia"
     xmlns:strings="clr-namespace:Vm167Box.Resources"
     xmlns:styles="clr-namespace:Vm167Box.Resources.Styles"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:Vm167Box.ViewModels"
     x:DataType="vm:RegulatorViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="TrueColor">Red</Color>
+            <Color x:Key="FalseColor">Yellow</Color>
+
+            <toolkit:BoolToObjectConverter x:Key="SafetyStopConverter" 
+                TrueObject="{StaticResource TrueColor}" 
+                FalseObject="{StaticResource FalseColor}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding StopCommand}"
@@ -26,6 +38,48 @@
                                         Glyph={x:Static styles:FontAwesomeSolid.Play},
                                         Size=20}"
             Text="{x:Static strings:AppResources.RegulatorStart}" />
+        <ToolbarItem
+            Command="{Binding RestartScopeCommand}"
+            IconImageSource="replay.png"
+            Order="Primary"
+            Text="{x:Static strings:AppResources.Restart}" />
+        <ToolbarItem
+            Command="{Binding ResetScopeCommand}"
+            IconImageSource="align_right.png"
+            Order="Primary"
+            Text="{x:Static strings:AppResources.Reset}" />
+        <ToolbarItem
+            Command="{Binding HistoryCommand}"
+            Order="Secondary"
+            Text="{x:Static strings:AppResources.s10}">
+            <ToolbarItem.CommandParameter>
+                <x:Int32>10</x:Int32>
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding HistoryCommand}"
+            Order="Secondary"
+            Text="{x:Static strings:AppResources.s100}">
+            <ToolbarItem.CommandParameter>
+                <x:Int32>100</x:Int32>
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding HistoryCommand}"
+            Order="Secondary"
+            Text="{x:Static strings:AppResources.s1000}">
+            <ToolbarItem.CommandParameter>
+                <x:Int32>1000</x:Int32>
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding HistoryCommand}"
+            Order="Secondary"
+            Text="{x:Static strings:AppResources.s10000}">
+            <ToolbarItem.CommandParameter>
+                <x:Int32>10000</x:Int32>
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <Grid ColumnDefinitions="Auto, *">
@@ -74,15 +128,11 @@
                             VerticalOptions="Center"
                             WidthRequest="130" />
                         <Entry
-                            behaviors:EntryLostFocus.Text="{Binding RegulatorKp}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             Placeholder="{x:Static strings:AppResources.RegulatorKp}"
+                            Text="{Binding RegulatorKp}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}"
-                            WidthRequest="100">
-                            <Entry.Behaviors>
-                                <behaviors:EntryLostFocus />
-                            </Entry.Behaviors>
-                        </Entry>
+                            WidthRequest="100" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
@@ -90,15 +140,11 @@
                             Text="{x:Static strings:AppResources.RegulatorKi}"
                             VerticalOptions="Center" />
                         <Entry
-                            behaviors:EntryLostFocus.Text="{Binding RegulatorKi}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             Placeholder="{x:Static strings:AppResources.RegulatorKi}"
+                            Text="{Binding RegulatorKi}"
                             ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}"
-                            WidthRequest="100">
-                            <Entry.Behaviors>
-                                <behaviors:EntryLostFocus />
-                            </Entry.Behaviors>
-                        </Entry>
+                            WidthRequest="100" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="10">
                         <Label
@@ -106,37 +152,46 @@
                             Text="{x:Static strings:AppResources.RegulatorKd}"
                             VerticalOptions="Center" />
                         <Entry
-                            behaviors:EntryLostFocus.Text="{Binding RegulatorKd}"
                             behaviors:NumericValidation.ZZZActivate="True"
                             MinimumWidthRequest="100"
                             Placeholder="{x:Static strings:AppResources.RegulatorKd}"
-                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}">
-                            <Entry.Behaviors>
-                                <behaviors:EntryLostFocus />
-                            </Entry.Behaviors>
-                        </Entry>
+                            Text="{Binding RegulatorKd}"
+                            ToolTipProperties.Text="{Binding Source={RelativeSource Self}, Path=Placeholder}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
-            <Frame BackgroundColor="Yellow">
+            <Frame BackgroundColor="{Binding IsSafetyStop, Converter={StaticResource SafetyStopConverter}}">
                 <toolkit:Expander>
                     <toolkit:Expander.Header>
                         <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Safety}" />
                     </toolkit:Expander.Header>
-                    <ListView ItemsSource="{Binding Safety}" VerticalScrollBarVisibility="Always">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="vm:SafetyViewModel">
-                                <ViewCell>
-                                    <HorizontalStackLayout Spacing="10">
-                                        <CheckBox IsChecked="{Binding IsSafe}" />
-                                        <Label Text="{Binding Channel.Name}" VerticalTextAlignment="Center" />
-                                    </HorizontalStackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <VerticalStackLayout>
+                        <Label Text="{x:Static strings:AppResources.SafetyInfo}" LineBreakMode="WordWrap" WidthRequest="200" HorizontalOptions="StartAndExpand"/>
+                        <ListView x:Name="_safetyList" ItemsSource="{Binding Safety}" VerticalScrollBarVisibility="Always">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SafetyViewModel">
+                                    <ViewCell>
+                                        <HorizontalStackLayout Spacing="10">
+                                            <CheckBox IsChecked="{Binding IsSafe}">
+                                                <CheckBox.Behaviors>
+                                                    <toolkit:EventToCommandBehavior
+                                                        x:TypeArguments="CheckedChangedEventArgs"
+                                                        Command="{Binding Path=BindingContext.SafetyChangedCommand, Source={x:Reference _safetyList}}"
+                                                        EventName="CheckedChanged" />
+                                                </CheckBox.Behaviors>
+                                            </CheckBox>
+                                            <Label Text="{Binding Channel.Name}" VerticalTextAlignment="Center" />
+                                        </HorizontalStackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </VerticalStackLayout>
                 </toolkit:Expander>
             </Frame>
         </VerticalStackLayout>
+        <Grid Grid.Column="1">
+            <oxy:PlotView x:Name="_scopeView" Model="{Binding ScopeModel}" />
+        </Grid>
     </Grid>
 </ContentPage>

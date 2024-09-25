@@ -592,6 +592,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abort when marked signals exceeds maximum value.
+        /// </summary>
+        internal static string SafetyInfo {
+            get {
+                return ResourceManager.GetString("SafetyInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scope.
         /// </summary>
         internal static string ScopeTitle {

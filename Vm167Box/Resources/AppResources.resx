@@ -330,4 +330,7 @@
   <data name="Safety" xml:space="preserve">
     <value>Safety</value>
   </data>
+  <data name="SafetyInfo" xml:space="preserve">
+    <value>Abort when marked signals exceeds maximum value</value>
+  </data>
 </root>

@@ -408,6 +408,13 @@ namespace Vm167Box.ViewModels
             OnPropertyChanged(nameof(Analog5MinValue));
             OnPropertyChanged(nameof(Analog5MaxSignal));
             OnPropertyChanged(nameof(Analog5MaxValue));
+            OnPropertyChanged(nameof(Analog6Name));
+            OnPropertyChanged(nameof(Analog6Unit));
+            OnPropertyChanged(nameof(Analog6Decimals));
+            OnPropertyChanged(nameof(Analog6MinSignal));
+            OnPropertyChanged(nameof(Analog6MinValue));
+            OnPropertyChanged(nameof(Analog6MaxSignal));
+            OnPropertyChanged(nameof(Analog6MaxValue));
             OnPropertyChanged(nameof(Pwm1Name));
             OnPropertyChanged(nameof(Pwm1Unit));
             OnPropertyChanged(nameof(Pwm1Decimals));

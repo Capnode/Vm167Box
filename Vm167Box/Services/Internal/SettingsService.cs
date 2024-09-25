@@ -62,6 +62,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog1);
         set
         {
+            if (Analog1Name == value) return;
             _settings.Set(Key(), value);
             _analog1.Name = value;
             Update?.Invoke();
@@ -73,6 +74,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog1Unit == value) return;
             _settings.Set(Key(), value);
             _analog1.Unit = value;
             Update?.Invoke();
@@ -84,6 +86,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog1Decimals == value) return;
             _settings.Set(Key(), value);
             _analog1.Decimals = value;
             Update?.Invoke();
@@ -95,6 +98,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog1MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog1.MinSignal = value;
             Update?.Invoke();
@@ -106,6 +110,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog1MinValue == value) return;
             _settings.Set(Key(), value);
             _analog1.MinValue = value;
             Update?.Invoke();
@@ -117,6 +122,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog1MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog1.MaxSignal = value;
             Update?.Invoke();
@@ -128,6 +134,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog1MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog1.MaxValue = value;
             Update?.Invoke();
@@ -139,6 +146,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog2);
         set
         {
+            if (Analog2Name == value) return;
             _settings.Set(Key(), value);
             _analog2.Name = value;
             Update?.Invoke();
@@ -150,6 +158,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog2Unit == value) return;
             _settings.Set(Key(), value);
             _analog2.Unit = value;
             Update?.Invoke();
@@ -161,6 +170,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog2Decimals == value) return;
             _settings.Set(Key(), value);
             _analog2.Decimals = value;
             Update?.Invoke();
@@ -172,6 +182,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog2MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog2.MinSignal = value;
             Update?.Invoke();
@@ -183,6 +194,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog2MinValue == value) return;
             _settings.Set(Key(), value);
             _analog2.MinValue = value;
             Update?.Invoke();
@@ -194,6 +206,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog2MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog2.MaxSignal = value;
             Update?.Invoke();
@@ -205,6 +218,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog2MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog2.MaxValue = value;
             Update?.Invoke();
@@ -216,6 +230,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog3);
         set
         {
+            if (Analog3Name == value) return;
             _settings.Set(Key(), value);
             _analog3.Name = value;
             Update?.Invoke();
@@ -227,6 +242,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog3Unit == value) return;
             _settings.Set(Key(), value);
             _analog3.Unit = value;
             Update?.Invoke();
@@ -238,6 +254,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog3Decimals == value) return;
             _settings.Set(Key(), value);
             _analog3.Decimals = value;
             Update?.Invoke();
@@ -249,6 +266,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog3MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog3.MinSignal = value;
             Update?.Invoke();
@@ -260,6 +278,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog3MinValue == value) return;
             _settings.Set(Key(), value);
             _analog3.MinValue = value;
             Update?.Invoke();
@@ -271,6 +290,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog3MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog3.MaxSignal = value;
             Update?.Invoke();
@@ -282,6 +302,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog3MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog3.MaxValue = value;
             Update?.Invoke();
@@ -293,6 +314,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog4);
         set
         {
+            if (Analog4Name == value) return;
             _settings.Set(Key(), value);
             _analog4.Name = value;
             Update?.Invoke();
@@ -304,6 +326,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog4Unit == value) return;
             _settings.Set(Key(), value);
             _analog4.Unit = value;
             Update?.Invoke();
@@ -315,6 +338,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog4Decimals == value) return;
             _settings.Set(Key(), value);
             _analog4.Decimals = value;
             Update?.Invoke();
@@ -326,6 +350,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog4MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog4.MinSignal = value;
             Update?.Invoke();
@@ -337,6 +362,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog4MinValue == value) return;
             _settings.Set(Key(), value);
             _analog4.MinValue = value;
             Update?.Invoke();
@@ -348,6 +374,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog4MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog4.MaxSignal = value;
             Update?.Invoke();
@@ -359,6 +386,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog4MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog4.MaxValue = value;
             Update?.Invoke();
@@ -370,6 +398,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog5);
         set
         {
+            if (Analog5Name == value) return;
             _settings.Set(Key(), value);
             _analog5.Name = value;
             Update?.Invoke();
@@ -381,6 +410,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog5Unit == value) return;
             _settings.Set(Key(), value);
             _analog5.Unit = value;
             Update?.Invoke();
@@ -392,6 +422,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog5Decimals == value) return;
             _settings.Set(Key(), value);
             _analog5.Decimals = value;
             Update?.Invoke();
@@ -403,6 +434,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog5MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog5.MinSignal = value;
             Update?.Invoke();
@@ -414,6 +446,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog5MinValue == value) return;
             _settings.Set(Key(), value);
             _analog5.MinValue = value;
             Update?.Invoke();
@@ -425,6 +458,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog5MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog5.MaxSignal = value;
             Update?.Invoke();
@@ -436,6 +470,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog5MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog5.MaxValue = value;
             Update?.Invoke();
@@ -447,6 +482,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Analog6);
         set
         {
+            if (Analog6Name == value) return;
             _settings.Set(Key(), value);
             _analog6.Name = value;
             Update?.Invoke();
@@ -458,6 +494,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Analog6Unit == value) return;
             _settings.Set(Key(), value);
             _analog6.Unit = value;
             Update?.Invoke();
@@ -469,6 +506,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Analog6Decimals == value) return;
             _settings.Set(Key(), value);
             _analog6.Decimals = value;
             Update?.Invoke();
@@ -480,6 +518,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMin);
         set
         {
+            if (Analog6MinSignal == value) return;
             _settings.Set(Key(), value);
             _analog6.MinSignal = value;
             Update?.Invoke();
@@ -491,6 +530,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMin);
         set
         {
+            if (Analog6MinValue == value) return;
             _settings.Set(Key(), value);
             _analog6.MinValue = value;
             Update?.Invoke();
@@ -502,6 +542,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.AnalogMax);
         set
         {
+            if (Analog6MaxSignal == value) return;
             _settings.Set(Key(), value);
             _analog6.MaxSignal = value;
             Update?.Invoke();
@@ -513,6 +554,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.AnalogMax);
         set
         {
+            if (Analog6MaxValue == value) return;
             _settings.Set(Key(), value);
             _analog6.MaxValue = value;
             Update?.Invoke();
@@ -524,6 +566,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Pwm1);
         set
         {
+            if (Pwm1Name == value) return;
             _settings.Set(Key(), value);
             _pwm1.Name = value;
             Update?.Invoke();
@@ -535,6 +578,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Pwm1Unit == value) return;
             _settings.Set(Key(), value);
             _pwm1.Unit = value;
             Update?.Invoke();
@@ -546,6 +590,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Pwm1Decimals == value) return;
             _settings.Set(Key(), value);
             _pwm1.Decimals = value;
             Update?.Invoke();
@@ -557,6 +602,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.PwmMin);
         set
         {
+            if (Pwm1MinSignal == value) return;
             _settings.Set(Key(), value);
             _pwm1.MinSignal = value;
             Update?.Invoke();
@@ -568,6 +614,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.PwmMin);
         set
         {
+            if (Pwm1MinValue == value) return;
             _settings.Set(Key(), value);
             _pwm1.MinValue = value;
             Update?.Invoke();
@@ -579,6 +626,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.PwmMax);
         set
         {
+            if (Pwm1MaxSignal == value) return;
             _settings.Set(Key(), value);
             _pwm1.MaxSignal = value;
             Update?.Invoke();
@@ -590,6 +638,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.PwmMax);
         set
         {
+            if (Pwm1MaxValue == value) return;
             _settings.Set(Key(), value);
             _pwm1.MaxValue = value;
             Update?.Invoke();
@@ -601,6 +650,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), AppResources.Pwm2);
         set
         {
+            if (Pwm2Name == value) return;
             _settings.Set(Key(), value);
             _pwm2.Name = value;
             Update?.Invoke();
@@ -612,6 +662,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Pwm2Unit == value) return;
             _settings.Set(Key(), value);
             _pwm2.Unit = value;
             Update?.Invoke();
@@ -623,6 +674,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), Decimals);
         set
         {
+            if (Pwm2Decimals == value) return;
             _settings.Set(Key(), value);
             _pwm2.Decimals = value;
             Update?.Invoke();
@@ -634,6 +686,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.PwmMin);
         set
         {
+            if (Pwm2MinSignal == value) return;
             _settings.Set(Key(), value);
             _pwm2.MinSignal = value;
             Update?.Invoke();
@@ -645,6 +698,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.PwmMin);
         set
         {
+            if (Pwm2MinValue == value) return;
             _settings.Set(Key(), value);
             _pwm2.MinValue = value;
             Update?.Invoke();
@@ -656,6 +710,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), IVm167.PwmMax);
         set
         {
+            if (Pwm2MaxSignal == value) return;
             _settings.Set(Key(), value);
             _pwm2.MaxSignal = value;
             Update?.Invoke();
@@ -667,6 +722,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), (double)IVm167.PwmMax);
         set
         {
+            if (Pwm2MaxValue == value) return;
             _settings.Set(Key(), value);
             _pwm2.MaxValue = value;
             Update?.Invoke();
@@ -678,6 +734,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0);
         set
         {
+            if (ReferenceIndex == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -688,6 +745,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0);
         set
         {
+            if (FeedbackIndex == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -698,6 +756,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0);
         set
         {
+            if (ControlIndex == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -708,6 +767,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 1d);
         set
         {
+            if (RegulatorKp == value)
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -718,6 +778,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0d);
         set
         {
+            if (RegulatorKi == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -728,6 +789,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0d);
         set
         {
+            if (RegulatorKd == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }
@@ -738,6 +800,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
+            if (Safety == value) return;
             _settings.Set(Key(), value);
             Update?.Invoke();
         }

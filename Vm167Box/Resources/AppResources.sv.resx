@@ -330,4 +330,7 @@
   <data name="Safety" xml:space="preserve">
     <value>Säkerhet</value>
   </data>
+  <data name="SafetyInfo" xml:space="preserve">
+    <value>Avbryt när markerade signaler överstiger maximalt värde</value>
+  </data>
 </root>
