@@ -767,9 +767,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 1d);
         set
         {
-            if (RegulatorKp == value)
             _settings.Set(Key(), value);
-            Update?.Invoke();
         }
     }
 
@@ -778,9 +776,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0d);
         set
         {
-            if (RegulatorKi == value) return;
             _settings.Set(Key(), value);
-            Update?.Invoke();
         }
     }
 
@@ -789,9 +785,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), 0d);
         set
         {
-            if (RegulatorKd == value) return;
             _settings.Set(Key(), value);
-            Update?.Invoke();
         }
     }
 
@@ -800,9 +794,7 @@ internal class SettingsService : ISettingsService
         get => _settings.Get(Key(), string.Empty);
         set
         {
-            if (Safety == value) return;
             _settings.Set(Key(), value);
-            Update?.Invoke();
         }
     }
 

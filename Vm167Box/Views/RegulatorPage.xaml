@@ -17,12 +17,13 @@
             <Color x:Key="TrueColor">Red</Color>
             <Color x:Key="FalseColor">Yellow</Color>
 
-            <toolkit:BoolToObjectConverter x:Key="SafetyStopConverter" 
-                TrueObject="{StaticResource TrueColor}" 
-                FalseObject="{StaticResource FalseColor}"/>
+            <toolkit:BoolToObjectConverter
+                x:Key="SafetyStopConverter"
+                FalseObject="{StaticResource FalseColor}"
+                TrueObject="{StaticResource TrueColor}" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding StopCommand}"
@@ -166,8 +167,15 @@
                         <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Safety}" />
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{x:Static strings:AppResources.SafetyInfo}" LineBreakMode="WordWrap" WidthRequest="200" HorizontalOptions="StartAndExpand"/>
-                        <ListView x:Name="_safetyList" ItemsSource="{Binding Safety}" VerticalScrollBarVisibility="Always">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            LineBreakMode="WordWrap"
+                            Text="{x:Static strings:AppResources.SafetyInfo}"
+                            WidthRequest="200" />
+                        <ListView
+                            x:Name="_safetyList"
+                            ItemsSource="{Binding Safety}"
+                            VerticalScrollBarVisibility="Always">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="vm:SafetyViewModel">
                                     <ViewCell>

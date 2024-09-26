@@ -5,6 +5,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Legends;
 using OxyPlot.Series;
+using Vm167Box.Helpers;
 using Vm167Box.Models;
 using Vm167Box.Services;
 
@@ -18,9 +19,9 @@ public partial class RegulatorViewModel : ObservableObject
     private readonly ILogger<RegulatorViewModel> _logger;
     private readonly IVm167Service _vm167Service;
     private readonly ISettingsService _settingsService;
-    private readonly AnalogChannel[] _inputs;
-    private readonly AnalogChannel[] _outputs;
-    private readonly SafetyViewModel[] _safety;
+    private readonly ObservableRangeCollection<AnalogChannel> _inputs;
+    private readonly ObservableRangeCollection<AnalogChannel> _outputs;
+    private readonly ObservableRangeCollection<SafetyViewModel> _safety;
     private double _previousError;
     private double _integral;
     private bool _running;
@@ -38,7 +39,7 @@ public partial class RegulatorViewModel : ObservableObject
         _logger = logger;
         _vm167Service = vm167Service;
         _settingsService = settingsService;
-        _inputs = new AnalogChannel[]
+        _inputs = new ObservableRangeCollection<AnalogChannel>
         {
             _settingsService.Analog1,
             _settingsService.Analog2,
@@ -48,13 +49,13 @@ public partial class RegulatorViewModel : ObservableObject
             _settingsService.Analog6
         };
 
-        _outputs = new AnalogChannel[]
+        _outputs = new ObservableRangeCollection<AnalogChannel>
         {
             _settingsService.Pwm1,
             _settingsService.Pwm2
         };
 
-        _safety = new SafetyViewModel[]
+        _safety = new ObservableRangeCollection<SafetyViewModel>
         {
             new SafetyViewModel { Channel = _settingsService.Analog1 },
             new SafetyViewModel { Channel = _settingsService.Analog2 },
@@ -80,11 +81,11 @@ public partial class RegulatorViewModel : ObservableObject
         _settingsService.Update += UpdateSettings;
     }
 
-    public IEnumerable<AnalogChannel> Inputs => _inputs;
+    public ObservableRangeCollection<AnalogChannel> Inputs => _inputs;
 
-    public IEnumerable<AnalogChannel> Outputs => _outputs;
+    public ObservableRangeCollection<AnalogChannel> Outputs => _outputs;
 
-    public IEnumerable<SafetyViewModel> Safety => _safety;
+    public ObservableRangeCollection<SafetyViewModel> Safety => _safety;
 
     [ObservableProperty]
     private bool _isOpen;
@@ -103,7 +104,7 @@ public partial class RegulatorViewModel : ObservableObject
         {
             if (SetProperty(ref _referenceSignal, value))
             {
-                _settingsService.ReferenceIndex = Array.IndexOf(_inputs, value);
+                _settingsService.ReferenceIndex = _inputs.IndexOf(value);
             }
         }
     }
@@ -116,7 +117,7 @@ public partial class RegulatorViewModel : ObservableObject
         {
             if (SetProperty(ref _feedbackSignal, value))
             {
-                _settingsService.FeedbackIndex = Array.IndexOf(_inputs, value);
+                _settingsService.FeedbackIndex = _inputs.IndexOf(value);
             }
         }
     }
@@ -129,7 +130,7 @@ public partial class RegulatorViewModel : ObservableObject
         {
             if (SetProperty(ref _controlSignal, value))
             {
-                _settingsService.ControlIndex = Array.IndexOf(_outputs, value);
+                _settingsService.ControlIndex = _outputs.IndexOf(value);
             }
         }
     }
@@ -328,17 +329,17 @@ public partial class RegulatorViewModel : ObservableObject
 
     private void UpdateSettings()
     {
-        OnPropertyChanged(nameof(Inputs));
-        OnPropertyChanged(nameof(Outputs));
+        Inputs.Refresh();
+        Outputs.Refresh();
 
         var referenceIndex = _settingsService.ReferenceIndex;
-        referenceIndex = referenceIndex >= 0 && referenceIndex < _inputs.Length ? referenceIndex : 0;
+        referenceIndex = referenceIndex >= 0 && referenceIndex < _inputs.Count ? referenceIndex : 0;
         ReferenceSignal = _inputs[referenceIndex];
         var feedbackIndex = _settingsService.FeedbackIndex;
-        feedbackIndex = feedbackIndex >= 0 && feedbackIndex < _inputs.Length ? feedbackIndex : 0;
+        feedbackIndex = feedbackIndex >= 0 && feedbackIndex < _inputs.Count ? feedbackIndex : 0;
         FeedbackSignal = _inputs[feedbackIndex];
         var controlIndex = _settingsService.ControlIndex;
-        controlIndex = controlIndex >= 0 && controlIndex < _outputs.Length ? controlIndex : 0;
+        controlIndex = controlIndex >= 0 && controlIndex < _outputs.Count ? controlIndex : 0;
         ControlSignal = _outputs[controlIndex];
         InitializeScope();
 
@@ -347,7 +348,7 @@ public partial class RegulatorViewModel : ObservableObject
         RegulatorKd = _settingsService.RegulatorKd;
 
         var safety = _settingsService.Safety;
-        var len = Math.Min(safety.Length, _safety.Length);
+        var len = Math.Min(safety.Length, _safety.Count);
         for (int i = 0; i < len; i++)
         {
             _safety[i].IsSafe = safety[i] == '1';

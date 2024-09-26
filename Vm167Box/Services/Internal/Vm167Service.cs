@@ -24,6 +24,7 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
         _settingsService = settingsService;
         _vm167 = vm167;
 
+        _settingsService.Update += UpdateSettings;
         _timer = new(async (obj) => await Loop(), null, Timeout.Infinite, Timeout.Infinite);
     }
 
@@ -171,6 +172,17 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
     public async Task<int> VersionFirmware()
     {
         return await _vm167.VersionFirmware(_device);
+    }
+
+    private void UpdateSettings()
+    {
+        Analog1.UpdateValue();
+        Analog2.UpdateValue();
+        Analog3.UpdateValue();
+        Analog4.UpdateValue();
+        Analog5.UpdateValue();
+        Pwm1.UpdateValue();
+        Pwm2.UpdateValue();
     }
 
     private async Task Loop()

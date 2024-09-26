@@ -126,6 +126,16 @@
             _value = channel.Value;
         }
 
+        public void UpdateValue()
+        {
+            _value = ToValue(_signal);
+        }
+
+        public void UpdateSignal()
+        {
+            _signal = ToSignal(_value);
+        }
+
         private double ToValue(int signal)
         {
             return MinValue + (MaxValue - MinValue) * (signal - MinSignal) / (MaxSignal - MinSignal);
