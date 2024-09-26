@@ -228,9 +228,6 @@
   <data name="PwmOut" xml:space="preserve">
     <value>Pwm Out</value>
   </data>
-  <data name="Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
   <data name="SelectCard" xml:space="preserve">
     <value>Select Card:</value>
   </data>

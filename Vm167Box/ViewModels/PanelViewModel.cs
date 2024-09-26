@@ -54,6 +54,7 @@ public partial class PanelViewModel : ObservableObject
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
         UpdateSettings();
 
+        Open().ConfigureAwait(false);
         _settingsService.Update += UpdateSettings;
     }
 
@@ -145,28 +146,6 @@ public partial class PanelViewModel : ObservableObject
 
     [ObservableProperty]
     private PlotModel _scopeModel;
-
-    [RelayCommand]
-    public async Task Open()
-    {
-        _logger.LogTrace(">Open()");
-        try
-        {
-            var mask = await _vm167Service.ListDevices();
-            Card0Exist = (mask & 1) > 0;
-            Card1Exist = (mask & 2) > 0;
-        }
-        catch (Exception)
-        {
-            Card0Exist = false;
-            Card1Exist = false;
-            throw;
-        }
-        finally
-        {
-            _logger.LogTrace("<Open()");
-        }
-    }
 
     [RelayCommand]
     public async Task SelectCard0(CheckedChangedEventArgs args)
@@ -290,7 +269,28 @@ public partial class PanelViewModel : ObservableObject
         _logger.LogTrace("<Calibrate()");
     }
 
-        private async Task SelectCard(bool selected, int card)
+    private async Task Open()
+    {
+        _logger.LogTrace(">Open()");
+        try
+        {
+            var mask = await _vm167Service.ListDevices();
+            Card0Exist = (mask & 1) > 0;
+            Card1Exist = (mask & 2) > 0;
+        }
+        catch (Exception)
+        {
+            Card0Exist = false;
+            Card1Exist = false;
+            throw;
+        }
+        finally
+        {
+            _logger.LogTrace("<Open()");
+        }
+    }
+
+    private async Task SelectCard(bool selected, int card)
     {
         if (selected)
         {

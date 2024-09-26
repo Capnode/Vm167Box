@@ -28,11 +28,6 @@
             Margin="20,20,0,0"
             Spacing="10">
 
-            <Button
-                Command="{Binding OpenCommand}"
-                HorizontalOptions="Fill"
-                Text="{x:Static strings:AppResources.Open}" />
-
             <Label IsVisible="{Binding Card0Exist}" Text="{x:Static strings:AppResources.Card0Connected}" />
             <Label IsVisible="{Binding Card1Exist}" Text="{x:Static strings:AppResources.Card1Connected}" />
             <Label Text="{x:Static strings:AppResources.SelectCard}" />

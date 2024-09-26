@@ -40,13 +40,10 @@ public partial class AboutViewModel : ObservableObject
         if (!IsOpen) return;
 
         _logger.LogTrace(">OnConnected()");
-        IsOpen = true;
-        var value = await _vm167Service.VersionFirmware();
-        FirmwareVersion = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
-
-        value = _vm167Service.VersionDLL();
-        DllVersion = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
-
+        var version = await _vm167Service.VersionFirmware();
+        var FirmwareVersion = new Version(version >> 24, (version >> 16) & 0xFF, (version >> 8) & 0xFF, version & 0xFF);
+        version = _vm167Service.VersionDLL();
+        DllVersion = new Version(version >> 24, (version >> 16) & 0xFF, (version >> 8) & 0xFF, version & 0xFF);
         _logger.LogTrace("<OnConnected()");
     }
 }

@@ -271,7 +271,7 @@ public partial class RegulatorViewModel : ObservableObject
                 _abort = true;
                 ControlSignal.Value = 0;
                 _logger.LogWarning("Safety: {} value {} > {}", channel.Name, channel.Value, channel.MaxValue);
-                MainThread.BeginInvokeOnMainThread(SetStates);
+                Threading.RunOnMainThread(SetStates);
                 break;
             }
         }
@@ -281,7 +281,7 @@ public partial class RegulatorViewModel : ObservableObject
             _running = false;
             _stopping = false;
             ControlSignal.Value = 0;
-            MainThread.BeginInvokeOnMainThread(SetStates);
+            Threading.RunOnMainThread(SetStates);
             return Task.CompletedTask;
         }
 
@@ -392,9 +392,9 @@ public partial class RegulatorViewModel : ObservableObject
 
         ScopeModel.DefaultColors = OxyPalette.Interpolate(
             ScopeModel.Series.Count,
-            OxyColors.Red,
+            OxyColors.Green,
             OxyColors.Blue,
-            OxyColors.Green)
+            OxyColors.Red)
             .Colors;
 
         ScopeModel.InvalidatePlot(true);

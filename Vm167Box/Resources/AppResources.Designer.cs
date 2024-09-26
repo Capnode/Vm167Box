@@ -430,15 +430,6 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open.
-        /// </summary>
-        internal static string Open {
-            get {
-                return ResourceManager.GetString("Open", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Panel.
         /// </summary>
         internal static string PanelTitle {
