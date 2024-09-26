@@ -6,8 +6,10 @@ public interface IVm167Service
 {
     const int Period = 100;
 
+    event Func<Task> Connected;
     event Func<Task> Tick;
 
+    bool IsConnected { get; }
     uint Counter { get; set; }
     bool AllDigital { get; set; }
     int PwmFrequency { get; set; }

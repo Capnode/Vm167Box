@@ -11,7 +11,7 @@ namespace Vm167Box.ViewModels
         public SettingsViewModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            _settingsService.Update += UpdateSettings;
+            _settingsService.Update += OnUpdateSettings;
         }
 
         public bool IsLightTheme
@@ -370,7 +370,7 @@ namespace Vm167Box.ViewModels
             _settingsService.Reset();
         }
 
-        private void UpdateSettings()
+        private void OnUpdateSettings()
         {
             OnPropertyChanged(nameof(IsLightTheme));
             OnPropertyChanged(nameof(Analog1Name));

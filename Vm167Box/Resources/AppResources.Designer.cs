@@ -277,6 +277,15 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DLL version: {0}.
+        /// </summary>
+        internal static string DllVersion {
+            get {
+                return ResourceManager.GetString("DllVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not open the driver, check connections and try again.
         /// </summary>
         internal static string DriverProblem {
@@ -300,6 +309,15 @@ namespace Vm167Box.Resources {
         internal static string FeedbackSignal {
             get {
                 return ResourceManager.GetString("FeedbackSignal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firmware version: {0}.
+        /// </summary>
+        internal static string FirmwareVersion {
+            get {
+                return ResourceManager.GetString("FirmwareVersion", resourceCulture);
             }
         }
         

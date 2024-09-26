@@ -333,4 +333,10 @@
   <data name="SafetyInfo" xml:space="preserve">
     <value>Abort when marked signals exceeds maximum value</value>
   </data>
+  <data name="FirmwareVersion" xml:space="preserve">
+    <value>Firmware version: {0}</value>
+  </data>
+  <data name="DllVersion" xml:space="preserve">
+    <value>DLL version: {0}</value>
+  </data>
 </root>

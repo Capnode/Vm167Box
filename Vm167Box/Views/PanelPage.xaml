@@ -68,12 +68,6 @@
                 Command="{Binding ClearAllDigitalCommand}"
                 IsEnabled="{Binding IsOpen}"
                 Text="{x:Static strings:AppResources.ClearAllDigital}" />
-            <Button
-                Command="{Binding VersionCommand}"
-                IsEnabled="{Binding IsOpen}"
-                Text="{x:Static strings:AppResources.Version}" />
-            <Label Text="{Binding FirmwareVersion}" />
-            <Label Text="{Binding DllVersion}" />
         </VerticalStackLayout>
 
         <FlexLayout

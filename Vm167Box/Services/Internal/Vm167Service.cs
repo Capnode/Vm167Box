@@ -7,6 +7,7 @@ namespace Vm167Box.Services.Internal;
 
 internal sealed class Vm167Service : IVm167Service, IDisposable
 {
+    public event Func<Task>? Connected;
     public event Func<Task>? Tick;
 
     private readonly ILogger<Vm167Service> _logger;
@@ -68,6 +69,8 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
             _allDigitalChanged = true;
         }
     }
+
+    public bool IsConnected { get; private set; }
 
     public DigitalChannel DigitalLowIn { get; } = new();
 
@@ -151,6 +154,8 @@ internal sealed class Vm167Service : IVm167Service, IDisposable
 
         _device = device;
         _settingsService.Initialize(device);
+        IsConnected = true;
+        Connected?.Invoke();
         _timer.Change(IVm167Service.Period, IVm167Service.Period);
     }
 

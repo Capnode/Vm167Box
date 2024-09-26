@@ -74,11 +74,13 @@ public partial class RegulatorViewModel : ObservableObject
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
 
-        UpdateSettings();
+        OnUpdateSettings();
         SetStates();
 
-        _vm167Service.Tick += Loop;
-        _settingsService.Update += UpdateSettings;
+        OnConnected().ConfigureAwait(false);
+        _vm167Service.Connected += OnConnected;
+        _vm167Service.Tick += OnTick;
+        _settingsService.Update += OnUpdateSettings;
     }
 
     public ObservableRangeCollection<AnalogChannel> Inputs => _inputs;
@@ -244,9 +246,14 @@ public partial class RegulatorViewModel : ObservableObject
         _settingsService.Safety = safety;
     }
 
-    private Task Loop()
+    private Task OnConnected()
     {
-        IsOpen = true;
+        IsOpen = _vm167Service.IsConnected;
+        return Task.CompletedTask;
+    }
+
+    private Task OnTick()
+    {
         if (!_running) return Task.CompletedTask;
 
         if (ReferenceSignal == null || FeedbackSignal == null || ControlSignal == null)
@@ -327,7 +334,7 @@ public partial class RegulatorViewModel : ObservableObject
         return Task.CompletedTask;
     }
 
-    private void UpdateSettings()
+    private void OnUpdateSettings()
     {
         Inputs.Refresh();
         Outputs.Refresh();

@@ -48,7 +48,7 @@ public partial class PanelViewModel : ObservableObject
         _logger = logger;
         _settingsService = settingsService;
         _vm167Service = vm167service;
-        _vm167Service.Tick += Loop;
+        _vm167Service.Tick += OnTick;
 
         ScopeModel = new PlotModel();
         ScopeModel.Legends.Add(new Legend { LegendPosition = LegendPosition.TopRight, LegendPlacement = LegendPlacement.Inside });
@@ -74,12 +74,6 @@ public partial class PanelViewModel : ObservableObject
 
     [ObservableProperty]
     private bool _card1;
-
-    [ObservableProperty]
-    private string _firmwareVersion = string.Empty;
-
-    [ObservableProperty]
-    private string _dllVersion = string.Empty;
 
     [ObservableProperty]
     private DigitalChannel _digitalLowIn = new();
@@ -207,20 +201,6 @@ public partial class PanelViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task Version()
-    {
-        _logger.LogTrace(">Version()");
-        var value = await _vm167Service.VersionFirmware();
-        var firmware = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
-        FirmwareVersion = $"Firmware: v{firmware}";
-
-        value = _vm167Service.VersionDLL();
-        var dll = new Version(value >> 24, (value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);
-        DllVersion = $"DLL: v{dll}";
-        _logger.LogTrace("<Version()");
-    }
-
-    [RelayCommand]
     public void ResetCounter()
     {
         _logger.LogTrace(">ResetCounter()");
@@ -331,13 +311,11 @@ public partial class PanelViewModel : ObservableObject
         else
         {
             await _vm167Service.CloseDevice();
-            FirmwareVersion = string.Empty;
-            DllVersion = string.Empty;
             IsOpen = false;
         }
     }
 
-    private Task Loop()
+    private Task OnTick()
     {
         _logger.LogTrace(">Loop()");
 

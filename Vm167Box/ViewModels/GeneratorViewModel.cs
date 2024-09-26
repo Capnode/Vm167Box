@@ -31,10 +31,13 @@ namespace Vm167Box.ViewModels
             _vm167Service = vm167Service;
             _settingsService = settingsService;
 
-            _vm167Service.Tick += Loop;
             ModelPwm1.Series.Add(new FunctionSeries());
             ModelPwm2.Series.Add(new FunctionSeries());
             ModelAnalog6.Series.Add(new FunctionSeries());
+
+            OnConnected().ConfigureAwait(false);
+            _vm167Service.Connected += OnConnected;
+            _vm167Service.Tick += OnTick;
         }
 
         [ObservableProperty]
@@ -252,9 +255,14 @@ namespace Vm167Box.ViewModels
             return series;
         }
 
-        private async Task Loop()
+        private Task OnConnected()
         {
-            IsOpen = true;
+            IsOpen = _vm167Service.IsConnected;
+            return Task.CompletedTask;
+        }
+
+        private async Task OnTick()
+        {
             using (await _lock.UseWaitAsync())
             {
                 UpdatePwm1();
