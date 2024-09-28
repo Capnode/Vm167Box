@@ -198,12 +198,6 @@
   <data name="Pwm2" xml:space="preserve">
     <value>Pwm2</value>
   </data>
-  <data name="Card0Connected" xml:space="preserve">
-    <value>Kort 0 anslutet</value>
-  </data>
-  <data name="Card1Connected" xml:space="preserve">
-    <value>Kort 1 anslutet</value>
-  </data>
   <data name="SetAllDigital" xml:space="preserve">
     <value>Ettställ Alla Digitalt</value>
   </data>
@@ -335,5 +329,8 @@
   </data>
   <data name="DllVersion" xml:space="preserve">
     <value>DLL version: {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Anslutning</value>
   </data>
 </root>

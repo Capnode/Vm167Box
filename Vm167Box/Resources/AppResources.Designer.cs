@@ -187,24 +187,6 @@ namespace Vm167Box.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Card 0 connected.
-        /// </summary>
-        internal static string Card0Connected {
-            get {
-                return ResourceManager.GetString("Card0Connected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Card 1 connected.
-        /// </summary>
-        internal static string Card1Connected {
-            get {
-                return ResourceManager.GetString("Card1Connected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Card in use.
         /// </summary>
         internal static string CardInUse {
@@ -219,6 +201,15 @@ namespace Vm167Box.Resources {
         internal static string ClearAllDigital {
             get {
                 return ResourceManager.GetString("ClearAllDigital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection.
+        /// </summary>
+        internal static string Connection {
+            get {
+                return ResourceManager.GetString("Connection", resourceCulture);
             }
         }
         

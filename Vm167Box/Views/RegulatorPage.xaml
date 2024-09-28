@@ -40,11 +40,6 @@
                                         Size=20}"
             Text="{x:Static strings:AppResources.RegulatorStart}" />
         <ToolbarItem
-            Command="{Binding RestartScopeCommand}"
-            IconImageSource="replay.png"
-            Order="Primary"
-            Text="{x:Static strings:AppResources.Restart}" />
-        <ToolbarItem
             Command="{Binding ResetScopeCommand}"
             IconImageSource="align_right.png"
             Order="Primary"

@@ -211,12 +211,6 @@ public partial class RegulatorViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void RestartScope()
-    {
-        _restartScope = true;
-    }
-
-    [RelayCommand]
     public void History(int time)
     {
         _logger.LogTrace(">History({})", time);
