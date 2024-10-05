@@ -30,330 +30,332 @@
             Text="{x:Static strings:AppResources.SetAllDigital}" />
     </ContentPage.ToolbarItems>
 
-    <FlexLayout
-        Margin="0,0,0,10"
-        Direction="Row"
-        Wrap="Wrap">
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout>
-                <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Connection}" />
-                <Label/>
-                <Label Text="{x:Static strings:AppResources.SelectCard}" />
-                <RadioButton
-                    Content="{x:Static lib:IVm167.Device0}"
-                    IsChecked="{Binding Card0}"
-                    IsEnabled="{Binding Card0Exist}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding SelectCard0Command}"
-                            EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
-                <RadioButton
-                    Content="{x:Static lib:IVm167.Device1}"
-                    IsChecked="{Binding Card1}"
-                    IsEnabled="{Binding Card1Exist}">
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            x:TypeArguments="CheckedChangedEventArgs"
-                            Command="{Binding SelectCard1Command}"
-                            EventName="CheckedChanged" />
-                    </RadioButton.Behaviors>
-                </RadioButton>
-            </VerticalStackLayout>
-        </Frame>
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout>
-                <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.DigitalInOut}" />
-                <HorizontalStackLayout Spacing="20">
-                    <VerticalStackLayout Spacing="0">
-                        <RadioButton
-                            Content="{x:Static strings:AppResources.DigitalIn}"
-                            IsChecked="{Binding DigitalLowIn.Value}"
-                            IsEnabled="{Binding IsOpen}" />
-                        <RadioButton
-                            Content="{x:Static strings:AppResources.DigitalOut}"
-                            IsChecked="{Binding DigitalLowOut.Value}"
-                            IsEnabled="{Binding IsOpen}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Spacing="0">
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital1.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="1" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital2.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="2" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital3.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="3" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital4.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="4" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
+    <ScrollView>
+        <FlexLayout
+            Margin="0,0,0,10"
+            Direction="Row"
+            Wrap="Wrap">
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout>
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Connection}" />
+                    <Label />
+                    <Label Text="{x:Static strings:AppResources.SelectCard}" />
+                    <RadioButton
+                        Content="{x:Static lib:IVm167.Device0}"
+                        IsChecked="{Binding Card0}"
+                        IsEnabled="{Binding Card0Exist}">
+                        <RadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                x:TypeArguments="CheckedChangedEventArgs"
+                                Command="{Binding SelectCard0Command}"
+                                EventName="CheckedChanged" />
+                        </RadioButton.Behaviors>
+                    </RadioButton>
+                    <RadioButton
+                        Content="{x:Static lib:IVm167.Device1}"
+                        IsChecked="{Binding Card1}"
+                        IsEnabled="{Binding Card1Exist}">
+                        <RadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                x:TypeArguments="CheckedChangedEventArgs"
+                                Command="{Binding SelectCard1Command}"
+                                EventName="CheckedChanged" />
+                        </RadioButton.Behaviors>
+                    </RadioButton>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout>
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.DigitalInOut}" />
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout Spacing="0">
+                            <RadioButton
+                                Content="{x:Static strings:AppResources.DigitalIn}"
+                                IsChecked="{Binding DigitalLowIn.Value}"
+                                IsEnabled="{Binding IsOpen}" />
+                            <RadioButton
+                                Content="{x:Static strings:AppResources.DigitalOut}"
+                                IsChecked="{Binding DigitalLowOut.Value}"
+                                IsEnabled="{Binding IsOpen}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="0">
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital1.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="1" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital2.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="2" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital3.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="3" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital4.Value}" IsEnabled="{Binding DigitalLowOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="4" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout>
-                <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.DigitalInOut}" />
-                <HorizontalStackLayout Spacing="20">
-                    <VerticalStackLayout Spacing="0">
-                        <RadioButton
-                            Content="{x:Static strings:AppResources.DigitalIn}"
-                            IsChecked="{Binding DigitalHighIn.Value}"
-                            IsEnabled="{Binding IsOpen}" />
-                        <RadioButton
-                            Content="{x:Static strings:AppResources.DigitalOut}"
-                            IsChecked="{Binding DigitalHighOut.Value}"
-                            IsEnabled="{Binding IsOpen}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Spacing="0">
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital5.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="5" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital6.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="6" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital7.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="7" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="0">
-                            <CheckBox IsChecked="{Binding Digital8.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
-                            <Label Padding="0,10,0,0" Text="8" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout>
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.DigitalInOut}" />
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout Spacing="0">
+                            <RadioButton
+                                Content="{x:Static strings:AppResources.DigitalIn}"
+                                IsChecked="{Binding DigitalHighIn.Value}"
+                                IsEnabled="{Binding IsOpen}" />
+                            <RadioButton
+                                Content="{x:Static strings:AppResources.DigitalOut}"
+                                IsChecked="{Binding DigitalHighOut.Value}"
+                                IsEnabled="{Binding IsOpen}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="0">
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital5.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="5" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital6.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="6" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital7.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="7" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="0">
+                                <CheckBox IsChecked="{Binding Digital8.Value}" IsEnabled="{Binding DigitalHighOut.Value}" />
+                                <Label Padding="0,10,0,0" Text="8" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout>
-                <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Counter}" />
-                <Entry IsEnabled="{Binding IsOpen}" Text="{Binding Counter}" />
-                <Button
-                    Command="{Binding ResetCounterCommand}"
-                    IsEnabled="{Binding IsOpen}"
-                    Text="{x:Static strings:AppResources.Reset}" />
-            </VerticalStackLayout>
-        </Frame>
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout>
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.Counter}" />
+                    <Entry IsEnabled="{Binding IsOpen}" Text="{Binding Counter}" />
+                    <Button
+                        Command="{Binding ResetCounterCommand}"
+                        IsEnabled="{Binding IsOpen}"
+                        Text="{x:Static strings:AppResources.Reset}" />
+                </VerticalStackLayout>
+            </Frame>
 
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout Spacing="10">
-                <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.AnalogIn}" />
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog1.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog1, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog1, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="1L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="1H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog2.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog2, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog2, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="2L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="2H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog3.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog3, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog3, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="3L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="3H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog4.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog4, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog4, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="4L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="4H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog5.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog5, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog5, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="5L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="5H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label
-                        Text="{Binding Analog6.Name}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="80" />
-                    <ProgressBar
-                        HeightRequest="30"
-                        IsEnabled="{Binding IsOpen}"
-                        Progress="{Binding Analog6, Converter={StaticResource AnalogToUnit}}"
-                        ScaleY="3"
-                        WidthRequest="150" />
-                    <Label
-                        Text="{Binding Analog6, Converter={StaticResource AnalogToString}}"
-                        VerticalTextAlignment="Center"
-                        WidthRequest="60" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="6L"
-                        Text="{x:Static strings:AppResources.CalibrateLowShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
-                    <Button
-                        Command="{Binding CalibrateCommand}"
-                        CommandParameter="6H"
-                        Text="{x:Static strings:AppResources.CalibrateHighShort}"
-                        ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
-
-        <Frame Margin="5" BorderColor="Black">
-            <VerticalStackLayout>
-                <HorizontalStackLayout>
-                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.PwmOut}" />
-                    <Picker
-                        Margin="10,-10,0,0"
-                        IsEnabled="{Binding IsOpen}"
-                        ItemDisplayBinding="{Binding Name}"
-                        ItemsSource="{Binding PwmFrequencies}"
-                        SelectedItem="{Binding PwmFrequency}" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <VerticalStackLayout Spacing="10">
-                        <Label HorizontalTextAlignment="Center" Text="{Binding Pwm1.Name}" />
-                        <Slider
-                            Margin="-30,40,0,30"
-                            HeightRequest="40"
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout Spacing="10">
+                    <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.AnalogIn}" />
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog1.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Maximum="{Binding Pwm1.MaxSignal}"
-                            Minimum="{Binding Pwm1.MinSignal}"
-                            Rotation="-90"
-                            TranslationX="20"
-                            WidthRequest="100"
-                            Value="{Binding Pwm1.Signal}" />
-                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                            <Label Text="{Binding Pwm1, Converter={StaticResource AnalogToString}}" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Spacing="10">
-                        <Label HorizontalTextAlignment="Center" Text="{Binding Pwm2.Name}" />
-                        <Slider
-                            Margin="-30,40,0,30"
-                            HeightRequest="40"
+                            Progress="{Binding Analog1, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog1, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="1L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="1H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog2.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
                             IsEnabled="{Binding IsOpen}"
-                            Maximum="{Binding Pwm2.MaxSignal}"
-                            Minimum="{Binding Pwm2.MinSignal}"
-                            Rotation="-90"
-                            TranslationX="20"
-                            WidthRequest="100"
-                            Value="{Binding Pwm2.Signal}" />
-                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                            <Label Text="{Binding Pwm2, Converter={StaticResource AnalogToString}}" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
-    </FlexLayout>
+                            Progress="{Binding Analog2, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog2, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="2L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="2H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog3.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
+                            IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog3, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog3, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="3L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="3H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog4.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
+                            IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog4, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog4, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="4L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="4H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog5.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
+                            IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog5, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog5, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="5L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="5H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label
+                            Text="{Binding Analog6.Name}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="80" />
+                        <ProgressBar
+                            HeightRequest="30"
+                            IsEnabled="{Binding IsOpen}"
+                            Progress="{Binding Analog6, Converter={StaticResource AnalogToUnit}}"
+                            ScaleY="3"
+                            WidthRequest="150" />
+                        <Label
+                            Text="{Binding Analog6, Converter={StaticResource AnalogToString}}"
+                            VerticalTextAlignment="Center"
+                            WidthRequest="60" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="6L"
+                            Text="{x:Static strings:AppResources.CalibrateLowShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateLow}" />
+                        <Button
+                            Command="{Binding CalibrateCommand}"
+                            CommandParameter="6H"
+                            Text="{x:Static strings:AppResources.CalibrateHighShort}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.CalibrateHigh}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Margin="5" BorderColor="Black">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label FontSize="Subtitle" Text="{x:Static strings:AppResources.PwmOut}" />
+                        <Picker
+                            Margin="10,-10,0,0"
+                            IsEnabled="{Binding IsOpen}"
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding PwmFrequencies}"
+                            SelectedItem="{Binding PwmFrequency}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <VerticalStackLayout Spacing="10">
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm1.Name}" />
+                            <Slider
+                                Margin="-30,40,0,30"
+                                HeightRequest="40"
+                                IsEnabled="{Binding IsOpen}"
+                                Maximum="{Binding Pwm1.MaxSignal}"
+                                Minimum="{Binding Pwm1.MinSignal}"
+                                Rotation="-90"
+                                TranslationX="20"
+                                WidthRequest="100"
+                                Value="{Binding Pwm1.Signal}" />
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                <Label Text="{Binding Pwm1, Converter={StaticResource AnalogToString}}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="10">
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Pwm2.Name}" />
+                            <Slider
+                                Margin="-30,40,0,30"
+                                HeightRequest="40"
+                                IsEnabled="{Binding IsOpen}"
+                                Maximum="{Binding Pwm2.MaxSignal}"
+                                Minimum="{Binding Pwm2.MinSignal}"
+                                Rotation="-90"
+                                TranslationX="20"
+                                WidthRequest="100"
+                                Value="{Binding Pwm2.Signal}" />
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                <Label Text="{Binding Pwm2, Converter={StaticResource AnalogToString}}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </FlexLayout>
+    </ScrollView>
 </ContentPage>
