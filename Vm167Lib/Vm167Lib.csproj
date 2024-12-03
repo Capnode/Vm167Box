@@ -2,11 +2,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-ios;net8.0-maccatalyst;net8.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
-		<TargetFrameworks>$(TargetFrameworks);net8.0</TargetFrameworks>
+		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
+		<TargetFrameworks>$(TargetFrameworks);net9.0</TargetFrameworks>
 
 		<!-- .NET MAUI -->
 		<UseMauiCore>true</UseMauiCore>
@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Core" Version="8.0.91" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.10" />
 	</ItemGroup>
 
 	<!-- Multi-Targeting in .NET MAUI https://blog.ewers-peters.de/multi-targeting-in-net-maui-part-2?source=more_series_bottom_blogs -->

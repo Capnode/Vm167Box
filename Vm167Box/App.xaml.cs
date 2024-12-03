@@ -77,7 +77,6 @@ public partial class App : Application
             window.Height = Preferences.Get("WindowHeight", 0d);
         }
 
-        SetShellFlyout(window.Width);
         return window;
     }
 
@@ -112,6 +111,7 @@ public partial class App : Application
 
     private static void SetShellFlyout(double currentWidth)
     {
+        if (Shell.Current == null) return;
         if (currentWidth > MinPageWidth + Shell.Current.FlyoutWidth)
         {
             Shell.Current.FlyoutBehavior = FlyoutBehavior.Locked;
@@ -126,6 +126,8 @@ public partial class App : Application
 
     private void OnCreated(object? sender, EventArgs e)
     {
+        if (sender is not Window window) return;
+        SetShellFlyout(window.Width);
     }
 
     private void OnDestroying(object? sender, EventArgs e)
