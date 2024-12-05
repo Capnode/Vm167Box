@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 
 		<!-- Note for MacCatalyst:
 		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
@@ -33,31 +35,18 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<!-- Target Platform Options -->
+		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
+		<WindowsPackageType>None</WindowsPackageType>
+
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-
-		<!-- Minimum Target OS Version for Windows Platform -->
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION</DefineConstants>
 		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<DefaultLanguage>en-us</DefaultLanguage>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-	  <CodesignResourceRules>Platforms\MacCatalyst\Entitlements.plist</CodesignResourceRules>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-	  <CodesignResourceRules>Platforms\MacCatalyst\Entitlements.plist</CodesignResourceRules>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (88XRBDBJ74)</CodesignKey>
-	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -78,11 +67,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\one.svg" />
-	  <None Remove="Resources\Images\zero.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.10" />
@@ -90,48 +74,48 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="OxyPlot.Maui.Skia" Version="1.0.2" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-	  <ProjectReference Include="..\Vm167Lib\Vm167Lib.csproj" />
+		<ProjectReference Include="..\Vm167Lib\Vm167Lib.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\AppResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\PanelPage.xaml.cs">
-	    <DependentUpon>PanelPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\RegulatorPage.xaml.cs">
-	    <DependentUpon>RegulatorPage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Resources\AppResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PanelPage.xaml.cs">
+			<DependentUpon>PanelPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RegulatorPage.xaml.cs">
+			<DependentUpon>RegulatorPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\AppResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Resources\AppResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AboutPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\GeneratorPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ScopePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\RegulatorPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SettingsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Views\AboutPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\GeneratorPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ScopePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\RegulatorPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>
