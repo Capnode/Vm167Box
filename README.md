@@ -1,19 +1,25 @@
-# Vm167 Box
+# Vm167Box
 
 ## Introduction
 This is the decription of the hardware and software of VM167Box. The VM167Box contains the Velleman VMI167 USB interface board, with the I/O pins extended to connectors to the front and back of the box. The software is written in .NET MAUI and compiles for both Windows and Mac, however the drivers from Velleman is only available for Windows.
 
-![Front](Doc/front.jpg)<br/>
-Front
-
-![Back](Doc/back.jpg)<br/>
-Back
-
 ![Panel](Doc/Panel.png)<br/>
-Panel view
+Panel view shows actual values of all input and output. One device is connected.
 
 ![Scope](Doc/Scope.png)<br/>
-Scope view
+Scope view showing an example with analog output and input
+
+![Generator](Doc/Generator.png)<br/>
+Generator view can generate a selection of output singals
+
+![Front](Doc/front.png)<br/>
+Front of the box with connectors and analog input control
+
+![Back](Doc/back.png)<br/>
+Back of the box with power connector, USB, analog output and configurable I/O ports
+
+![Back](Doc/pcb.png)<br/>
+Single sided PCB layout
 
 ## Velleman VM167 USB Interface Board
 The VM167 USB interface board has 8 digital input/output channels, five analog input channels and two PWM outputs. The number of inputs/outputs can be expanded by connecting two VM167 cards to the PC.
@@ -26,5 +32,6 @@ The VM167 USB interface board has 8 digital input/output channels, five analog i
 - Velleman VM167 [SDK Rev 1.18.18](https://cdn.velleman.eu/downloads/files/downloads/vm167_sdk_rev1818.exe) software development pack with drivers,DLL,demo, diagnose and program examples.
 
 
-## PID Controller
-- [PID Controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller)
+<!-- ## PID Controller
+// - [PID Controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller)
+-->
