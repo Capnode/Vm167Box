@@ -43,6 +43,13 @@ public partial class App : Application
 
         Directory.SetCurrentDirectory(wd);
 
+        // Set culture to en-US
+        //var culture = new CultureInfo("en-US");
+        //CultureInfo.DefaultThreadCurrentCulture = culture;
+        //CultureInfo.DefaultThreadCurrentUICulture = culture;
+        //Thread.CurrentThread.CurrentCulture = culture;
+        //Thread.CurrentThread.CurrentUICulture = culture;
+
         _logger.LogDebug("CurrentCulture: {}", CultureInfo.CurrentCulture);
         _logger.LogDebug("CurrentUICulture: {}", CultureInfo.CurrentUICulture);
 

@@ -1,7 +1,13 @@
 # Vm167 Box
 
 ## Introduction
-This is the decription of the hardware and software of the VM167Box. The VM167Box contains the Velleman VMI167 USB interface board, with the I/O pins extended to connectors to the front and back of the box.
+This is the decription of the hardware and software of the VM167Box. The VM167Box contains the Velleman VMI167 USB interface board, with the I/O pins extended to connectors to the front and back of the box. The software is written in .NET MAUI and compiles for both Windows and Mac, however the drivers from Velleman is only available for Windows.
+
+![Panel](Doc/Panel.png) { width=50% } <br/>
+Panel view
+
+![Scope](Doc/Scope.png) { width=50% } <br/>
+Scope view
 
 ## Velleman VM167 USB Interface Board
 The VM167 USB interface board has 8 digital input/output channels, five analog input channels and two PWM outputs. The number of inputs/outputs can be expanded by connecting two VM167 cards to the PC.
