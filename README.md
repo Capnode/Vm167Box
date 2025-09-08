@@ -1,12 +1,18 @@
 # Vm167 Box
 
 ## Introduction
-This is the decription of the hardware and software of the VM167Box. The VM167Box contains the Velleman VMI167 USB interface board, with the I/O pins extended to connectors to the front and back of the box. The software is written in .NET MAUI and compiles for both Windows and Mac, however the drivers from Velleman is only available for Windows.
+This is the decription of the hardware and software of VM167Box. The VM167Box contains the Velleman VMI167 USB interface board, with the I/O pins extended to connectors to the front and back of the box. The software is written in .NET MAUI and compiles for both Windows and Mac, however the drivers from Velleman is only available for Windows.
 
-![Panel](Doc/Panel.png) { width=50% } <br/>
+![Front](Doc/front.jpg)<br/>
+Front
+
+![Back](Doc/back.jpg)<br/>
+Back
+
+![Panel](Doc/Panel.png)<br/>
 Panel view
 
-![Scope](Doc/Scope.png) { width=50% } <br/>
+![Scope](Doc/Scope.png)<br/>
 Scope view
 
 ## Velleman VM167 USB Interface Board
