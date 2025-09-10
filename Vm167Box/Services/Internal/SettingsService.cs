@@ -25,7 +25,11 @@ internal class SettingsService : ISettingsService
 
     public AppTheme AppTheme
     {
-        get => _settings.Get(nameof(AppTheme), Application.Current?.PlatformAppTheme ?? AppTheme.Unspecified);
+        get
+        {
+            int theme = (int)(Application.Current?.PlatformAppTheme ?? AppTheme.Unspecified);
+            return (AppTheme)_settings.Get(nameof(AppTheme), theme);
+        }
         set
         {
             _settings.Set(nameof(AppTheme), (int)value);
