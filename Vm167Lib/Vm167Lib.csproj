@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.110" />
 	</ItemGroup>
 
 	<!-- Multi-Targeting in .NET MAUI https://blog.ewers-peters.de/multi-targeting-in-net-maui-part-2?source=more_series_bottom_blogs -->
